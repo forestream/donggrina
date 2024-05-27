@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Pretendard';
 }
 ul,
 ol {
@@ -9,4 +10,22 @@ ol {
 }
 a {
   text-decoration: none;
+}
+
+html,
+body,
+#__wrap,
+#__next {
+  height: 100%;
+}
+
+#__container {
+  max-width: 430px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-bottom: none;
 }

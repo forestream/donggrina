@@ -1,3 +1,10 @@
+import styles from './index.module.css';
+import LoginTop from '@/components/login/loginTop/loginTop';
+
 export default function Login() {
-  return <div>로그인 페이지</div>;
+  return (
+    <article className={styles.article}>
+      <LoginTop />
+    </article>
+  );
 }
