@@ -24,7 +24,15 @@ ol {
 a {
   text-decoration: none;
 }
-
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
 html,
 body,
 #__wrap,
