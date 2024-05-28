@@ -1,6 +1,6 @@
 @import '/components/common/Button/Button.module.scss';
 
 .kakaoButton {
-  @include Button(#f8e049, #371c1d);
+  @include RoundButton(var(--kakao-background), var(--kakao-color));
   gap: 14px;
 }
