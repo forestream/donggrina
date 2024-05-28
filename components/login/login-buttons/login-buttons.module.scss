@@ -1,0 +1,8 @@
+.buttonBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  li {
+    height: 44px;
+  }
+}
