@@ -1,0 +1,7 @@
+@import '/components/common/Button/Button.module.scss';
+
+.googleButton {
+  @include Button(#fff, 1px solid #eee, #757575);
+  cursor: pointer;
+  gap: 14px;
+}
