@@ -4,7 +4,7 @@
 export default function Home() {
   return (
     <>
-      <div>안녕</div>
+      <div style={{ paddingTop: '54px' }}>안녕</div>
     </>
   );
 }
