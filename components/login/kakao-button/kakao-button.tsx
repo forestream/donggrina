@@ -3,7 +3,7 @@ import styles from './kakao-button.module.scss';
 import KakaoSVG from '@/public/images/login/kakao_logo.svg';
 
 export default function KakaoButton() {
-  const kakaoURL = `백엔드에서 받기`;
+  const kakaoURL = `/oauth2/authorization/kakao`;
 
   return (
     <Link className={styles.kakaoButton} href={kakaoURL}>
