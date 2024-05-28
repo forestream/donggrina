@@ -1,0 +1,6 @@
+@import '/components/common/Button/Button.module.scss';
+
+.kakaoButton {
+  @include Button(#f8e049, #371c1d);
+  gap: 14px;
+}

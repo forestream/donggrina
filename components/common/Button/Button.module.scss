@@ -1,0 +1,13 @@
+@mixin Button($background, $border: none, $color: var(--text-color)) {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  border-radius: 32px;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: $background;
+  border: $border;
+  color: $color;
+}
