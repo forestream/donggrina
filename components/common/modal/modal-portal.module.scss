@@ -1,0 +1,18 @@
+.button {
+  font-size: 16px;
+  font-weight: 600;
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-top: 1px solid var(--main-color);
+  border-right: 1px solid var(--main-color);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &.greenButton {
+    background-color: var(--main-color);
+  }
+}
