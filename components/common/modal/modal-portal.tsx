@@ -13,9 +13,9 @@ interface ModalPortalProps extends CommonProps {
 }
 
 export default function ModalPortal({ message, buttons, handleClose }: ModalPortalProps) {
-  const [portalRef, setPortalRef] = useState<HTMLElement | null>(null);
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
-  if (!portalRef) setPortalRef(document.getElementById('__container'));
+  if (!portalElement) setPortalElement(document.getElementById('__container'));
 
   const buttonComps = buttons.map((button, i) => (
     <button className={`${styles.button} ${i === buttons.length - 1 ? styles.greenButton : ''}`} onClick={button.event}>
@@ -25,10 +25,10 @@ export default function ModalPortal({ message, buttons, handleClose }: ModalPort
 
   return (
     <>
-      {portalRef &&
+      {portalElement &&
         createPortal(
           <Modal message={message} buttons={buttonComps} handleClose={handleClose} />,
-          portalRef as HTMLElement,
+          portalElement as HTMLElement,
         )}
     </>
   );
