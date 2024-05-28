@@ -20,7 +20,7 @@ export default function ModalPortal({ message, buttons, handleClose }: ModalPort
   ));
 
   useEffect(() => {
-    setPortalRef(document.getElementById('__modal'));
+    setPortalRef(document.getElementById('__container'));
   }, []);
 
   return (
