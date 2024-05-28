@@ -6,6 +6,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div id="__wrap">
       <main id="__container">
         <Component {...pageProps} />
+        <div id="__modal"></div>
       </main>
     </div>
   );

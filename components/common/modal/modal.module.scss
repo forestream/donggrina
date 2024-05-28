@@ -1,0 +1,14 @@
+.outer {
+  position: absolute;
+  inset: 0 -24px;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 1rem;
+}
