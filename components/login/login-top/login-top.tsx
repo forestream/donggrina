@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './loginTop.module.scss';
+import styles from './login-top.module.scss';
 
 export default function LoginTop() {
   return (

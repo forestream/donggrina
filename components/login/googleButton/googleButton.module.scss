@@ -1,6 +1,0 @@
-@import '/components/common/Button/Button.module.scss';
-
-.googleButton {
-  @include RoundButton(var(--white), 1px solid var(--google-border), var(--google-color));
-  gap: 14px;
-}

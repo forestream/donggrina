@@ -1,5 +1,5 @@
 import GoogleSVG from '@/public/images/login/google_logo.svg';
-import styles from './googleButton.module.scss';
+import styles from './google-button.module.scss';
 import Link from 'next/link';
 
 export default function GoogleButton() {

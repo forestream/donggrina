@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './kakaoButton.module.scss';
+import styles from './kakao-button.module.scss';
 import KakaoSVG from '@/public/images/login/kakao_logo.svg';
 
 export default function KakaoButton() {
