@@ -1,6 +1,6 @@
-import GoogleButton from '../googleButton/googleButton';
-import KakaoButton from '../kakaoButton/kakaoButton';
-import styles from './loginButtons.module.scss';
+import GoogleButton from '../google-button/google-button';
+import KakaoButton from '../kakao-button/kakao-button';
+import styles from './login-buttons.module.scss';
 
 export default function LoginButtons() {
   return (

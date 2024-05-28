@@ -1,4 +1,4 @@
-@mixin RoundButton($background, $border: none, $color: var(--text-color)) {
+@mixin roundButton($background, $border: none, $color: var(--text-color)) {
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -12,14 +12,14 @@
   color: $color;
 }
 
-@mixin PrimaryButton {
-  @include RoundButton(var(--main-color));
+@mixin primaryButton {
+  @include roundButton(var(--main-color));
 }
 
-@mixin SecondaryButton {
-  @include RoundButton(var(--white), 1px solid var(--main-color));
+@mixin secondaryButton {
+  @include roundButton(var(--white), 1px solid var(--main-color));
 }
 
-@mixin TertiaryButton {
-  @include RoundButton(var(--tertiary));
+@mixin tertiaryButton {
+  @include roundButton(var(--tertiary));
 }
