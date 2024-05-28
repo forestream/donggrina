@@ -1,25 +1,54 @@
 import { createPortal } from 'react-dom';
 import styles from './modal.module.scss';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-function Modal({ message }) {
+interface CommonProps {
+  message: string;
+  handleClose: () => void;
+}
+
+interface ModalProps extends CommonProps {
+  buttons: ReactNode;
+}
+
+interface ModalPortalProps extends CommonProps {
+  buttons: {
+    text: string;
+    event: () => void;
+  }[];
+}
+
+function Modal({ message, buttons, handleClose }: ModalProps) {
   return (
-    <div className={styles.outer}>
-      <div className={styles.inner}>
-        <p>{message}</p>
-        <button>y</button>
-        <button>n</button>
+    <div className={styles.outer} onClick={handleClose}>
+      <div className={styles.inner} onClick={(e) => e.stopPropagation()}>
+        <p className={styles.message}>{message}</p>
+        <div className={styles.buttonContainer}>{buttons}</div>
       </div>
     </div>
   );
 }
 
-export default function ModalPortal({ message }) {
-  const [ref, setRef] = useState<HTMLElement | null>(null);
+export default function ModalPortal({ message, buttons, handleClose }: ModalPortalProps) {
+  const [portalRef, setPortalRef] = useState<HTMLElement | null>(null);
+
+  const buttonComps = buttons.map((button, i) => (
+    <button className={`${styles.button} ${i === buttons.length - 1 ? styles.greenButton : ''}`} onClick={button.event}>
+      {button.text}
+    </button>
+  ));
 
   useEffect(() => {
-    setRef(document.getElementById('__modal'));
+    setPortalRef(document.getElementById('__modal'));
   }, []);
 
-  return <>{ref && createPortal(<Modal message={message} />, ref as HTMLElement)}</>;
+  return (
+    <>
+      {portalRef &&
+        createPortal(
+          <Modal message={message} buttons={buttonComps} handleClose={handleClose} />,
+          portalRef as HTMLElement,
+        )}
+    </>
+  );
 }
