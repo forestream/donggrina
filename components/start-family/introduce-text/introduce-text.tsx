@@ -1,6 +1,6 @@
-import styles from './text-box.module.scss';
+import styles from './introduce-text.module.scss';
 
-export default function TextBox() {
+export default function IntroduceText() {
   return (
     <div className={styles.textBox}>
       <h2>
