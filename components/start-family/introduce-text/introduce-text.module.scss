@@ -1,0 +1,17 @@
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  padding-top: 72px;
+  h2 {
+    font-size: 24px;
+    span {
+      font-size: 16px;
+    }
+  }
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+}
