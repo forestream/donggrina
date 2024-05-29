@@ -11,7 +11,7 @@ export default function useModal(
     setIsOpen(false);
   };
 
-  const Modal = () => <>{isOpen && <ModalPortal message={message} buttons={buttons} handleClose={handleClose} />}</>;
+  const Modal = () => <>{isOpen && <ModalPortal message={message} buttons={buttons} onClose={handleClose} />}</>;
 
   return [Modal, setIsOpen];
 }
