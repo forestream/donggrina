@@ -1,15 +1,17 @@
-import Link from 'next/link';
 import styles from './link-list.module.scss';
+import LinkItem from './link-item';
+
+const links = [
+  { href: '/', text: '가족만들기' },
+  { href: '/', text: '가족에 참여하기' },
+];
 
 export default function LinkList() {
   return (
     <ul className={styles.linkList}>
-      <li>
-        <Link href={'/'}>가족만들기</Link>
-      </li>
-      <li>
-        <Link href={'/'}>가족에 참여하기</Link>
-      </li>
+      {links.map((link, index) => (
+        <LinkItem key={index} text={link.text} href={link.href} />
+      ))}
     </ul>
   );
 }
