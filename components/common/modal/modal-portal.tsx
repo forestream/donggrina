@@ -12,7 +12,7 @@ interface ModalPortalProps extends CommonProps {
   buttons: Buttons;
 }
 
-export default function ModalPortal({ message, buttons, handleClose }: ModalPortalProps) {
+export default function ModalPortal({ message, buttons, onClose }: ModalPortalProps) {
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
   if (!portalElement) setPortalElement(document.getElementById('__container'));
@@ -26,10 +26,7 @@ export default function ModalPortal({ message, buttons, handleClose }: ModalPort
   return (
     <>
       {portalElement &&
-        createPortal(
-          <Modal message={message} buttons={buttonComps} handleClose={handleClose} />,
-          portalElement as HTMLElement,
-        )}
+        createPortal(<Modal message={message} buttons={buttonComps} onClose={onClose} />, portalElement as HTMLElement)}
     </>
   );
 }
