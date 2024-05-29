@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Modal, { CommonProps } from './modal';
+import Modal, { ModalCommonProps } from './modal';
 import styles from './modal-portal.module.scss';
 import { createPortal } from 'react-dom';
 
@@ -8,7 +8,7 @@ export type Buttons = {
   event: () => void;
 }[];
 
-interface ModalPortalProps extends CommonProps {
+interface ModalPortalProps extends ModalCommonProps {
   buttons: Buttons;
 }
 

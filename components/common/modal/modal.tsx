@@ -1,12 +1,12 @@
 import styles from './modal.module.scss';
 import { MouseEvent, ReactNode } from 'react';
 
-export interface CommonProps {
+export interface ModalCommonProps {
   message: string;
   onClose: () => void;
 }
 
-interface ModalProps extends CommonProps {
+interface ModalProps extends ModalCommonProps {
   buttons: ReactNode;
 }
 
