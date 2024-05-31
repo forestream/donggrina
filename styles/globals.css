@@ -9,6 +9,7 @@
   --kakao-color: #371c1d;
   --google-color: #757575;
   --google-border: #eeeeee;
+  --red: #d6173a;
 }
 
 * {
@@ -24,7 +25,15 @@ ol {
 a {
   text-decoration: none;
 }
-
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
 html,
 body,
 #__wrap,
@@ -41,4 +50,5 @@ body,
   border: 1px solid #ddd;
   border-top: none;
   border-bottom: none;
+  position: relative;
 }
