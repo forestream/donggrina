@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest } from 'next/server';
 
 const PROTECTED_PAGES = ['/start-family'];
 const PUBLIC_PAGES = ['/login'];
@@ -14,15 +14,20 @@ export default function middleware(request: NextRequest) {
   const hasCookie = cookies.has('accessToken');
 
   // 쿼리 파라미터에서 token 값 확인
-  const hasToken = nextUrl.search.includes('token');
+  const hasQuery = nextUrl.search.includes('token');
 
-  // /start-family 페이지로 접근하는데 token이 있을 경우 진행
-  // /start-family 페이지로 접근하는데 token이 없을 경우 리다이렉션
+  // /start-family 페이지로 접근하는데 token이 있을 경우 : 페이지 접근
+  // /start-family 페이지로 접근하는데 token이 없을 경우 : 리다이렉션
+  // /start-family 페이지로 접근하는데 token이 없지만 쿠키가 있을 경우 : 페이지 접근
   // 추후 배포됐을 때 수정.
-  if (path === '/start-family' && hasToken) {
+  if (path === '/start-family' && hasQuery) {
     return NextResponse.next();
-  } else if (path === '/start-family' && !hasToken) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl));
+  } else if (path === '/start-family' && !hasQuery) {
+    if (hasCookie) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL('/login', request.nextUrl));
+    }
   }
 
   // 비로그인 상태일 때 로그인이 필요한 페이지에 접근 시 리다이렉션
