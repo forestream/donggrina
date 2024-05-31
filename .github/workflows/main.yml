@@ -2,7 +2,7 @@ name: Notification Pull Request
 
 on: 
   pull_request:
-
+    branches: [develop, main]
 # job은 사용자가 정한 플랫폼을 통해 step이라는 일련의 과정을 실행
 jobs:
   test:
