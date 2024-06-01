@@ -3,14 +3,18 @@ import CalendarContainer from '@/components/calendar/calendar-container';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const {
+  let {
     query: { year, month, date },
   } = context;
 
   const today = new Date();
-  const [yearToday, monthToday, dateToday] = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
+  const [yearToday, monthToday] = [today.getFullYear(), today.getMonth() + 1];
 
-  return { props: { year: year || yearToday, month: month || monthToday, date: date || dateToday } };
+  if (!year || Number(year) < yearToday - 100 || Number(year) > yearToday + 100) year = String(yearToday);
+  if (!month || Number(month) < 1 || Number(month) > 12) month = String(monthToday);
+  if (!date || Number(date) < 1 || Number(date) > 31) date = '1';
+
+  return { props: { year, month, date } };
 }
 
 export type CalendarProps = InferGetServerSidePropsType<typeof getServerSideProps>;

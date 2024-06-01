@@ -6,8 +6,8 @@ import getFirstDay from '@/utils/get-first-day';
 import Link from 'next/link';
 
 export default function CalendarContainer({ year, month, date }: CalendarProps) {
-  const dateCount = getDateCount(year as number, month as number);
-  const firstDay = getFirstDay(year as number, month as number);
+  const dateCount = getDateCount(Number(year), Number(month));
+  const firstDay = getFirstDay(Number(year), Number(month));
   const emptyDates = Array(CALENDAR_EMPTY_DATES[firstDay]).fill('');
   const dates = Array(dateCount)
     .fill(0)
