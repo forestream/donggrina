@@ -8,8 +8,9 @@
   text-align: center;
   padding: 8px;
   font-size: 18px;
+  color: var(--text-color);
 
   &.red {
-    color: red;
+    color: var(--red);
   }
 }
