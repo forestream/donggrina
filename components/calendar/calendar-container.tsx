@@ -16,15 +16,19 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
 
   return (
     <div className={styles.container}>
-      {calendarArray.map((e, i) => (
-        <Link
-          key={e}
-          className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}
-          href={`/calendar?year=${year}&month=${month}&date=${e}`}
-        >
-          {e}
-        </Link>
-      ))}
+      {calendarArray.map((e, i) =>
+        !e ? (
+          <div></div>
+        ) : (
+          <Link
+            key={e}
+            className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}
+            href={`/calendar?year=${year}&month=${month}&date=${e}`}
+          >
+            {e}
+          </Link>
+        ),
+      )}
     </div>
   );
 }
