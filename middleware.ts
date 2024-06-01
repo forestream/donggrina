@@ -42,5 +42,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login', '/start-family'],
+  matcher: [...PUBLIC_PAGES, ...PROTECTED_PAGES],
 };
