@@ -13,29 +13,37 @@
     }
     span {
       z-index: 1;
+      font-weight: 500;
     }
   }
-}
-.navList.on {
-  a {
-    gap: 0;
-    .imgBox {
-      position: relative;
-      top: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      background-color: #fff;
-      box-shadow: 0 -20px 20px 0 rgba(143, 204, 147, 0.1);
-      svg {
-        position: absolute;
-        top: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        path {
-          stroke: var(--main-color);
+  &:hover {
+    svg {
+      path {
+        stroke: var(--main-color);
+      }
+    }
+  }
+  &.on {
+    a {
+      gap: 0;
+      .imgBox {
+        position: relative;
+        top: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background-color: #fff;
+        box-shadow: 0 -20px 20px 0 rgba(143, 204, 147, 0.1);
+        svg {
+          position: absolute;
+          top: 12px;
+          left: 50%;
+          transform: translateX(-50%);
+          path {
+            stroke: var(--main-color);
+          }
         }
       }
     }
