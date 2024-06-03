@@ -17,8 +17,8 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
   return (
     <div className={styles.container}>
       {calendarArray.map((e, i) =>
-        !e ? (
-          <div></div>
+        typeof e === 'string' ? (
+          <div className={styles.calendarCell}>{e}</div>
         ) : (
           <Link
             key={e}
