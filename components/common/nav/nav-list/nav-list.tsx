@@ -1,12 +1,7 @@
 import Link from 'next/link';
 import styles from './nav-list.module.scss';
 import { useRouter } from 'next/router';
-
-interface NavListProps {
-  href: string;
-  text: string;
-  SvgValue: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-}
+import { NavListProps } from '../types/nav';
 
 export default function NavList({ href, text, SvgValue }: NavListProps) {
   const { pathname } = useRouter();
