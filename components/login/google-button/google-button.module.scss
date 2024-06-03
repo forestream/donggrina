@@ -1,4 +1,4 @@
-@import '../../common/button/Button.module.scss';
+@import '/components/common/common-button/common-button.module.scss';
 
 .googleButton {
   @include roundButton(var(--white), 1px solid var(--google-border), var(--google-color));

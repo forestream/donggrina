@@ -1,4 +1,4 @@
-@import '../../common/button/Button.module.scss';
+@import '/components/common/common-button/common-button.module.scss';
 
 .kakaoButton {
   @include roundButton(var(--kakao-background), var(--kakao-color));
