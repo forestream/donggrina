@@ -3,13 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
   border-radius: 32px;
   font-weight: 700;
   font-size: 16px;
   background-color: $background;
-  border: $border;
   color: $color;
+  border: $border;
 }
 
 @mixin primaryButton {
