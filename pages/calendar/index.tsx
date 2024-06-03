@@ -1,5 +1,6 @@
 import styles from './calendar.module.scss';
 import CalendarContainer from '@/components/calendar/calendar-container';
+import CalendarTodo from '@/components/calendar/calendar-todo';
 import getDay from '@/utils/get-day';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
@@ -34,6 +35,7 @@ export default function Calendar({ year, month, date }: CalendarProps) {
       <p className={styles.date}>
         {month}월 {date}일 {day}
       </p>
+      <CalendarTodo />
     </main>
   );
 }
