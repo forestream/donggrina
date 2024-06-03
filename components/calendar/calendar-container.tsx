@@ -25,7 +25,7 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
             className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}
             href={`/calendar?year=${year}&month=${month}&date=${e}`}
           >
-            {e}
+            <div className={`${styles.date} ${e == date ? styles.selected : ''}`}>{e}</div>
           </Link>
         ),
       )}

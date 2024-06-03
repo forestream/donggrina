@@ -6,11 +6,30 @@
 
 .calendarCell {
   text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9e9e9e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 8px;
-  font-size: 18px;
-  color: var(--text-color);
 
   &.red {
-    color: var(--red);
+    color: #e75852;
+  }
+
+  .date {
+    padding: 12px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .selected {
+    background-color: var(--main-color);
+    border-radius: 9999px;
+    color: var(--white);
   }
 }
