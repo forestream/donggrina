@@ -1,13 +1,8 @@
 import styles from './nav.module.scss';
 import Gooey from './gooey/gooey';
-import { NAVVALUE } from './data/navData';
+import { NAVVALUE } from '@/utils/constants/navData';
 import NavList from './nav-list/nav-list';
-
-interface NavListProps {
-  href: string;
-  text: string;
-  SvgValue: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-}
+import { NavListProps } from './types/nav';
 
 export default function Nav() {
   return (
