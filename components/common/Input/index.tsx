@@ -3,17 +3,17 @@ import { useFormContext } from 'react-hook-form';
 import styles from '@/components/common/Input/Input.module.scss';
 
 interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
   name: string;
 }
-const FormInput = ({ name, label, type = 'text' }: FormInput) => {
+
+const FormInput = ({ name, type = 'text' }: FormInput) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
+
   return (
     <div className={styles.container}>
-      <label htmlFor={name}>{label}</label>
       <input
         className={styles.input}
         id={name}
