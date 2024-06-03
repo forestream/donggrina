@@ -1,11 +1,16 @@
 import styles from './calendar.module.scss';
 import CalendarContainer from '@/components/calendar/calendar-container';
+import getDay from '@/utils/get-day';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let {
     query: { year, month, date },
   } = context;
+
+  if (typeof year === 'object') year = year[0];
+  if (typeof month === 'object') month = month[0];
+  if (typeof date === 'object') date = date[0];
 
   const today = new Date();
   const [yearToday, monthToday] = [today.getFullYear(), today.getMonth() + 1];
@@ -21,10 +26,14 @@ export type CalendarProps = InferGetServerSidePropsType<typeof getServerSideProp
 
 export default function Calendar({ year, month, date }: CalendarProps) {
   const ymd = { year, month, date };
+  const day = getDay(year, month, date);
 
   return (
     <main className={styles.outer}>
       <CalendarContainer {...ymd} />
+      <p className={styles.date}>
+        {month}월 {date}일 {day}
+      </p>
     </main>
   );
 }
