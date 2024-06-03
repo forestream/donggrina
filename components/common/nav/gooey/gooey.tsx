@@ -4,7 +4,7 @@ export default function Gooey() {
       <defs>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 1  0 1 0 0 1  0 0 1 0 1  0 0 0 20 -10" result="goo" />
           <feBlend in="SourceGraphic" in2="goo" />
         </filter>
       </defs>

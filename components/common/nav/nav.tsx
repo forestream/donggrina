@@ -12,11 +12,13 @@ interface NavListProps {
 export default function Nav() {
   return (
     <>
-      <ul className={`${styles.nav}`}>
-        {NAVVALUE.map(({ href, text, SvgValue }: NavListProps, index) => {
-          return <NavList key={index} href={href} text={text} SvgValue={SvgValue} />;
-        })}
-      </ul>
+      <div className={styles.box}>
+        <ul className={`${styles.nav}`}>
+          {NAVVALUE.map(({ href, text, SvgValue }: NavListProps, index) => {
+            return <NavList key={index} href={href} text={text} SvgValue={SvgValue} />;
+          })}
+        </ul>
+      </div>
 
       <Gooey />
     </>
