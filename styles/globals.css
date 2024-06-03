@@ -12,6 +12,17 @@
   --red: #d6173a;
 }
 
+@font-face {
+  font-family: 'LaundryGothic';
+  src: url('/fonts/LaundryGothic_subset_Bold.woff2');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'LaundryGothic';
+  src: url('/fonts/LaundryGothic_subset_Regular.woff2');
+  font-weight: 400;
+}
+
 * {
   margin: 0;
   padding: 0;
