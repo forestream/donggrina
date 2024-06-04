@@ -1,4 +1,4 @@
-import isLeapYear from './is-leap-year';
+import isLeapYear from './isLeapYear';
 
 export default function getDateCount(year: number, month: number) {
   const leapYear = isLeapYear(year);
