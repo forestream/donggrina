@@ -1,7 +1,7 @@
 import styles from './calendar.module.scss';
 import CalendarContainer from '@/components/calendar/calendar-container';
 import CalendarTodo from '@/components/calendar/calendar-todo';
-import getDay from '@/utils/getDay';
+import getDay from '@/utils/get-day';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
