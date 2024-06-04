@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import FormInput from '@/components/common/Input';
+import FormInput from '@/components/common/Input/main-input';
 import styles from './Form.module.scss';
 
 interface FormProps {
@@ -13,9 +13,9 @@ const Form = ({ onSubmit, children }: FormProps) => {
 
   return (
     <FormProvider {...methods}>
-      <div className={styles.wrapper}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
-      </div>
+      <form onSubmit={methods.handleSubmit(onSubmit)} className={styles.wrapper}>
+        {children}
+      </form>
     </FormProvider>
   );
 };

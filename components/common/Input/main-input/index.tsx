@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes } from 'react';
 import { useFormContext } from 'react-hook-form';
-import styles from '@/components/common/Input/Input.module.scss';
+import styles from './main-input.module.scss';
 
 interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -16,7 +16,10 @@ const FormInput = ({ name, label, type = 'text' }: FormInput) => {
 
   return (
     <div className={styles.container}>
-      <label htmlFor={name}>{label}</label>
+      <div className={styles.label}>
+        <span>|</span>
+        <label htmlFor={name}>{label}</label>
+      </div>
       <input
         className={styles.input}
         id={name}
