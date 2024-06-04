@@ -4,30 +4,30 @@ import HomeSVG from '@/public/images/nav/home.svg';
 import SmileSVG from '@/public/images/nav/smile.svg';
 import UserSVG from '@/public/images/nav/user.svg';
 
-export const NAVVALUE = [
+export const NAV_LIST_DATA = [
   {
     text: '패밀리',
-    SvgValue: BookSVG,
+    RenderSvgComponent: BookSVG,
     href: '/family',
   },
   {
     text: '달력',
-    SvgValue: CalendarSVG,
+    RenderSvgComponent: CalendarSVG,
     href: '/달력',
   },
   {
     text: '다이어리',
-    SvgValue: HomeSVG,
+    RenderSvgComponent: HomeSVG,
     href: '/다이어리',
   },
   {
     text: '스토리',
-    SvgValue: SmileSVG,
+    RenderSvgComponent: SmileSVG,
     href: '/스토리',
   },
   {
     text: '내정보',
-    SvgValue: UserSVG,
+    RenderSvgComponent: UserSVG,
     href: '/내정보',
   },
 ];

@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 import { Header } from '@/components/common/Header';
 import { isHeader } from '@/utils/IsHeader';
-import { isNav } from '@/utils/IsNav';
+import { isNav } from '@/utils/is-nav';
 import { useRouter } from 'next/router';
 import Nav from '@/components/common/nav/nav';
 

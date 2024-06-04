@@ -12,7 +12,6 @@
       border-radius: 50%;
     }
     span {
-      z-index: 1;
       font-weight: 500;
     }
   }
@@ -44,6 +43,9 @@
             stroke: var(--main-color);
           }
         }
+      }
+      span {
+        z-index: 1;
       }
     }
   }
