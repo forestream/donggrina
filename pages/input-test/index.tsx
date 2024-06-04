@@ -1,22 +1,17 @@
 import React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import FormInput from '@/components/common/Input';
+import Form from '@/components/common/Form';
 
-function App() {
-  const methods = useForm();
-
-  const onSubmit = (data) => {
+export default function InputTest() {
+  const onSubmit = (data: any) => {
     console.log(data);
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <FormInput name="name" label="가족의 이름을 알려주세요!" />
-        <FormInput name="nickname" label="가족 내 본인의 이름을 입력해주세요." />
-      </form>
-    </FormProvider>
+    <Form onSubmit={onSubmit}>
+      <Form.Input name="이름" label="이름" />
+      <Form.Input name="생일" label="생일" />
+      <Form.Input name="입양일" label="입양일" />
+      <button type="submit">Submit</button>
+    </Form>
   );
 }
-
-export default App;

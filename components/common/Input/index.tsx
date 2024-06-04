@@ -5,12 +5,15 @@ import styles from '@/components/common/Input/Input.module.scss';
 interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
+  type?: string;
 }
+
 const FormInput = ({ name, label, type = 'text' }: FormInput) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
+
   return (
     <div className={styles.container}>
       <label htmlFor={name}>{label}</label>
