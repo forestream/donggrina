@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 import { Header } from '@/components/common/Header';
-import { isHeader } from '@/utils/IsHeader';
+import { isHeader } from '@/utils/isHeader';
 import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }: AppProps) {
