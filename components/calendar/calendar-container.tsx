@@ -26,7 +26,11 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
             href={`/calendar?year=${year}&month=${month}&date=${e}`}
           >
             <div className={`${styles.date} ${e == date ? styles.selected : ''}`}>{e}</div>
-            <div className={styles.todoIcon}></div>
+            <div className={styles.todoIconContainer}>
+              <div className={styles.todoIcon}></div>
+              <div className={styles.todoIcon}></div>
+              <div className={styles.todoIcon}></div>
+            </div>
           </Link>
         ),
       )}
