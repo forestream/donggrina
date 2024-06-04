@@ -1,8 +1,8 @@
-import getDateCount from '@/utils/get-date-count';
+import getDateCount from '@/utils/getDateCount';
 import styles from './calendar-container.module.scss';
 import { CalendarProps } from '@/pages/calendar';
 import { CALENDAR_DAYS, CALENDAR_EMPTY_DATES } from '@/lib/constants/calendar-constants';
-import getFirstDay from '@/utils/get-first-day';
+import getFirstDay from '@/utils/getFirstDay';
 import Link from 'next/link';
 
 export default function CalendarContainer({ year, month, date }: CalendarProps) {
@@ -26,6 +26,7 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
             href={`/calendar?year=${year}&month=${month}&date=${e}`}
           >
             <div className={`${styles.date} ${e == date ? styles.selected : ''}`}>{e}</div>
+            <div className={styles.todoIcon}></div>
           </Link>
         ),
       )}

@@ -6,12 +6,14 @@
 
 .calendarCell {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--text-color-gray);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   padding: 8px;
 
   &.red {
@@ -19,9 +21,10 @@
   }
 
   .date {
-    padding: 12px;
-    width: 36px;
-    height: 36px;
+    font-size: 13px;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,4 +35,11 @@
     border-radius: 9999px;
     color: var(--white);
   }
+}
+
+.todoIcon {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background-color: var(--main-color);
 }
