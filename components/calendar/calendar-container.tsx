@@ -18,7 +18,7 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
     <div className={styles.container}>
       {calendarArray.map((e, i) =>
         typeof e === 'string' ? (
-          <div className={styles.calendarCell}>{e}</div>
+          <div className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}>{e}</div>
         ) : (
           <Link
             key={e}
