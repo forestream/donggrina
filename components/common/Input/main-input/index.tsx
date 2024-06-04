@@ -8,7 +8,7 @@ interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
 }
 
-const FormInput = ({ name, label, type = 'text' }: FormInput) => {
+export default function MainInput({ name, label, type = 'text' }: FormInput) {
   const {
     register,
     formState: { errors },
@@ -31,6 +31,4 @@ const FormInput = ({ name, label, type = 'text' }: FormInput) => {
       {errors[name] && <p className={styles.error}>{errors[name]?.message as string}</p>}
     </div>
   );
-};
-
-export default FormInput;
+}

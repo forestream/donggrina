@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import FormInput from '@/components/common/Input/main-input';
+import MainInput from '@/components/common/Input/main-input';
+import DateInput from '../Input/date-input';
 import styles from './Form.module.scss';
 
 interface FormProps {
@@ -8,7 +9,7 @@ interface FormProps {
   children: React.ReactNode;
 }
 
-const Form = ({ onSubmit, children }: FormProps) => {
+export default function Form({ onSubmit, children }: FormProps) {
   const methods = useForm();
 
   return (
@@ -18,8 +19,7 @@ const Form = ({ onSubmit, children }: FormProps) => {
       </form>
     </FormProvider>
   );
-};
+}
 
-Form.Input = FormInput;
-
-export default Form;
+Form.MainInput = MainInput;
+Form.DateInput = DateInput;
