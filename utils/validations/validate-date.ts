@@ -1,28 +1,27 @@
-interface ValidateDateProps {
-  value: string;
-}
+import { UseFormRegister, FieldValues } from 'react-hook-form';
 
-const validateYear = ({ value }: ValidateDateProps) => {
-  return /^\d{4}$/.test(value) || '년도는 4자리 숫자여야 합니다.';
+type CustomRegisterType = {
+  register: UseFormRegister<FieldValues>;
+  type: 'year' | 'month' | 'day';
 };
 
-const validateMonth = ({ value }: ValidateDateProps) => {
-  if (value.length === 1) {
-    value = '0' + value;
-  }
-  return (
-    (/^\d{2}$/.test(value) && parseInt(value, 10) >= 1 && parseInt(value, 10) <= 12) ||
-    '월은 01부터 12 사이의 2자리 숫자여야 합니다.'
-  );
-};
+export const CustomRegister = ({ register, type }: CustomRegisterType) => {
+  const config = {
+    required: '필수 정보입니다.',
+    valueAsNumber: true,
+    ...(type === 'month' && {
+      min: { value: 1, message: '월은 1부터 12 사이의 숫자여야 합니다.' },
+      max: { value: 12, message: '월은 1부터 12 사이의 숫자여야 합니다.' },
+    }),
+    ...(type === 'day' && {
+      min: { value: 1, message: '일은 1부터 31 사이의 숫자여야 합니다.' },
+      max: { value: 31, message: '일은 1부터 31 사이의 숫자여야 합니다.' },
+    }),
+    ...(type === 'year' && {
+      min: { value: 1900, message: '연도는 1900 이상이어야 합니다.' },
+      max: { value: 9999, message: `연도는 9999 이하이어야 합니다.` },
+    }),
+  };
 
-const validateDay = ({ value }: ValidateDateProps) => {
-  if (value.length === 1) {
-    value = '0' + value;
-  }
-  return (
-    (/^\d{2}$/.test(value) && parseInt(value, 10) >= 1 && parseInt(value, 10) <= 31) ||
-    '일은 01부터 31 사이의 2자리 숫자여야 합니다.'
-  );
+  return register(type, config);
 };
-export { validateYear, validateMonth, validateDay };

@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from './date-input.module.scss';
-// import { validateDay, validateMonth, validateYear } from '@/utils/validations/validate-date';
+import { CustomRegister } from '@/utils/validations/validate-date';
 
 interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -28,12 +28,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           id="year"
           type={type}
           placeholder="YYYY"
-          {...register('year', {
-            required: '필수 정보입니다.',
-            min: { value: 1000, message: '년도는 4자리 숫자여야 합니다.' },
-            max: { value: 9999, message: '년도는 4자리 숫자여야 합니다.' },
-            valueAsNumber: true,
-          })}
+          {...CustomRegister({ register, type: 'year' })}
           onBlur={() => trigger('year')}
         />
         <span>-</span>
@@ -42,12 +37,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           id="month"
           type={type}
           placeholder="MM"
-          {...register('month', {
-            required: '필수 정보입니다.',
-            min: { value: 1, message: '월은 1부터 12 사이의 숫자여야 합니다.' },
-            max: { value: 12, message: '월은 1부터 12 사이의 숫자여야 합니다.' },
-            valueAsNumber: true,
-          })}
+          {...CustomRegister({ register, type: 'month' })}
           onBlur={() => trigger('month')}
         />
         <span>-</span>
@@ -56,12 +46,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           id="day"
           type={type}
           placeholder="DD"
-          {...register('day', {
-            required: '필수 정보입니다.',
-            min: { value: 1, message: '일은 1부터 31 사이의 숫자여야 합니다.' },
-            max: { value: 31, message: '일은 1부터 31 사이의 숫자여야 합니다.' },
-            valueAsNumber: true,
-          })}
+          {...CustomRegister({ register, type: 'day' })}
           onBlur={() => trigger('day')}
         />
       </div>
