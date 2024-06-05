@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import styles from './button.module.scss';
+import { ButtonClassType } from '@/utils/constants/button-class';
 
-interface ButtonPropsType {
-  className: 'primary' | 'secondary' | 'tertiary' | 'default';
+interface ButtonPropsType extends ButtonClassType {
   children: ReactNode;
   type: 'submit' | 'reset' | 'button';
   onClick: () => void;

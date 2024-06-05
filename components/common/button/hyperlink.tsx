@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from './button.module.scss';
 import { ReactNode } from 'react';
+import { ButtonClassType } from '@/utils/constants/button-class';
 
-interface LinkPropsType {
-  className: 'primary' | 'secondary' | 'tertiary' | 'empty';
+interface LinkPropsType extends ButtonClassType {
   href: string;
   children: ReactNode;
   round?: boolean;
