@@ -1,13 +1,8 @@
-import React, { InputHTMLAttributes } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from './date-input.module.scss';
 import { CustomRegister } from '@/utils/validations/validate-date';
-
-interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  name?: string;
-  type?: string;
-}
+import { FormInput } from '../input-type';
 
 export default function DateInput({ label, type = 'text' }: FormInput) {
   const {
