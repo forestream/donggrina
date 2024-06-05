@@ -16,6 +16,13 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
     trigger,
   } = useFormContext();
 
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = value.replace(/[^0-9]/g, '');
+    if (value !== formattedValue) {
+      e.target.value = formattedValue;
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.label}>
@@ -30,6 +37,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           placeholder="YYYY"
           {...CustomRegister({ register, type: 'year' })}
           onBlur={() => trigger('year')}
+          onInput={handleInput}
         />
         <span>-</span>
         <input
@@ -39,6 +47,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           placeholder="MM"
           {...CustomRegister({ register, type: 'month' })}
           onBlur={() => trigger('month')}
+          onInput={handleInput}
         />
         <span>-</span>
         <input
@@ -48,6 +57,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           placeholder="DD"
           {...CustomRegister({ register, type: 'day' })}
           onBlur={() => trigger('day')}
+          onInput={handleInput}
         />
       </div>
       {(errors.year || errors.month || errors.day) && (
