@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '@/components/common/Form';
 
 export default function InputTest() {
+  // eslint-disable-next-line
   const onSubmit = (data: any) => {
     const localDate = new Date(data.year, data.month - 1, data.day + 1).toISOString().split('T')[0];
     const formData = { ...data, localDate };

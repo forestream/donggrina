@@ -6,6 +6,7 @@ import styles from './Form.module.scss';
 import WeightInput from '../Input/weight-input';
 
 interface FormProps {
+  // eslint-disable-next-line
   onSubmit: (data: any) => void;
   children: React.ReactNode;
 }
