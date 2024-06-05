@@ -3,6 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import MainInput from '@/components/common/Input/main-input';
 import DateInput from '../Input/date-input';
 import styles from './Form.module.scss';
+import WeightInput from '../Input/weight-input';
 
 interface FormProps {
   onSubmit: (data: any) => void;
@@ -23,3 +24,4 @@ export default function Form({ onSubmit, children }: FormProps) {
 
 Form.MainInput = MainInput;
 Form.DateInput = DateInput;
+Form.WeightInput = WeightInput;

@@ -6,6 +6,10 @@ export default function InputTest() {
     const localDate = new Date(data.year, data.month - 1, data.day + 1).toISOString().split('T')[0];
     const formData = { ...data, localDate };
 
+    if (formData.weight) {
+      formData.weight = parseFloat(formData.weight);
+    }
+
     // eslint-disable-next-line
     const { year, month, day, ...rest } = formData;
     console.log(rest);
@@ -16,6 +20,7 @@ export default function InputTest() {
       <Form onSubmit={onSubmit}>
         <Form.MainInput name="이름" label="이름" />
         <Form.DateInput label="생일" />
+        <Form.WeightInput name="weight" label="무게" />
         <button type="submit">Submit</button>
       </Form>
     </div>
