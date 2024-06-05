@@ -5,9 +5,11 @@
 
   .input {
     @include input;
+    height: 50px;
+    padding: 12px 11px;
   }
 }
 
 .error {
-  color: var(--red);
+  @include error;
 }

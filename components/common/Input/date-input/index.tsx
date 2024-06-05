@@ -24,7 +24,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
       </div>
       <div className={styles.inputContainer}>
         <input
-          className={styles.input}
+          className={`${styles.input} ${styles.year}`}
           id="year"
           type={type}
           placeholder="YYYY"
@@ -38,7 +38,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
         />
         <span>-</span>
         <input
-          className={styles.input}
+          className={`${styles.input} ${styles.month}`}
           id="month"
           type={type}
           placeholder="MM"
@@ -52,7 +52,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
         />
         <span>-</span>
         <input
-          className={styles.input}
+          className={`${styles.input} ${styles.day}`}
           id="day"
           type={type}
           placeholder="DD"
