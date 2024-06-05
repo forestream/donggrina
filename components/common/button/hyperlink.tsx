@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './button.module.scss';
 import { ReactNode } from 'react';
-import { ButtonClassType } from '@/utils/constants/button-class';
+import { ButtonClassType } from './types/button-type';
 
 interface LinkPropsType extends ButtonClassType {
   href: string;

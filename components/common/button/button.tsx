@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import styles from './button.module.scss';
-import { ButtonClassType } from '@/utils/constants/button-class';
+import { ButtonClassType } from './types/button-type';
 
 interface ButtonPropsType extends ButtonClassType {
   children: ReactNode;
