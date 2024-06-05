@@ -16,18 +16,18 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
 
   return (
     <div className={styles.container}>
-      {calendarArray.map((e, i) =>
-        typeof e === 'string' ? (
+      {calendarArray.map((calendarCell, i) =>
+        typeof calendarCell === 'string' ? (
           <div key={i + 'empty'} className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}>
-            {e}
+            {calendarCell}
           </div>
         ) : (
           <Link
-            key={e}
+            key={calendarCell}
             className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}
-            href={`/calendar?year=${year}&month=${month}&date=${e}`}
+            href={`/calendar?year=${year}&month=${month}&date=${calendarCell}`}
           >
-            <div className={`${styles.date} ${e == date ? styles.selected : ''}`}>{e}</div>
+            <div className={`${styles.date} ${calendarCell == date ? styles.selected : ''}`}>{calendarCell}</div>
             <div className={styles.todoIconContainer}>
               <div className={styles.todoIcon}></div>
               <div className={styles.todoIcon}></div>
