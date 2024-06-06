@@ -3,6 +3,9 @@ import CalendarContainer from '@/components/calendar/calendar-container';
 import CalendarTodo from '@/components/calendar/calendar-todo';
 import CreateTodoButton from '@/components/calendar/create-todo-button';
 import getDay from '@/utils/get-day';
+import validateDate from '@/utils/validate-date';
+import validateMonth from '@/utils/validate-month';
+import validateYear from '@/utils/validate-year';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -17,11 +20,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const today = new Date();
   const [yearToday, monthToday] = [today.getFullYear(), today.getMonth() + 1];
 
-  if (!year || Number(year) < yearToday - 100 || Number(year) > yearToday + 100) year = String(yearToday);
-  if (!month || Number(month) < 1 || Number(month) > 12) month = String(monthToday);
-  if (!date || Number(date) < 1 || Number(date) > 31) date = '1';
+  if (!validateYear(year)) year = String(yearToday);
+  if (!validateMonth(month)) month = String(monthToday);
+  if (!validateDate(date)) date = '1';
 
-  return { props: { year, month, date } };
+  return { props: { year: +(year as string), month: +(month as string), date: +(date as string) } };
 }
 
 export type CalendarProps = InferGetServerSidePropsType<typeof getServerSideProps>;
