@@ -1,7 +1,12 @@
-.month {
+.month-list {
   font-size: 24px;
   font-weight: bold;
   color: #bdbdbd;
+  margin: 8px 0 20px;
+
+  .month {
+    width: max-content;
+  }
 
   .selected {
     color: #000000;
