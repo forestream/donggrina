@@ -30,4 +30,6 @@ class Calendar extends Core {
   }
 }
 
-export const CalendarInstance = new Calendar(new Date());
+const CalendarInstance = new Calendar(new Date());
+
+export default CalendarInstance;
