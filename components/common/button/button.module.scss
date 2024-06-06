@@ -22,7 +22,7 @@
   @include button();
   background-color: var(--tertiary);
 }
-.empty {
+.default {
   @include button();
   background-color: var(--white);
 }
