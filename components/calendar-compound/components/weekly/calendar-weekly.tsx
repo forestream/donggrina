@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CalendarInstance } from '@/utils/date/date.utils';
+import CalendarInstance from '@/utils/date/date.utils';
 import { useCalendarContext } from '@/components/calendar-compound/calendar';
 import styles from './calendar-weekly.module.scss';
 

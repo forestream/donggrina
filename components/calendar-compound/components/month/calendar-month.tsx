@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCalendarContext } from '../../calendar';
-import { CalendarInstance } from '@/utils/date/date.utils';
+import CalendarInstance from '@/utils/date/date.utils';
 import 'swiper/css';
 import styles from './calendar-month.module.scss';
 
