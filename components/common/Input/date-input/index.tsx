@@ -11,13 +11,21 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
     trigger,
   } = useFormContext();
 
+  const formatInputValue = (value: string): string => {
+    return value.replace(/[^0-9]/g, '');
+  };
+  const updateInputValue = (input: HTMLInputElement, value: string) => {
+    input.value = value;
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const formattedValue = value.replace(/[^0-9]/g, '');
+    const formattedValue = formatInputValue(value);
     if (value !== formattedValue) {
-      e.target.value = formattedValue;
+      updateInputValue(e.target, formattedValue);
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.label}>
