@@ -1,10 +1,11 @@
-import { ChangeEvent, ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
+import { ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
 import styles from '../radio.module.scss';
+import RadioInput from '../radio-input/radio-input';
+import RadioLabel from '../radio-label/radio-label';
 
 interface ContextType {
   radioValue: string;
-  setRadioValue: React.Dispatch<SetStateAction<string>>;
-  setValue: React.Dispatch<SetStateAction<string>>;
+  updateValue: (value: string) => void;
 }
 
 interface RadioContainerPropsType {
@@ -20,14 +21,17 @@ interface RadioType {
   name: string;
 }
 
-const radioContext = createContext<ContextType | undefined>(undefined);
+export const radioContext = createContext<ContextType | undefined>(undefined);
 
 export function RadioContainer({ values, children, setValue }: RadioContainerPropsType) {
   const [radioValue, setRadioValue] = useState(values[0]);
+  const updateValue = (value: string) => {
+    setRadioValue(value);
+    setValue(value);
+  };
   const providerState = {
     radioValue,
-    setRadioValue,
-    setValue,
+    updateValue,
   };
   return (
     <radioContext.Provider value={providerState}>
@@ -41,17 +45,13 @@ function RadioItemList({ text, id, value, name }: RadioType) {
   if (context === undefined) {
     return null;
   }
-  const { setRadioValue, radioValue, setValue } = context;
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRadioValue(e.target.value);
-    setValue(e.target.value);
-  };
+  const { updateValue } = context;
   return (
     <li>
-      <input type="radio" value={value} id={id} name={name} onChange={handleChange} checked={value === radioValue} />
-      <label htmlFor={id}>
-        <span>{text}</span>
-      </label>
+      <RadioInput value={value} id={id} name={name} />
+      <RadioLabel id={id} updateValue={updateValue} value={value}>
+        {text}
+      </RadioLabel>
     </li>
   );
 }

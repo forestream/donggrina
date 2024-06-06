@@ -11,7 +11,8 @@ interface RadioPropsType {
   setValue: React.Dispatch<SetStateAction<string>>;
 }
 
-// Radio는 값을 저장할 set
+// Radio는 상태 설정 함수, 배열을 받습니다.
+// 배열에는 value, text, id, name을 포함합니다.
 export default function Radio({ options, setValue }: RadioPropsType) {
   const optionValues = options.map((item) => item.value);
 
