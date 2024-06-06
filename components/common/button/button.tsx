@@ -1,16 +1,17 @@
-import React, { ReactNode } from 'react';
+import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import styles from './button.module.scss';
 import { ButtonClassType } from './types/button-type';
 
 interface ButtonPropsType extends ButtonClassType {
-  children: ReactNode;
-  type: 'submit' | 'reset' | 'button';
-  onClick: () => void;
-  disabled?: boolean;
   round?: boolean;
 }
 
-export default function Button({ round = false, className, children, ...props }: ButtonPropsType) {
+export default function Button({
+  round = false,
+  className,
+  children,
+  ...props
+}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement> & ButtonPropsType>) {
   const roundStyle: React.CSSProperties = {
     borderRadius: round ? '32px' : 'none',
   };
