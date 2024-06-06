@@ -14,7 +14,7 @@ export default function RadioLabel({ id, children, updateValue, value }: LabelTy
     }
   };
   return (
-    <label htmlFor={id} onKeyDown={handleKeyDown}>
+    <label htmlFor={id} onKeyDown={handleKeyDown} tabIndex={0}>
       {children}
     </label>
   );
