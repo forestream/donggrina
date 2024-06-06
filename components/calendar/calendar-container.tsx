@@ -4,6 +4,7 @@ import { CalendarProps } from '@/pages/calendar';
 import { CALENDAR_DAYS, CALENDAR_EMPTY_DATES } from '@/lib/constants/calendar-constants';
 import getFirstDay from '@/utils/get-first-day';
 import Link from 'next/link';
+import getSeventhDate from '@/utils/get-seventh-date';
 
 export default function CalendarContainer({ year, month, date }: CalendarProps) {
   const dateCount = getDateCount(year, month);
@@ -18,7 +19,7 @@ export default function CalendarContainer({ year, month, date }: CalendarProps) 
     <div className={styles.container}>
       {calendarArray.map((calendarCell, i) =>
         typeof calendarCell === 'string' ? (
-          <div key={i + 'empty'} className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}>
+          <div key={i + 'empty'} className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}>
             {calendarCell}
           </div>
         ) : (
