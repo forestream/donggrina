@@ -1,16 +1,18 @@
-import { ReactNode } from 'react';
+import { InputHTMLAttributes, PropsWithChildren } from 'react';
 
 interface LabelType {
-  id: string;
-  children: ReactNode;
   updateValue: (value: string) => void;
-  value: string;
 }
 
-export default function RadioLabel({ id, children, updateValue, value }: LabelType) {
+export default function RadioLabel({
+  id,
+  children,
+  updateValue,
+  value,
+}: PropsWithChildren<InputHTMLAttributes<HTMLInputElement> & LabelType>) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
     if (e.key === 'Enter') {
-      updateValue(value);
+      updateValue(value!.toString());
     }
   };
   return (

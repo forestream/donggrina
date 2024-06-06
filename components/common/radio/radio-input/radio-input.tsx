@@ -1,20 +1,15 @@
-import { useContext } from 'react';
-import { radioContext } from '../context/radio-context';
+import { InputHTMLAttributes, useContext } from 'react';
+import { RadioContext } from '../context/radio-context';
 
-interface InputType {
-  value: string;
-  id: string;
-  name: string;
-}
-
-export default function RadioInput({ value, id, name }: InputType) {
-  const context = useContext(radioContext);
+export default function RadioInput({ value, id, name }: InputHTMLAttributes<HTMLInputElement>) {
+  const context = useContext(RadioContext);
   if (context === undefined) {
-    return null;
+    throw new Error('잘못된 접근 입니다.');
   }
   const { updateValue, radioValue } = context;
   const handleChange = () => {
-    updateValue(value);
+    updateValue(value!.toString());
+    console.log(radioValue);
   };
   return (
     <input
