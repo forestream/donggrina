@@ -1,0 +1,14 @@
+:root {
+  --global-width: 430px;
+  --main-color: #8fcc93;
+  --button-color: #021508;
+  --text-color: #000;
+  --white: #fff;
+  --tertiary: #f6f6f6;
+  --kakao-background: #f8e049;
+  --kakao-color: #371c1d;
+  --google-color: #757575;
+  --google-border: #eeeeee;
+  --red: #d6173a;
+  --nav-text-color: #9e9e9e;
+}
