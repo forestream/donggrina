@@ -1,0 +1,11 @@
+.selected {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--text-color-gray);
+
+  span {
+    width: 100%;
+    text-align: center;
+    color: var(--text-color-time-selected);
+  }
+}
