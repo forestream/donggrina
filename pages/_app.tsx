@@ -6,6 +6,12 @@ import { isNav } from '@/utils/is-nav';
 import { useRouter } from 'next/router';
 import Nav from '@/components/common/nav/nav';
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any;
+  }
+}
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
