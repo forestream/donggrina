@@ -80,3 +80,39 @@
 .petInput:checked ~ .petOff {
   display: none;
 }
+
+.todoDate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: LaundryGothic;
+  width: 100%;
+}
+
+.todoDateSelector {
+  display: flex;
+}
+
+.input {
+  text-align: center;
+  color: var(--text-color-gray);
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  align-self: last baseline;
+}
+
+.year {
+  width: 36px;
+}
+
+.month,
+.date,
+.hour,
+.minute {
+  width: 20px;
+}
+
+.date {
+  margin-right: 12px;
+}

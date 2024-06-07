@@ -40,7 +40,7 @@ export default function Calendar({ year, month, date }: CalendarProps) {
         {month}월 {date}일 {day}
       </p>
       <CalendarTodo />
-      <CreateTodoButton />
+      <CreateTodoButton {...ymd} />
     </main>
   );
 }
