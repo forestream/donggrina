@@ -1,5 +1,5 @@
 import LinkList from '@/components/start-family/link-list/link-list';
-import IntroduceText from '@/components/start-family/introduce-text/introduce-text';
+import IntroduceText from '@/components/common/introduce-text/introduce-text';
 import styles from './index.module.scss';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
