@@ -1,5 +1,5 @@
 .outer {
-  padding: 54px 0 64px;
+  padding: 54px 24px 64px;
   position: relative;
   font-family: 'LaundryGothic';
   color: var(--text-color-gray);
@@ -37,8 +37,8 @@
 .division {
   border-bottom: 5px solid #f5f5f5;
   position: absolute;
-  left: -24px;
-  right: -24px;
+  left: 0;
+  right: 0;
 }
 
 .petSelector {
