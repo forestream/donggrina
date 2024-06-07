@@ -1,14 +1,12 @@
-import Link from 'next/link';
+import Hyperlink from '@/components/common/button/hyperlink';
+import { LinkType } from './types/link-type';
 
-interface LinkType {
-  text: string;
-  href: string;
-}
-
-export default function LinkItem({ text, href }: LinkType) {
+export default function LinkItem({ text, href, className }: LinkType) {
   return (
     <li>
-      <Link href={href}>{text}</Link>
+      <Hyperlink className={className} href={href} round>
+        {text}
+      </Hyperlink>
     </li>
   );
 }
