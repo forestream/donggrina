@@ -5,7 +5,8 @@ import validateDate from '@/utils/validate-date';
 import validateMonth from '@/utils/validate-month';
 import validateYear from '@/utils/validate-year';
 import { GetServerSidePropsContext } from 'next';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { CalendarProps } from '..';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let {
@@ -26,16 +27,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return { props: { year: +(year as string), month: +(month as string), date: +(date as string) } };
 }
 
-export default function Create({ year, month, date }) {
+export default function Create({ year, month, date }: CalendarProps) {
   const [dateTime, setDateTime] = useState({ year, month, date, hour: 0, minute: 0 });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDateTime((prevDateTime) => ({
       ...prevDateTime,
       [e.target.id]: e.target.value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(e);
   };
@@ -65,7 +66,7 @@ export default function Create({ year, month, date }) {
               className={`${styles.input} ${styles.year}`}
               type="text"
               id="year"
-              value={dateTime.year}
+              value={dateTime.year.toString().padStart(2, '0')}
             />
             <span>-</span>
             <input
@@ -73,7 +74,7 @@ export default function Create({ year, month, date }) {
               className={`${styles.input} ${styles.month}`}
               type="text"
               id="month"
-              value={dateTime.month}
+              value={dateTime.month.toString().padStart(2, '0')}
             />
             <span>-</span>
             <input
@@ -81,14 +82,14 @@ export default function Create({ year, month, date }) {
               className={`${styles.input} ${styles.date}`}
               type="text"
               id="date"
-              value={dateTime.date}
+              value={dateTime.date.toString().padStart(2, '0')}
             />
             <input
               onChange={handleChange}
               className={`${styles.input} ${styles.hour}`}
               type="text"
               id="hour"
-              value={dateTime.hour}
+              value={dateTime.hour.toString().padStart(2, '0')}
             />
             <span>:</span>
             <input
@@ -96,7 +97,7 @@ export default function Create({ year, month, date }) {
               className={`${styles.input} ${styles.minute}`}
               type="text"
               id="minute"
-              value={dateTime.minute}
+              value={dateTime.minute.toString().padStart(2, '0')}
             />
           </div>
         </div>
