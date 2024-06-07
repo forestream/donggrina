@@ -1,16 +1,34 @@
 import getDateCount from '@/utils/get-date-count';
 import styles from './calendar-modal.module.scss';
 import { CalendarProps } from '@/pages/calendar';
-import { CALENDAR_DAYS, CALENDAR_EMPTY_DATES } from '@/lib/constants/calendar-constants';
+import { CALENDAR_DAYS, CALENDAR_EMPTY_DATES, TIME_SELECTOR } from '@/lib/constants/calendar-constants';
 import getFirstDay from '@/utils/get-first-day';
 import getSeventhDate from '@/utils/get-seventh-date';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import CalendarModalTimeSelector from './calendar-modal-time-selector';
 
 interface CalendarModalProps extends CalendarProps {
+  hour: number;
+  minute: number;
   onSelect: (e: MouseEvent<HTMLDivElement>) => void;
 }
-export default function CalendarModal({ year, month, date, hour, minute, onSelect }: CalendarModalProps) {
+
+export default function CalendarModal({
+  year,
+  month,
+  date,
+  hour: initHour,
+  minute: initMinute,
+  onSelect,
+}: CalendarModalProps) {
+  const [hour, setHour] = useState(initHour);
+  const [minute, setMinute] = useState(initMinute);
+  const [ampm, setAmpm] = useState(initHour < 12 ? TIME_SELECTOR.AM_PM[0] : TIME_SELECTOR.AM_PM[1]);
+
+  const handleAmpmSelect = (value: string) => setAmpm(value);
+  const handleHourSelect = (value: number) => setHour(value);
+  const handleMinuteSelect = (value: number) => setMinute(value);
+
   const dateCount = getDateCount(year, month);
   const firstDay = getFirstDay(year, month);
   const emptyDates = Array(CALENDAR_EMPTY_DATES[firstDay]).fill('');
@@ -38,7 +56,14 @@ export default function CalendarModal({ year, month, date, hour, minute, onSelec
           ),
         )}
       </div>
-      <CalendarModalTimeSelector hour={hour} minute={minute} />
+      <CalendarModalTimeSelector
+        onAmpmSelect={handleAmpmSelect}
+        onHourSelect={handleHourSelect}
+        onMinuteSelect={handleMinuteSelect}
+        ampm={ampm}
+        hour={hour}
+        minute={minute}
+      />
     </>
   );
 }

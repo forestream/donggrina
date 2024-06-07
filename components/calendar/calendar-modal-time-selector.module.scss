@@ -12,27 +12,37 @@
 
 .selector {
   display: flex;
+  align-items: center;
   width: 100%;
   height: 130px;
   font-size: 14px;
   color: var(--text-color-time-selected);
 }
 
+.observerRoot {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  height: 20px;
+  width: 100%;
+}
+
 .scroller {
   width: 100%;
-  height: 100%;
+  height: 130px; // .selector의 height 값을 보면서 조정
   overflow-y: scroll;
-  text-align: center;
   scrollbar-width: none;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 5px;
 
   :first-child {
-    margin-top: 50%;
+    margin-top: calc(50% - 7px);
   }
 
   :last-child {
-    margin-bottom: 50%;
+    margin-bottom: calc(50% - 7px);
   }
 }
