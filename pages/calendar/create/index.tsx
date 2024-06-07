@@ -5,8 +5,10 @@ import validateDate from '@/utils/validate-date';
 import validateMonth from '@/utils/validate-month';
 import validateYear from '@/utils/validate-year';
 import { GetServerSidePropsContext } from 'next';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { BaseSyntheticEvent, ChangeEvent, FormEvent, useState } from 'react';
 import { CalendarProps } from '..';
+import useModal from '@/hooks/use-modal';
+import CalendarModal from '@/components/calendar/calendar-modal';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let {
@@ -36,6 +38,19 @@ export default function Create({ year, month, date }: CalendarProps) {
       [e.target.id]: e.target.value,
     }));
   };
+
+  const handleDateSelect = (e: BaseSyntheticEvent) => {
+    console.log(e);
+    setDateTime((prevDateTime) => ({
+      ...prevDateTime,
+      date: e.target.innerText,
+    }));
+  };
+
+  const [Modal, handleModal] = useModal(<CalendarModal onSelect={handleDateSelect} {...dateTime} />);
+
+  const openModal = () => handleModal(true);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(e);
@@ -59,7 +74,9 @@ export default function Create({ year, month, date }: CalendarProps) {
           </div>
         </div>
         <div className={styles.todoDate}>
-          날짜/시간
+          <button type="button" onClick={openModal} className={styles.todoDateText}>
+            날짜 / 시간
+          </button>
           <div className={styles.todoDateSelector}>
             <input
               onChange={handleChange}
@@ -103,6 +120,7 @@ export default function Create({ year, month, date }: CalendarProps) {
         </div>
         <button>submit</button>
       </form>
+      <Modal />
     </div>
   );
 }

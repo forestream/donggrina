@@ -89,6 +89,15 @@
   width: 100%;
 }
 
+.todoDateText {
+  background-color: var(--main-color);
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--white);
+  border-radius: 4px;
+}
+
 .todoDateSelector {
   display: flex;
 }
