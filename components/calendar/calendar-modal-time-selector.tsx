@@ -1,3 +1,4 @@
+import { TIME_SELECTOR } from '@/lib/constants/calendar-constants';
 import styles from './calendar-modal-time-selector.module.scss';
 
 export default function CalendarModalTimeSelector({ hour, minute }) {
@@ -10,13 +11,19 @@ export default function CalendarModalTimeSelector({ hour, minute }) {
       </div>
       <div className={styles.selector}>
         <div className={styles.scroller}>
-          <div className={styles.amPm}></div>
+          {TIME_SELECTOR.AM_PM.map((amPm) => (
+            <div className={styles.amPm}>{amPm}</div>
+          ))}
         </div>
         <div className={styles.scroller}>
-          <div className={styles.hours}></div>
+          {TIME_SELECTOR.HOURS.map((hour) => (
+            <div className={styles.hour}>{hour}</div>
+          ))}
         </div>
         <div className={styles.scroller}>
-          <div className={styles.minutes}></div>
+          {TIME_SELECTOR.MINUTES.map((minute) => (
+            <div className={styles.minute}>{minute}</div>
+          ))}
         </div>
       </div>
     </>
