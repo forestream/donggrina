@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import styles from './kakao-button.module.scss';
 import KakaoSVG from '@/public/images/login/kakao_logo.svg';
+import { config } from '@/config';
 
 export default function KakaoButton() {
-  const kakaoURL = `백엔드에서 받기`;
+  const kakaoURL = config.kakaoAuth;
 
   return (
     <Link className={styles.kakaoButton} href={kakaoURL}>
