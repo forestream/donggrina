@@ -4,5 +4,8 @@
   gap: 8px;
   li {
     height: 44px;
+    a {
+      color: var(--text-color);
+    }
   }
 }
