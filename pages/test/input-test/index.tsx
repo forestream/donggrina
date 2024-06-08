@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '@/components/common/Form';
 
+const options = ['고양이', '강아지'];
 export default function InputTest() {
   // eslint-disable-next-line
   const onSubmit = (data: any) => {
@@ -22,6 +23,7 @@ export default function InputTest() {
         <Form.MainInput name="이름" label="이름" />
         <Form.DateInput label="생일" />
         <Form.WeightInput name="weight" label="무게" />
+        <Form.SelectInput name="kind" label="품종" options={options} />
         <button type="submit">Submit</button>
       </Form>
     </div>
