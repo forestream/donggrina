@@ -2,8 +2,8 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import MainInput from '@/components/common/Input/main-input';
 import DateInput from '../Input/date-input';
-import styles from './Form.module.scss';
 import WeightInput from '../Input/weight-input';
+import styles from './Form.module.scss';
 
 interface FormProps {
   // eslint-disable-next-line
