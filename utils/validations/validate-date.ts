@@ -1,27 +1,41 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { UseFormRegister, FieldValues } from 'react-hook-form';
 
-type CustomRegisterType = {
+export type CustomRegisterType = {
   register: UseFormRegister<FieldValues>;
-  type: 'year' | 'month' | 'day';
+  inputType: 'year' | 'month' | 'day';
+  handleBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+type CustomInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-export const CustomRegister = ({ register, type }: CustomRegisterType) => {
+export const CustomRegister = ({
+  register,
+  inputType,
+  handleBlur,
+  handleInput,
+}: CustomRegisterType): CustomInputProps => {
   const config = {
     required: '필수 정보입니다.',
     valueAsNumber: true,
-    ...(type === 'month' && {
-      min: { value: 1, message: '월은 1부터 12 사이의 숫자여야 합니다.' },
-      max: { value: 12, message: '월은 1부터 12 사이의 숫자여야 합니다.' },
-    }),
-    ...(type === 'day' && {
-      min: { value: 1, message: '일은 1부터 31 사이의 숫자여야 합니다.' },
-      max: { value: 31, message: '일은 1부터 31 사이의 숫자여야 합니다.' },
-    }),
-    ...(type === 'year' && {
-      min: { value: 1900, message: '연도는 1900 이상이어야 합니다.' },
-      max: { value: 9999, message: `연도는 9999 이하이어야 합니다.` },
-    }),
+    validate: (value: number) => {
+      if (inputType === 'month' && (value < 1 || value > 12)) {
+        return '월은 1부터 12 사이의 숫자여야 합니다.';
+      }
+      if (inputType === 'day' && (value < 1 || value > 31)) {
+        return '일은 1부터 31 사이의 숫자여야 합니다.';
+      }
+      if (inputType === 'year' && (value < 1900 || value > 9999)) {
+        return '연도는 1900 이상이어야 합니다.';
+      }
+      return true;
+    },
   };
+  const registerProps = register(inputType, config);
 
-  return register(type, config);
+  return {
+    ...registerProps,
+    onBlur: handleBlur,
+    onInput: handleInput,
+  };
 };

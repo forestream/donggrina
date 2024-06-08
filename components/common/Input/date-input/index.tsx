@@ -1,8 +1,8 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from './date-input.module.scss';
-import { CustomRegister } from '@/utils/validations/validate-date';
 import { FormInput } from '../input-type';
+import { CustomRegister } from '@/utils/validations/validate-date';
 
 export default function DateInput({ label, type = 'text' }: FormInput) {
   const {
@@ -25,6 +25,10 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
       updateInputValue(e.target, formattedValue);
     }
   };
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const inputType = e.target.id;
+    trigger(inputType);
+  };
 
   return (
     <div className={styles.container}>
@@ -38,29 +42,23 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
           id="year"
           type={type}
           placeholder="YYYY"
-          {...CustomRegister({ register, type: 'year' })}
-          onBlur={() => trigger('year')}
-          onInput={handleInput}
+          {...CustomRegister({ register, inputType: 'year', handleBlur, handleInput })}
         />
         <span>-</span>
         <input
-          className={`${styles.input} ${styles.month}`}
+          className={`${styles.input} ${styles.year}`}
           id="month"
           type={type}
           placeholder="MM"
-          {...CustomRegister({ register, type: 'month' })}
-          onBlur={() => trigger('month')}
-          onInput={handleInput}
+          {...CustomRegister({ register, inputType: 'month', handleBlur, handleInput })}
         />
         <span>-</span>
         <input
-          className={`${styles.input} ${styles.day}`}
+          className={`${styles.input} ${styles.year}`}
           id="day"
           type={type}
           placeholder="DD"
-          {...CustomRegister({ register, type: 'day' })}
-          onBlur={() => trigger('day')}
-          onInput={handleInput}
+          {...CustomRegister({ register, inputType: 'day', handleBlur, handleInput })}
         />
       </div>
       {(errors.year || errors.month || errors.day) && (
