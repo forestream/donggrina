@@ -24,7 +24,7 @@ class Calendar extends Core {
     return new Date(year, month, 0).getDate();
   }
 
-  calculateDate(month: number, currentDate: number) {
+  calculateDay(month: number, currentDate: number) {
     const calulateDay = new Date(this.currentYear, month, currentDate).getDay() as Days;
     return dayMap[calulateDay];
   }
