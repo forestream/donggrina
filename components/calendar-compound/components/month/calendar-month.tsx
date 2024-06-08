@@ -6,9 +6,14 @@ import styles from './calendar-month.module.scss';
 
 export default function CalendarMonth() {
   const calendarContext = useCalendarContext();
-
   return (
-    <Swiper className={styles['month-list']} slidesPerView={'auto'} spaceBetween={20} wrapperTag="ul">
+    <Swiper
+      className={styles['month-list']}
+      slidesPerView={'auto'}
+      spaceBetween={16}
+      wrapperTag="ul"
+      onAfterInit={(swiper) => (swiper.activeIndex = calendarContext.month)}
+    >
       {CalendarInstance.MONTH_LIST.map((month, index) => {
         const isCurrentMonth = calendarContext.month === month;
         const selectedMonthClassName = isCurrentMonth ? styles.selected : '';

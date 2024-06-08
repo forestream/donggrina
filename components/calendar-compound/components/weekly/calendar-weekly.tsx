@@ -9,7 +9,13 @@ export default function CalendarWeekly() {
   const dayList = CalendarInstance.DAY_LIST(daysInMonth);
 
   return (
-    <Swiper className={styles['date-list']} slidesPerView={'auto'} spaceBetween={10} wrapperTag="ul">
+    <Swiper
+      className={styles['date-list']}
+      slidesPerView={'auto'}
+      spaceBetween={10}
+      wrapperTag="ul"
+      onAfterInit={(swiper) => (swiper.activeIndex = calendarContext.date - 1)}
+    >
       {dayList.map((date) => {
         const isToday = calendarContext.date === date;
         const selectedTodayClassName = isToday ? styles.selected : '';
