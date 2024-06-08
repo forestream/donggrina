@@ -1,0 +1,30 @@
+name: Notification Pull Request
+
+on: 
+  pull_request:
+    branches: [develop, main]
+# job은 사용자가 정한 플랫폼을 통해 step이라는 일련의 과정을 실행
+jobs:
+  test:
+    name: Discord Notification
+    # 해당 job을 리눅스 환경에서 사용
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          content: "Code Review Please!"
+          title: "Pull Request"
+          description: "PR 확인 후 review 부탁드립니다."
+          image: ${{ secrets.PULL_REQUEST }}
+          color: 0x0000ff
+          url: "https://github.com/Donggrina/Frontend/pulls"
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}

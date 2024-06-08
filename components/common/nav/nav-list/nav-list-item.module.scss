@@ -1,0 +1,52 @@
+.navList {
+  a {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 51px;
+    color: var(--text-color-gray);
+    font-size: 14px;
+    .imgBox {
+      height: 20px;
+      border-radius: 50%;
+    }
+    span {
+      font-weight: 500;
+    }
+  }
+  &:hover {
+    svg {
+      path {
+        stroke: var(--main-color);
+      }
+    }
+  }
+  &.on {
+    a {
+      gap: 0;
+      .imgBox {
+        position: relative;
+        top: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background-color: var(--white);
+        svg {
+          position: absolute;
+          top: 12px;
+          left: 50%;
+          transform: translateX(-50%);
+          path {
+            stroke: var(--main-color);
+          }
+        }
+      }
+      span {
+        z-index: 1;
+      }
+    }
+  }
+}

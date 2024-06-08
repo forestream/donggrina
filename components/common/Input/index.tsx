@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from '@/components/common/Input/Input.module.scss';
 
-const FormInput = ({ name, label, type = 'text' }) => {
+interface FormInput extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+}
+
+const FormInput = ({ name, type = 'text' }: FormInput) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
+
   return (
     <div className={styles.container}>
-      <label htmlFor={name}>{label}</label>
       <input
         className={styles.input}
         id={name}
@@ -18,7 +22,7 @@ const FormInput = ({ name, label, type = 'text' }) => {
           required: '필수 정보입니다.',
         })}
       />
-      {errors[name] && <p className={styles.error}>{errors[name].message}</p>}
+      {errors[name] && <p className={styles.error}>{errors[name]?.message as string}</p>}
     </div>
   );
 };
