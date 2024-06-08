@@ -12,7 +12,7 @@ interface SelectProps extends FormInput {
   control: Control;
 }
 
-export default function Select({ name, label, control, options }: SelectProps) {
+export default function Select({ name, label, control, options, placeholder }: SelectProps) {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const buttonRef = useRef(null);
   const { field } = useController({
@@ -34,27 +34,27 @@ export default function Select({ name, label, control, options }: SelectProps) {
 
   return (
     <div className={styles.container}>
+      <div className={styles.label}>
+        <span>|</span>
+        <label htmlFor={name}>{label}</label>
+      </div>
       <div className={styles.select}>
-        <div className={styles.label}>
-          <span>|</span>
-          <label htmlFor={name}>{label}</label>
-        </div>
         <button className={styles.button} onClick={handleButtonClick} type="button">
           <input
             id={name}
             className={styles.input}
             readOnly
-            placeholder="선택"
+            placeholder={placeholder}
             type="text"
             tabIndex={-1}
             value={field.value || ''}
           />
+          {showDropDown ? (
+            <DropDownUpIcon alt="arrowUpIcon" className={styles.upIcon} />
+          ) : (
+            <DropDownDownIcon alt="arrowDownIcon" className={styles.downIcon} />
+          )}
         </button>
-        {showDropDown ? (
-          <DropDownUpIcon alt="arrowUpIcon" className={styles.upIcon} />
-        ) : (
-          <DropDownDownIcon alt="arrowDownIcon" className={styles.downIcon} />
-        )}
       </div>
       {showDropDown && (
         <Dropdown

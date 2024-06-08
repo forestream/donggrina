@@ -36,7 +36,13 @@ export default function InputTest() {
           <Form.MainInput name="이름" label="이름" />
           <Form.DateInput label="생일" />
           <Form.WeightInput name="weight" label="무게" />
-          <Form.SelectInput name="kind" label="품종" options={options} control={control} />
+          <Form.SelectInput
+            name="kind"
+            label="품종"
+            options={options}
+            control={control}
+            placeholder="품종을 선택해주세요"
+          />
           <button type="submit" disabled={!isValid}>
             Submit
           </button>

@@ -1,0 +1,33 @@
+@import '../Input/mixins.scss';
+
+.container {
+  @include container;
+
+  .select {
+    display: flex;
+    width: 100%;
+    .button {
+      position: relative;
+      background-color: var(--tertiary);
+      width: 312px;
+      height: 46px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .input {
+        cursor: pointer;
+        border: none;
+        background-color: var(--tertiary);
+        position: absolute;
+        left: 17px;
+      }
+      .upIcon,
+      .downIcon {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+      }
+    }
+  }
+}
