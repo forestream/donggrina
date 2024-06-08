@@ -1,25 +1,17 @@
 import { TIME_SELECTOR } from '@/lib/constants/calendar-constants';
 import styles from './calendar-modal-time-selector.module.scss';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, BaseSyntheticEvent } from 'react';
 import TimeScroller from './time-scroller';
+import { DateTime } from '@/pages/calendar/create';
 
 interface CalendarModalTimeSelectorProps {
-  onAmpmSelect: (value: string) => void;
-  onHourSelect: (value: number) => void;
-  onMinuteSelect: (value: number) => void;
-  ampm: string;
-  hour: number;
-  minute: number;
+  dateTime: DateTime;
+  onSelect: (type: string, e: BaseSyntheticEvent | IntersectionObserverEntry) => void;
 }
 
-export default function CalendarModalTimeSelector({
-  onAmpmSelect,
-  onHourSelect,
-  onMinuteSelect,
-  ampm,
-  hour,
-  minute,
-}: CalendarModalTimeSelectorProps) {
+export default function CalendarModalTimeSelector({ dateTime, onSelect }: CalendarModalTimeSelectorProps) {
+  const { ampm, hour, minute } = dateTime;
+
   const observerRootRef = useRef<HTMLDivElement | null>(null);
   const ampmRef = useRef<HTMLDivElement[]>([]);
   const hoursRef = useRef<HTMLDivElement[]>([]);
@@ -36,9 +28,9 @@ export default function CalendarModalTimeSelector({
 
   const observerCallback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
-      if (entry.target.matches('.ampm') && entry.isIntersecting) onAmpmSelect(entry.target.innerHTML);
-      if (entry.target.matches('.hour') && entry.isIntersecting) onHourSelect(+entry.target.innerHTML);
-      if (entry.target.matches('.minute') && entry.isIntersecting) onMinuteSelect(+entry.target.innerHTML);
+      if (entry.target.matches('.ampm') && entry.isIntersecting) onSelect('ampm', entry);
+      if (entry.target.matches('.hour') && entry.isIntersecting) onSelect('hour', entry);
+      if (entry.target.matches('.minute') && entry.isIntersecting) onSelect('minute', entry);
     });
   };
 

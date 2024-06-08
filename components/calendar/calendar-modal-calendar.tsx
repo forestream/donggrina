@@ -1,17 +1,21 @@
 import getSeventhDate from '@/utils/get-seventh-date';
 import styles from './calendar-modal-calendar.module.scss';
 import getCalendarArray from '@/utils/get-calendar-array';
-import { MouseEvent } from 'react';
+import { BaseSyntheticEvent, MouseEvent } from 'react';
+import { DateTime } from '@/pages/calendar/create';
 
 interface CalendarModalCalendarProps {
-  year: number;
-  month: number;
-  date: number;
-  onSelect: (e: MouseEvent<HTMLDivElement>) => void;
+  dateTime: DateTime;
+  onSelect: (type: string, e: BaseSyntheticEvent) => void;
 }
 
-export default function CalendarModalCalendar({ year, month, date, onSelect }: CalendarModalCalendarProps) {
+export default function CalendarModalCalendar({ dateTime, onSelect }: CalendarModalCalendarProps) {
+  const { year, month, date } = dateTime;
   const calendarArray = getCalendarArray(year, month);
+
+  const handleDateClick = (e: MouseEvent) => {
+    onSelect('date', e);
+  };
 
   return (
     <div className={styles.container}>
@@ -23,7 +27,7 @@ export default function CalendarModalCalendar({ year, month, date, onSelect }: C
         ) : (
           <div
             key={calendarCell}
-            onClick={onSelect}
+            onClick={handleDateClick}
             className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}
           >
             <div className={`${styles.date} ${calendarCell == date ? styles.selected : ''}`}>{calendarCell}</div>
