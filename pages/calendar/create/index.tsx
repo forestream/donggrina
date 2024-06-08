@@ -5,7 +5,7 @@ import validateDate from '@/utils/validate-date';
 import validateMonth from '@/utils/validate-month';
 import validateYear from '@/utils/validate-year';
 import { GetServerSidePropsContext } from 'next';
-import { BaseSyntheticEvent, ChangeEvent, FormEvent, useState } from 'react';
+import { BaseSyntheticEvent, useState } from 'react';
 import { CalendarProps } from '..';
 import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar/calendar-modal';
@@ -29,18 +29,31 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return { props: { year: +(year as string), month: +(month as string), date: +(date as string) } };
 }
 
-export default function Create({ year, month, date }: CalendarProps) {
-  const [dateTime, setDateTime] = useState({ year, month, date, hour: 0, minute: 0 });
+interface DateTime extends CalendarProps {
+  [key: string]: string | number;
+  ampm: string;
+  hour: number;
+  minute: number;
+}
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDateTime((prevDateTime) => ({
-      ...prevDateTime,
-      [e.target.id]: e.target.value,
-    }));
-  };
+export default function Create({ year, month, date }: CalendarProps) {
+  const [dateTime, setDateTime] = useState<DateTime>({
+    year,
+    month,
+    date,
+    ampm: '오전',
+    hour: 0,
+    minute: 0,
+  });
+
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setDateTime((prevDateTime) => ({
+  //     ...prevDateTime,
+  //     [e.target.id]: e.target.value,
+  //   }));
+  // };
 
   const handleDateSelect = (e: BaseSyntheticEvent) => {
-    console.log(e);
     setDateTime((prevDateTime) => ({
       ...prevDateTime,
       date: e.target.innerText,
@@ -51,9 +64,11 @@ export default function Create({ year, month, date }: CalendarProps) {
 
   const openModal = () => handleModal(true);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault();
-    console.log(e);
+    Object.keys(dateTime).forEach((key) => {
+      console.log(e.target[key].value);
+    });
   };
 
   return (
@@ -78,44 +93,14 @@ export default function Create({ year, month, date }: CalendarProps) {
             날짜 / 시간
           </button>
           <div className={styles.todoDateSelector}>
-            <input
-              onChange={handleChange}
-              className={`${styles.input} ${styles.year}`}
-              type="text"
-              id="year"
-              value={dateTime.year.toString().padStart(2, '0')}
-            />
-            <span>-</span>
-            <input
-              onChange={handleChange}
-              className={`${styles.input} ${styles.month}`}
-              type="text"
-              id="month"
-              value={dateTime.month.toString().padStart(2, '0')}
-            />
-            <span>-</span>
-            <input
-              onChange={handleChange}
-              className={`${styles.input} ${styles.date}`}
-              type="text"
-              id="date"
-              value={dateTime.date.toString().padStart(2, '0')}
-            />
-            <input
-              onChange={handleChange}
-              className={`${styles.input} ${styles.hour}`}
-              type="text"
-              id="hour"
-              value={dateTime.hour.toString().padStart(2, '0')}
-            />
-            <span>:</span>
-            <input
-              onChange={handleChange}
-              className={`${styles.input} ${styles.minute}`}
-              type="text"
-              id="minute"
-              value={dateTime.minute.toString().padStart(2, '0')}
-            />
+            {Object.keys(dateTime).map((key) => (
+              <>
+                <div key={key} className={`${styles.input} ${styles[key]}`}>
+                  {dateTime[key].toString().padStart(2, '0')}
+                </div>
+                <input type="hidden" id={key} value={dateTime[key].toString().padStart(2, '0')} />
+              </>
+            ))}
           </div>
         </div>
         <button>submit</button>
