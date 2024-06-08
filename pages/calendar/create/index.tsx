@@ -42,7 +42,7 @@ export default function Create({ year, month, date }: CalendarProps) {
     month,
     date,
     ampm: '오전',
-    hour: 0,
+    hour: 12,
     minute: 0,
   });
 

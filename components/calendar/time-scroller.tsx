@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styles from './time-scroller.module.scss';
+import getTimeScrollPosition from '@/utils/get-time-scroll-position';
 
 interface TimeScrollerProps {
   scrollItems: (string | number)[];
@@ -17,9 +18,11 @@ export default function TimeScroller({ scrollItems, refPusher, className, select
   };
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.addEventListener('wheel', handleWheel);
-    }
+    if (!ref.current) return;
+
+    ref.current.scrollTop += getTimeScrollPosition(ref.current.scrollHeight, className, selectedItem);
+
+    ref.current.addEventListener('wheel', handleWheel);
 
     return () => {
       if (ref.current) ref.current.removeEventListener('wheel', handleWheel);
