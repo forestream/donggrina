@@ -1,11 +1,9 @@
-import getDateCount from '@/utils/get-date-count';
 import styles from './calendar-modal.module.scss';
 import { CalendarProps } from '@/pages/calendar';
-import { CALENDAR_DAYS, CALENDAR_EMPTY_DATES, TIME_SELECTOR } from '@/lib/constants/calendar-constants';
-import getFirstDay from '@/utils/get-first-day';
-import getSeventhDate from '@/utils/get-seventh-date';
+import { TIME_SELECTOR } from '@/lib/constants/calendar-constants';
 import { MouseEvent, useState } from 'react';
 import CalendarModalTimeSelector from './calendar-modal-time-selector';
+import CalendarModalCalendar from './calendar-modal-calendar';
 
 interface CalendarModalProps extends CalendarProps {
   hour: number;
@@ -29,33 +27,9 @@ export default function CalendarModal({
   const handleHourSelect = (value: number) => setHour(value);
   const handleMinuteSelect = (value: number) => setMinute(value);
 
-  const dateCount = getDateCount(year, month);
-  const firstDay = getFirstDay(year, month);
-  const emptyDates = Array(CALENDAR_EMPTY_DATES[firstDay]).fill('');
-  const dates = Array(dateCount)
-    .fill(0)
-    .map((_, i) => i + 1);
-  const calendarArray = [...CALENDAR_DAYS, ...emptyDates, ...dates];
-
   return (
     <div className={styles.outer}>
-      <div className={styles.container}>
-        {calendarArray.map((calendarCell, i) =>
-          typeof calendarCell === 'string' ? (
-            <div key={i + 'empty'} className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}>
-              {calendarCell}
-            </div>
-          ) : (
-            <div
-              key={calendarCell}
-              onClick={onSelect}
-              className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}
-            >
-              <div className={`${styles.date} ${calendarCell == date ? styles.selected : ''}`}>{calendarCell}</div>
-            </div>
-          ),
-        )}
-      </div>
+      <CalendarModalCalendar {...{ year, month, date, onSelect }} />
       <CalendarModalTimeSelector
         onAmpmSelect={handleAmpmSelect}
         onHourSelect={handleHourSelect}
