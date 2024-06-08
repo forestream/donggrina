@@ -63,23 +63,35 @@ export default function CalendarModalTimeSelector({
       <div className={styles.selector}>
         <div ref={observerRootRef} id="observerRoot" className={styles.observerRoot}>
           <div className={styles.scroller}>
-            {TIME_SELECTOR.AM_PM.map((ampm, i) => (
-              <div key={i} ref={pushAmpmRef} className={`ampm ${styles.scrollItem}`}>
-                {ampm}
+            {TIME_SELECTOR.AM_PM.map((item, i) => (
+              <div
+                key={i}
+                ref={pushAmpmRef}
+                className={`ampm ${styles.scrollItem} ${item === ampm ? styles.magnify : ''}`}
+              >
+                {item}
               </div>
             ))}
           </div>
           <div className={styles.scroller}>
-            {TIME_SELECTOR.HOURS.map((hour, i) => (
-              <div key={i} ref={pushHoursRef} className={`hour ${styles.scrollItem}`}>
-                {hour}
+            {TIME_SELECTOR.HOURS.map((item, i) => (
+              <div
+                key={i}
+                ref={pushHoursRef}
+                className={`hour ${styles.scrollItem} ${+item === hour ? styles.magnify : ''}`}
+              >
+                {item}
               </div>
             ))}
           </div>
           <div className={styles.scroller}>
-            {TIME_SELECTOR.MINUTES.map((minute, i) => (
-              <div key={i} ref={pushMinutesRef} className={`minute ${styles.scrollItem}`}>
-                {minute}
+            {TIME_SELECTOR.MINUTES.map((item, i) => (
+              <div
+                key={i}
+                ref={pushMinutesRef}
+                className={`minute ${styles.scrollItem} ${+item === minute ? styles.magnify : ''}`}
+              >
+                {item}
               </div>
             ))}
           </div>

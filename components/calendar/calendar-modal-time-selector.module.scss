@@ -22,7 +22,6 @@
 .observerRoot {
   display: flex;
   align-items: center;
-  border: 1px solid black;
   height: 20px;
   width: 100%;
 }
@@ -50,4 +49,9 @@
 
 .scrollItem {
   scroll-snap-align: center;
+}
+
+.magnify {
+  font-size: 20px;
+  color: var(--main-color);
 }
