@@ -1,0 +1,15 @@
+@import '../mixins.scss';
+
+.container {
+  @include container;
+
+  .input {
+    @include input;
+    height: 50px;
+    padding: 12px 11px;
+  }
+}
+
+.error {
+  @include error;
+}
