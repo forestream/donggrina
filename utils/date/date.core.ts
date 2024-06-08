@@ -14,7 +14,7 @@ export default abstract class Core {
     this.currentDate = this.date.getDate();
     this.currentDay = this.date.getDay();
 
-    const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
+    const firstDayOfMonth = new Date(this.currentYear, this.currentMonth + 1, 1);
     this.startDayOfWeek = firstDayOfMonth.getDay();
     this.startDay = firstDayOfMonth.getDate();
   }

@@ -5,9 +5,12 @@ import styles from './calendar-weekly.module.scss';
 
 export default function CalendarWeekly() {
   const calendarContext = useCalendarContext();
+  const daysInMonth = CalendarInstance.daysInMonth(calendarContext.years[0], calendarContext.month);
+  const dayList = CalendarInstance.DAY_LIST(daysInMonth);
+
   return (
     <Swiper className={styles['date-list']} slidesPerView={'auto'} spaceBetween={10} wrapperTag="ul">
-      {CalendarInstance.DAY_LIST.map((date) => {
+      {dayList.map((date) => {
         const isToday = calendarContext.date === date;
         const selectedTodayClassName = isToday ? styles.selected : '';
         const dateItemClassName = `${styles['date-item']} ${selectedTodayClassName}`;
