@@ -4,10 +4,10 @@ export const CALENDAR_EMPTY_DATES = [6, 0, 1, 2, 3, 4, 5];
 
 export const CALENDAR_DAYS_KOREAN = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
-export const TIME_SELECTOR = {
-  AM_PM: ['오전', '오후'],
-  HOURS: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-  MINUTES: [
+export const TIME_SELECTOR: { [key: string]: string[] } = {
+  ampm: ['오전', '오후'],
+  hour: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+  minute: [
     '00',
     '01',
     '02',
@@ -70,3 +70,5 @@ export const TIME_SELECTOR = {
     '59',
   ],
 };
+
+export const TIME_SELECTOR_HEIGHT = 130;

@@ -55,22 +55,17 @@ export default function CalendarModalTimeSelector({ dateTime, onSelect }: Calend
       </div>
       <div className={styles.selector}>
         <div ref={observerRootRef} id="observerRoot" className={styles.observerRoot}>
-          <TimeScroller
-            className="ampm"
-            refPusher={pushAmpmRef}
-            scrollItems={TIME_SELECTOR.AM_PM}
-            selectedItem={ampm}
-          />
+          <TimeScroller className="ampm" refPusher={pushAmpmRef} scrollItems={TIME_SELECTOR.ampm} selectedItem={ampm} />
           <TimeScroller
             className="hour"
             refPusher={pushHoursRef}
-            scrollItems={TIME_SELECTOR.HOURS}
+            scrollItems={TIME_SELECTOR.hour}
             selectedItem={hour}
           />
           <TimeScroller
             className="minute"
             refPusher={pushMinutesRef}
-            scrollItems={TIME_SELECTOR.MINUTES}
+            scrollItems={TIME_SELECTOR.minute}
             selectedItem={minute}
           />
         </div>
