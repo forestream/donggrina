@@ -9,6 +9,7 @@
   justify-content: flex-start;
   gap: 5px;
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 
   :first-child {
     margin-top: calc(50% - 7px);
