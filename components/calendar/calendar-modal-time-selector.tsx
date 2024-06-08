@@ -54,7 +54,7 @@ export default function CalendarModalTimeSelector({
   }, []);
 
   return (
-    <>
+    <div className={styles.outer}>
       <div className={styles.selected}>
         <span>{ampm}</span>
         <span>{hour.toString().padStart(2, '0')}</span>
@@ -97,6 +97,6 @@ export default function CalendarModalTimeSelector({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

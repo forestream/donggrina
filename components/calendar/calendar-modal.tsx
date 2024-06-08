@@ -38,7 +38,7 @@ export default function CalendarModal({
   const calendarArray = [...CALENDAR_DAYS, ...emptyDates, ...dates];
 
   return (
-    <>
+    <div className={styles.outer}>
       <div className={styles.container}>
         {calendarArray.map((calendarCell, i) =>
           typeof calendarCell === 'string' ? (
@@ -64,6 +64,9 @@ export default function CalendarModal({
         hour={hour}
         minute={minute}
       />
-    </>
+      <button className={styles.save} type="button">
+        저장하기
+      </button>
+    </div>
   );
 }

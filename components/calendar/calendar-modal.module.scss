@@ -1,3 +1,8 @@
+.outer {
+  width: 100%;
+  padding: 22px 12px;
+}
+
 .container {
   display: grid;
   grid: auto-flow / repeat(7, 1fr);
@@ -49,4 +54,11 @@
   height: 4px;
   border-radius: 9999px;
   background-color: var(--main-color);
+}
+
+.save {
+  background-color: var(--main-color);
+  width: 100%;
+  border-radius: 9999px;
+  padding: 14px;
 }

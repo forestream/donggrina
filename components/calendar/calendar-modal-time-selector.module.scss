@@ -1,5 +1,10 @@
+.outer {
+  margin: 47px 0;
+}
+
 .selected {
   display: flex;
+  padding-bottom: 5px;
   width: 100%;
   border-bottom: 1px solid var(--text-color-gray);
 
@@ -11,6 +16,7 @@
 }
 
 .selector {
+  user-select: none;
   display: flex;
   align-items: center;
   width: 100%;
