@@ -28,11 +28,12 @@ export default function CalendarWeekly() {
 
 function CalendarWeeklyItem(props: { date: number }) {
   const calendarContext = useCalendarContext();
-
+  const day = CalendarInstance.calculateDay(calendarContext.month, props.date);
+  const isSunday = day === '일';
   return (
     <button>
-      <div>{CalendarInstance.calculateDate(calendarContext.month, props.date)}</div>
-      <div>{props.date}</div>
+      <div className={isSunday ? styles.sunday : ''}>{day}</div>
+      <div className={isSunday ? styles.sunday : ''}>{props.date}</div>
     </button>
   );
 }
