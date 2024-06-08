@@ -13,7 +13,7 @@ export const NAV_LIST_DATA = [
   {
     text: '달력',
     RenderSvgComponent: CalendarSVG,
-    href: '/달력',
+    href: '/calendar',
   },
   {
     text: '다이어리',
