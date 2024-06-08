@@ -1,0 +1,29 @@
+.scroller {
+  width: 100%;
+  height: 130px; // calendar-modal-time-selector.module의 .selector의 height 값을 보면서 조정
+  overflow-y: scroll;
+  scrollbar-width: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  scroll-snap-type: y mandatory;
+
+  :first-child {
+    margin-top: calc(50% - 7px);
+  }
+
+  :last-child {
+    margin-bottom: calc(50% - 7px);
+  }
+}
+
+.scrollItem {
+  scroll-snap-align: center;
+}
+
+.magnify {
+  font-size: 20px;
+  color: var(--main-color);
+}

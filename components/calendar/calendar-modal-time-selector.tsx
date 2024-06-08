@@ -1,6 +1,7 @@
 import { TIME_SELECTOR } from '@/lib/constants/calendar-constants';
 import styles from './calendar-modal-time-selector.module.scss';
 import { useRef, useEffect } from 'react';
+import TimeScroller from './time-scroller';
 
 interface CalendarModalTimeSelectorProps {
   onAmpmSelect: (value: string) => void;
@@ -62,39 +63,24 @@ export default function CalendarModalTimeSelector({
       </div>
       <div className={styles.selector}>
         <div ref={observerRootRef} id="observerRoot" className={styles.observerRoot}>
-          <div className={styles.scroller}>
-            {TIME_SELECTOR.AM_PM.map((item, i) => (
-              <div
-                key={i}
-                ref={pushAmpmRef}
-                className={`ampm ${styles.scrollItem} ${item === ampm ? styles.magnify : ''}`}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-          <div className={styles.scroller}>
-            {TIME_SELECTOR.HOURS.map((item, i) => (
-              <div
-                key={i}
-                ref={pushHoursRef}
-                className={`hour ${styles.scrollItem} ${+item === hour ? styles.magnify : ''}`}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-          <div className={styles.scroller}>
-            {TIME_SELECTOR.MINUTES.map((item, i) => (
-              <div
-                key={i}
-                ref={pushMinutesRef}
-                className={`minute ${styles.scrollItem} ${+item === minute ? styles.magnify : ''}`}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+          <TimeScroller
+            className="ampm"
+            refPusher={pushAmpmRef}
+            scrollItems={TIME_SELECTOR.AM_PM}
+            selectedItem={ampm}
+          />
+          <TimeScroller
+            className="hour"
+            refPusher={pushHoursRef}
+            scrollItems={TIME_SELECTOR.HOURS}
+            selectedItem={hour}
+          />
+          <TimeScroller
+            className="minute"
+            refPusher={pushMinutesRef}
+            scrollItems={TIME_SELECTOR.MINUTES}
+            selectedItem={minute}
+          />
         </div>
       </div>
     </div>
