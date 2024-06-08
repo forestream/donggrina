@@ -1,0 +1,36 @@
+.radioBox {
+  position: relative;
+  top: 72px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 32px;
+  padding: 4px;
+  background-color: var(--tertiary);
+  li {
+    width: 100%;
+    label {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 32px;
+      width: 100%;
+      height: 38px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--radio-text-color);
+    }
+    input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      &:checked + label {
+        background-color: var(--main-color);
+        color: var(--white);
+        font-weight: 700;
+      }
+    }
+  }
+}
