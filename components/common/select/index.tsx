@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import classNames from 'classnames';
 import styles from './select.module.scss';
 import { FormInput } from '../Input/input-type';
 import { Control, useController } from 'react-hook-form';
@@ -39,10 +40,14 @@ export default function Select({ name, label, control, options, placeholder }: S
         <label htmlFor={name}>{label}</label>
       </div>
       <div className={styles.select}>
-        <button className={styles.button} onClick={handleButtonClick} type="button">
+        <button
+          className={classNames(styles.button, { [styles.buttonActive]: showDropDown })}
+          onClick={handleButtonClick}
+          type="button"
+        >
           <input
             id={name}
-            className={styles.input}
+            className={classNames(styles.input, { [styles.inputActive]: showDropDown })}
             readOnly
             placeholder={placeholder}
             type="text"
@@ -54,17 +59,17 @@ export default function Select({ name, label, control, options, placeholder }: S
           ) : (
             <DropDownDownIcon alt="arrowDownIcon" className={styles.downIcon} />
           )}
+          {showDropDown && (
+            <Dropdown
+              buttonRef={buttonRef}
+              options={options}
+              showDropDown={showDropDown}
+              handleClick={handleDropDownClick}
+              handleClose={handleClose}
+            />
+          )}
         </button>
       </div>
-      {showDropDown && (
-        <Dropdown
-          buttonRef={buttonRef}
-          options={options}
-          showDropDown={showDropDown}
-          handleClick={handleDropDownClick}
-          handleClose={handleClose}
-        />
-      )}
     </div>
   );
 }

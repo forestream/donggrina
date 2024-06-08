@@ -15,7 +15,7 @@ export default function Dropdown({ showDropDown, options, buttonRef, handleClick
   useCloseDropDown(showDropDown, handleClose, dropDownRef, buttonRef);
 
   return (
-    <div ref={dropDownRef}>
+    <div className={styles.optionContainer} ref={dropDownRef}>
       <ul className={styles.optionList}>
         {options &&
           options.map((option) => {

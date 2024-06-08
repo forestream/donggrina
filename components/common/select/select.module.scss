@@ -21,6 +21,14 @@
         background-color: var(--tertiary);
         position: absolute;
         left: 17px;
+        &::placeholder {
+          color: #959595;
+          font-size: 14px;
+        }
+      }
+      .inputActive {
+        background-color: var(--white);
+        top: 14px;
       }
       .upIcon,
       .downIcon {
@@ -28,6 +36,12 @@
         top: 10px;
         right: 12px;
       }
+    }
+    .buttonActive {
+      position: absolute;
+      background-color: var(--white);
+      border: 1px solid var(--text-color-gray);
+      height: 137px;
     }
   }
 }
