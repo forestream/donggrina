@@ -64,21 +64,21 @@ export default function CalendarModalTimeSelector({
         <div ref={observerRootRef} id="observerRoot" className={styles.observerRoot}>
           <div className={styles.scroller}>
             {TIME_SELECTOR.AM_PM.map((ampm, i) => (
-              <div key={i} ref={pushAmpmRef} className="ampm">
+              <div key={i} ref={pushAmpmRef} className={`ampm ${styles.scrollItem}`}>
                 {ampm}
               </div>
             ))}
           </div>
           <div className={styles.scroller}>
             {TIME_SELECTOR.HOURS.map((hour, i) => (
-              <div key={i} ref={pushHoursRef} className="hour">
+              <div key={i} ref={pushHoursRef} className={`hour ${styles.scrollItem}`}>
                 {hour}
               </div>
             ))}
           </div>
           <div className={styles.scroller}>
             {TIME_SELECTOR.MINUTES.map((minute, i) => (
-              <div key={i} ref={pushMinutesRef} className="minute">
+              <div key={i} ref={pushMinutesRef} className={`minute ${styles.scrollItem}`}>
                 {minute}
               </div>
             ))}

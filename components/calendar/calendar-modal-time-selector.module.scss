@@ -37,6 +37,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 5px;
+  scroll-snap-type: y mandatory;
 
   :first-child {
     margin-top: calc(50% - 7px);
@@ -45,4 +46,8 @@
   :last-child {
     margin-bottom: calc(50% - 7px);
   }
+}
+
+.scrollItem {
+  scroll-snap-align: center;
 }
