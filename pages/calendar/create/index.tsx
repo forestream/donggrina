@@ -29,7 +29,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return { props: { year: +(year as string), month: +(month as string), date: +(date as string) } };
 }
 
-interface DateTime extends CalendarProps {
+export interface DateTime extends CalendarProps {
   [key: string]: string | number;
   ampm: string;
   hour: number;
@@ -46,23 +46,14 @@ export default function Create({ year, month, date }: CalendarProps) {
     minute: 0,
   });
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setDateTime((prevDateTime) => ({
-  //     ...prevDateTime,
-  //     [e.target.id]: e.target.value,
-  //   }));
-  // };
-
-  const handleDateSelect = (e: BaseSyntheticEvent) => {
+  const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
       ...prevDateTime,
-      date: e.target.innerText,
+      ...newDateTime,
     }));
   };
 
-  const [Modal, handleModal] = useModal(<CalendarModal onSelect={handleDateSelect} {...dateTime} />);
-
-  const openModal = () => handleModal(true);
+  const [Modal, handleModal] = useModal();
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault();
@@ -89,23 +80,23 @@ export default function Create({ year, month, date }: CalendarProps) {
           </div>
         </div>
         <div className={styles.todoDate}>
-          <button type="button" onClick={openModal} className={styles.todoDateText}>
+          <button type="button" onClick={handleModal.bind(null, true)} className={styles.todoDateText}>
             날짜 / 시간
           </button>
           <div className={styles.todoDateSelector}>
             {Object.keys(dateTime).map((key) => (
-              <>
-                <div key={key} className={`${styles.input} ${styles[key]}`}>
-                  {dateTime[key].toString().padStart(2, '0')}
-                </div>
+              <div key={key} className={`${styles.input} ${styles[key]}`}>
+                {dateTime[key].toString().padStart(2, '0')}
                 <input type="hidden" id={key} value={dateTime[key].toString().padStart(2, '0')} />
-              </>
+              </div>
             ))}
           </div>
         </div>
         <button>submit</button>
       </form>
-      <Modal />
+      <Modal>
+        <CalendarModal updateDateTime={updateDateTime} dateTime={dateTime} onClose={handleModal.bind(null, false)} />
+      </Modal>
     </div>
   );
 }

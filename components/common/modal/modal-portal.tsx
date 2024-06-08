@@ -7,12 +7,12 @@ export type Buttons = {
   event: () => void;
 }[];
 
-export default function ModalPortal({ content, onClose }: ModalCommonProps) {
+export default function ModalPortal({ children, onClose }: ModalCommonProps) {
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
 
   if (!portalElement) setPortalElement(document.getElementById('__container'));
 
   return (
-    <>{portalElement && createPortal(<Modal content={content} onClose={onClose} />, portalElement as HTMLElement)}</>
+    <>{portalElement && createPortal(<Modal onClose={onClose}>{children}</Modal>, portalElement as HTMLElement)}</>
   );
 }
