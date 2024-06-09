@@ -11,7 +11,7 @@ export default function middleware(request: NextRequest) {
   const isPublicPage = PUBLIC_PAGES.includes(path);
 
   // 로그인 상태 확인
-  const hasCookie = cookies.has('accessToken');
+  const hasCookie = cookies.has('Authorization');
 
   // 쿼리 파라미터에서 token 값 확인
   const hasQuery = nextUrl.search.includes('token');

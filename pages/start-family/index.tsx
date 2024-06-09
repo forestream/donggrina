@@ -16,7 +16,7 @@ export default function StartFamily() {
   useEffect(() => {
     if (!isReady) return;
     if (token) {
-      setCookie('accessToken', token);
+      setCookie('Authorization', token);
     }
   }, [isReady]);
 

@@ -8,7 +8,6 @@ import Nav from '@/components/common/nav/nav';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
   return (
     <div id="__wrap">
       <main id="__container">
