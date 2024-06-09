@@ -17,7 +17,6 @@ export default function InputTest() {
 
   // eslint-disable-next-line
   const onSubmit = (data: any) => {
-    console.log(data);
     const localDate = new Date(data.year, data.month - 1, data.day + 1).toISOString().split('T')[0];
     const formData = { ...data, localDate };
 
@@ -25,6 +24,7 @@ export default function InputTest() {
       formData.weight = parseFloat(formData.weight);
     }
 
+    // rest: 백엔드에 전송할 포메팅 데이터
     // eslint-disable-next-line
     const { year, month, day, ...rest } = formData;
     console.log(rest);

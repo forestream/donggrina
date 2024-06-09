@@ -25,6 +25,9 @@
           color: #959595;
           font-size: 14px;
         }
+        &:focus {
+          outline: none;
+        }
       }
       .inputActive {
         background-color: var(--white);
