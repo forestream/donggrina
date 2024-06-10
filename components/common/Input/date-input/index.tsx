@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import styles from './date-input.module.scss';
 import { FormInput } from '../input-type';
 import { CustomRegister } from '@/utils/validations/validate-date';
+import FormLabel from '../../Label';
 
 export default function DateInput({ label, type = 'text' }: FormInput) {
   const {
@@ -32,10 +33,7 @@ export default function DateInput({ label, type = 'text' }: FormInput) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.label}>
-        <span>|</span>
-        <label htmlFor={label}>{label}</label>
-      </div>
+      <FormLabel htmlFor={label}>{label}</FormLabel>
       <div className={styles.inputContainer}>
         <input
           className={`${styles.input} ${styles.year}`}
