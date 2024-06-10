@@ -2,13 +2,13 @@ import Radio from '@/components/common/radio/radio';
 import { useForm } from 'react-hook-form';
 
 export interface RadioType {
-  value: string;
+  type: string;
 }
 
 export default function RadioTest() {
   const { control, handleSubmit } = useForm<RadioType>({
     defaultValues: {
-      value: 'dog',
+      type: 'dog',
     },
   });
 
@@ -18,13 +18,11 @@ export default function RadioTest() {
 
   const radioValue = [
     {
-      name: '종류',
       value: 'dog',
       text: '강아지',
       id: 'dog',
     },
     {
-      name: '종류',
       value: 'cat',
       text: '고양이',
       id: 'cat',
@@ -32,7 +30,7 @@ export default function RadioTest() {
   ];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Radio options={radioValue} control={control} inputName={'value'} />
+      <Radio options={radioValue} control={control} name={'type'} />
       <button type="submit">버튼</button>
     </form>
   );

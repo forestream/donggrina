@@ -9,6 +9,11 @@ interface RadioContainerPropsType {
   control: UseFormReturn<RadioType>['control'];
 }
 
+interface RadioItemListType {
+  text: string;
+  name: keyof RadioType;
+}
+
 const InitialState = {
   control: {} as UseFormReturn<RadioType>['control'],
 };
@@ -26,18 +31,7 @@ export function RadioContainer({ children, control }: PropsWithChildren<RadioCon
   );
 }
 
-interface RadioItemListType {
-  text: string;
-  inputName: keyof RadioType;
-}
-
-function RadioItemList({
-  text,
-  id,
-  value,
-  name,
-  inputName,
-}: InputHTMLAttributes<HTMLInputElement> & RadioItemListType) {
+function RadioItemList({ text, id, value, name }: InputHTMLAttributes<HTMLInputElement> & RadioItemListType) {
   const context = useContext(RadioContext);
   if (context === undefined) {
     throw new Error('잘못된 접근 입니다.');
@@ -45,7 +39,7 @@ function RadioItemList({
   const { control } = context;
   return (
     <Controller
-      name={inputName}
+      name={name}
       control={control}
       render={({ field }) => (
         <li>

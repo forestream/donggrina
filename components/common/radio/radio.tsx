@@ -7,17 +7,16 @@ interface RadioPropsType {
     value: string;
     text: string;
     id: string;
-    name: string;
   }[];
   control: UseFormReturn<RadioType>['control'];
-  inputName: keyof RadioType;
+  name: keyof RadioType;
 }
 
-export default function Radio({ options, control, inputName }: RadioPropsType) {
+export default function Radio({ options, control, name }: RadioPropsType) {
   return (
     <RadioContainer control={control}>
       {options.map((item, index) => {
-        return <RadioContainer.RadioItemList key={index} inputName={inputName} {...item} />;
+        return <RadioContainer.RadioItemList key={index} name={name} {...item} />;
       })}
     </RadioContainer>
   );
