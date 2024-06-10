@@ -1,8 +1,9 @@
 import getSeventhDate from '@/utils/get-seventh-date';
 import styles from './calendar-modal-calendar.module.scss';
 import getCalendarArray from '@/utils/get-calendar-array';
-import { BaseSyntheticEvent, MouseEvent } from 'react';
+import { BaseSyntheticEvent, MouseEvent, useEffect } from 'react';
 import { DateTime } from '@/pages/calendar/create';
+import { useCalendarContext } from '../calendar-compound/calendar';
 
 interface CalendarModalCalendarProps {
   dateTime: DateTime;
@@ -10,6 +11,16 @@ interface CalendarModalCalendarProps {
 }
 
 export default function CalendarModalCalendar({ dateTime, onSelect }: CalendarModalCalendarProps) {
+  const calendarContext = useCalendarContext();
+
+  useEffect(() => {
+    calendarContext.onSelectedMonth(dateTime.month - 1);
+  }, []);
+
+  useEffect(() => {
+    onSelect('month', { target: { innerText: calendarContext.month + 1 } } as BaseSyntheticEvent);
+  }, [calendarContext.month]);
+
   const { year, month, date } = dateTime;
   const calendarArray = getCalendarArray(year, month);
 
