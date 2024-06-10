@@ -5,6 +5,7 @@ import DateInput from '../Input/date-input';
 import WeightInput from '../Input/weight-input';
 import styles from './Form.module.scss';
 import Select from '../select';
+import FormLabel from '../Label';
 
 interface FormProps {
   // eslint-disable-next-line
@@ -27,3 +28,4 @@ Form.MainInput = MainInput;
 Form.DateInput = DateInput;
 Form.WeightInput = WeightInput;
 Form.SelectInput = Select;
+Form.Label = FormLabel;

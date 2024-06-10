@@ -2,9 +2,8 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from './weight-input.module.scss';
 import { FormInput } from '../input-type';
-import FormLabel from '../../Label';
 
-export default function WeightInput({ name, label, type = 'text' }: FormInput) {
+export default function WeightInput({ name, type = 'text' }: FormInput) {
   const {
     register,
     formState: { errors },
@@ -27,7 +26,6 @@ export default function WeightInput({ name, label, type = 'text' }: FormInput) {
 
   return (
     <div className={styles.container}>
-      <FormLabel htmlFor={label}>{label}</FormLabel>
       <div className={styles.inputContainer}>
         <input
           className={styles.input}
