@@ -11,10 +11,19 @@ interface TimeScrollerProps {
 
 export default function TimeScroller({ scrollItems, refPusher, className, selectedItem }: TimeScrollerProps) {
   const ref = useRef<HTMLDivElement>(null);
+  let eventCount = 0;
+  let timer: NodeJS.Timeout;
+
   const handleWheel = (e: WheelEvent) => {
     e.preventDefault();
-    if (e.deltaY > 0 && ref.current) ref.current.scrollTop += 14;
-    if (e.deltaY < 0 && ref.current) ref.current.scrollTop -= 14;
+    if (eventCount < 3) eventCount++;
+    if (e.deltaY > 0 && ref.current) ref.current.scrollTop += 14 * eventCount;
+    if (e.deltaY < 0 && ref.current) ref.current.scrollTop -= 14 * eventCount;
+
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      eventCount = 0;
+    }, 500);
   };
 
   useEffect(() => {
