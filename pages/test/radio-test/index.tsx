@@ -1,12 +1,20 @@
 import Radio from '@/components/common/radio/radio';
-import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+export interface RadioType {
+  value: string;
+}
 
 export default function RadioTest() {
-  const [test, setTest] = useState('');
+  const { control, handleSubmit } = useForm<RadioType>({
+    defaultValues: {
+      value: 'dog',
+    },
+  });
 
-  useEffect(() => {
-    console.log(test);
-  }, [test]);
+  const onSubmit = (data: RadioType) => {
+    console.log(data);
+  };
 
   const radioValue = [
     {
@@ -22,5 +30,10 @@ export default function RadioTest() {
       id: 'cat',
     },
   ];
-  return <Radio options={radioValue} setValue={setTest} />;
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Radio options={radioValue} control={control} inputName={'value'} />
+      <button type="submit">버튼</button>
+    </form>
+  );
 }

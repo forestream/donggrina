@@ -1,18 +1,15 @@
+import { RadioType } from '@/pages/test/radio-test';
 import { InputHTMLAttributes, PropsWithChildren } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
 
-interface LabelType {
-  updateValue: (value: string) => void;
+interface LabelType extends PropsWithChildren<InputHTMLAttributes<HTMLInputElement>> {
+  field: ControllerRenderProps<RadioType>;
 }
 
-export default function RadioLabel({
-  id,
-  children,
-  updateValue,
-  value,
-}: PropsWithChildren<InputHTMLAttributes<HTMLInputElement> & LabelType>) {
+export default function RadioLabel({ id, children, value, field }: LabelType) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
     if (e.key === 'Enter') {
-      updateValue(value!.toString());
+      field.onChange(value);
     }
   };
   return (
