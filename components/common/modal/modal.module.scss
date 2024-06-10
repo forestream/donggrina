@@ -11,12 +11,12 @@
 }
 
 .inner {
+  overflow: hidden;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
   font-size: 16px;
   background-color: var(--white);
   border-radius: 10px;
