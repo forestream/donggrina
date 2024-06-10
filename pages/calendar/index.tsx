@@ -1,12 +1,13 @@
+import Calendar from '@/components/calendar-compound/calendar';
 import styles from './calendar.module.scss';
 import CalendarContainer from '@/components/calendar/calendar-container';
 import CalendarTodo from '@/components/calendar/calendar-todo';
 import CreateTodoButton from '@/components/calendar/create-todo-button';
-import getDay from '@/utils/get-day';
 import validateDate from '@/utils/validate-date';
 import validateMonth from '@/utils/validate-month';
 import validateYear from '@/utils/validate-year';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import CalendarTodoDate from '@/components/calendar/calendar-todo-date';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let {
@@ -24,23 +25,30 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!validateMonth(month)) month = String(monthToday);
   if (!validateDate(date)) date = '1';
 
-  return { props: { year: +(year as string), month: +(month as string), date: +(date as string) } };
+  return {
+    props: {
+      year: +(year as string),
+      month: +(month as string),
+      date: +(date as string),
+    },
+  };
 }
 
 export type CalendarProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-export default function Calendar({ year, month, date }: CalendarProps) {
+export default function CalendarPage({ year, month, date }: CalendarProps) {
   const ymd = { year, month, date };
-  const day = getDay(year, month, date);
 
   return (
     <main className={styles.outer}>
-      <CalendarContainer {...ymd} />
-      <p className={styles.date}>
-        {month}월 {date}일 {day}
-      </p>
-      <CalendarTodo />
-      <CreateTodoButton {...ymd} />
+      <Calendar>
+        <Calendar.Year />
+        <Calendar.Month />
+        <CalendarContainer {...ymd} />
+        <CalendarTodoDate {...ymd} />
+        <CalendarTodo />
+        <CreateTodoButton {...ymd} />
+      </Calendar>
     </main>
   );
 }
