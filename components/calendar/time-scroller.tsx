@@ -16,7 +16,7 @@ export default function TimeScroller({ scrollItems, refPusher, className, select
 
   const handleWheel = (e: WheelEvent) => {
     e.preventDefault();
-    if (eventCount < 3) eventCount++;
+    if (eventCount < 5) eventCount++;
     if (e.deltaY > 0 && ref.current) ref.current.scrollTop += 14 * eventCount;
     if (e.deltaY < 0 && ref.current) ref.current.scrollTop -= 14 * eventCount;
 
