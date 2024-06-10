@@ -3,8 +3,9 @@ import SubTitle from '@/components/common/title/sub-title/sub-title';
 import Form from '@/components/common/Form';
 import Button from '@/components/common/button/button';
 import styles from './index.module.scss';
-import { createFamily, inquiryCode } from '@/apis/my';
-import { getCookie } from 'cookies-next';
+import { createFamily } from '@/apis/my';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 interface SubmitDataType {
   name: string;
@@ -12,17 +13,20 @@ interface SubmitDataType {
 }
 
 export default function CreateFamily() {
-  const token = getCookie('Authorization');
-  const handleSubmit = async () => {
+  const router = useRouter();
+  const handleSubmit = async (data: SubmitDataType) => {
     try {
-      const response = await inquiryCode(token!);
+      const response = await createFamily(data);
       console.log(response);
-    } catch {
-      console.log('에러');
+      router.replace('/start-family/entry-info/finish');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error.response!.data);
+      }
     }
   };
   const onSubmit = (data: SubmitDataType) => {
-    // handleSubmit(data);
+    handleSubmit(data);
   };
   return (
     <section style={{ padding: '126px 24px 0 24px' }}>
@@ -39,9 +43,6 @@ export default function CreateFamily() {
           </Button>
         </div>
       </Form>
-      <button type="button" onClick={handleSubmit}>
-        초대코드
-      </button>
     </section>
   );
 }

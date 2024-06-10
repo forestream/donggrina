@@ -3,7 +3,7 @@ import LinkItem from './link-item';
 import { LinkType } from './types/link-type';
 
 const links: LinkType[] = [
-  { href: '/create-family', text: '가족만들기', className: 'primary' },
+  { href: '/start-family/entry-info', text: '가족만들기', className: 'primary' },
   { href: '/', text: '가족에 참여하기', className: 'tertiary' },
 ];
 

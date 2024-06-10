@@ -21,7 +21,7 @@ export default function StartFamily() {
   }, [isReady]);
 
   return (
-    <article className={styles.article}>
+    <section className={styles.section}>
       <div className={styles.titleBox}>
         <SubTitle>너! 내 가족이 되라!</SubTitle>
         <Title>가족만들기</Title>
@@ -33,6 +33,6 @@ export default function StartFamily() {
         </TitleText>
       </div>
       <LinkList />
-    </article>
+    </section>
   );
 }
