@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import styles from './main-input.module.scss';
 import { FormInput } from '../input-type';
+import FormLabel from '../../Label';
 
 export default function MainInput({ name, label, type = 'text' }: FormInput) {
   const {
@@ -11,10 +12,7 @@ export default function MainInput({ name, label, type = 'text' }: FormInput) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.label}>
-        <span>|</span>
-        <label htmlFor={name}>{label}</label>
-      </div>
+      <FormLabel htmlFor={label}>{label}</FormLabel>
       <input
         className={styles.input}
         id={name}
