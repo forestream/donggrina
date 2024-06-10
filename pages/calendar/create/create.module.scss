@@ -89,6 +89,16 @@
   width: 100%;
 }
 
+.todoDateText {
+  background-color: var(--main-color);
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--white);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
 .todoDateSelector {
   display: flex;
 }
@@ -100,19 +110,21 @@
   font-size: 14px;
   border: none;
   align-self: last baseline;
+  width: fit-content;
 }
 
-.year {
-  width: 36px;
+.year,
+.month {
+  &::after {
+    content: '-';
+  }
 }
 
-.month,
 .date,
-.hour,
-.minute {
-  width: 20px;
+.ampm {
+  margin-right: 8px;
 }
 
-.date {
-  margin-right: 12px;
+.hour::after {
+  content: ':';
 }

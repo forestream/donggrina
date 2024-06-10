@@ -1,10 +1,11 @@
 import Button from '@/components/common/button/button';
-import Modal from '@/components/common/modal/modal';
 import styles from './index.module.scss';
+import useModal from '@/hooks/use-modal';
 
-function Buttons() {
+function Buttons({ onClose }: { onClose: (v: boolean) => void }) {
   const handleClick = () => {
     console.log('b');
+    onClose(false);
   };
   return (
     <div className={styles.box}>
@@ -16,14 +17,10 @@ function Buttons() {
 }
 
 export default function ButtonTest() {
-  const handleClose = () => {
-    console.log('a');
-  };
+  const [Modal, handleModal] = useModal();
   return (
-    <>
-      <div>
-        <Modal message="테스트" onClose={handleClose} buttons={<Buttons />} />
-      </div>
-    </>
+    <Modal>
+      <Buttons onClose={handleModal} />
+    </Modal>
   );
 }

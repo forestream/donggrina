@@ -1,16 +1,12 @@
-import { InputHTMLAttributes, useContext } from 'react';
-import { RadioContext } from '../context/radio-context';
+import { RadioType } from '@/pages/test/radio-test';
+import { InputHTMLAttributes } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
 
-export default function RadioInput({ value, id, name }: InputHTMLAttributes<HTMLInputElement>) {
-  const context = useContext(RadioContext);
-  if (context === undefined) {
-    throw new Error('잘못된 접근 입니다.');
-  }
-  const { updateValue, radioValue } = context;
-  const handleChange = () => {
-    updateValue(value!.toString());
-    console.log(radioValue);
-  };
+interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  field: ControllerRenderProps<RadioType>;
+}
+
+export default function RadioInput({ value, id, name, field }: RadioInputProps) {
   return (
     <input
       type="radio"
@@ -18,8 +14,8 @@ export default function RadioInput({ value, id, name }: InputHTMLAttributes<HTML
       value={value}
       id={id}
       name={name}
-      onChange={handleChange}
-      checked={value === radioValue}
+      onChange={() => field.onChange(value)}
+      checked={field.value === value}
     />
   );
 }
