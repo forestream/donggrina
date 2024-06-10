@@ -14,7 +14,9 @@ export const onKakaoShare = ({ url, description, title }: KakaoShareType) => {
     content: {
       title: 'donggrina',
       description: description,
-      imageUrl: '이미지 넣기',
+      imageUrl: 'https://donggrina.s3.ap-northeast-2.amazonaws.com/kakao-message.png',
+      imageWidth: 800,
+      imageHeight: 400,
       link: {
         mobileWebUrl: url,
         webUrl: url,
