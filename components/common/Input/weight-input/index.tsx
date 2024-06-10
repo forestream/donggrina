@@ -35,6 +35,10 @@ export default function WeightInput({ name, label, type = 'text' }: FormInput) {
           type={type}
           {...register(name as string, {
             required: '필수 정보입니다.',
+            validate: {
+              min: (value) => parseFloat(value) >= 0.01 || '값은 0.01kg보다 커야 합니다.',
+              max: (value) => parseFloat(value) <= 100 || '값은 100kg보다 작아야 합니다.',
+            },
           })}
           onInput={handleInput}
         />
