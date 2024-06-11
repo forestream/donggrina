@@ -5,11 +5,12 @@ import useSelect from '@/hooks/use-select';
 import { InitialState } from './calendar.type';
 
 const initialState = {
-  years: [],
+  year: CalendarInstance.currentYear,
   month: 1,
   date: 1,
   onSelectedMonth: () => {},
   onSelectedDate: () => {},
+  onSelectedYear: () => {},
 };
 
 const CalendarContext = createContext<InitialState>(initialState);
@@ -21,6 +22,9 @@ export function useCalendarContext() {
 }
 
 export default function Calendar(props: PropsWithChildren) {
+  const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
+    CalendarInstance.currentYear,
+  );
   const { selectedItem: selectedMonth, handleSelectedItem: onSelectedMonth } = useSelect<number>(
     CalendarInstance.currentMonth,
   );
@@ -29,11 +33,12 @@ export default function Calendar(props: PropsWithChildren) {
   );
 
   const value = {
-    years: [CalendarInstance.currentYear],
+    year: selectedYear,
     month: selectedMonth,
     date: selectedDate,
     onSelectedMonth,
     onSelectedDate,
+    onSelectedYear,
   };
 
   return (
