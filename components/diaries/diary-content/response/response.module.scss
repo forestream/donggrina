@@ -1,0 +1,19 @@
+.responseContainer {
+  display: flex;
+  gap: 17px;
+
+  @mixin responseItem {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-color-gray);
+  }
+
+  .comment {
+    @include responseItem;
+  }
+
+  .favorite {
+    @include responseItem;
+  }
+}
