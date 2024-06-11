@@ -1,0 +1,26 @@
+.petLabel {
+  display: block;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  position: relative;
+}
+
+.petInput {
+  width: 0;
+  height: 0;
+}
+
+.petInput ~ .petOn {
+  display: none;
+}
+.petInput ~ .petOff {
+  display: block;
+}
+
+.petInput:checked ~ .petOn {
+  display: block;
+}
+.petInput:checked ~ .petOff {
+  display: none;
+}
