@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import styles from './diary-content.module.scss';
 import Kebab from '@/public/images/diaries/more-horizontal.svg';
 import Profile from '../diary-content/profile';
