@@ -1,19 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './family-diary.module.scss';
+import Avatar from '../avatar/avatar';
 
 export default function FamilyDiary() {
-  const isImage = false;
+  const isImage = true;
   const isImageClassName = isImage ? `${styles['diary-card']} ${styles.isImage}` : styles['diary-card'];
 
   return (
     <div className={styles['wrapper']}>
       <div className={isImageClassName}>
         <div className={styles['diary-card__profile']}>
-          <div className={styles['diary-card__avatar']}>
-            <Image src="/images/family/default-image.svg" alt="" fill />
-          </div>
-          <span className={styles['diary-card__username']}>배수지</span>
+          <Avatar />
         </div>
         <div className={styles['diary-card__contents']}>
           <p className={styles['content-text']}>

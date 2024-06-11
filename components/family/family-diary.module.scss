@@ -28,18 +28,6 @@
     gap: 0 10px;
   }
 
-  &__avatar {
-    position: relative;
-    width: 20px;
-    height: 20px;
-  }
-
-  &__username {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-color-gray);
-  }
-
   .content-text {
     font-size: 12px;
     font-weight: 700;
@@ -71,11 +59,6 @@
 
   .diary-card__profile {
     position: absolute;
-
-    .diary-card__avatar {
-      width: 17px;
-      height: 17px;
-    }
   }
 
   .diary-card__contents {
