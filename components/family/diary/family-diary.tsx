@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './family-diary.module.scss';
-import Avatar from '../avatar/avatar';
+import Avatar from '@/components/avatar/avatar';
 
 export default function FamilyDiary() {
   const isImage = true;

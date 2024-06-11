@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { AvatarImage } from '../avatar/avatar';
+import { AvatarImage } from '../../avatar/avatar';
 import 'swiper/css';
 import styles from './family-growth.module.scss';
 
