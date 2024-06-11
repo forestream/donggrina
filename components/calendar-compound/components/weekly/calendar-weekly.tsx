@@ -5,7 +5,7 @@ import styles from './calendar-weekly.module.scss';
 
 export default function CalendarWeekly() {
   const calendarContext = useCalendarContext();
-  const daysInMonth = CalendarInstance.daysInMonth(calendarContext.years[0], calendarContext.month);
+  const daysInMonth = CalendarInstance.daysInMonth(calendarContext.year, calendarContext.month);
   const dayList = CalendarInstance.DAY_LIST(daysInMonth);
 
   return (
