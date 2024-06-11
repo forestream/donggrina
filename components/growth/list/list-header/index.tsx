@@ -13,7 +13,7 @@ export default function ListHeader({ categoryName, writer, pet }: ListHeaderProp
   return (
     <div className={styles.headerContainer}>
       <div className={styles.wrapper}>
-        <CategoryIcon />
+        <CategoryIcon alt="카테고리 아이콘" />
         <div className={styles.subHeader}>
           <div className={styles.categoryName}>사료</div>
           <div className={styles.profileContainer}>
