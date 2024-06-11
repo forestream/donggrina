@@ -9,14 +9,17 @@ import { setCookie } from 'cookies-next';
 
 export default function StartFamily() {
   const {
-    query: { token },
+    query: { accessToken, refreshToken },
     isReady,
   } = useRouter();
 
   useEffect(() => {
     if (!isReady) return;
-    if (token) {
-      setCookie('Authorization', token);
+    if (accessToken) {
+      setCookie('accessToken', accessToken);
+    }
+    if (refreshToken) {
+      setCookie('refreshToken', refreshToken);
     }
   }, [isReady]);
 
