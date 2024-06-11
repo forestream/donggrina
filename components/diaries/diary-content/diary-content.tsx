@@ -24,7 +24,7 @@ const DiaryContent = () => {
   return (
     <>
       <div>
-        {data.map((diary) => (
+        {data?.map((diary) => (
           <div key={diary.diaryId} className={styles.diaryContent}>
             <div className={styles.leftContainer}>
               <Profile author={diary.author} />

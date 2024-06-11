@@ -4,7 +4,12 @@ import Heart from '@/public/images/diaries/heart.svg';
 import HeartClick from '@/public/images/diaries/heart-click.svg';
 import Message from '@/public/images/diaries/message.svg';
 
-const Response = ({ commentCount, favoriteCount }) => {
+interface ResponseProps {
+  commentCount: number;
+  favoriteCount: number;
+}
+
+const Response: React.FC<ResponseProps> = ({ commentCount, favoriteCount }) => {
   return (
     <div className={styles.responseContainer}>
       <div className={styles.comment}>

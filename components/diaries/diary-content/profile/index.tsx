@@ -3,7 +3,11 @@ import styles from './profile.module.scss';
 import ProfileImage from '@/public/images/diaries/profile.svg';
 import Vector from '@/public/images/diaries/vector.svg';
 
-const Profile = ({ author }) => {
+interface ProfileProps {
+  author: string;
+}
+
+const Profile: React.FC<ProfileProps> = ({ author }) => {
   return (
     <div className={styles.authorContainer}>
       <ProfileImage alt="Profile Image" width={20} height={20} />
