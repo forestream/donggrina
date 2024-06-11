@@ -1,25 +1,22 @@
-import { SetStateAction } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 import { RadioContainer } from './context/radio-context';
+import { RadioType } from '@/pages/test/radio-test';
 
 interface RadioPropsType {
   options: {
     value: string;
     text: string;
     id: string;
-    name: string;
   }[];
-  setValue: React.Dispatch<SetStateAction<string>>;
+  control: UseFormReturn<RadioType>['control'];
+  name: keyof RadioType;
 }
 
-// Radio는 상태 설정 함수, 배열을 받습니다.
-// 배열에는 value, text, id, name을 포함합니다.
-export default function Radio({ options, setValue }: RadioPropsType) {
-  const optionValues = options.map((item) => item.value);
-
+export default function Radio({ options, control, name }: RadioPropsType) {
   return (
-    <RadioContainer values={optionValues} setValue={setValue}>
+    <RadioContainer control={control}>
       {options.map((item, index) => {
-        return <RadioContainer.RadioItemList key={index} {...item} />;
+        return <RadioContainer.RadioItemList key={index} name={name} {...item} />;
       })}
     </RadioContainer>
   );

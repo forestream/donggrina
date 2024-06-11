@@ -1,16 +1,17 @@
-.container {
+@mixin container {
   display: flex;
   flex-direction: column;
-  gap: 120px;
-  margin-bottom: 41px;
+  position: relative;
 }
 
-.input {
+@mixin input {
   outline: none;
   border-width: 0 0 1.5px;
   border-color: var(--main-color);
 }
 
-.error {
+@mixin error {
   color: var(--red);
+  font-size: 12px;
+  margin-top: 10px;
 }
