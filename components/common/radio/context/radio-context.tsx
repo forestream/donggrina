@@ -1,44 +1,34 @@
-import { InputHTMLAttributes, PropsWithChildren, SetStateAction, createContext, useContext, useState } from 'react';
+import { InputHTMLAttributes, PropsWithChildren, createContext, useContext } from 'react';
 import styles from '../radio.module.scss';
 import RadioInput from '../radio-input/radio-input';
 import RadioLabel from '../radio-label/radio-label';
-
-interface ContextType {
-  radioValue: string;
-  updateValue: (value: string) => void;
-}
+import { Controller, UseFormReturn } from 'react-hook-form';
+import { RadioType } from '@/pages/test/radio-test';
 
 interface RadioContainerPropsType {
-  values: string[];
-  setValue: React.Dispatch<SetStateAction<string>>;
-}
-
-const InitialState = {
-  radioValue: '',
-  updateValue: () => {},
-};
-
-export const RadioContext = createContext<ContextType>(InitialState);
-
-export function RadioContainer({ values, children, setValue }: PropsWithChildren<RadioContainerPropsType>) {
-  const [radioValue, setRadioValue] = useState(values[0]);
-  const updateValue = (value: string) => {
-    setRadioValue(value);
-    setValue(value);
-  };
-  const providerState = {
-    radioValue,
-    updateValue,
-  };
-  return (
-    <RadioContext.Provider value={providerState}>
-      <ul className={styles.radioBox}>{children}</ul>
-    </RadioContext.Provider>
-  );
+  control: UseFormReturn<RadioType>['control'];
 }
 
 interface RadioItemListType {
   text: string;
+  name: keyof RadioType;
+}
+
+const InitialState = {
+  control: {} as UseFormReturn<RadioType>['control'],
+};
+
+export const RadioContext = createContext<RadioContainerPropsType>(InitialState);
+
+export function RadioContainer({ children, control }: PropsWithChildren<RadioContainerPropsType>) {
+  const contextValue = {
+    control,
+  };
+  return (
+    <RadioContext.Provider value={contextValue}>
+      <ul className={styles.radioBox}>{children}</ul>
+    </RadioContext.Provider>
+  );
 }
 
 function RadioItemList({ text, id, value, name }: InputHTMLAttributes<HTMLInputElement> & RadioItemListType) {
@@ -46,14 +36,20 @@ function RadioItemList({ text, id, value, name }: InputHTMLAttributes<HTMLInputE
   if (context === undefined) {
     throw new Error('잘못된 접근 입니다.');
   }
-  const { updateValue } = context;
+  const { control } = context;
   return (
-    <li>
-      <RadioInput value={value} id={id} name={name} />
-      <RadioLabel id={id} updateValue={updateValue} value={value}>
-        {text}
-      </RadioLabel>
-    </li>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <li>
+          <RadioInput value={value} id={id} name={name} field={field} />
+          <RadioLabel value={value} id={id} field={field}>
+            {text}
+          </RadioLabel>
+        </li>
+      )}
+    />
   );
 }
 

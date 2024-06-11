@@ -14,7 +14,7 @@ export default function middleware(request: NextRequest) {
   const hasCookie = cookies.has('accessToken');
 
   // 쿼리 파라미터에서 token 값 확인
-  const hasQuery = nextUrl.search.includes('token');
+  const hasQuery = nextUrl.search.includes('accessToken');
 
   // /start-family 페이지로 접근하는데 token이 있을 경우 : 페이지 접근
   // /start-family 페이지로 접근하는데 token이 없을 경우 : 리다이렉션
