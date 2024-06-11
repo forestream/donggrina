@@ -7,15 +7,16 @@ import ListFooter from './list-footer';
 interface GrowthListProps {
   text: string;
   writer: string;
+  pet: string;
   categoryName: string;
 }
 
-export default function GrowthList({ text, writer, categoryName }: GrowthListProps) {
+export default function GrowthList({ text, writer, pet, categoryName }: GrowthListProps) {
   return (
     <div className={styles.container}>
-      <ListHeader writer={writer} categoryName={categoryName} />
+      <ListHeader writer={writer} categoryName={categoryName} pet={pet} />
       <Link href="/" className={styles.text}>
-        {text}
+        text text text text text text text text text text texttext texttext texttext text text text text
       </Link>
       <ListFooter />
     </div>
