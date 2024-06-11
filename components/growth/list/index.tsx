@@ -12,10 +12,12 @@ interface GrowthListProps {
 
 export default function GrowthList({ text, writer, categoryName }: GrowthListProps) {
   return (
-    <Link href="/" className={styles.container}>
+    <div className={styles.container}>
       <ListHeader writer={writer} categoryName={categoryName} />
-      <div className={styles.text}>{text}</div>
+      <Link href="/" className={styles.text}>
+        {text}
+      </Link>
       <ListFooter />
-    </Link>
+    </div>
   );
 }
