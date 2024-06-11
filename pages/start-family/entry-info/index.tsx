@@ -14,8 +14,8 @@ export default function CreateFamily() {
   const methods = useForm<FieldValues>({
     mode: 'onBlur',
   });
-  const { handleSubmit } = methods;
-
+  const { handleSubmit, formState } = methods;
+  const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       await myFamilyApi.myFamilyCreate(data);
@@ -49,7 +49,7 @@ export default function CreateFamily() {
           </li>
         </ul>
         <div className={styles.buttonBox}>
-          <Button type="submit" className="primary" round>
+          <Button type="submit" className={buttonClassCondition} round disabled={formState.isSubmitting}>
             가족 등록하기
           </Button>
         </div>
