@@ -6,9 +6,9 @@ import { GetServerSidePropsContext } from 'next';
 import { useState } from 'react';
 import { CalendarProps } from '..';
 import useModal from '@/hooks/use-modal';
-import CalendarModal from '@/components/calendar/calendar-modal';
+import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import PetRadio from '@/components/calendar/pet-radio';
+import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

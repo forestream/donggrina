@@ -1,13 +1,13 @@
 import Calendar from '@/components/calendar-compound/calendar';
 import styles from './calendar.module.scss';
-import CalendarContainer from '@/components/calendar/calendar-container';
-import CalendarTodo from '@/components/calendar/calendar-todo';
-import CreateTodoButton from '@/components/calendar/create-todo-button';
+import CalendarContainer from '@/components/calendar-monthly/calendar-container';
+import CalendarTodo from '@/components/calendar-monthly/calendar-todo';
+import CreateTodoButton from '@/components/calendar-monthly/create-todo-button';
 import validateDate from '@/utils/validate-date';
 import validateMonth from '@/utils/validate-month';
 import validateYear from '@/utils/validate-year';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import CalendarTodoDate from '@/components/calendar/calendar-todo-date';
+import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let {
