@@ -1,0 +1,11 @@
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .name {
+    font-size: 14px;
+    color: var(--text-color-gray);
+    padding-right: 4px;
+  }
+}
