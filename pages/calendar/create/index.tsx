@@ -70,9 +70,9 @@ export default function Create({ year, month, date }: CalendarProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<IFormInput>();
-  console.log(errors);
+  console.log(isValid);
 
   return (
     <div className={styles.outer}>
@@ -140,7 +140,9 @@ export default function Create({ year, month, date }: CalendarProps) {
             ))}
           </div>
         </div>
-        <button className={styles.submit}>등록하기</button>
+        <button className={styles.submit} disabled={!isValid}>
+          등록하기
+        </button>
       </form>
       <Modal>
         <CalendarModal updateDateTime={updateDateTime} dateTime={dateTime} onClose={handleModal.bind(null, false)} />

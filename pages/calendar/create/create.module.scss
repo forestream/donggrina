@@ -85,7 +85,7 @@
   width: 66px;
   height: 66px;
   cursor: pointer;
-  background-color: var(--text-color-time-selector);
+  background-color: var(--todo-category);
   border-radius: 10px;
   margin: 0 auto 8px;
 }
@@ -151,7 +151,14 @@
 .submit {
   width: 100%;
   padding: 14px;
-  background-color: var(--disabled-button);
+  color: var(--button-color);
+  background-color: var(--main-color);
   border-radius: 9999px;
   margin-top: 30px;
+
+  &:disabled {
+    background-color: var(--disabled-button);
+    color: var(--white);
+    cursor: default;
+  }
 }
