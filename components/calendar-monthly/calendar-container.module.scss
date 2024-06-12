@@ -40,8 +40,9 @@
 
 .todoIconContainer {
   display: flex;
-  justify-content: space-around;
-  width: 50%;
+  justify-content: center;
+  gap: 4px;
+  height: 4px;
 }
 
 .todoIcon {
