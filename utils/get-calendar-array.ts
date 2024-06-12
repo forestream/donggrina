@@ -2,11 +2,17 @@ import { CALENDAR_DAYS, CALENDAR_EMPTY_DATES } from '@/lib/constants/calendar-co
 import getDateCount from './get-date-count';
 import getFirstDay from './get-first-day';
 
-export default function getCalendarArray(
-  year: number,
-  month: number,
-  todoCounts: { date: string; count: number }[] = [],
-) {
+type TodoCount = {
+  date: string;
+  count: number;
+};
+
+interface CalendarArray {
+  calendarArray: (string | number)[];
+  todoCountsArray: (string | number)[];
+}
+
+export default function getCalendarArray(year: number, month: number, todoCounts: TodoCount[] = []): CalendarArray {
   const firstDay = getFirstDay(year, month);
   const emptyDates = Array(CALENDAR_EMPTY_DATES[firstDay]).fill('');
 
@@ -20,7 +26,7 @@ export default function getCalendarArray(
     count,
   }));
   const counts = Array(dateCount).fill(0);
-  editedTodoCounts.forEach(({ date, count }, i) => {
+  editedTodoCounts.forEach(({ date, count }) => {
     counts[date - 1] = count;
   });
 
