@@ -1,0 +1,16 @@
+.footer {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  gap: 17px;
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 5.5px;
+    .count {
+      font-size: 14px;
+      color: var(--text-color-gray);
+    }
+  }
+}

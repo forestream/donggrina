@@ -1,22 +1,16 @@
 .optionContainer {
-  position: absolute;
-  left: 17px;
-  top: 45px;
+  width: 100%;
 
   .optionList {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-
     .optionItem {
       color: #959595;
       font-size: 14px;
 
       .optionButton {
-        width: 276px;
         border-top: 1px solid #959595;
         display: flex;
-        padding-top: 10px;
+        padding: 13px 0;
+        width: 100%;
       }
     }
   }
