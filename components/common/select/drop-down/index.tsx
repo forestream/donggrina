@@ -18,9 +18,9 @@ export default function Dropdown({ showDropDown, options, buttonRef, handleClick
     <div className={styles.optionContainer} ref={dropDownRef}>
       <ul className={styles.optionList}>
         {options &&
-          options.map((option) => {
+          options.map((option, index) => {
             return (
-              <li className={styles.optionItem} key={option}>
+              <li className={styles.optionItem} key={index}>
                 <button className={styles.optionButton} onClick={handleClick} type="button">
                   {option}
                 </button>

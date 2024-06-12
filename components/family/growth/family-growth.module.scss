@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+  gap: 12px 0;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #a9a9a9;
+}
+
+.growth-list {
+  width: 100%;
+
+  & &__item {
+    width: 74px;
+    border-radius: 10px;
+    background-color: var(--main-color);
+  }
+}

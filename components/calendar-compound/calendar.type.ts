@@ -5,4 +5,5 @@ export interface InitialState {
   onSelectedMonth: (month: number) => void;
   onSelectedDate: (date: number) => void;
   onSelectedYear: (year: number) => void;
+  onResetToday: () => void;
 }

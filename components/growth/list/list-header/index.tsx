@@ -1,19 +1,28 @@
 import React from 'react';
 import styles from './list-header.module.scss';
+import Profile from '../../profile';
+import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
 
 interface ListHeaderProps {
   categoryName: string;
   writer: string;
+  pet: string;
 }
 
-export default function ListHeader({ categoryName, writer }: ListHeaderProps) {
+export default function ListHeader({ categoryName, writer, pet }: ListHeaderProps) {
   return (
     <div className={styles.headerContainer}>
-      <div className={styles.category}>
-        <div className={styles.categoryIcon} />
-        <div className={styles.categoryName}>{categoryName}</div>
+      <div className={styles.wrapper}>
+        <CategoryIcon alt="카테고리 아이콘" />
+        <div className={styles.subHeader}>
+          <div className={styles.categoryName}>사료</div>
+          <div className={styles.profileContainer}>
+            <Profile name="문지혜" />
+            <Profile name="뽀삐" className={styles.lastProfile} />
+          </div>
+        </div>
       </div>
-      <div className={styles.writer}>{writer}</div>
+      <div className={styles.kebab}>Kebab</div>
     </div>
   );
 }
