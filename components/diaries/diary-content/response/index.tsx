@@ -7,9 +7,10 @@ import Message from '@/public/images/diaries/message.svg';
 interface ResponseProps {
   commentCount: number;
   favoriteCount: number;
+  favoriteState: boolean;
 }
 
-const Response: React.FC<ResponseProps> = ({ commentCount, favoriteCount }) => {
+const Response: React.FC<ResponseProps> = ({ commentCount, favoriteCount, favoriteState }) => {
   return (
     <div className={styles.responseContainer}>
       <div className={styles.comment}>
@@ -17,7 +18,11 @@ const Response: React.FC<ResponseProps> = ({ commentCount, favoriteCount }) => {
         <p>{commentCount}</p>
       </div>
       <div className={styles.favorite}>
-        <Heart alt="heart" width={20} height={20} />
+        {favoriteState ? (
+          <HeartClick alt="heart click" width={20} height={20} />
+        ) : (
+          <Heart alt="heart" width={20} height={20} />
+        )}
         <p>{favoriteCount}</p>
       </div>
     </div>

@@ -28,7 +28,11 @@ const DiaryContent = () => {
             <div className={styles.leftContainer}>
               <Profile author={diary.author} />
               <Content content={diary.content} />
-              <Response commentCount={diary.commentCount} favoriteCount={diary.favoriteCount} />
+              <Response
+                commentCount={diary.commentCount}
+                favoriteCount={diary.favoriteCount}
+                favoriteState={diary.favoriteState}
+              />
             </div>
             <div className={styles.rightContainer}>
               <Kebab />
