@@ -11,7 +11,9 @@ export default function FileImage({ imageValue }: ImageValueType) {
   useEffect(() => {
     if (imageValue && imageValue.length > 0) {
       const file = imageValue[0];
-      setImageSrc(URL.createObjectURL(file));
+      if (file instanceof File) {
+        setImageSrc(URL.createObjectURL(file));
+      }
     }
   }, [imageValue]);
   return (

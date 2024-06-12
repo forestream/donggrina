@@ -5,55 +5,75 @@ import FileInput from '@/components/start-pet/file-input/file-input';
 import FileImage from '@/components/start-pet/file-image/file-image';
 import Radio from '@/components/common/radio/radio';
 import Button from '@/components/common/button/button';
-import { KIND_OPTION } from '@/utils/constants/kind-data';
-import { GENDER_OPTION } from '@/utils/constants/gender-data';
-import { NEUTERED_OPTION } from '@/utils/constants/neutered-data';
-import { CAT_BREED_OPTION, DOG_BREED_OPTION } from '@/utils/constants/breed-data';
 import { useEffect, useState } from 'react';
-
-export interface PetEntryInfoType {
-  files: string;
-  name: string;
-}
+import Title from '@/components/common/title/title';
+import { imageUplolad } from '@/api/image-api';
+import {
+  CAT_BREED_OPTION,
+  DOG_BREED_OPTION,
+  GENDER_OPTION,
+  KIND_OPTION,
+  NEUTERED_OPTION,
+} from '@/utils/constants/entry-data';
 
 export default function StartPet() {
-  const [breedOPtion, setBreedOption] = useState<string[]>();
+  const [speciesOPtion, setSpeciesOption] = useState<string[]>();
   const [selectDisabled, setSelectDisabled] = useState<boolean>();
   const methods = useForm<FieldValues>({
     defaultValues: {
+      files: null,
       sex: 'female',
       isNeutered: 'true',
     },
   });
-  const { control, handleSubmit, watch } = methods;
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (data.files[0]) {
-      const submitData = {
-        files: data.files[0].name,
-      };
-    }
-    console.log(data);
+  const { control, handleSubmit, watch, setValue } = methods;
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    // if (data.files[0]) {
+    //   const submitData = {
+    //     files: data.files[0],
+    //   };
+    //   try {
+    //     const response = await imageUplolad(submitData);
+    //     console.log(...response.data.data);
+    //   } catch {
+    //     console.log('에러');
+    //   }
+    // }
+    const newData = {
+      imageId: data.files,
+      name: data.name,
+      sex: data.sex,
+      birthDate: data.birthDate,
+      adoptionDate: data.adoptionDate,
+      type: data.type,
+      species: data.species,
+      weight: Number(data.weight),
+      isNeutered: Boolean(data.isNeutered),
+    };
+    console.log(newData);
   };
+
   useEffect(() => {
-    if (watch('kind') === '강아지') setBreedOption(DOG_BREED_OPTION);
-    if (watch('kind') === '고양이') setBreedOption(CAT_BREED_OPTION);
-    if (watch('kind') === undefined) {
+    if (watch('type') === '강아지') setSpeciesOption(DOG_BREED_OPTION);
+    if (watch('type') === '고양이') setSpeciesOption(CAT_BREED_OPTION);
+    if (watch('type') === undefined) {
       setSelectDisabled(true);
-      setBreedOption(DOG_BREED_OPTION);
+      setSpeciesOption(DOG_BREED_OPTION);
     } else {
       setSelectDisabled(false);
     }
-  }, [watch('kind')]);
+    setValue('breed', '');
+  }, [watch('type')]);
 
   return (
     <section className={styles.section}>
-      <div className={styles.fileBox}>
-        <FileImage imageValue={watch('files')} />
-        <FileInput name="files" id="file" control={control} />
-      </div>
+      <Title>반려동물 추가</Title>
       <Form onSubmit={handleSubmit(onSubmit)} methods={methods}>
-        <ul>
+        <div className={styles.fileBox}>
+          <FileImage imageValue={watch('files')} />
+          <FileInput name="files" id="file" control={control} />
+        </div>
+        <ul className={styles.listContainer}>
           <li className={styles.nameInputBox}>
             <Form.Label htmlFor="name">이름</Form.Label>
             <Form.MainInput name="name" />
@@ -71,14 +91,14 @@ export default function StartPet() {
             <Form.DateInput />
           </li>
           <li className={styles.kindInputBox}>
-            <Form.Label htmlFor="kind">종류</Form.Label>
-            <Form.SelectInput name="kind" options={KIND_OPTION} control={control} placeholder="종류를 선택해주세요" />
+            <Form.Label htmlFor="type">종류</Form.Label>
+            <Form.SelectInput name="type" options={KIND_OPTION} control={control} placeholder="종류를 선택해주세요" />
           </li>
           <li className={styles.breedInputBox}>
-            <Form.Label htmlFor="breed">품종</Form.Label>
+            <Form.Label htmlFor="species">품종</Form.Label>
             <Form.SelectInput
-              name="breed"
-              options={breedOPtion!}
+              name="species"
+              options={speciesOPtion!}
               control={control}
               placeholder="품종을 선택해주세요"
               disabled={selectDisabled}

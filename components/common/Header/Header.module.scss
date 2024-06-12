@@ -1,4 +1,6 @@
 .header {
+  z-index: 1;
+  background-color: var(--white);
   position: fixed;
   display: flex;
   width: 100%;
@@ -7,6 +9,8 @@
   left: 50%;
   transform: translateX(-50%);
   border-bottom: 1px solid var(--main-color);
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 
   .leftArrow {
     position: absolute;
