@@ -31,8 +31,6 @@ export default function CalendarModal({ updateDateTime, onClose }: CalendarModal
     minute: 0,
   });
 
-  console.log(modalDateTime);
-
   const handleSelect = (type: string, e: BaseSyntheticEvent | IntersectionObserverEntry) => {
     setModalDateTime((prevModalDateTime) => ({
       ...prevModalDateTime,
@@ -41,7 +39,6 @@ export default function CalendarModal({ updateDateTime, onClose }: CalendarModal
   };
 
   const handleDateTimeSave = () => {
-    console.log(modalDateTime);
     updateDateTime(modalDateTime);
     onClose();
   };

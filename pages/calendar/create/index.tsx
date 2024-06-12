@@ -1,5 +1,5 @@
 import styles from './create.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CalendarProps } from '..';
 import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
+import classNames from 'classnames';
 
 export interface DateTime extends CalendarProps {
   ampm: string | null;
@@ -23,6 +24,14 @@ export interface IFormInput extends CalendarProps {
 }
 
 export default function Create() {
+  const {
+    setValue,
+    trigger,
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IFormInput>();
+
   const [dateTime, setDateTime] = useState<DateTime>({
     year: null,
     month: null,
@@ -39,17 +48,16 @@ export default function Create() {
     }));
   };
 
+  useEffect(() => {
+    setValue('dateTime', getDateTimeFrontend(dateTime));
+    if (errors.dateTime) trigger('dateTime');
+  }, [dateTime]);
+
   const [Modal, handleModal] = useModal();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
   };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<IFormInput>();
 
   return (
     <div className={styles.outer}>
@@ -105,17 +113,24 @@ export default function Create() {
           </button>
           <div className={styles.todoDateSelector}>
             <input
-              {...register('dateTime', { required: true })}
+              {...register('dateTime', {
+                validate: (value) => !!value || '*날짜를 선택해주세요.',
+              })}
               type="text"
               id="dateTime"
               placeholder="YYYY-MM-DD 오전/오후 00:00"
-              value={getDateTimeFrontend(dateTime)}
               className={styles.input}
-              disabled
+              readOnly
             />
           </div>
         </div>
-        <button className={styles.submit} disabled={!isValid}>
+        {errors.dateTime && <p className={styles.error}>{errors.dateTime.message}</p>}
+
+        <button
+          className={classNames(styles.submit, {
+            [styles.disabled]: !isValid,
+          })}
+        >
           등록하기
         </button>
       </form>
