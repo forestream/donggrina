@@ -61,7 +61,11 @@ export default function CalendarContainer() {
               {calendarCell}
             </div>
             <div className={styles.todoIconContainer}>
-              {Array(Math.min(3, todoCountsArray[i] as number)).fill(<div className={styles.todoIcon}></div>)}
+              {Array(Math.min(3, todoCountsArray[i] as number))
+                .fill(null)
+                .map((_, i) => (
+                  <div key={i} className={styles.todoIcon}></div>
+                ))}
             </div>
           </div>
         ),
