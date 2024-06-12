@@ -5,6 +5,7 @@ import { Days } from './date.type';
 class Calendar extends Core {
   public DAY_LIST: (daysInMonth: number) => number[];
   public MONTH_LIST: number[];
+  public YEAR_LIST: number[];
 
   constructor(date: Date) {
     super(date);
@@ -17,6 +18,8 @@ class Calendar extends Core {
     this.MONTH_LIST = Array(12)
       .fill(0)
       .map((_, index) => index);
+
+    this.YEAR_LIST = [this.currentYear - 1, this.currentYear, this.currentYear + 1];
   }
 
   daysInMonth(currentYear?: number, currentMonth?: number) {

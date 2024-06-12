@@ -33,16 +33,14 @@ export default function InputTest() {
   return (
     <div style={{ paddingTop: '54px' }}>
       <Form onSubmit={handleSubmit(onSubmit)} methods={methods}>
-        <Form.MainInput name="이름" label="이름" />
-        <Form.DateInput label="생일" />
-        <Form.WeightInput name="weight" label="무게" />
-        <Form.SelectInput
-          name="kind"
-          label="품종"
-          options={options}
-          control={control}
-          placeholder="품종을 선택해주세요"
-        />
+        <Form.Label htmlFor="이름">이름</Form.Label>
+        <Form.MainInput name="이름" />
+        <Form.Label htmlFor="생일">생일</Form.Label>
+        <Form.DateInput />
+        <Form.Label htmlFor="무게">무게</Form.Label>
+        <Form.WeightInput name="weight" />
+        <Form.Label htmlFor="품종">품종</Form.Label>
+        <Form.SelectInput name="kind" options={options} control={control} placeholder="품종을 선택해주세요" />
         <button type="submit" disabled={!isValid}>
           Submit
         </button>

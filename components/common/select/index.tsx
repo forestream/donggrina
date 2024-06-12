@@ -6,7 +6,6 @@ import { Control, useController } from 'react-hook-form';
 import DropDownUpIcon from '@/public/images/select/dropdown-up.svg';
 import DropDownDownIcon from '@/public/images/select/dropdown-down.svg';
 import Dropdown from './drop-down';
-import FormLabel from '../Label';
 
 interface SelectProps extends FormInput {
   name: string;
@@ -14,7 +13,7 @@ interface SelectProps extends FormInput {
   control: Control;
 }
 
-export default function Select({ name, label, control, options, placeholder }: SelectProps) {
+export default function Select({ name, control, options, placeholder }: SelectProps) {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const buttonRef = useRef(null);
   const { field } = useController({
@@ -36,7 +35,6 @@ export default function Select({ name, label, control, options, placeholder }: S
 
   return (
     <div className={styles.container}>
-      <FormLabel htmlFor={label}>{label}</FormLabel>
       <div className={styles.select}>
         <button
           className={classNames(styles.button, { [styles.buttonActive]: showDropDown })}
