@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import styles from './create-todo-button.module.scss';
 import Link from 'next/link';
-import { CalendarProps } from '@/pages/calendar';
 import { useCalendarContext } from '../calendar-compound/calendar';
 
-export default function CreateTodoButton({ year }: CalendarProps) {
+export default function CreateTodoButton() {
   const calendarContext = useCalendarContext();
+  const year = calendarContext.year;
   const month = calendarContext.month + 1;
   const date = calendarContext.date;
 

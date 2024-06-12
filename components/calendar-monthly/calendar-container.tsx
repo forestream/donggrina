@@ -1,13 +1,13 @@
 import styles from './calendar-container.module.scss';
-import { CalendarProps } from '@/pages/calendar';
 import getSeventhDate from '@/utils/get-seventh-date';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
 
-export default function CalendarContainer({ year }: CalendarProps) {
+export default function CalendarContainer() {
   const calendarContext = useCalendarContext();
-  const date = calendarContext.date;
+  const year = calendarContext.year;
   const month = calendarContext.month + 1;
+  const date = calendarContext.date;
 
   const calendarArray = getCalendarArray(year, month);
 
