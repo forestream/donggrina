@@ -4,6 +4,7 @@ import getCalendarArray from '@/utils/get-calendar-array';
 import { BaseSyntheticEvent, MouseEvent, useEffect } from 'react';
 import { DateTime } from '@/pages/calendar/create';
 import { useCalendarContext } from '../calendar-compound/calendar';
+import classNames from 'classnames';
 
 interface CalendarModalCalendarProps {
   dateTime: DateTime;
@@ -22,7 +23,12 @@ export default function CalendarModalCalendar({ dateTime, onSelect }: CalendarMo
   }, [calendarContext.month]);
 
   const { year, month, date } = dateTime;
-  const calendarArray = getCalendarArray(year, month);
+  const { calendarArray } = getCalendarArray(year, month);
+
+  const calendarCellClassNames = (cellIndex: number) =>
+    classNames(styles.calendarCell, {
+      [styles.red]: getSeventhDate(cellIndex),
+    });
 
   const handleDateClick = (e: MouseEvent) => {
     onSelect('date', e);
@@ -32,15 +38,11 @@ export default function CalendarModalCalendar({ dateTime, onSelect }: CalendarMo
     <div className={styles.container}>
       {calendarArray.map((calendarCell, i) =>
         typeof calendarCell === 'string' ? (
-          <div key={i + 'empty'} className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}>
+          <div key={i + 'empty'} className={calendarCellClassNames(i)}>
             {calendarCell}
           </div>
         ) : (
-          <div
-            key={calendarCell}
-            onClick={handleDateClick}
-            className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}
-          >
+          <div key={calendarCell} onClick={handleDateClick} className={calendarCellClassNames(i)}>
             <div className={`${styles.date} ${calendarCell == date ? styles.selected : ''}`}>{calendarCell}</div>
           </div>
         ),
