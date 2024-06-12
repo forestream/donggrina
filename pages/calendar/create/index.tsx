@@ -9,7 +9,6 @@ import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 
 export interface DateTime extends CalendarProps {
-  [key: string]: string | number | null;
   ampm: string | null;
   hour: number | null;
   minute: number | null;
@@ -85,7 +84,7 @@ export default function Create() {
         <div className={styles.categorySelectorOuter}>
           <div className={styles.categorySelectorInner}>
             {TODO_CATEGORY.map((category) => (
-              <label className={styles.categoryLabel}>
+              <label key={category} className={styles.categoryLabel}>
                 <input
                   {...register('category', { validate: (selected) => !!selected || '*카테고리를 선택해주세요.' })}
                   value={category}
@@ -121,7 +120,7 @@ export default function Create() {
         </button>
       </form>
       <Modal>
-        <CalendarModal updateDateTime={updateDateTime} dateTime={dateTime} onClose={handleModal.bind(null, false)} />
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
       </Modal>
     </div>
   );
