@@ -1,0 +1,12 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 126px 24px 0;
+  gap: 456px;
+  .linkBox {
+    height: 46px;
+    a {
+      color: var(--text-color);
+    }
+  }
+}

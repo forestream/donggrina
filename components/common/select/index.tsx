@@ -4,7 +4,6 @@ import styles from './select.module.scss';
 import { FormInput } from '../Input/input-type';
 import { Control, useController } from 'react-hook-form';
 import DropDownUpIcon from '@/public/images/select/dropdown-up.svg';
-import DropDownDownIcon from '@/public/images/select/dropdown-down.svg';
 import Dropdown from './drop-down';
 
 interface SelectProps extends FormInput {
@@ -43,20 +42,18 @@ export default function Select({ name, control, options, placeholder, disabled =
           type="button"
           disabled={disabled}
         >
-          <input
-            id={name}
-            className={classNames(styles.input, { [styles.inputActive]: showDropDown })}
-            readOnly
-            placeholder={placeholder}
-            type="text"
-            tabIndex={-1}
-            value={field.value || ''}
-          />
-          {showDropDown ? (
+          <div className={styles.inputBox}>
+            <input
+              id={name}
+              className={classNames(styles.input, { [styles.inputActive]: showDropDown })}
+              readOnly
+              placeholder={placeholder}
+              type="text"
+              tabIndex={-1}
+              value={field.value || ''}
+            />
             <DropDownUpIcon alt="arrowUpIcon" className={styles.upIcon} />
-          ) : (
-            <DropDownDownIcon alt="arrowDownIcon" className={styles.downIcon} />
-          )}
+          </div>
           {showDropDown && (
             <Dropdown
               buttonRef={buttonRef}
