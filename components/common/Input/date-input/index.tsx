@@ -30,7 +30,6 @@ export default function DateInput({ name, control, type = 'text' }: DateInputPro
     input.value = value;
   };
   const convertToLocalDate = (values: LocalDateType): string => {
-    console.log(values);
     const { year, month, day } = values;
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   };
