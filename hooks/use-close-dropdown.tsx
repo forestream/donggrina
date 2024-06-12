@@ -6,22 +6,15 @@ import React, { useEffect } from 'react';
  * @param {boolean} showModal 모달의 열림 유무
  * @param {Function} setShowModal 모달의 상태를 관리하는 함수
  * @param {React.RefObject} modalRef 모달에 대한 참조 객체
- * @param {React.RefObject} buttonRef 모달을 여는 버튼에 대한 참조 객체
  */
 export default function useCloseDropDown(
   showModal: boolean,
   handleClose: () => void,
   modalRef: React.RefObject<HTMLDivElement>,
-  buttonRef: React.RefObject<HTMLElement>,
 ) {
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(e.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(e.target as Node)
-      ) {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         handleClose();
       }
     };
@@ -40,5 +33,5 @@ export default function useCloseDropDown(
       document.removeEventListener('mousedown', handleOutsideClick);
       document.removeEventListener('keydown', handleEscapeKey);
     };
-  }, [showModal, handleClose, modalRef, buttonRef]);
+  }, [showModal, handleClose, modalRef]);
 }
