@@ -8,6 +8,7 @@ import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
+import { postTodo } from '@/api/calendar/request';
 
 export interface DateTime extends CalendarProps {
   ampm: string | null;
@@ -18,7 +19,7 @@ export interface DateTime extends CalendarProps {
 export interface IFormInput extends CalendarProps {
   title: string;
   memo: string;
-  pet: string;
+  petName: string;
   category: string;
   dateTime: string;
 }
@@ -41,6 +42,8 @@ export default function Create() {
     minute: null,
   });
 
+  const [Modal, handleModal] = useModal();
+
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
       ...prevDateTime,
@@ -53,10 +56,12 @@ export default function Create() {
     if (errors.dateTime) trigger('dateTime');
   }, [dateTime]);
 
-  const [Modal, handleModal] = useModal();
-
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+    const [date, ampm, time] = data.dateTime.split(' ');
+    const dateTimeBackend = new Date([date, time, ampm === '오전' ? 'am' : 'pm', 'UTC+0'].join(' '))
+      .toISOString()
+      .slice(0, -8);
+    postTodo({ ...data, petName: '바둑이', dateTime: dateTimeBackend });
   };
 
   return (
@@ -86,7 +91,7 @@ export default function Create() {
             <PetRadio register={register} petName="dog" />
             <PetRadio register={register} petName="cat" />
           </div>
-          {errors.pet && <p className={styles.error}>{errors.pet.message}</p>}
+          {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
         </div>
 
         <div className={styles.categorySelectorOuter}>

@@ -13,7 +13,7 @@ export default function PetRadio({ register, petName }: PetRadio) {
     <label className={styles.petLabel}>
       <div className={styles.petImage}>
         <input
-          {...register('pet', { validate: (selected) => !!selected || '*반려동물을 선택해주세요.' })}
+          {...register('petName', { validate: (selected) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
           type="radio"
