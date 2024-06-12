@@ -1,0 +1,23 @@
+.formList {
+  display: flex;
+  flex-direction: column;
+  gap: 41px;
+  margin: 73px 0 121px;
+  .nameInput {
+    label {
+      display: block;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+  }
+  .inputDescription {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--input-description);
+    padding: 13px 0 28px 12px;
+    line-height: 18px;
+  }
+}
+.buttonBox {
+  height: 46px;
+}

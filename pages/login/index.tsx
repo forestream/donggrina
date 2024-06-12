@@ -4,9 +4,9 @@ import LoginButtons from '@/components/login/login-buttons/login-buttons';
 
 export default function Login() {
   return (
-    <article className={styles.article}>
+    <section className={styles.section}>
       <LoginTop />
       <LoginButtons />
-    </article>
+    </section>
   );
 }
