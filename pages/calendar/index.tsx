@@ -5,6 +5,12 @@ import CalendarTodo from '@/components/calendar-monthly/calendar-todo';
 import CreateTodoButton from '@/components/calendar-monthly/create-todo-button';
 import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 
+export type CalendarProps = {
+  year: number;
+  month: number;
+  date: number;
+};
+
 export default function CalendarPage() {
   return (
     <main className={styles.outer}>
