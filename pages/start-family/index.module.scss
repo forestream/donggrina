@@ -1,5 +1,10 @@
-.article {
+.section {
   display: flex;
   flex-direction: column;
   gap: 313px;
+  padding: 126px 24px 0;
+  .titleBox {
+    display: flex;
+    flex-direction: column;
+  }
 }

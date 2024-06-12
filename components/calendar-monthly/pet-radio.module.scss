@@ -1,0 +1,36 @@
+.petLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.petImage {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.petInput {
+  width: 0;
+  height: 0;
+}
+
+.petInput ~ .petOn {
+  display: none;
+}
+.petInput ~ .petOff {
+  display: block;
+}
+
+.petInput:checked ~ .petOn {
+  display: block;
+}
+.petInput:checked ~ .petOff {
+  display: none;
+}
+
+.petName {
+  font-weight: 400;
+}

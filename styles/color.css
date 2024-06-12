@@ -6,6 +6,8 @@
   --text-color-gray: #9e9e9e;
   --text-color-time-selected: #a4a19d;
   --text-color-time-selector: #d9d3c7;
+  --disabled-button: #c8c8c8;
+  --todo-category: #d9d9d9;
   --white: #fff;
   --tertiary: #f6f6f6;
   --kakao-background: #f8e049;
@@ -14,5 +16,8 @@
   --google-border: #eeeeee;
   --red: #d6173a;
   --calendar-red: #e75852;
+  --input-error: #e74133;
   --nav-text-color: #9e9e9e;
+  --input-description: #616161;
+  --disabled-color: #c8c8c8;
 }

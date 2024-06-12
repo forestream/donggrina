@@ -26,3 +26,8 @@
   @include button();
   background-color: var(--white);
 }
+.disabled {
+  @include button();
+  background-color: var(--disabled-color);
+  color: var(--white);
+}
