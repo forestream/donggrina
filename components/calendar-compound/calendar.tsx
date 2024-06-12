@@ -11,6 +11,7 @@ const initialState = {
   onSelectedMonth: () => {},
   onSelectedDate: () => {},
   onSelectedYear: () => {},
+  onResetToday: () => {},
 };
 
 const CalendarContext = createContext<InitialState>(initialState);
@@ -32,6 +33,12 @@ export default function Calendar(props: PropsWithChildren) {
     CalendarInstance.currentDate,
   );
 
+  const onResetToday = () => {
+    onSelectedYear(CalendarInstance.currentYear);
+    onSelectedMonth(CalendarInstance.currentMonth);
+    onSelectedDate(CalendarInstance.currentDate);
+  };
+
   const value = {
     year: selectedYear,
     month: selectedMonth,
@@ -39,6 +46,7 @@ export default function Calendar(props: PropsWithChildren) {
     onSelectedMonth,
     onSelectedDate,
     onSelectedYear,
+    onResetToday,
   };
 
   return (
@@ -48,6 +56,7 @@ export default function Calendar(props: PropsWithChildren) {
   );
 }
 
+Calendar.Header = Components.Header;
 Calendar.Year = Components.Year;
 Calendar.Month = Components.Month;
 Calendar.Weekly = Components.Weekly;

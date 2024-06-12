@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px 20px 24px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.today-button {
+  color: var(--main-color);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+}
