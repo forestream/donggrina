@@ -8,7 +8,7 @@ import validateDate from '@/utils/validate-date';
 import { CalendarProps } from '../calendar';
 import styles from './growth.module.scss';
 import getDay from '@/utils/get-day';
-import CreateTodoButton from '@/components/calendar/create-todo-button';
+import AddButton from '@/components/common/add-button/add-button';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let {
@@ -33,27 +33,26 @@ export default function GrowthPage({ year, month, date }: CalendarProps) {
   const ymd = { year, month, date };
   const day = getDay(year, month, date);
   return (
-    <div className={styles.wrapper}>
+    <>
       <Calendar>
-        <div className={styles.titleContainer}>
-          <div className={styles.title}>성장 기록</div>
-          <div>오늘 날짜</div>
-        </div>
+        <Calendar.Header>성장 기록</Calendar.Header>
         <Calendar.Year />
         <Calendar.Month />
         <Calendar.Weekly />
       </Calendar>
-      <p className={styles.date}>
-        {month}월 {date}일 {day}
-      </p>
-      <div className={styles.listContainer}>
-        <GrowthList />
-        <GrowthList />
-        <GrowthList />
-        <GrowthList />
-        <GrowthList />
+      <div className={styles.wrapper}>
+        <p className={styles.date}>
+          {month}월 {date}일 {day}
+        </p>
+        <div className={styles.listContainer}>
+          <GrowthList />
+          <GrowthList />
+          <GrowthList />
+          <GrowthList />
+          <GrowthList />
+        </div>
+        <AddButton href={'/'} />
       </div>
-      <CreateTodoButton {...ymd} />
-    </div>
+    </>
   );
 }

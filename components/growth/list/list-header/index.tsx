@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './list-header.module.scss';
 import Profile from '../../profile';
 import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
+import DropdownMenu from '@/components/kebab/kebab';
 
 interface ListHeaderProps {
   categoryName: string;
@@ -22,7 +23,8 @@ export default function ListHeader({ categoryName, writer, pet }: ListHeaderProp
           </div>
         </div>
       </div>
-      <div className={styles.kebab}>Kebab</div>
+      {/* <div className={styles.kebab}>Kebab</div> */}
+      <DropdownMenu.Kebab />
     </div>
   );
 }
