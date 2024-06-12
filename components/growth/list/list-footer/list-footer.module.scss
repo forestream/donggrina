@@ -1,9 +1,7 @@
 .footer {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
   display: flex;
   gap: 17px;
+  justify-content: flex-end;
   .container {
     display: flex;
     align-items: center;

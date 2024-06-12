@@ -46,7 +46,13 @@ export default function GrowthPage({ year, month, date }: CalendarProps) {
       <p className={styles.date}>
         {month}월 {date}일 {day}
       </p>
-      <GrowthList />
+      <div className={styles.listContainer}>
+        <GrowthList />
+        <GrowthList />
+        <GrowthList />
+        <GrowthList />
+        <GrowthList />
+      </div>
       <CreateTodoButton {...ymd} />
     </div>
   );
