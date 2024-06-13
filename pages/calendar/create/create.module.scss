@@ -19,7 +19,7 @@
   }
 }
 
-.description {
+.memo {
   font-size: 14px;
   display: block;
   width: 100%;
@@ -39,6 +39,7 @@
   position: absolute;
   left: 0;
   right: 0;
+  margin-top: 8px;
 }
 
 .petSelector {
@@ -54,31 +55,43 @@
   gap: 17px;
 }
 
-.petLabel {
-  display: block;
-  width: 64px;
-  height: 64px;
-  cursor: pointer;
+.categorySelectorOuter {
+  padding: 30px 0;
+  margin: 0 0 30px;
+  border-bottom: 1px solid var(--text-color-time-selector);
+  border-top: 1px solid var(--text-color-time-selector);
+}
+
+.categorySelectorInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
   position: relative;
 }
 
-.petInput {
+.categoryLabel {
+  width: 100%;
+  text-align: center;
+}
+
+.categoryInput {
+  position: absolute;
   width: 0;
   height: 0;
 }
 
-.petInput ~ .petOn {
-  display: none;
-}
-.petInput ~ .petOff {
-  display: block;
+.categoryInput ~ .categoryIcon {
+  width: 66px;
+  height: 66px;
+  cursor: pointer;
+  background-color: var(--todo-category);
+  border-radius: 10px;
+  margin: 0 auto 8px;
 }
 
-.petInput:checked ~ .petOn {
-  display: block;
-}
-.petInput:checked ~ .petOff {
-  display: none;
+.categoryInput:checked ~ .categoryIcon {
+  background-color: var(--main-color);
 }
 
 .todoDate {
@@ -127,4 +140,25 @@
 
 .hour::after {
   content: ':';
+}
+
+.error {
+  color: var(--input-error);
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+.submit {
+  width: 100%;
+  padding: 14px;
+  color: var(--button-color);
+  background-color: var(--main-color);
+  border-radius: 9999px;
+  margin-top: 30px;
+
+  &:disabled {
+    background-color: var(--disabled-button);
+    color: var(--white);
+    cursor: default;
+  }
 }

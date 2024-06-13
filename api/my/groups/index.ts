@@ -1,5 +1,5 @@
 import { MyPageData } from '@/types/my-page/family';
-import { axiosInstance } from '..';
+import { axiosInstance } from '../..';
 import { FieldValues } from 'react-hook-form';
 
 interface MyCodeType {

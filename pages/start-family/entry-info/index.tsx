@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import MyFamilyApi from '@/api/my/my';
+import MyFamilyApi from '@/api/my/groups';
 
 export default function CreateFamily() {
   const myFamilyApi = new MyFamilyApi();

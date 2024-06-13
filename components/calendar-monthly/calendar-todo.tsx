@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './calendar-todo.module.scss';
 
 export default function CalendarTodo() {
@@ -10,7 +11,9 @@ export default function CalendarTodo() {
       </div>
       <label className={styles.checkContainer}>
         <input className={styles.checkbox} type="checkbox" />
-        <span className={styles.checkmark}></span>
+        <div className={styles.checkmarkContainer}>
+          <Image className={styles.checkmark} src="/images/calendar/check.svg" alt="체크 표시" width={14} height={14} />
+        </div>
       </label>
     </div>
   );

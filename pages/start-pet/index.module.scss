@@ -1,38 +1,3 @@
-@mixin Flex {
-  display: flex;
-  flex-direction: column;
-}
-
 .section {
   padding: 126px 24px 51px;
-  .fileBox {
-    position: relative;
-    width: 116px;
-    height: 116px;
-    margin: 0 auto;
-    margin-top: 18px;
-  }
-  .listContainer {
-    @include Flex();
-    gap: 41px;
-    & > li {
-      @include Flex();
-    }
-    .nameInputBox,
-    .birthInputBox,
-    .adoptionInputBox,
-    .weightInputBox {
-      gap: 27px;
-    }
-    .sexInputBox,
-    .kindInputBox,
-    .breedInputBox,
-    .isNeuteredInputBox {
-      gap: 22px;
-    }
-  }
-  .buttonBox {
-    height: 44px;
-    margin-top: 72px;
-  }
 }

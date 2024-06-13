@@ -72,3 +72,5 @@ export const TIME_SELECTOR: { [key: string]: string[] } = {
 };
 
 export const TIME_SELECTOR_HEIGHT = 130;
+
+export const TODO_CATEGORY = ['산책', '사료 구입', '목욕', '병원'];

@@ -33,12 +33,6 @@ button {
   cursor: pointer;
   box-shadow: none;
 }
-html,
-body,
-#__wrap,
-#__next {
-  min-height: 100vh;
-}
 
 #__container {
   max-width: var(--global-width);
