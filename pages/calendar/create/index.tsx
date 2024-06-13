@@ -63,7 +63,7 @@ export default function Create() {
     const dateTimeBackend = new Date([date, time, ampm === '오전' ? 'am' : 'pm', 'UTC+0'].join(' '))
       .toISOString()
       .slice(0, -8);
-    postTodo({ ...data, petName: '바둑이', dateTime: dateTimeBackend });
+    postTodo({ ...data, dateTime: dateTimeBackend });
   };
 
   const handleLoad = async () => {

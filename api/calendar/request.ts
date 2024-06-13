@@ -23,3 +23,8 @@ export async function fetchPets(): Promise<Pet[]> {
   const { data } = await axiosInstance.get(`/my/pets`);
   return data.data;
 }
+
+export async function putTodoFinished(calendarId: string) {
+  const { data } = await axiosInstance.put(`/calendar/completion/${calendarId}`);
+  console.log(data);
+}
