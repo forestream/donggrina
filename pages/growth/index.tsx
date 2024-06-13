@@ -30,7 +30,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function GrowthPage({ year, month, date }: CalendarProps) {
-  const ymd = { year, month, date };
   const day = getDay(year, month, date);
   return (
     <>

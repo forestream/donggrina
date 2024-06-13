@@ -12,15 +12,15 @@ export default class GrowthAPI {
     return await axiosInstance.post('/growth', formData);
   }
 
-  async growthByDate(date: LocalDate) {
+  async getGrowthByDate(date: LocalDate) {
     return (await axiosInstance.get<GrowthData>(`/growth?date=${date}`)).data;
   }
 
-  async growthDetails(growthId: number) {
+  async getGrowthDetails(growthId: number) {
     return (await axiosInstance.get<GrowthDetailsData>(`/growth/${growthId}`)).data;
   }
 
-  async searchGrowth(keyword: string, petNames: string[], writerNames: string[]) {
+  async getSearchGrowth(keyword: string, petNames: string[], writerNames: string[]) {
     return (
       await axiosInstance.get<GrowthSearchData>(
         `/growth/search?keyword=${keyword}&petNames=${petNames}&writerNames=${writerNames}`,
