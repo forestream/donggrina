@@ -28,7 +28,7 @@ export default function CalendarTodo() {
   return (
     <>
       {dailyTodos.map((todo) => (
-        <div className={styles.outer}>
+        <div key={todo.id} className={styles.outer}>
           <div className={styles.category}>카테고리</div>
 
           <div className={styles.todo}>
