@@ -5,14 +5,13 @@ import styles from './drop-down.module.scss';
 interface DropDownProps {
   showDropDown: boolean;
   options: string[];
-  buttonRef: React.RefObject<HTMLElement>;
   handleClick: MouseEventHandler;
   handleClose: () => void;
 }
 
-export default function Dropdown({ showDropDown, options, buttonRef, handleClick, handleClose }: DropDownProps) {
+export default function Dropdown({ showDropDown, options, handleClick, handleClose }: DropDownProps) {
   const dropDownRef = useRef<HTMLDivElement>(null);
-  useCloseDropDown(showDropDown, handleClose, dropDownRef, buttonRef);
+  useCloseDropDown(showDropDown, handleClose, dropDownRef);
 
   return (
     <div className={styles.optionContainer} ref={dropDownRef}>

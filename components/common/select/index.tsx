@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './select.module.scss';
 import { FormInput } from '../Input/input-type';
@@ -14,7 +14,6 @@ interface SelectProps extends FormInput {
 
 export default function Select({ name, control, options, placeholder }: SelectProps) {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const buttonRef = useRef(null);
   const { field } = useController({
     name,
     control,
@@ -54,7 +53,6 @@ export default function Select({ name, control, options, placeholder }: SelectPr
           </div>
           {showDropDown && (
             <Dropdown
-              buttonRef={buttonRef}
               options={options}
               showDropDown={showDropDown}
               handleClick={handleDropDownClick}
