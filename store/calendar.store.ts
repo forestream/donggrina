@@ -12,7 +12,7 @@ interface CalenderDateStore {
   onResetToday: () => void;
 }
 
-const useCalendarStoreBase = create<CalenderDateStore>()((set) => ({
+const useCalendarDateStoreBase = create<CalenderDateStore>()((set) => ({
   year: CalendarInstance.currentYear,
   month: CalendarInstance.currentMonth,
   date: CalendarInstance.currentDate,
@@ -27,6 +27,6 @@ const useCalendarStoreBase = create<CalenderDateStore>()((set) => ({
     })),
 }));
 
-const useCalenderDateStore = createSelectors(useCalendarStoreBase);
+const useCalenderDateStore = createSelectors(useCalendarDateStoreBase);
 
 export default useCalenderDateStore;
