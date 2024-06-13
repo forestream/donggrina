@@ -1,35 +1,13 @@
 import React from 'react';
 import GrowthList from '@/components/growth/list';
-import Calendar from '@/components/calendar-compound/calendar';
-import { GetServerSidePropsContext } from 'next';
-import validateYear from '@/utils/validate-year';
-import validateMonth from '@/utils/validate-month';
-import validateDate from '@/utils/validate-date';
-import { CalendarProps } from '../calendar';
+import Calendar, { useCalendarContext } from '@/components/calendar-compound/calendar';
 import styles from './growth.module.scss';
 import getDay from '@/utils/get-day';
 import AddButton from '@/components/common/add-button/add-button';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  let {
-    query: { year, month, date },
-  } = context;
-
-  if (typeof year === 'object') year = year[0];
-  if (typeof month === 'object') month = month[0];
-  if (typeof date === 'object') date = date[0];
-
-  const today = new Date();
-  const [yearToday, monthToday] = [today.getFullYear(), today.getMonth() + 1];
-
-  if (!validateYear(year)) year = String(yearToday);
-  if (!validateMonth(month)) month = String(monthToday);
-  if (!validateDate(date)) date = '1';
-
-  return { props: { year: +(year as string), month: +(month as string), date: +(date as string) } };
-}
-
-export default function GrowthPage({ year, month, date }: CalendarProps) {
+export default function GrowthPage() {
+  const { year, month, date } = useCalendarContext();
+  console.log(year, month, date);
   const day = getDay(year, month, date);
   return (
     <>
