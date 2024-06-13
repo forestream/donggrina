@@ -37,7 +37,7 @@ export default function CalendarTodo() {
             </p>
             <div className={styles.profiles}>
               <CalendarTodoProfile src={todo.memberProfileImageUrl} name={todo.nickname} />
-              <CalendarTodoProfile src={todo.petProfileImageUrl} name={todo.nickname} />
+              <CalendarTodoProfile src={todo.petProfileImageUrl} name={todo.petName} />
             </div>
           </div>
 

@@ -12,6 +12,7 @@ export interface Todo {
   memberProfileImageUrl: string;
   nickname: string;
   petProfileImageUrl: string;
+  petName: string;
   isFinished: boolean;
   isMine: boolean;
 }
