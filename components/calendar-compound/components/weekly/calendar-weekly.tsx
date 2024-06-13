@@ -8,6 +8,8 @@ export default function CalendarWeekly() {
   const daysInMonth = CalendarInstance.daysInMonth(calendarContext.year, calendarContext.month);
   const dayList = CalendarInstance.DAY_LIST(daysInMonth);
 
+  console.log(daysInMonth);
+
   return (
     <Swiper
       className={styles['date-list']}
@@ -37,7 +39,7 @@ export default function CalendarWeekly() {
 
 function CalendarWeeklyItem(props: { date: number }) {
   const calendarContext = useCalendarContext();
-  const day = CalendarInstance.calculateDay(calendarContext.month, props.date);
+  const day = CalendarInstance.calculateDay(calendarContext.year, calendarContext.month, props.date);
   const isSunday = day === '일';
   return (
     <button>
