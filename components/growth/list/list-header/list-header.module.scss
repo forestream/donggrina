@@ -1,0 +1,29 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  .wrapper {
+    display: flex;
+    gap: 6px;
+    .subHeader {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      .categoryName {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--main-color);
+      }
+      .profileContainer {
+        display: flex;
+      }
+    }
+  }
+}
+.profileContainer {
+  display: flex;
+  .lastProfile {
+    padding-left: 4px;
+    border-left: 1.5px solid #d9d9d9;
+  }
+}

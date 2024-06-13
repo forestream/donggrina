@@ -1,6 +1,6 @@
 export default function Gooey() {
   return (
-    <svg>
+    <svg style={{ position: 'absolute', top: 0, left: '-9999px' }}>
       <defs>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />

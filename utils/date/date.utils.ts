@@ -36,6 +36,10 @@ class Calendar extends Core {
     const calulateDay = new Date(year, month, date).getDay() as Days;
     return dayMap[calulateDay];
   }
+
+  getToday() {
+    return `${this.currentMonth + 1}월 ${this.currentDate}일 ${this.calculateDay()}요일`;
+  }
 }
 
 const CalendarInstance = new Calendar(new Date());
