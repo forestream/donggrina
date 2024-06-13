@@ -22,17 +22,11 @@ button {
   cursor: pointer;
   box-shadow: none;
 }
-html,
-body,
-#__wrap,
-#__next {
-  height: 100%;
-}
 
 #__container {
   max-width: var(--global-width);
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   border: 1px solid #ddd;
   border-top: none;
