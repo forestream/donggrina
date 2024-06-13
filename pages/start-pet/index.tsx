@@ -4,24 +4,19 @@ import EntryForm from '@/components/start-pet/entry-form/entry-form';
 import { imageUpload } from '@/api/image-api';
 import PetsApi from '@/api/my/pets';
 import { FieldValues } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 export default function StartPet() {
+  const router = useRouter();
   const petsApi = new PetsApi();
   const handleSubmit = async (data: FieldValues) => {
-    if (data.files && data.files[0]) {
-      const submitData = {
-        files: data.files[0],
-      };
-      try {
-        const response = await imageUpload(submitData);
-        const imgId = response.data.data[0];
-        data.imageId = imgId;
-      } catch {
-        console.log('에러');
-      }
-    }
     try {
-      const petsResponse = await petsApi.petsAdd({
+      if (data.imageId && data.imageId[0]) {
+        const submitData = { files: data.imageId[0] };
+        const response = await imageUpload(submitData);
+        data.imageId = response.data.data[0];
+      }
+      await petsApi.petsAdd({
         imageId: data.imageId,
         name: data.name,
         sex: data.sex,
@@ -32,9 +27,9 @@ export default function StartPet() {
         weight: Number(data.weight),
         isNeutered: Boolean(data.isNeutered),
       });
-      console.log(petsResponse);
-    } catch {
-      console.log('에러');
+      router.replace('/start-pet/finish');
+    } catch (error) {
+      console.error('에러 발생:', error);
     }
   };
   return (
