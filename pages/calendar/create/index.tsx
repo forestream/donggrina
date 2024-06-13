@@ -8,7 +8,8 @@ import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
-import { postTodo } from '@/api/calendar/request';
+import { fetchPets, postTodo } from '@/api/calendar/request';
+import { Pet } from '@/api/calendar/request.type';
 
 export interface DateTime extends CalendarProps {
   ampm: string | null;
@@ -41,6 +42,7 @@ export default function Create() {
     hour: null,
     minute: null,
   });
+  const [pets, setPets] = useState<Pet[]>([]);
 
   const [Modal, handleModal] = useModal();
 
@@ -63,6 +65,15 @@ export default function Create() {
       .slice(0, -8);
     postTodo({ ...data, petName: '바둑이', dateTime: dateTimeBackend });
   };
+
+  const handleLoad = async () => {
+    const data = await fetchPets();
+    setPets(data);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
 
   return (
     <div className={styles.outer}>
@@ -88,8 +99,7 @@ export default function Create() {
         <div className={styles.petSelector}>
           반려동물 선택
           <div className={styles.petLabelContainer}>
-            <PetRadio register={register} petName="dog" />
-            <PetRadio register={register} petName="cat" />
+            {!!pets.length && pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} />)}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
         </div>

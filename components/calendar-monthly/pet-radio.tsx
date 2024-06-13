@@ -19,13 +19,8 @@ export default function PetRadio({ register, petName }: PetRadio) {
           type="radio"
         />
 
-        <Image className={styles.petOn} src={`/images/calendar/${petName}-on.svg`} alt="반려동물 선택 상태" fill />
-        <Image
-          className={styles.petOff}
-          src={`/images/calendar/${petName}-off.svg`}
-          alt="반려동물 선택 해제 상태"
-          fill
-        />
+        <Image className={styles.petOn} src={`/images/calendar/${'dog'}-on.svg`} alt="반려동물 선택 상태" fill />
+        <Image className={styles.petOff} src={`/images/calendar/${'dog'}-off.svg`} alt="반려동물 선택 해제 상태" fill />
       </div>
       <p className={styles.petName}>{petName}</p>
     </label>

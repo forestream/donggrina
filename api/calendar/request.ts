@@ -1,5 +1,6 @@
 import { IFormInput } from '@/pages/calendar/create';
 import { axiosInstance } from '..';
+import { Pet } from './request.type';
 
 export async function fetchTodos(yearMonth: string) {
   console.log(yearMonth);
@@ -11,4 +12,9 @@ export async function postTodo(data: IFormInput) {
   console.log(data);
   const response = await axiosInstance.post('/calendar', data);
   console.log(response);
+}
+
+export async function fetchPets(): Promise<Pet[]> {
+  const { data } = await axiosInstance.get(`/my/pets`);
+  return data.data;
 }
