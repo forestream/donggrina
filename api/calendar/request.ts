@@ -1,10 +1,15 @@
 import { IFormInput } from '@/pages/calendar/create';
 import { axiosInstance } from '..';
-import { Pet } from './request.type';
+import { Pet, Todo } from './request.type';
 
-export async function fetchTodos(yearMonth: string) {
+export async function fetchMonthlyTodos(yearMonth: string) {
   console.log(yearMonth);
   const { data } = await axiosInstance.get(`/calendar/month?yearMonth=${yearMonth}`);
+  return data.data;
+}
+
+export async function fetchDailyTodos(yearMonthDate: string): Promise<Todo[]> {
+  const { data } = await axiosInstance.get(`calendar/day?date=${yearMonthDate}`);
   return data.data;
 }
 

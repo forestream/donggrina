@@ -4,7 +4,7 @@ import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { fetchTodos } from '@/api/calendar/request';
+import { fetchMonthlyTodos } from '@/api/calendar/request';
 
 export default function CalendarContainer() {
   const [monthlyTodos, setMonthlyTodos] = useState();
@@ -22,7 +22,7 @@ export default function CalendarContainer() {
     });
 
   const handleLoad = async () => {
-    const data = await fetchTodos(yearMonth);
+    const data = await fetchMonthlyTodos(yearMonth);
     setMonthlyTodos(data);
   };
 
