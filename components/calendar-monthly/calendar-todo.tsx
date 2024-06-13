@@ -27,6 +27,7 @@ export default function CalendarTodo() {
   const finishedMutation = useMutation({
     mutationFn: (calendarId: string) => putTodoFinished(calendarId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['dailyTodos', yearMonthDate] }),
+    onError: () => queryClient.resetQueries({ queryKey: ['dailyTodos', yearMonthDate] }),
   });
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -60,6 +61,7 @@ export default function CalendarTodo() {
               type="checkbox"
               onChange={handleChange}
               defaultChecked={todo.isFinished}
+              disabled={finishedMutation.isPending}
             />
             <div className={styles.checkmarkContainer}>
               <Image
