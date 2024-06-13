@@ -11,7 +11,11 @@ export const DropdownMenuContext = createContext<DropdownMenuContextProps>({
 });
 
 export default function DropdownMenu(props: PropsWithChildren<{ value: DropdownMenuContextProps }>) {
-  return <DropdownMenuContext.Provider value={props.value}>{props.children}</DropdownMenuContext.Provider>;
+  return (
+    <DropdownMenuContext.Provider value={props.value}>
+      <div className={styles['dropdown-menu']}>{props.children}</div>
+    </DropdownMenuContext.Provider>
+  );
 }
 
 export function useDropdownMenu() {
