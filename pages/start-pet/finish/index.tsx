@@ -5,14 +5,13 @@ import PetsApi from '@/api/my/pets';
 
 export default function FinishPet() {
   const petsApi = new PetsApi();
-  const handleApi = () => {
-    petsApi.petsAllInquiry();
-  };
-  const { data, refetch } = useQuery({
+  const { data, refetch, isLoading } = useQuery({
     queryKey: ['pets'],
-    queryFn: handleApi,
-    enabled: false, // 컴포넌트가 마운트될 때 자동으로 실행되지 않도록 설정.
+    queryFn: () => {
+      return petsApi.petsAllInquiry();
+    },
   });
+  if (isLoading) return null;
   console.log(data);
   return (
     <section className={styles.section}>
