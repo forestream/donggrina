@@ -37,7 +37,7 @@ export default function CalendarWeekly() {
 
 function CalendarWeeklyItem(props: { date: number }) {
   const calendarContext = useCalendarContext();
-  const day = CalendarInstance.calculateDay(calendarContext.month, props.date);
+  const day = CalendarInstance.calculateDay(calendarContext.year, calendarContext.month, props.date);
   const isSunday = day === '일';
   return (
     <button>
