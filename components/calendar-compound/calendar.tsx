@@ -6,8 +6,8 @@ import { InitialState } from './calendar.type';
 
 const initialState = {
   year: CalendarInstance.currentYear,
-  month: 1,
-  date: 1,
+  month: CalendarInstance.currentMonth,
+  date: CalendarInstance.currentDate,
   onSelectedMonth: () => {},
   onSelectedDate: () => {},
   onSelectedYear: () => {},
