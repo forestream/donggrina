@@ -1,6 +1,7 @@
 .outer {
   position: absolute;
   inset: 0;
+  z-index: 100;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
