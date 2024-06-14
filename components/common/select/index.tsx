@@ -10,9 +10,10 @@ interface SelectProps extends FormInput {
   name: string;
   options: string[];
   control: Control;
+  disabled?: boolean;
 }
 
-export default function Select({ name, control, options, placeholder }: SelectProps) {
+export default function Select({ name, control, options, placeholder, disabled = false }: SelectProps) {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const { field } = useController({
     name,
@@ -38,6 +39,7 @@ export default function Select({ name, control, options, placeholder }: SelectPr
           className={classNames(styles.button, { [styles.buttonActive]: showDropDown })}
           onClick={handleButtonClick}
           type="button"
+          disabled={disabled}
         >
           <div className={styles.inputBox}>
             <input

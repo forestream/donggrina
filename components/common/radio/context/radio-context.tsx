@@ -3,19 +3,21 @@ import styles from '../radio.module.scss';
 import RadioInput from '../radio-input/radio-input';
 import RadioLabel from '../radio-label/radio-label';
 import { Controller, UseFormReturn } from 'react-hook-form';
-import { RadioType } from '@/pages/test/radio-test';
 
 interface RadioContainerPropsType {
-  control: UseFormReturn<RadioType>['control'];
+  // eslint-disable-next-line
+  control: UseFormReturn<any>['control'];
 }
 
 interface RadioItemListType {
   text: string;
-  name: keyof RadioType;
+  // eslint-disable-next-line
+  name: any;
 }
 
 const InitialState = {
-  control: {} as UseFormReturn<RadioType>['control'],
+  // eslint-disable-next-line
+  control: {} as UseFormReturn<any>['control'],
 };
 
 export const RadioContext = createContext<RadioContainerPropsType>(InitialState);
