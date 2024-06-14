@@ -1,7 +1,6 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 import * as Components from '@/components/calendar-compound/components';
 import CalendarInstance from '@/utils/date/date.utils';
-import useSelect from '@/hooks/use-select';
 import { InitialState } from './calendar.type';
 
 const initialState = {
