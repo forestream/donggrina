@@ -3,7 +3,9 @@ import { BaseSyntheticEvent, useState } from 'react';
 import CalendarModalTimeSelector from './calendar-modal-time-selector';
 import CalendarModalCalendar from './calendar-modal-calendar';
 import { DateTime } from '@/pages/calendar/create';
-import Calendar, { useCalendarContext } from '../calendar-compound/calendar';
+import Calendar from '../calendar-compound/calendar';
+import CalendarInstance from '@/utils/date/date.utils';
+import useSelect from '@/hooks/use-select';
 
 interface CalendarModalProps {
   updateDateTime: (newDateTime: DateTime) => void;
@@ -20,12 +22,26 @@ export interface ModalDateTime {
 }
 
 export default function CalendarModal({ updateDateTime, onClose }: CalendarModalProps) {
-  const calendarContext = useCalendarContext();
+  const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
+    CalendarInstance.currentYear,
+  );
+  const { selectedItem: selectedMonth, handleSelectedItem: onSelectedMonth } = useSelect<number>(
+    CalendarInstance.currentMonth,
+  );
+  const { selectedItem: selectedDate, handleSelectedItem: onSelectedDate } = useSelect<number>(
+    CalendarInstance.currentDate,
+  );
+
+  const onResetToday = () => {
+    onSelectedYear(CalendarInstance.currentYear);
+    onSelectedMonth(CalendarInstance.currentMonth);
+    onSelectedDate(CalendarInstance.currentDate);
+  };
 
   const [modalDateTime, setModalDateTime] = useState<ModalDateTime>({
-    year: calendarContext.year,
-    month: calendarContext.month,
-    date: calendarContext.date,
+    year: CalendarInstance.currentYear,
+    month: CalendarInstance.currentMonth,
+    date: CalendarInstance.currentDate,
     ampm: '오전',
     hour: 12,
     minute: 0,
@@ -45,7 +61,17 @@ export default function CalendarModal({ updateDateTime, onClose }: CalendarModal
 
   return (
     <div className={styles.outer}>
-      <Calendar>
+      <Calendar
+        value={{
+          year: selectedYear,
+          month: selectedMonth,
+          date: selectedDate,
+          onSelectedMonth,
+          onSelectedDate,
+          onSelectedYear,
+          onResetToday,
+        }}
+      >
         <Calendar.Year />
         <Calendar.Month />
         <CalendarModalCalendar dateTime={modalDateTime} onSelect={handleSelect} />
