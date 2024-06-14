@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './calendar-todo.module.scss';
 import { useCalendarContext } from '../calendar-compound/calendar';
-import { fetchDailyTodos, putTodoFinished } from '@/api/calendar/request';
+import { fetchDailyTodos, postRefreshToken, putTodoFinished } from '@/api/calendar/request';
 import CalendarTodoProfile from './calendar-todo-profile';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChangeEventHandler } from 'react';
@@ -22,6 +22,11 @@ export default function CalendarTodo() {
     queryKey: ['dailyTodos', yearMonthDate],
     queryFn: () => fetchDailyTodos(yearMonthDate),
     placeholderData: (prevDailyTodos) => prevDailyTodos,
+    retry: (count) => {
+      if (count > 1) return false;
+      if (count === 0) postRefreshToken();
+      return true;
+    },
   });
 
   const finishedMutation = useMutation({
