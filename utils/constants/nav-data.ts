@@ -11,7 +11,7 @@ export const NAV_LIST_DATA = [
     href: '/family',
   },
   {
-    text: '달력',
+    text: '일정기록',
     RenderSvgComponent: CalendarSVG,
     href: '/calendar',
   },
