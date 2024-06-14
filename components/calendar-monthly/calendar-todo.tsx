@@ -4,7 +4,8 @@ import { useCalendarContext } from '../calendar-compound/calendar';
 import { fetchDailyTodos, postRefreshToken, putTodoFinished } from '@/api/calendar/request';
 import CalendarTodoProfile from './calendar-todo-profile';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
+import DropdownMenu from '../kebab/kebab';
 
 export default function CalendarTodo() {
   const calendarContext = useCalendarContext();
@@ -29,6 +30,11 @@ export default function CalendarTodo() {
     },
   });
 
+  const [kebabOpen, setKebabOpen] = useState<boolean[]>([]);
+  useEffect(() => {
+    if (dailyTodos) setKebabOpen(dailyTodos.map(() => false));
+  }, [dailyTodos]);
+
   const finishedMutation = useMutation({
     mutationFn: (calendarId: string) => putTodoFinished(calendarId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['dailyTodos', yearMonthDate] }),
@@ -40,12 +46,14 @@ export default function CalendarTodo() {
     finishedMutation.mutate(e.target.id);
   };
 
+  console.log(dailyTodos);
+
   if (isPending) return <span>loading</span>;
   if (isError) return <span>Error: {error.message}</span>;
 
   return (
     <>
-      {dailyTodos.map((todo) => (
+      {dailyTodos.map((todo, i) => (
         <div key={todo.id} className={styles.outer}>
           <div className={styles.category}>카테고리</div>
 
@@ -59,25 +67,44 @@ export default function CalendarTodo() {
             </div>
           </div>
 
-          <label className={styles.checkContainer}>
-            <input
-              id={todo.id.toString()}
-              className={styles.checkbox}
-              type="checkbox"
-              onChange={handleChange}
-              defaultChecked={todo.isFinished}
-              disabled={finishedMutation.isPending}
-            />
-            <div className={styles.checkmarkContainer}>
-              <Image
-                className={styles.checkmark}
-                src="/images/calendar/check.svg"
-                alt="체크 표시"
-                width={14}
-                height={14}
+          <div className={styles.kebabCheck}>
+            <DropdownMenu
+              value={{
+                isOpen: kebabOpen[i],
+                onOpenToggle: () => {
+                  setKebabOpen((prev) => [...prev.slice(0, i), !prev[i], ...prev.slice(i + 1)]);
+                },
+                onCloseToggle: () => {
+                  setKebabOpen((prev) => [...prev.slice(0, i), !prev[i], ...prev.slice(i + 1)]);
+                },
+              }}
+            >
+              <DropdownMenu.Kebab />
+              <DropdownMenu.Content>
+                <DropdownMenu.Item>수정</DropdownMenu.Item>
+                <DropdownMenu.Item>삭제</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu>
+            <label className={styles.checkContainer}>
+              <input
+                id={todo.id.toString()}
+                className={styles.checkbox}
+                type="checkbox"
+                onChange={handleChange}
+                defaultChecked={todo.isFinished}
+                disabled={finishedMutation.isPending}
               />
-            </div>
-          </label>
+              <div className={styles.checkmarkContainer}>
+                <Image
+                  className={styles.checkmark}
+                  src="/images/calendar/check.svg"
+                  alt="체크 표시"
+                  width={14}
+                  height={14}
+                />
+              </div>
+            </label>
+          </div>
         </div>
       ))}
     </>
