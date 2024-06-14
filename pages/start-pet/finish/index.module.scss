@@ -1,3 +1,23 @@
 .section {
-  padding-top: 126px;
+  padding: 126px 0 126px 24px;
+  .petsInfoText {
+    font-size: 14px;
+    margin-top: 40px;
+    margin-bottom: 176px;
+    font-weight: 500;
+    padding-right: 24px;
+  }
+  .linkList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 24px;
+    & > li {
+      height: 44px;
+      a,
+      button {
+        color: var(--button-color);
+      }
+    }
+  }
 }

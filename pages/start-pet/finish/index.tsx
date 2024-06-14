@@ -1,23 +1,18 @@
 import Title from '@/components/common/title/title';
 import styles from './index.module.scss';
-import { useQuery } from '@tanstack/react-query';
-import PetsApi from '@/api/my/pets';
+import PetsList from '@/components/start-pet/finish/pets-list/pets-list';
+import PetsLinkList from '@/components/start-pet/finish/pets-link-list/pets-link-list';
 
 export default function FinishPet() {
-  const petsApi = new PetsApi();
-  const { data, refetch, isLoading } = useQuery({
-    queryKey: ['pets'],
-    queryFn: () => {
-      return petsApi.petsAllInquiry();
-    },
-  });
-  if (isLoading) return null;
-  console.log(data);
   return (
     <section className={styles.section}>
       <div>
         <Title>반려동물 등록 완료</Title>
-        <button type="button">불러오기</button>
+        <PetsList />
+        <p className={styles.petsInfoText}>가족 초대와 관련된 안내 문구</p>
+        <ul className={styles.linkList}>
+          <PetsLinkList />
+        </ul>
       </div>
     </section>
   );
