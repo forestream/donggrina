@@ -2,11 +2,24 @@ import Hyperlink from '@/components/common/button/hyperlink';
 import Button from '@/components/common/button/button';
 import useModal from '@/hooks/use-modal';
 import ShareModal from '../share-modal/share-modal';
+import MyFamilyApi from '@/api/my/groups';
+import { useState } from 'react';
 
 export default function PetsLinkList() {
+  const myFamilyApi = new MyFamilyApi();
   const [Modal, handleModal] = useModal();
+  const [code, setCode] = useState('');
+  const handleGetCode = async () => {
+    try {
+      const response = await myFamilyApi.myFamilyCode();
+      setCode(response.data.code);
+    } catch {
+      console.log('에러');
+    }
+  };
   const openModal = () => {
     handleModal(true);
+    handleGetCode();
   };
   const closeModal = () => {
     handleModal(false);
@@ -29,7 +42,7 @@ export default function PetsLinkList() {
         </Hyperlink>
       </li>
       <Modal>
-        <ShareModal closeModal={closeModal} />
+        <ShareModal closeModal={closeModal} code={code} />
       </Modal>
     </>
   );

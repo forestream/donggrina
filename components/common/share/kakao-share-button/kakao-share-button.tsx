@@ -3,11 +3,15 @@ import { config } from '@/config';
 import KakaoSVG from '@/public/images/share/kakao_logo.svg';
 import styles from './kakao-share-button.module.scss';
 
-export default function KakaoShareButton() {
+interface KakaoShareType {
+  code: string;
+}
+
+export default function KakaoShareButton({ code }: KakaoShareType) {
   const { kakaoShareUrl } = config;
   const shareValue = {
     url: kakaoShareUrl,
-    description: '초대 코드를 등록하고 가족이 되어보세요!',
+    description: `초대 코드 : ${code}`,
     title: '가족 등록하기',
   };
   const handleClick = () => {

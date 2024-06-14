@@ -3,13 +3,13 @@ import ClipboardSVG from '@/public/images/share/Copy_alt.svg';
 import styles from './clipboard-button.module.scss';
 
 interface ClipboardType {
-  text: string;
+  code: string;
 }
 
-export default function ClipboardButton({ text }: ClipboardType) {
+export default function ClipboardButton({ code }: ClipboardType) {
   const handleClick = async () => {
     try {
-      await onCopy(text);
+      await onCopy(code);
       console.log('복사 완료');
     } catch {
       console.log('복사 실패');

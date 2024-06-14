@@ -2,33 +2,60 @@ import styles from './calendar-container.module.scss';
 import getSeventhDate from '@/utils/get-seventh-date';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
+import { fetchMonthlyTodos } from '@/api/calendar/request';
 
 export default function CalendarContainer() {
+  const [monthlyTodos, setMonthlyTodos] = useState();
   const calendarContext = useCalendarContext();
   const year = calendarContext.year;
   const month = calendarContext.month + 1;
   const date = calendarContext.date;
+  const yearMonth = `${year}-${month.toString().padStart(2, '0')}`;
 
-  const calendarArray = getCalendarArray(year, month);
+  const { calendarArray, todoCountsArray } = getCalendarArray(year, month, monthlyTodos);
+
+  const calendarCellClassNames = (cellIndex: number) =>
+    classNames(styles.calendarCell, {
+      [styles.red]: getSeventhDate(cellIndex),
+    });
+
+  const handleLoad = async () => {
+    const data = await fetchMonthlyTodos(yearMonth);
+    setMonthlyTodos(data);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, [year, month]);
 
   return (
     <div className={styles.container}>
       {calendarArray.map((calendarCell, i) =>
         typeof calendarCell === 'string' ? (
-          <div key={i + 'empty'} className={`${styles.calendarCell} ${getSeventhDate(i) ? styles.red : ''}`}>
+          <div key={i + 'empty'} className={calendarCellClassNames(i)}>
             {calendarCell}
           </div>
         ) : (
           <div
             key={calendarCell}
             onClick={calendarContext.onSelectedDate.bind(null, calendarCell)}
-            className={`${styles.calendarCell} ${(i + 1) % 7 === 0 ? styles.red : ''}`}
+            className={calendarCellClassNames(i)}
           >
-            <div className={`${styles.date} ${calendarCell == date ? styles.selected : ''}`}>{calendarCell}</div>
+            <div
+              className={classNames(styles.date, {
+                [styles.selected]: calendarCell == date,
+              })}
+            >
+              {calendarCell}
+            </div>
             <div className={styles.todoIconContainer}>
-              <div className={styles.todoIcon}></div>
-              <div className={styles.todoIcon}></div>
-              <div className={styles.todoIcon}></div>
+              {Array(Math.min(3, todoCountsArray[i] as number))
+                .fill(null)
+                .map((_, i) => (
+                  <div key={i} className={styles.todoIcon}></div>
+                ))}
             </div>
           </div>
         ),

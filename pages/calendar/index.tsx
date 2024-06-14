@@ -6,17 +6,21 @@ import CreateTodoButton from '@/components/calendar-monthly/create-todo-button';
 import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 
 export type CalendarProps = {
-  year: number;
-  month: number;
-  date: number;
+  year: number | null;
+  month: number | null;
+  date: number | null;
 };
 
 export default function CalendarPage() {
   return (
     <main className={styles.outer}>
       <Calendar>
-        <Calendar.Year />
-        <Calendar.Month />
+        <div style={{ position: 'relative', left: '-12px' }}>
+          <Calendar.Year />
+        </div>
+        <div style={{ position: 'relative', left: '-12px' }}>
+          <Calendar.Month />
+        </div>
         <CalendarContainer />
         <CalendarTodoDate />
         <CalendarTodo />

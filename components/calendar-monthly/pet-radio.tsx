@@ -13,19 +13,14 @@ export default function PetRadio({ register, petName }: PetRadio) {
     <label className={styles.petLabel}>
       <div className={styles.petImage}>
         <input
-          {...register('pet', { validate: (selected) => !!selected || '*반려동물을 선택해주세요.' })}
+          {...register('petName', { validate: (selected) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
           type="radio"
         />
 
-        <Image className={styles.petOn} src={`/images/calendar/${petName}-on.svg`} alt="반려동물 선택 상태" fill />
-        <Image
-          className={styles.petOff}
-          src={`/images/calendar/${petName}-off.svg`}
-          alt="반려동물 선택 해제 상태"
-          fill
-        />
+        <Image className={styles.petOn} src={`/images/calendar/${'dog'}-on.svg`} alt="반려동물 선택 상태" fill />
+        <Image className={styles.petOff} src={`/images/calendar/${'dog'}-off.svg`} alt="반려동물 선택 해제 상태" fill />
       </div>
       <p className={styles.petName}>{petName}</p>
     </label>

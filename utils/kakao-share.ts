@@ -12,8 +12,8 @@ export const onKakaoShare = ({ url, description, title }: KakaoShareType) => {
   window.Kakao.Share.sendDefault({
     objectType: 'feed',
     content: {
-      title: 'donggrina',
-      description: description,
+      title: description,
+      description: '가족 코드를 등록하고 가족이 되어보세요!',
       imageUrl: 'https://donggrina.s3.ap-northeast-2.amazonaws.com/kakao-message.png',
       imageWidth: 800,
       imageHeight: 400,

@@ -5,7 +5,6 @@ import ModifySVG from '@/public/images/pets/modify.svg';
 import Link from 'next/link';
 
 export default function PetsListItem({ imageUrl, petId }: PetData) {
-  console.log(imageUrl, petId);
   return (
     <div className={styles.imgBox}>
       <Image src={imageUrl} alt="프로필 이미지" fill priority sizes="100%" />

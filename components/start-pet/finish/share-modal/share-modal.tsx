@@ -5,19 +5,20 @@ import styles from './share-modal.module.scss';
 
 interface ShareModalType {
   closeModal: () => void;
+  code: string;
 }
 
-export default function ShareModal({ closeModal }: ShareModalType) {
+export default function ShareModal({ closeModal, code }: ShareModalType) {
   return (
     <>
       <div className={styles.box}>
         <p>가족 초대 코드를 전달해보세요!</p>
         <ul>
           <li>
-            <ClipboardButton text="임시" />
+            <ClipboardButton code={code} />
           </li>
           <li>
-            <KakaoShareButton />
+            <KakaoShareButton code={code} />
           </li>
         </ul>
         <div className={styles.buttonBox}>

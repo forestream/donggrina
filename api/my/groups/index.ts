@@ -1,10 +1,14 @@
 import { MyPageData } from '@/types/my-page/family';
-import { axiosInstance } from '..';
+import { axiosInstance } from '../..';
 import { FieldValues } from 'react-hook-form';
 
 interface MyCodeType {
-  id: number;
-  code: string;
+  code: number;
+  data: {
+    id: number;
+    code: string;
+  };
+  message: string;
 }
 
 interface NameModifyType {
