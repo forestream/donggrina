@@ -1,6 +1,5 @@
 import { GrowthData } from '@/types/growth';
 import { axiosInstance } from '..';
-import { LocalDate } from '@/types/date';
 import { GrowthDetailsData } from '@/types/growth/details';
 import { FieldValues } from 'react-hook-form';
 import { GrowthSearchData } from '@/types/growth/search';
@@ -12,7 +11,7 @@ export default class GrowthAPI {
     return await axiosInstance.post('/growth', formData);
   }
 
-  async getGrowthByDate(date: LocalDate) {
+  async getGrowthByDate(date: string) {
     return (await axiosInstance.get<GrowthData>(`/growth?date=${date}`)).data;
   }
 
