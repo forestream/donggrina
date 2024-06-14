@@ -1,11 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './family-diary.module.scss';
 import Avatar from '@/components/avatar/avatar';
+import FamilyDiaryEmpty from '@/components/family/diary/family-diary-empty';
+import styles from './family-diary.module.scss';
 
 export default function FamilyDiary() {
   const isImage = true;
   const isImageClassName = isImage ? `${styles['diary-card']} ${styles.isImage}` : styles['diary-card'];
+
+  return <FamilyDiaryEmpty />;
 
   return (
     <div className={styles['wrapper']}>
