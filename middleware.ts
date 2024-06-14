@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
-const PROTECTED_PAGES = ['/start-family'];
+const PROTECTED_PAGES = ['/start-family', '/calendar'];
 const PUBLIC_PAGES = ['/login'];
 const MATCHER_PAGES = ['/start-family/:path*', '/login'];
 
