@@ -6,7 +6,7 @@
   cursor: pointer;
 }
 
-.petImage {
+.petImageContainer {
   position: relative;
   width: 64px;
   height: 64px;
@@ -16,6 +16,10 @@
   &:has(.petInput:checked) {
     border: 2px solid var(--main-color);
   }
+}
+
+.petImage {
+  border-radius: 9999px;
 }
 
 .petInput:checked ~ .check {
