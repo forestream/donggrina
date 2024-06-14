@@ -28,11 +28,12 @@ class Calendar extends Core {
     return new Date(year, month + 1, 0).getDate();
   }
 
-  calculateDay(currentMonth?: number, currentDate?: number) {
+  calculateDay(currentYear?: number, currentMonth?: number, currentDate?: number) {
+    const year = currentYear || this.currentYear;
     const month = currentMonth ?? this.currentMonth;
     const date = currentDate ?? this.currentDate;
 
-    const calulateDay = new Date(this.currentYear, month, date).getDay() as Days;
+    const calulateDay = new Date(year, month, date).getDay() as Days;
     return dayMap[calulateDay];
   }
 

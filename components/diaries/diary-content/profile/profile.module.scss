@@ -1,0 +1,12 @@
+.authorContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 4px;
+
+  .author {
+    font-size: 14px;
+    color: var(--text-color-gray);
+    font-weight: 400px;
+  }
+}

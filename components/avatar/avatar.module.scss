@@ -1,0 +1,31 @@
+.layout {
+  display: flex;
+  align-items: center;
+  gap: 0 10px;
+}
+
+.avatar-image {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  &.small {
+    width: 17px;
+    height: 17px;
+  }
+
+  &.border-gray {
+    border: 1px solid #bdbdbd;
+  }
+
+  &.border-main {
+    border: 1px solid #32a753;
+  }
+}
+
+.avatar-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color-gray);
+}

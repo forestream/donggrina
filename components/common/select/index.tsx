@@ -1,21 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './select.module.scss';
 import { FormInput } from '../Input/input-type';
 import { Control, useController } from 'react-hook-form';
 import DropDownUpIcon from '@/public/images/select/dropdown-up.svg';
-import DropDownDownIcon from '@/public/images/select/dropdown-down.svg';
 import Dropdown from './drop-down';
 
 interface SelectProps extends FormInput {
   name: string;
   options: string[];
   control: Control;
+  disabled?: boolean;
 }
 
-export default function Select({ name, control, options, placeholder }: SelectProps) {
+export default function Select({ name, control, options, placeholder, disabled = false }: SelectProps) {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const buttonRef = useRef(null);
   const { field } = useController({
     name,
     control,
@@ -40,24 +39,22 @@ export default function Select({ name, control, options, placeholder }: SelectPr
           className={classNames(styles.button, { [styles.buttonActive]: showDropDown })}
           onClick={handleButtonClick}
           type="button"
+          disabled={disabled}
         >
-          <input
-            id={name}
-            className={classNames(styles.input, { [styles.inputActive]: showDropDown })}
-            readOnly
-            placeholder={placeholder}
-            type="text"
-            tabIndex={-1}
-            value={field.value || ''}
-          />
-          {showDropDown ? (
+          <div className={styles.inputBox}>
+            <input
+              id={name}
+              className={classNames(styles.input, { [styles.inputActive]: showDropDown })}
+              readOnly
+              placeholder={placeholder}
+              type="text"
+              tabIndex={-1}
+              value={field.value || ''}
+            />
             <DropDownUpIcon alt="arrowUpIcon" className={styles.upIcon} />
-          ) : (
-            <DropDownDownIcon alt="arrowDownIcon" className={styles.downIcon} />
-          )}
+          </div>
           {showDropDown && (
             <Dropdown
-              buttonRef={buttonRef}
               options={options}
               showDropDown={showDropDown}
               handleClick={handleDropDownClick}
