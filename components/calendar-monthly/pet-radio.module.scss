@@ -10,25 +10,29 @@
   position: relative;
   width: 64px;
   height: 64px;
+  border: 2px solid var(--pet-border);
+  border-radius: 9999px;
+
+  &:has(.petInput:checked) {
+    border: 2px solid var(--main-color);
+  }
+}
+
+.petInput:checked ~ .check {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.check {
+  display: none;
 }
 
 .petInput {
   width: 0;
   height: 0;
-}
-
-.petInput ~ .petOn {
-  display: none;
-}
-.petInput ~ .petOff {
-  display: block;
-}
-
-.petInput:checked ~ .petOn {
-  display: block;
-}
-.petInput:checked ~ .petOff {
-  display: none;
 }
 
 .petName {
