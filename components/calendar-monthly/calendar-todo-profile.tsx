@@ -9,7 +9,7 @@ interface CalendarTodoProfileProps {
 export default function CalendarTodoProfile({ src, name }: CalendarTodoProfileProps) {
   return (
     <div className={styles.outer}>
-      <Image src={src} alt="프로필 이미지" width={20} height={20} />
+      <Image className={styles.image} src={src} alt="프로필 이미지" width={20} height={20} />
       <p>{name}</p>
     </div>
   );
