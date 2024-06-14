@@ -1,6 +1,6 @@
 import styles from './nav.module.scss';
 import Gooey from './gooey/gooey';
-import { NAV_LIST_DATA } from '@/utils/constants/navData';
+import { NAV_LIST_DATA } from '@/utils/constants/nav-data';
 import { NavListProps } from './types/nav';
 import NavListItem from './nav-list/nav-list-item';
 

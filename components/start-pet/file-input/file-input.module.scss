@@ -1,0 +1,10 @@
+.fileButton {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  right: -6px;
+  bottom: 0;
+  .fileInput {
+    display: none;
+  }
+}
