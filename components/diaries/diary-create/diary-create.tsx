@@ -15,8 +15,9 @@ const DiaryCreate = () => {
     defaultValues: {
       content: '',
       weather: '',
-      toggle: false,
       images: Array(5).fill(null),
+      isShare: false,
+      date: '',
     },
   });
   const selectedWeather = watch('weather');
@@ -88,16 +89,39 @@ const DiaryCreate = () => {
             </div>
           ))}
         </div>
+
         <div className={styles.storyshareContainer}>
           <div className={styles.storyshare}>
             <img src="/images/diaries/bar.svg" />
             스토리에 공유하기
           </div>
           <label className={styles.toggle}>
-            <input type="checkbox" {...register('toggle')} />
+            <input type="checkbox" {...register('isShare')} />
             <span className={styles.toggleSlide}></span>
           </label>
         </div>
+
+        <hr className={styles.division} />
+
+        <div className={styles.dateContainer}>
+          <div className={styles.date}>
+            <label htmlFor="date">날짜</label>
+          </div>
+          <input
+            className={styles.dateInput}
+            type="text"
+            id="date"
+            placeholder="YYYY-MM-DD"
+            {...register('date', {
+              required: '*날짜를 입력해주세요.',
+              pattern: {
+                value: /^\d{4}-\d{2}-\d{2}$/,
+                message: '*날짜 형식이 올바르지 않습니다. (예: 2024-06-15)',
+              },
+            })}
+          />
+        </div>
+        {errors.date && <p className={styles.error}>{errors.date.message}</p>}
 
         <div className={styles.button}>
           <button

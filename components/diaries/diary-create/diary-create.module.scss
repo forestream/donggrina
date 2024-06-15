@@ -146,6 +146,43 @@ input:checked + .toggleSlide:before {
   transform: translateX(16.92px);
 }
 
+.dateContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-bottom: 30px;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--white);
+  background-color: var(--main-color);
+}
+
+.dateInput {
+  border: none;
+  width: 96px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-color-gray);
+
+  &::placeholder {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color-gray);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
 .submit {
   width: 100%;
   padding: 14px;
