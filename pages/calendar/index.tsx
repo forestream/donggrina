@@ -43,8 +43,11 @@ export default function CalendarPage() {
           onResetToday,
         }}
       >
-        <div style={{ position: 'relative', left: '-12px' }}>
+        <div className={styles.yearContainer} style={{ position: 'relative', left: '-12px' }}>
           <Calendar.Year />
+          <p className={styles.resetToday} onClick={onResetToday}>
+            오늘 날짜
+          </p>
         </div>
         <div style={{ position: 'relative', left: '-12px' }}>
           <Calendar.Month />
