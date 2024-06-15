@@ -1,4 +1,4 @@
-import { TIME_SELECTOR, TIME_SELECTOR_HEIGHT } from '@/lib/constants/calendar-constants';
+import { TIME_SELECTOR, TIME_SELECTOR_HEIGHT } from '@/utils/constants/calendar-constants';
 
 export default function getTimeScrollPosition(scrollHeight: number, className: string, selectedItem: string | number) {
   const scrollY =

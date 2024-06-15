@@ -5,7 +5,7 @@ import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
+import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
 import { fetchPets, postTodo } from '@/api/calendar/request';

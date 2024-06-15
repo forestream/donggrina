@@ -3,19 +3,16 @@ import { Control, useController } from 'react-hook-form';
 import styles from './date-input.module.scss';
 import { FormInput } from '../input-type';
 import { dateValidation } from '@/utils/validations/date-validation';
+import { LocalDate } from '@/types/date';
+import { convertToLocalDate } from '@/utils/convert-local-date';
 
-interface LocalDateType {
-  year: string;
-  month: string;
-  day: string;
-}
 interface DateInputProps extends FormInput {
   control: Control;
 }
 
 export default function DateInput({ name, control, type = 'text' }: DateInputProps) {
   const [error, setError] = useState('');
-  const [localDate, setLocalDate] = useState<LocalDateType>({ year: '', month: '', day: '' });
+  const [localDate, setLocalDate] = useState<LocalDate>({ year: '', month: '', day: '' });
 
   const { field } = useController({
     name,
@@ -28,10 +25,6 @@ export default function DateInput({ name, control, type = 'text' }: DateInputPro
   };
   const updateInputValue = (input: HTMLInputElement, value: string) => {
     input.value = value;
-  };
-  const convertToLocalDate = (values: LocalDateType): string => {
-    const { year, month, day } = values;
-    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
