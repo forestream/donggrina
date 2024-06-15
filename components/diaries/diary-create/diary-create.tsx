@@ -15,11 +15,11 @@ const DiaryCreate = () => {
     defaultValues: {
       content: '',
       weather: '',
-      photos: Array(5).fill(null),
+      images: Array(5).fill(null),
     },
   });
   const selectedWeather = watch('weather');
-  const imagePreviews = watch('photos');
+  const imagePreviews = watch('images');
   const fileInputRefs = useRef(new Array(5).fill(null));
 
   const handleImageChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ const DiaryCreate = () => {
       const file = files[0];
       const updatedPhotos = [...imagePreviews];
       updatedPhotos[index] = URL.createObjectURL(file);
-      setValue('photos', updatedPhotos);
+      setValue('images', updatedPhotos);
     }
   };
 
