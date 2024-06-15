@@ -7,26 +7,34 @@ import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
-import { fetchPets, fetchTodoById, putTodoById } from '@/api/calendar/request';
-import { Pet } from '@/api/calendar/request.type';
+import { fetchTodoById } from '@/api/calendar/request';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import disintegrateDateTime from '@/utils/disintegrate-date-time';
 import { DateTime, IFormInput } from '@/types/calendar';
+import getDateTimeBackend from '@/utils/get-date-time-backend';
+import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
+import useTodoPutMutation from '@/hooks/queries/calendar/use-todo-put-mutation';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
     params: { calendarId },
+    req: {
+      cookies: { accessToken },
+    },
   } = context as Params;
 
-  const data = await fetchTodoById(calendarId, context.req.cookies.accessToken!);
+  const data = await fetchTodoById(calendarId, accessToken);
 
   return { props: { todo: data } };
 }
 
 export default function Edit({ todo }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(todo);
   const { id, title, memo, category: initCategory, dateTime: initDateTime } = todo;
+  const { data: pets } = usePetsQuery();
+  const putMutation = useTodoPutMutation();
+  const router = useRouter();
 
   const { year, month, date, ampm, hour, minute } = disintegrateDateTime(initDateTime);
 
@@ -46,9 +54,6 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
     hour,
     minute,
   });
-  const [pets, setPets] = useState<Pet[]>([]);
-
-  const [Modal, handleModal] = useModal();
 
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
@@ -63,21 +68,15 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
   }, [dateTime]);
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const [date, ampm, time] = data.dateTime.split(' ');
-    const dateTimeBackend = new Date([date, time, ampm === '오전' ? 'am' : 'pm', 'UTC+0'].join(' '))
-      .toISOString()
-      .slice(0, -8);
-    putTodoById({ ...data, dateTime: dateTimeBackend }, id);
+    putMutation.mutate(
+      { data: { ...data, dateTime: getDateTimeBackend(data.dateTime) }, id },
+      {
+        onSuccess: () => router.push('/calendar'),
+      },
+    );
   };
 
-  const handleLoad = async () => {
-    const data = await fetchPets();
-    setPets(data);
-  };
-
-  useEffect(() => {
-    handleLoad();
-  }, []);
+  const [Modal, handleModal] = useModal();
 
   return (
     <div className={styles.outer}>
@@ -105,8 +104,9 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
         <div className={styles.petSelector}>
           반려동물 선택
           <div className={styles.petLabelContainer}>
-            {!!pets.length &&
-              pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />)}
+            {pets.map((pet, i) => (
+              <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+            ))}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
         </div>
