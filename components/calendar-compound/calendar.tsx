@@ -1,13 +1,12 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 import * as Components from '@/components/calendar-compound/components';
 import CalendarInstance from '@/utils/date/date.utils';
-import useSelect from '@/hooks/use-select';
 import { InitialState } from './calendar.type';
 
 const initialState = {
   year: CalendarInstance.currentYear,
-  month: 1,
-  date: 1,
+  month: CalendarInstance.currentMonth,
+  date: CalendarInstance.currentDate,
   onSelectedMonth: () => {},
   onSelectedDate: () => {},
   onSelectedYear: () => {},
@@ -22,35 +21,9 @@ export function useCalendarContext() {
   return calendarContext;
 }
 
-export default function Calendar(props: PropsWithChildren) {
-  const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
-    CalendarInstance.currentYear,
-  );
-  const { selectedItem: selectedMonth, handleSelectedItem: onSelectedMonth } = useSelect<number>(
-    CalendarInstance.currentMonth,
-  );
-  const { selectedItem: selectedDate, handleSelectedItem: onSelectedDate } = useSelect<number>(
-    CalendarInstance.currentDate,
-  );
-
-  const onResetToday = () => {
-    onSelectedYear(CalendarInstance.currentYear);
-    onSelectedMonth(CalendarInstance.currentMonth);
-    onSelectedDate(CalendarInstance.currentDate);
-  };
-
-  const value = {
-    year: selectedYear,
-    month: selectedMonth,
-    date: selectedDate,
-    onSelectedMonth,
-    onSelectedDate,
-    onSelectedYear,
-    onResetToday,
-  };
-
+export default function Calendar(props: PropsWithChildren<{ value: InitialState }>) {
   return (
-    <CalendarContext.Provider value={value}>
+    <CalendarContext.Provider value={props.value}>
       <section style={{ paddingTop: '54px' }}>{props.children}</section>
     </CalendarContext.Provider>
   );

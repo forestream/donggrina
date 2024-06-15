@@ -2,14 +2,18 @@ import React from 'react';
 import styles from './list-header.module.scss';
 import Profile from '../../profile';
 import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
+import DropdownMenu from '@/components/kebab/kebab';
+import useToggle from '@/hooks/use-toggle';
 
-interface ListHeaderProps {
-  categoryName: string;
-  writer: string;
-  pet: string;
-}
+// interface ListHeaderProps {
+//   categoryName: string;
+//   writer: string;
+//   pet: string;
+// }
 
-export default function ListHeader({ categoryName, writer, pet }: ListHeaderProps) {
+export default function ListHeader() {
+  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.wrapper}>
@@ -22,7 +26,13 @@ export default function ListHeader({ categoryName, writer, pet }: ListHeaderProp
           </div>
         </div>
       </div>
-      <div className={styles.kebab}>Kebab</div>
+      <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+        <DropdownMenu.Kebab />
+        <DropdownMenu.Content>
+          <DropdownMenu.Item>수정</DropdownMenu.Item>
+          <DropdownMenu.Item>삭제</DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>
     </div>
   );
 }

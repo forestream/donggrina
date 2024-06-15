@@ -23,7 +23,7 @@ export default function DateInput({ name, control, type = 'text' }: DateInputPro
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value.replace(/\D/g, ''); // 숫자만 허용
+    const input = e.target.value.replace(/\D/g, '');
     let formattedDate = input;
 
     if (input.length >= 5) formattedDate = `${input.slice(0, 4)}-${input.slice(4, 6)}`;

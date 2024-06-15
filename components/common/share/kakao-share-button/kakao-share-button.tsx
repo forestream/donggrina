@@ -11,7 +11,7 @@ export default function KakaoShareButton({ code }: KakaoShareType) {
   const { kakaoShareUrl } = config;
   const shareValue = {
     url: kakaoShareUrl,
-    description: `초대 코드 : ${code}`,
+    description: `가족코드 : ${code}`,
     title: '가족 등록하기',
   };
   const handleClick = () => {
@@ -19,7 +19,7 @@ export default function KakaoShareButton({ code }: KakaoShareType) {
   };
   return (
     <div className={styles.kakaoButtonBox}>
-      <button type="button" onClick={handleClick} title="카카오톡으로 초대코드 공유하기">
+      <button type="button" onClick={handleClick} title="카카오톡으로 가족코드 공유하기">
         <KakaoSVG />
       </button>
       <span>카카오톡</span>

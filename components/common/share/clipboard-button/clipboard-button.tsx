@@ -17,7 +17,7 @@ export default function ClipboardButton({ code }: ClipboardType) {
   };
   return (
     <div className={styles.ClipboardButtonBox}>
-      <button type="button" onClick={handleClick} title="초대코드 복사하기">
+      <button type="button" onClick={handleClick} title="가족코드 복사하기">
         <ClipboardSVG />
       </button>
       <span>클립보드</span>
