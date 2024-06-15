@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import styles from './calendar-todo.module.scss';
 import { useCalendarContext } from '../calendar-compound/calendar';
-import { fetchDailyTodos, postRefreshToken, putTodoFinished } from '@/api/calendar/request';
+import { deleteTodo, fetchDailyTodos, postRefreshToken, putTodoFinished } from '@/api/calendar/request';
 import CalendarTodoProfile from './calendar-todo-profile';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import DropdownMenu from '../kebab/kebab';
+// import useToggle from '@/hooks/use-toggle';
 
 export default function CalendarTodo() {
   const calendarContext = useCalendarContext();
@@ -31,14 +32,27 @@ export default function CalendarTodo() {
   });
 
   const [kebabOpen, setKebabOpen] = useState<boolean[]>([]);
+
   useEffect(() => {
     if (dailyTodos) setKebabOpen(dailyTodos.map(() => false));
   }, [dailyTodos]);
 
   const finishedMutation = useMutation({
     mutationFn: (calendarId: string) => putTodoFinished(calendarId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['dailyTodos', yearMonthDate] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['dailyTodos', yearMonthDate] });
+    },
     onError: () => queryClient.resetQueries({ queryKey: ['dailyTodos', yearMonthDate] }),
+  });
+
+  console.log(queryClient.getQueriesData({ queryKey: ['monthlyTodos', year, month + 1] }));
+
+  const deleteMutation = useMutation({
+    mutationFn: (calendarId: string) => deleteTodo(calendarId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['monthlyTodos', year, month + 1] });
+      queryClient.invalidateQueries({ queryKey: ['dailyTodos', yearMonthDate] });
+    },
   });
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -46,7 +60,13 @@ export default function CalendarTodo() {
     finishedMutation.mutate(e.target.id);
   };
 
+  const handleDelete: MouseEventHandler = (e) => {
+    deleteMutation.mutate((e.target as Element).id);
+  };
+
   console.log(dailyTodos);
+
+  // const { handleCloseToggle, handleOpenToggle, handleToggle, isToggle } = useToggle();
 
   if (isPending) return <span>loading</span>;
   if (isError) return <span>Error: {error.message}</span>;
@@ -72,17 +92,21 @@ export default function CalendarTodo() {
               value={{
                 isOpen: kebabOpen[i],
                 onOpenToggle: () => {
-                  setKebabOpen((prev) => [...prev.slice(0, i), !prev[i], ...prev.slice(i + 1)]);
+                  setTimeout(() => setKebabOpen((prev) => [...prev.slice(0, i), !prev[i], ...prev.slice(i + 1)]), 0);
                 },
                 onCloseToggle: () => {
-                  setKebabOpen((prev) => [...prev.slice(0, i), !prev[i], ...prev.slice(i + 1)]);
+                  setTimeout(() => setKebabOpen((prev) => [...prev.slice(0, i), !prev[i], ...prev.slice(i + 1)]), 200);
                 },
               }}
             >
               <DropdownMenu.Kebab />
               <DropdownMenu.Content>
                 <DropdownMenu.Item>수정</DropdownMenu.Item>
-                <DropdownMenu.Item>삭제</DropdownMenu.Item>
+                <DropdownMenu.Item>
+                  <div onClick={handleDelete} id={todo.id.toString()}>
+                    삭제
+                  </div>
+                </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu>
             <label className={styles.checkContainer}>

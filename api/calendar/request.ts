@@ -22,6 +22,12 @@ export async function postTodo(data: IFormInput) {
   console.log(response);
 }
 
+export async function deleteTodo(calendarId: string) {
+  console.log('delete!');
+  const { data } = await axiosInstance.delete(`/calendar/${calendarId}`);
+  console.log(data);
+}
+
 export async function fetchPets(): Promise<Pet[]> {
   const { data } = await axiosInstance.get(`/my/pets`);
   return data.data;
