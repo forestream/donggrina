@@ -19,8 +19,19 @@ export default function useOutside<T extends HTMLElement, U extends HTMLElement>
       if (!isTargetIncludes(event, ref) && !isTargetIncludes(event, modalRef)) onCloseToggle();
     };
 
-    if (isOpen) document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onCloseToggle();
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
   }, [onCloseToggle]);
 
   return ref;
