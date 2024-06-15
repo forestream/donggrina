@@ -15,6 +15,7 @@ const DiaryCreate = () => {
     defaultValues: {
       content: '',
       weather: '',
+      toggle: false,
       images: Array(5).fill(null),
     },
   });
@@ -86,6 +87,16 @@ const DiaryCreate = () => {
               />
             </div>
           ))}
+        </div>
+        <div className={styles.storyshareContainer}>
+          <div className={styles.storyshare}>
+            <img src="/images/diaries/bar.svg" />
+            스토리에 공유하기
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" {...register('toggle')} />
+            <span className={styles.toggleSlide}></span>
+          </label>
         </div>
 
         <div className={styles.button}>
