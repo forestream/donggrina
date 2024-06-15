@@ -4,7 +4,7 @@ import Calendar from '@/components/calendar-compound/calendar';
 import styles from './growth.module.scss';
 import getDay from '@/utils/get-day';
 import AddButton from '@/components/common/add-button/add-button';
-import { useGetGrotwthByDateQuery } from '@/hooks/queries/growth/useGetGrowthQueries';
+import { useGetGrotwthByDateQuery } from '@/hooks/queries/growth/use-get-growth-queries';
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import useCalenderDateStore from '@/store/calendar.store';
 

@@ -14,15 +14,13 @@ export const useCreateGrotwthQuery = (data: FieldValues) => {
 export const useModifyGrowthQuery = (growthId: number) => {
   return useMutation({
     mutationFn: async () => await growthAPI.modifyGrowth(growthId),
-    onSuccess: async () =>
-      await queryClient.invalidateQueries({ queryKey: ['modifyGrowth', growthId], refetchType: 'active' }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['modifyGrowth', growthId], refetchType: 'active' }),
   });
 };
 
 export const useDeleteGrowthQuery = (growthId: number) => {
   return useMutation({
     mutationFn: async () => await growthAPI.deleteGrowth(growthId),
-    onSuccess: async () =>
-      await queryClient.invalidateQueries({ queryKey: ['deleteGrowth', growthId], refetchType: 'active' }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['deleteGrowth', growthId], refetchType: 'active' }),
   });
 };
