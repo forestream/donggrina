@@ -22,4 +22,8 @@ export default class PetsApi {
   async petsAllInquiry() {
     return await axiosInstance.get('/my/pets').then((res) => res.data);
   }
+
+  async petsDetailsInquiry(id: string) {
+    return await axiosInstance.get(`/my/pets/${id}`).then((res) => res.data);
+  }
 }

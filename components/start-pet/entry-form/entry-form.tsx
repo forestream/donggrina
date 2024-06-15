@@ -5,13 +5,12 @@ import {
   KIND_OPTION,
   NEUTERED_OPTION,
 } from '@/utils/constants/entry-data';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import FileImage from '../file-image/file-image';
 import FileInput from '../file-input/file-input';
 import Form from '@/components/common/Form';
 import Radio from '@/components/common/radio/radio';
-import Button from '@/components/common/button/button';
 import styles from './entry-form.module.scss';
 import { PetDetailsData } from '@/types/my-page/pet/detsils';
 
@@ -20,14 +19,14 @@ interface EntryFormType {
   defaultData?: PetDetailsData;
 }
 
-export default function EntryForm({ onSubmit, defaultData }: EntryFormType) {
+export default function EntryForm({ onSubmit, defaultData, children }: PropsWithChildren<EntryFormType>) {
   const [speciesOPtion, setSpeciesOption] = useState<string[]>();
   const [selectDisabled, setSelectDisabled] = useState<boolean>();
   const methods = useForm<FieldValues>({
     defaultValues: {
       imageId: null,
       sex: '암컷',
-      isNeutered: 'true',
+      isNeutered: true,
       name: '',
       birthDate: '',
       adoptionDate: '',
@@ -36,25 +35,32 @@ export default function EntryForm({ onSubmit, defaultData }: EntryFormType) {
       weight: 0,
       ...defaultData,
     },
+    mode: 'onBlur',
   });
+  console.log(methods);
   const { control, handleSubmit, watch, setValue } = methods;
   const formSubmit: SubmitHandler<FieldValues> = async (data) => {
     onSubmit(data);
   };
-
+  const type = watch('type');
+  const prevType = useRef();
   useEffect(() => {
-    const type = watch('type');
+    prevType.current = type;
+  }, []);
+  useEffect(() => {
     const isDog = type === '강아지';
     const isCat = type === '고양이';
-
     setSpeciesOption(isDog ? DOG_BREED_OPTION : isCat ? CAT_BREED_OPTION : DOG_BREED_OPTION);
-    setSelectDisabled(type === undefined);
-    setValue('species', '');
-  }, [watch('type')]);
+    setSelectDisabled(type === '');
+    if (prevType.current !== type) {
+      setValue('species', '');
+      prevType.current = type;
+    }
+  }, [type, prevType]);
   return (
     <Form onSubmit={handleSubmit(formSubmit)} methods={methods}>
       <div className={styles.fileBox}>
-        <FileImage imageValue={watch('imageId')} />
+        <FileImage imageValue={watch('imageId')} imageUrl={defaultData?.url} />
         <FileInput name="imageId" id="file" control={control} />
       </div>
       <ul className={styles.listContainer}>
@@ -97,11 +103,7 @@ export default function EntryForm({ onSubmit, defaultData }: EntryFormType) {
           <Radio options={NEUTERED_OPTION} control={control} name="isNeutered" />
         </li>
       </ul>
-      <div className={styles.buttonBox}>
-        <Button type="submit" className="primary" round>
-          가족 등록하기
-        </Button>
-      </div>
+      <div className={styles.buttonBox}>{children}</div>
     </Form>
   );
 }

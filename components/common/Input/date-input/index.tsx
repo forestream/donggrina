@@ -1,102 +1,43 @@
-import React, { useEffect, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
 import styles from './date-input.module.scss';
 import { FormInput } from '../input-type';
-import { dateValidation } from '@/utils/validations/date-validation';
-
-interface LocalDateType {
-  year: string;
-  month: string;
-  day: string;
-}
+import { ChangeEvent } from 'react';
 interface DateInputProps extends FormInput {
   control: Control;
 }
 
 export default function DateInput({ name, control, type = 'text' }: DateInputProps) {
-  const [error, setError] = useState('');
-  const [localDate, setLocalDate] = useState<LocalDateType>({ year: '', month: '', day: '' });
-
-  const { field } = useController({
+  const {
+    field,
+    fieldState: { error },
+  } = useController({
     name,
     control,
-    rules: { required: true },
+    rules: {
+      required: '날짜를 입력해 주세요.',
+      pattern: {
+        value: /^\d{4}-\d{2}-\d{2}$/,
+        message: '날짜 형식이 올바르지 않습니다.',
+      },
+    },
   });
 
-  const formatInputValue = (value: string): string => {
-    return value.replace(/[^0-9]/g, '');
-  };
-  const updateInputValue = (input: HTMLInputElement, value: string) => {
-    input.value = value;
-  };
-  const convertToLocalDate = (values: LocalDateType): string => {
-    const { year, month, day } = values;
-    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-  };
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.replace(/\D/g, ''); // 숫자만 허용
+    let formattedDate = input;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const formattedValue = formatInputValue(value);
-    if (value !== formattedValue) {
-      updateInputValue(e.target, formattedValue);
-    }
+    if (input.length >= 5) formattedDate = `${input.slice(0, 4)}-${input.slice(4, 6)}`;
+    if (input.length >= 7) formattedDate = `${input.slice(0, 4)}-${input.slice(4, 6)}-${input.slice(6, 8)}`;
+
+    field.onChange(formattedDate);
   };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const inputType = e.target.id;
-    const value = e.target.value;
-    const valueToNumber = Number(e.target.value);
-    const validator = dateValidation[inputType];
-
-    if (validator) {
-      if (valueToNumber < validator.min || valueToNumber > validator.max) {
-        setError(validator.errorMessage);
-      } else {
-        setLocalDate((prevState) => ({
-          ...prevState,
-          [inputType]: value,
-        }));
-        setError('');
-      }
-    }
-  };
-
-  useEffect(() => {
-    const newLocalDate = convertToLocalDate(localDate);
-    field.onChange(newLocalDate);
-  }, [localDate, field]);
 
   return (
     <div className={styles.container}>
       <div className={styles.inputContainer}>
-        <input
-          className={`${styles.input} ${styles.year}`}
-          id="year"
-          type={type}
-          placeholder="YYYY"
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-        <span>-</span>
-        <input
-          className={`${styles.input} ${styles.year}`}
-          id="month"
-          type={type}
-          placeholder="MM"
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-        <span>-</span>
-        <input
-          className={`${styles.input} ${styles.year}`}
-          id="day"
-          type={type}
-          placeholder="DD"
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+        <input type={type} id={name} {...field} onChange={handleInputChange} placeholder="YYYY-MM-DD" />
       </div>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className={styles.error}>{error.message}</p>}
     </div>
   );
 }

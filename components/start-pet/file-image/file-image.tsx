@@ -4,10 +4,12 @@ import styles from './file-image.module.scss';
 
 interface ImageValueType {
   imageValue: FileList;
+  imageUrl: string | undefined;
 }
 
-export default function FileImage({ imageValue }: ImageValueType) {
-  const [imageSrc, setImageSrc] = useState<string>('/images/start-pet/Dog.png');
+export default function FileImage({ imageValue, imageUrl }: ImageValueType) {
+  const url = imageUrl ? imageUrl : '/images/start-pet/Dog.png';
+  const [imageSrc, setImageSrc] = useState<string>(url);
   useEffect(() => {
     if (imageValue && imageValue.length > 0) {
       const file = imageValue[0];

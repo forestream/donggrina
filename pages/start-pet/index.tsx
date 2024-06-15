@@ -5,6 +5,7 @@ import { imageUpload } from '@/api/image-api';
 import PetsApi from '@/api/my/pets';
 import { FieldValues } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import Button from '@/components/common/button/button';
 
 export default function StartPet() {
   const router = useRouter();
@@ -35,7 +36,11 @@ export default function StartPet() {
   return (
     <section className={styles.section}>
       <Title>반려동물 추가</Title>
-      <EntryForm onSubmit={handleSubmit} />
+      <EntryForm onSubmit={handleSubmit}>
+        <Button type="submit" className="primary" round>
+          반려동물 추가하기
+        </Button>
+      </EntryForm>
     </section>
   );
 }
