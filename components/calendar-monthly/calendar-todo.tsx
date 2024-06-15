@@ -3,11 +3,10 @@ import styles from './calendar-todo.module.scss';
 import CalendarTodoProfile from './calendar-todo-profile';
 import DropdownMenu from '../kebab/kebab';
 import Image from 'next/image';
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { DailyTodo } from '@/api/calendar/request.type';
 
 interface CalendarTodoProps {
@@ -16,6 +15,7 @@ interface CalendarTodoProps {
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
   const router = useRouter();
+  const optionRef = useRef<HTMLDivElement>(null);
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
@@ -36,8 +36,13 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
     router.push(`/calendar/${todo.id}/edit`);
   };
 
+  const handleClick: MouseEventHandler = (e) => {
+    if (optionRef.current?.contains(e.target as Node)) return;
+    router.push(`/calendar/${todo.id}`);
+  };
+
   return (
-    <Link href={`/calendar/${todo.id}`} key={todo.id} className={styles.outer}>
+    <div onClick={handleClick} key={todo.id} className={styles.outer}>
       <div className={styles.category}>카테고리</div>
 
       <div className={styles.todo}>
@@ -50,7 +55,7 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
         </div>
       </div>
 
-      <div className={styles.kebabCheck}>
+      <div ref={optionRef} className={styles.kebabCheck}>
         <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
           <DropdownMenu.Kebab />
           <DropdownMenu.Content>
@@ -78,6 +83,6 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
           </div>
         </label>
       </div>
-    </Link>
+    </div>
   );
 }
