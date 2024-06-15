@@ -33,7 +33,7 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
       <div className={styles.category}>카테고리</div>
 
       <div className={styles.todo}>
-        <p>
+        <p className={styles.todoTitle}>
           {todo.title} ({todo.dateTime.slice(-8, -3)})
         </p>
         <div className={styles.profiles}>

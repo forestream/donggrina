@@ -19,6 +19,11 @@
   flex-grow: 1;
 }
 
+.todoTitle {
+  font-family: LaundryGothic;
+  font-weight: 700;
+}
+
 .kebabCheck {
   display: flex;
   flex-direction: column;
@@ -64,6 +69,7 @@
 }
 
 .profiles {
+  margin-top: 4px;
   display: flex;
   gap: 10px;
 }
