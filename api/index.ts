@@ -11,3 +11,12 @@ export const axiosInstance = axios.create({
   },
   withCredentials: true,
 });
+
+export const axiosFileInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: `Bearer ${token}`,
+  },
+  withCredentials: true,
+});

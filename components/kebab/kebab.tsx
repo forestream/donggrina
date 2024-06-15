@@ -14,7 +14,12 @@ export const DropdownMenuContext = createContext<DropdownMenuContextProps>({
 export default function DropdownMenu(props: PropsWithChildren<{ value: Omit<DropdownMenuContextProps, 'modalRef'> }>) {
   const modalRef = useRef<HTMLUListElement>(null);
   const value = { ...props.value, modalRef };
-  return <DropdownMenuContext.Provider value={value}>{props.children}</DropdownMenuContext.Provider>;
+
+  return (
+    <DropdownMenuContext.Provider value={value}>
+      <div className={styles['dropdown-menu']}>{props.children}</div>
+    </DropdownMenuContext.Provider>
+  );
 }
 
 export function useDropdownMenu() {

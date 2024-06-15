@@ -16,9 +16,7 @@ export default function useOutside<T extends HTMLElement, U extends HTMLElement>
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (!isTargetIncludes(event, ref) && !isTargetIncludes(event, modalRef)) {
-        onCloseToggle();
-      }
+      if (!isTargetIncludes(event, ref) && !isTargetIncludes(event, modalRef)) onCloseToggle();
     };
 
     if (isOpen) document.addEventListener('mousedown', handleOutsideClick);

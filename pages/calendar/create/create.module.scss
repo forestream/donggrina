@@ -1,8 +1,11 @@
 .outer {
-  padding: 54px 24px 64px;
+  padding: 54px 24px 100px;
   position: relative;
   font-family: 'LaundryGothic';
   color: var(--text-color-gray);
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .title {
@@ -64,14 +67,14 @@
 
 .categorySelectorInner {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   gap: 16px;
+  flex-wrap: wrap;
   position: relative;
 }
 
 .categoryLabel {
-  width: 100%;
   text-align: center;
 }
 
@@ -87,7 +90,7 @@
   cursor: pointer;
   background-color: var(--todo-category);
   border-radius: 10px;
-  margin: 0 auto 8px;
+  margin: 0 0 8px;
 }
 
 .categoryInput:checked ~ .categoryIcon {
@@ -155,10 +158,9 @@
   background-color: var(--main-color);
   border-radius: 9999px;
   margin-top: 30px;
+}
 
-  &:disabled {
-    background-color: var(--disabled-button);
-    color: var(--white);
-    cursor: default;
-  }
+.disabled {
+  background-color: var(--disabled-color);
+  color: var(--white);
 }
