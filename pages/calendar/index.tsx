@@ -37,9 +37,9 @@ export default function CalendarPage() {
           year: selectedYear,
           month: selectedMonth,
           date: selectedDate,
+          onSelectedYear,
           onSelectedMonth,
           onSelectedDate,
-          onSelectedYear,
           onResetToday,
         }}
       >

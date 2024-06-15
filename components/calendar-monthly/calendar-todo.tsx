@@ -5,7 +5,7 @@ import DropdownMenu from '../kebab/kebab';
 import Image from 'next/image';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteTodo, putTodoFinished } from '@/api/calendar/request';
-import { ChangeEventHandler, MouseEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 import { Todo } from '@/api/calendar/request.type';
 
 interface CalendarTodoProps {
@@ -13,6 +13,8 @@ interface CalendarTodoProps {
 }
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
+  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+
   const queryClient = useQueryClient();
 
   const finishedMutation = useMutation({
@@ -32,17 +34,16 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
     mutationFn: (calendarId: string) => deleteTodo(calendarId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['monthlyTodos', +todo.dateTime.split('-')[0], +todo.dateTime.split('-')[1]],
+        queryKey: ['monthlyTodos', todo.dateTime.slice(0, 7)],
       });
       queryClient.invalidateQueries({ queryKey: ['dailyTodos', todo.dateTime.split('T')[0]] });
     },
   });
 
-  const handleDelete: MouseEventHandler = (e) => {
-    deleteMutation.mutate((e.target as Element).id);
+  const handleDelete = () => {
+    deleteMutation.mutate(todo.id.toString());
+    onCloseToggle();
   };
-
-  const { isToggle, handleOpenToggle, handleCloseToggle } = useToggle();
 
   return (
     <div key={todo.id} className={styles.outer}>
@@ -59,21 +60,11 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
       </div>
 
       <div className={styles.kebabCheck}>
-        <DropdownMenu
-          value={{
-            isOpen: isToggle,
-            onOpenToggle: handleOpenToggle,
-            onCloseToggle: () => setTimeout(() => handleCloseToggle(), 100),
-          }}
-        >
+        <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
           <DropdownMenu.Kebab />
           <DropdownMenu.Content>
             <DropdownMenu.Item>수정</DropdownMenu.Item>
-            <DropdownMenu.Item>
-              <div onClick={handleDelete} id={todo.id.toString()}>
-                삭제
-              </div>
-            </DropdownMenu.Item>
+            <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu>
         <label className={styles.checkContainer}>

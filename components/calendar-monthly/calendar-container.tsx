@@ -14,7 +14,7 @@ export default function CalendarContainer() {
   const yearMonth = `${year}-${month.toString().padStart(2, '0')}`;
 
   const { data: monthlyTodos } = useQuery({
-    queryKey: ['monthlyTodos', year, month],
+    queryKey: ['monthlyTodos', yearMonth],
     queryFn: () => fetchMonthlyTodos(yearMonth),
   });
 
