@@ -3,10 +3,10 @@ import styles from './calendar-todo.module.scss';
 import CalendarTodoProfile from './calendar-todo-profile';
 import DropdownMenu from '../kebab/kebab';
 import Image from 'next/image';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTodo, putTodoFinished } from '@/api/calendar/request';
 import { ChangeEventHandler } from 'react';
 import { Todo } from '@/api/calendar/request.type';
+import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
+import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 
 interface CalendarTodoProps {
   todo: Todo;
@@ -15,30 +15,13 @@ interface CalendarTodoProps {
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
-  const queryClient = useQueryClient();
-
-  const finishedMutation = useMutation({
-    mutationFn: (calendarId: string) => putTodoFinished(calendarId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dailyTodos', todo.dateTime.split('T')[0]] });
-    },
-    onError: () => queryClient.resetQueries({ queryKey: ['dailyTodos', todo.dateTime.split('T')[0]] }),
-  });
+  const finishedMutation = useTodoFinishedMutation(todo);
+  const deleteMutation = useTodoDeleteMutation(todo);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.target.defaultChecked = !e.target.defaultChecked;
     finishedMutation.mutate(e.target.id);
   };
-
-  const deleteMutation = useMutation({
-    mutationFn: (calendarId: string) => deleteTodo(calendarId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['monthlyTodos', todo.dateTime.slice(0, 7)],
-      });
-      queryClient.invalidateQueries({ queryKey: ['dailyTodos', todo.dateTime.split('T')[0]] });
-    },
-  });
 
   const handleDelete = () => {
     deleteMutation.mutate(todo.id.toString());
