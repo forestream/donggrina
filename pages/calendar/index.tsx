@@ -7,12 +7,6 @@ import CalendarInstance from '@/utils/date/date.utils';
 import useSelect from '@/hooks/use-select';
 import CalendarTodos from '@/components/calendar-monthly/calendar-todos';
 
-export type CalendarProps = {
-  year: number | null;
-  month: number | null;
-  date: number | null;
-};
-
 export default function CalendarPage() {
   const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
     CalendarInstance.currentYear,

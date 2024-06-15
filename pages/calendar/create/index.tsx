@@ -1,6 +1,5 @@
 import styles from './create.module.scss';
 import { useEffect, useState } from 'react';
-import { CalendarProps } from '..';
 import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -10,22 +9,18 @@ import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
 import { fetchPets, postTodo } from '@/api/calendar/request';
 import { Pet } from '@/api/calendar/request.type';
-
-export interface DateTime extends CalendarProps {
-  ampm: string | null;
-  hour: number | null;
-  minute: number | null;
-}
-
-export interface IFormInput extends CalendarProps {
-  title: string;
-  memo: string;
-  petName: string;
-  category: string;
-  dateTime: string;
-}
+import { DateTime, IFormInput } from '@/types/calendar';
 
 export default function Create() {
+  const handleLoad = async () => {
+    const data = await fetchPets();
+    setPets(data);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
   const {
     setValue,
     trigger,
@@ -65,15 +60,6 @@ export default function Create() {
       .slice(0, -8);
     postTodo({ ...data, dateTime: dateTimeBackend });
   };
-
-  const handleLoad = async () => {
-    const data = await fetchPets();
-    setPets(data);
-  };
-
-  useEffect(() => {
-    handleLoad();
-  }, []);
 
   return (
     <div className={styles.outer}>
