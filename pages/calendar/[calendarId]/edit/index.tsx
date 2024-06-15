@@ -31,7 +31,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Edit({ todo }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { id, title, memo, category: initCategory, dateTime: initDateTime } = todo;
+  const { id, title, memo, petName: initPetName, category: initCategory, dateTime: initDateTime } = todo;
   const { data: pets } = usePetsQuery();
   const putMutation = useTodoPutMutation();
   const router = useRouter();
@@ -105,7 +105,13 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
           반려동물 선택
           <div className={styles.petLabelContainer}>
             {pets.map((pet, i) => (
-              <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+              <PetRadio
+                key={i}
+                register={register}
+                petName={pet.name}
+                petImage={pet.imageUrl}
+                defaultPet={initPetName}
+              />
             ))}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
