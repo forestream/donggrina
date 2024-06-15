@@ -4,13 +4,14 @@ import CalendarTodoProfile from './calendar-todo-profile';
 import DropdownMenu from '../kebab/kebab';
 import Image from 'next/image';
 import { ChangeEventHandler } from 'react';
-import { Todo } from '@/api/calendar/request.type';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { DailyTodo } from '@/api/calendar/request.type';
 
 interface CalendarTodoProps {
-  todo: Todo;
+  todo: DailyTodo;
 }
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
@@ -36,7 +37,7 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
   };
 
   return (
-    <div key={todo.id} className={styles.outer}>
+    <Link href={`/calendar/${todo.id}`} key={todo.id} className={styles.outer}>
       <div className={styles.category}>카테고리</div>
 
       <div className={styles.todo}>
@@ -77,6 +78,6 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
           </div>
         </label>
       </div>
-    </div>
+    </Link>
   );
 }
