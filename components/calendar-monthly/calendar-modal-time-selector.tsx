@@ -1,4 +1,4 @@
-import { TIME_SELECTOR } from '@/lib/constants/calendar-constants';
+import { TIME_SELECTOR } from '@/utils/constants/calendar-constants';
 import styles from './calendar-modal-time-selector.module.scss';
 import { useRef, useEffect, BaseSyntheticEvent } from 'react';
 import TimeScroller from './time-scroller';
