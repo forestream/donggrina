@@ -7,6 +7,7 @@ export interface Pet {
 export interface Todo {
   id: number;
   title: string;
+  memo?: string;
   category: string;
   dateTime: string;
   memberProfileImageUrl: string;

@@ -7,12 +7,15 @@ import { ChangeEventHandler } from 'react';
 import { Todo } from '@/api/calendar/request.type';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
+import { useRouter } from 'next/router';
 
 interface CalendarTodoProps {
   todo: Todo;
 }
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
+  const router = useRouter();
+
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
   const finishedMutation = useTodoFinishedMutation(todo);
@@ -26,6 +29,10 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
   const handleDelete = () => {
     deleteMutation.mutate(todo.id.toString());
     onCloseToggle();
+  };
+
+  const handleEdit = () => {
+    router.push(`/calendar/${todo.id}/edit`);
   };
 
   return (
@@ -46,7 +53,7 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
         <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
           <DropdownMenu.Kebab />
           <DropdownMenu.Content>
-            <DropdownMenu.Item>수정</DropdownMenu.Item>
+            <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
             <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu>
