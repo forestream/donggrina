@@ -3,13 +3,16 @@ import { useQuery } from '@tanstack/react-query';
 
 const petsApi = new PetsApi();
 
-export default class PetsGetQuery {
-  constructor() {}
+export const useGetPetsAllQuery = () => {
+  return useQuery({
+    queryKey: ['pets'],
+    queryFn: async () => await petsApi.petsAllInquiry(),
+  });
+};
 
-  petsAllInquiry() {
-    return useQuery({
-      queryKey: ['pets'],
-      queryFn: () => petsApi.petsAllInquiry(),
-    });
-  }
-}
+export const useGetPetsDetailsQuery = (id: string) => {
+  return useQuery({
+    queryKey: ['petsDetail', id],
+    queryFn: async () => await petsApi.petsDetailsInquiry(id),
+  });
+};

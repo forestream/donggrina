@@ -37,7 +37,6 @@ export default function EntryForm({ onSubmit, defaultData, children }: PropsWith
     },
     mode: 'onBlur',
   });
-  console.log(methods);
   const { control, handleSubmit, watch, setValue } = methods;
   const formSubmit: SubmitHandler<FieldValues> = async (data) => {
     onSubmit(data);

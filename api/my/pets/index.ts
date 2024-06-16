@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/api';
 
-interface PetsAddDataType {
+export interface PetsAddDataType {
   imageId: number;
   name: string;
   sex: string;
@@ -25,5 +25,9 @@ export default class PetsApi {
 
   async petsDetailsInquiry(id: string) {
     return await axiosInstance.get(`/my/pets/${id}`).then((res) => res.data);
+  }
+
+  async petsModify(data: PetsAddDataType, id: string) {
+    return await axiosInstance.put(`/my/pets/${id}`, data);
   }
 }
