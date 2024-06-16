@@ -7,10 +7,17 @@ export default function CalendarTodos() {
   const { year, month, date } = calendarContext;
   const yearMonthDate = [year, (month + 1).toString().padStart(2, '0'), date.toString().padStart(2, '0')].join('-');
 
-  const { data: dailyTodos, error, isPending, isError } = useDailyTodosQuery(yearMonthDate);
+  const { data: dailyTodos, error, isPending, isError, isFetchedAfterMount } = useDailyTodosQuery(yearMonthDate);
 
+  if (!isFetchedAfterMount) return;
   if (isPending) return <span>loading</span>;
   if (isError) return <span>Error: {error.message}</span>;
 
-  return <>{dailyTodos && dailyTodos.map((todo) => <CalendarTodo key={todo.id} todo={todo} />)}</>;
+  return (
+    <>
+      {dailyTodos.map((todo) => (
+        <CalendarTodo key={todo.id} todo={todo} />
+      ))}
+    </>
+  );
 }
