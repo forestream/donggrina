@@ -4,13 +4,14 @@ import styles from './clipboard-button.module.scss';
 
 interface ClipboardType {
   code: string;
+  onClick: () => void;
 }
 
-export default function ClipboardButton({ code }: ClipboardType) {
+export default function ClipboardButton({ code, onClick }: ClipboardType) {
   const handleClick = async () => {
     try {
       await onCopy(code);
-      console.log('복사 완료');
+      onClick();
     } catch {
       console.log('복사 실패');
     }

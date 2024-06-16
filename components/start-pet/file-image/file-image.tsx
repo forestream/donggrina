@@ -20,7 +20,7 @@ export default function FileImage({ imageValue, imageUrl }: ImageValueType) {
   }, [imageValue]);
   return (
     <div className={styles.imgBox}>
-      <Image src={imageSrc} objectFit="cover" fill alt="프로필 이미지" />
+      <Image src={imageSrc} fill priority sizes="100%" alt="프로필 이미지" />
     </div>
   );
 }

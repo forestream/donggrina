@@ -19,3 +19,19 @@ export const usePetsModifyQuery = () => {
     },
   });
 };
+
+export const usePetsAddQuery = () => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (variables: { data: PetsAddDataType }) => {
+      const { data } = variables;
+      return await petsApi.petsAdd(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pets'], refetchType: 'active' });
+      router.push('/start-pet/finish');
+    },
+  });
+};
