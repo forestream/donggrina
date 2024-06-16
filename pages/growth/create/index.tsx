@@ -6,14 +6,26 @@ import { Pet } from '@/api/calendar/request.type';
 import { GROWTH_CATEGORY } from '@/utils/constants/growth';
 import { AddGrowthData } from '@/types/growth/details';
 import classNames from 'classnames';
+import CategoryInputs from './category-inputs';
 
 export default function CreateGrowth() {
   const [pets, setPets] = useState<Pet[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState(GROWTH_CATEGORY[0]);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<AddGrowthData>({ mode: 'onBlur' });
+  } = useForm<AddGrowthData>({
+    mode: 'onBlur',
+    defaultValues: {
+      category: GROWTH_CATEGORY[0],
+    },
+  });
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCategory(event.target.value);
+  };
 
   const onSubmit: SubmitHandler<AddGrowthData> = (data) => {
     console.log(data);
@@ -43,18 +55,20 @@ export default function CreateGrowth() {
             {GROWTH_CATEGORY.map((category) => (
               <label key={category} className={styles.categoryLabel}>
                 <input
-                  {...register('category', { validate: (selected) => !!selected || '*카테고리를 선택해주세요.' })}
+                  {...register('category')}
                   value={category}
                   className={styles.categoryInput}
                   type="radio"
+                  checked={selectedCategory === category}
+                  onChange={handleCategoryChange}
                 />
                 <div className={styles.categoryIcon}></div>
-                <p>{category}</p>
+                <p className={styles.categoryName}>{category}</p>
               </label>
             ))}
           </div>
-          {errors.category && <p className={styles.error}>{errors.category.message}</p>}
         </div>
+        <CategoryInputs selectedCategory={selectedCategory} register={register} />
         <button
           className={classNames(styles.submit, {
             [styles.disabled]: !isValid,

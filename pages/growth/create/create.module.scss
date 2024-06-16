@@ -43,38 +43,40 @@
     margin: 0 0 30px;
     border-bottom: 1px solid var(--text-color-time-selector);
     border-top: 1px solid var(--text-color-time-selector);
+
+    .categorySelectorInner {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      .categoryLabel {
+        text-align: center;
+        .categoryInput {
+          position: absolute;
+          width: 0;
+          height: 0;
+        }
+        .categoryInput ~ .categoryIcon {
+          width: 66px;
+          height: 66px;
+          cursor: pointer;
+          background-color: var(--todo-category);
+          border-radius: 10px;
+          margin: 0 0 8px;
+        }
+        .categoryInput:checked ~ .categoryIcon {
+          background-color: var(--main-color);
+        }
+      }
+      .categoryName {
+        color: var(--text-color-gray);
+        font-size: 14px;
+      }
+    }
   }
 
-  .categorySelectorInner {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    gap: 16px;
-    flex-wrap: wrap;
-    position: relative;
-  }
-
-  .categoryLabel {
-    text-align: center;
-  }
-
-  .categoryInput {
-    position: absolute;
-    width: 0;
-    height: 0;
-  }
-  .categoryInput ~ .categoryIcon {
-    width: 66px;
-    height: 66px;
-    cursor: pointer;
-    background-color: var(--todo-category);
-    border-radius: 10px;
-    margin: 0 0 8px;
-  }
-
-  .categoryInput:checked ~ .categoryIcon {
-    background-color: var(--main-color);
-  }
   .submit {
     width: 100%;
     padding: 14px;

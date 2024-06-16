@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import styles from './pet-radio.module.scss';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '@/pages/calendar/create';
+import { AddGrowthData } from '@/types/growth/details';
 
 interface PetRadio {
-  register: UseFormRegister<IFormInput>;
+  register: UseFormRegister<IFormInput & FieldValues> | UseFormRegister<AddGrowthData & FieldValues>;
   petName: string;
   petImage: string;
 }
@@ -19,7 +20,7 @@ export default function PetRadio({ register, petName, petImage }: PetRadio) {
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
         <input
-          {...register('petName', { validate: (selected) => !!selected || '*반려동물을 선택해주세요.' })}
+          {...register('petName', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
           type="radio"
