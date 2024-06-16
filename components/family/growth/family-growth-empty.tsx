@@ -1,8 +1,7 @@
 import React from 'react';
-import styles from './family-growth-empty.module.scss';
-import Hyperlink from '@/components/common/button/hyperlink';
 import Image from 'next/image';
 import Link from 'next/link';
+import styles from './family-growth-empty.module.scss';
 
 export default function FamilyGrowthEmpty() {
   return (

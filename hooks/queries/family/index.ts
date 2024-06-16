@@ -29,6 +29,6 @@ export function useFetchGrowth(date: string) {
 export function useFetchDiary(date: string) {
   return useQuery({
     queryKey: ['family/diary', date],
-    queryFn: () => fetchDiary(date),
+    queryFn: () => fetchDiary(date)!,
   });
 }

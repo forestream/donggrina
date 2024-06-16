@@ -1,8 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import FamilyDiaryLayout from './layout/family-diary-layout';
-import styles from './family-diary-contents-empty.module.scss';
+import styles from './family-diary-empty.module.scss';
 import Hyperlink from '@/components/common/button/hyperlink';
 
 export default function FamilyDiaryContentsEmpty() {
