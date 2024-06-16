@@ -10,6 +10,8 @@ import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-pro
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
 import useTodoQuery from '@/hooks/queries/calendar/use-todo-query';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -22,12 +24,23 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function CalendarById({ calendarId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const queryClient = useQueryClient();
   const { data: todo } = useTodoQuery(calendarId);
+  const finishedMutation = useTodoFinishedMutation(todo);
+  const deleteMutation = useTodoDeleteMutation(todo);
+
+  const router = useRouter();
 
   const { year, month, date, ampm, hour, minute } = disintegrateDateTime(todo.dateTime);
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
-  const finishedMutation = useTodoFinishedMutation(todo);
+  const handleClickEdit = () => {
+    router.push(`/calendar/${calendarId}/edit`);
+  };
+  const handleClickDelete = () => {
+    deleteMutation.mutate(calendarId, {
+      onSuccess: () => router.push('/calendar'),
+    });
+  };
 
   const handleClickFinished = () => {
     finishedMutation.mutate(todo.id.toString(), {
@@ -63,8 +76,8 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
             <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
               <DropdownMenu.Kebab />
               <DropdownMenu.Content>
-                <DropdownMenu.Item>수정</DropdownMenu.Item>
-                <DropdownMenu.Item>삭제</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleClickEdit}>수정</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleClickDelete}>삭제</DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu>
           </div>

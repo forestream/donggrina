@@ -1,8 +1,8 @@
 import { deleteTodoById } from '@/api/calendar/request';
-import { Todo } from '@/api/calendar/request.type';
+import { DailyTodo, TodoById } from '@/api/calendar/request.type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-const useTodoDeleteMutation = (todo: Todo) => {
+const useTodoDeleteMutation = (todo: DailyTodo | TodoById) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (calendarId: string) => deleteTodoById(calendarId),
