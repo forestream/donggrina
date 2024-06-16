@@ -1,7 +1,7 @@
 import { fetchDailyTodos, postRefreshToken } from '@/api/calendar/request';
 import { useQuery } from '@tanstack/react-query';
 
-const useMonthlyTodosQuery = (yearMonthDate: string) =>
+const useDailyTodosQuery = (yearMonthDate: string) =>
   useQuery({
     queryKey: ['dailyTodos', yearMonthDate],
     queryFn: () => fetchDailyTodos(yearMonthDate),
@@ -13,4 +13,4 @@ const useMonthlyTodosQuery = (yearMonthDate: string) =>
     },
   });
 
-export default useMonthlyTodosQuery;
+export default useDailyTodosQuery;
