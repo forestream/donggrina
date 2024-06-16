@@ -24,7 +24,7 @@ export default function FamilyDiaryContents() {
           <path
             d="M1 1L8.50555 14C10.0452 16.6667 13.8941 16.6667 15.4338 14L22.9393 1"
             stroke="#8fcc93"
-            stroke-linecap="round"
+            strokeLinecap="round"
           />
         </svg>
       </div>
