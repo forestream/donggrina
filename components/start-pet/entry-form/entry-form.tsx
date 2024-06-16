@@ -59,7 +59,7 @@ export default function EntryForm({ onSubmit, defaultData, children }: PropsWith
   return (
     <Form onSubmit={handleSubmit(formSubmit)} methods={methods}>
       <div className={styles.fileBox}>
-        <FileImage imageValue={watch('imageId')} imageUrl={defaultData?.url} />
+        <FileImage imageValue={watch('imageId')} imageUrl={defaultData?.url} watchType={watch('type')} />
         <FileInput name="imageId" id="file" control={control} />
       </div>
       <ul className={styles.listContainer}>
