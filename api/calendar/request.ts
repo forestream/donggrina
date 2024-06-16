@@ -16,12 +16,17 @@ export async function fetchDailyTodos(yearMonthDate: string): Promise<DailyTodo[
   return data.data;
 }
 
-export async function fetchTodoById(calendarId: string, auth: string): Promise<TodoById> {
-  const { data } = await axiosInstance.get(`/calendar/${calendarId}`, {
-    headers: {
-      Authorization: 'Bearer ' + auth,
-    },
-  });
+export async function fetchTodoById(calendarId: string, auth: string | null = null): Promise<TodoById> {
+  const { data } = await axiosInstance.get(
+    `/calendar/${calendarId}`,
+    auth
+      ? {
+          headers: {
+            Authorization: 'Bearer ' + auth,
+          },
+        }
+      : {},
+  );
   return data.data;
 }
 
