@@ -23,13 +23,13 @@ export default function Search() {
   return (
     <main className={styles.outer}>
       <form className={styles.inner} onSubmit={handleSubmit(onSubmit)}>
-        <SearchBar />
+        <SearchBar register={register} />
 
         <div className={styles.section}>
           <p>필터</p>
           <div className={styles.filters}>
             {FILTERS.map((filter) => (
-              <SearchFilter key={filter.name} filter={filter} />
+              <SearchFilter key={filter.name} filter={filter} register={register} />
             ))}
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function Search() {
           <p>작성자 필터</p>
           <div className={styles.members}>
             {membersQuery.data.members.map((member) => (
-              <SearchMemberFilter key={member.id} member={member} />
+              <SearchMemberFilter key={member.id} member={member} register={register} />
             ))}
           </div>
         </div>
