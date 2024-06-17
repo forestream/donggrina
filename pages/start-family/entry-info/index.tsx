@@ -18,8 +18,7 @@ export default function CreateFamily() {
   const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      await myFamilyApi.myFamilyCreate(data);
-      router.replace('/start-family/entry-info/finish');
+      await myFamilyApi.myFamilyCreate(data).then(() => router.replace('/start-family/entry-info/finish'));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response!.data);

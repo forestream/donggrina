@@ -7,23 +7,10 @@
     display: flex;
     gap: 3px;
     border-bottom: 1.5px solid var(--main-color);
-
-    span {
-      font-size: 14px;
-      font-weight: 400;
+    input {
+      @include input;
+      border: 0;
     }
-  }
-  .input {
-    @include input;
-    border: 0;
-    text-align: center;
-  }
-  .year {
-    width: 40px;
-  }
-  .day,
-  .month {
-    width: 25px;
   }
 }
 .error {

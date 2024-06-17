@@ -3,17 +3,16 @@ import { axiosInstance } from '../..';
 import { FieldValues } from 'react-hook-form';
 
 interface MyCodeType {
-  id: number;
   code: number;
+  data: {
+    id: number;
+    code: string;
+  };
+  message: string;
 }
 
 interface NameModifyType {
   name: string;
-}
-
-interface AddMemberType {
-  code: string;
-  nickname: string;
 }
 
 export default class MyFamilyApi {
@@ -39,7 +38,7 @@ export default class MyFamilyApi {
     return axiosInstance.put(`/my/groups/${groupId}`, formData);
   }
 
-  async myFamilyAddMember(formData: AddMemberType) {
+  async myFamilyAddMember(formData: FieldValues) {
     return axiosInstance.post(`/my/groups/members`, formData);
   }
 

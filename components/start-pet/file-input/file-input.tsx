@@ -1,4 +1,3 @@
-import { PetEntryInfoType } from '@/pages/start-pet';
 import { Controller, FieldValues, UseFormReturn } from 'react-hook-form';
 import FileButtonSVG from '@/public/images/start-pet/fileButton.svg';
 import styles from './file-input.module.scss';
@@ -6,7 +5,7 @@ import { useRef } from 'react';
 
 interface FileInputType {
   id: string;
-  name: keyof PetEntryInfoType;
+  name: string;
   control: UseFormReturn<FieldValues>['control'];
 }
 
