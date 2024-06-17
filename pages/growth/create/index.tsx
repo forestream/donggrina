@@ -10,8 +10,10 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growt-query';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
+import { useRouter } from 'next/router';
 
 export default function CreateGrowth() {
+  const router = useRouter();
   const { data: pets } = usePetsQuery();
   const createGrowthMutation = useCreateGrotwthMutation();
 
@@ -39,10 +41,10 @@ export default function CreateGrowth() {
   };
 
   const onSubmit: SubmitHandler<AddGrowthData> = (data) => {
-    console.log(data);
     createGrowthMutation.mutate(data, {
       onSuccess: (response) => {
         console.log('Success:', response);
+        router.push('/growth');
       },
       onError: (error) => {
         console.error('Error:', error);
