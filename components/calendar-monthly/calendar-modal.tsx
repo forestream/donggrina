@@ -2,10 +2,11 @@ import styles from './calendar-modal.module.scss';
 import { BaseSyntheticEvent, useState } from 'react';
 import CalendarModalTimeSelector from './calendar-modal-time-selector';
 import CalendarModalCalendar from './calendar-modal-calendar';
-import { DateTime } from '@/pages/calendar/create';
 import Calendar from '../calendar-compound/calendar';
 import CalendarInstance from '@/utils/date/date.utils';
 import useSelect from '@/hooks/use-select';
+import { DateTime } from '@/types/calendar';
+import Image from 'next/image';
 
 interface CalendarModalProps {
   updateDateTime: (newDateTime: DateTime) => void;
@@ -61,6 +62,7 @@ export default function CalendarModal({ updateDateTime, onClose }: CalendarModal
 
   return (
     <div className={styles.outer}>
+      <Image src="/images/calendar/modal-close.svg" alt="닫기" width={20} height={20} className={styles.close} />
       <Calendar
         value={{
           year: selectedYear,
@@ -72,8 +74,12 @@ export default function CalendarModal({ updateDateTime, onClose }: CalendarModal
           onResetToday,
         }}
       >
-        <Calendar.Year />
-        <Calendar.Month />
+        <div style={{ position: 'relative', left: '-12px' }}>
+          <Calendar.Year />
+        </div>
+        <div style={{ position: 'relative', left: '-12px' }}>
+          <Calendar.Month />
+        </div>
         <CalendarModalCalendar dateTime={modalDateTime} onSelect={handleSelect} />
         <CalendarModalTimeSelector dateTime={modalDateTime} onSelect={handleSelect} />
         <button onClick={handleDateTimeSave} className={styles.save} type="button">
