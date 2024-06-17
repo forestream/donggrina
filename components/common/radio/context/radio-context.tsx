@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, PropsWithChildren, createContext, useContext } from 'react';
+import { PropsWithChildren, createContext, useContext } from 'react';
 import styles from '../radio.module.scss';
 import RadioInput from '../radio-input/radio-input';
 import RadioLabel from '../radio-label/radio-label';
@@ -11,6 +11,8 @@ interface RadioContainerPropsType {
 
 interface RadioItemListType {
   text: string;
+  value: string | boolean;
+  id: string;
   // eslint-disable-next-line
   name: any;
 }
@@ -33,7 +35,7 @@ export function RadioContainer({ children, control }: PropsWithChildren<RadioCon
   );
 }
 
-function RadioItemList({ text, id, value, name }: InputHTMLAttributes<HTMLInputElement> & RadioItemListType) {
+function RadioItemList({ text, id, value, name }: RadioItemListType) {
   const context = useContext(RadioContext);
   if (context === undefined) {
     throw new Error('잘못된 접근 입니다.');

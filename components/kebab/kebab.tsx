@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PropsWithChildren, createContext, useContext } from 'react';
+import { PropsWithChildren, createContext, useContext, useRef } from 'react';
 import { DropdownMenuContextProps } from './kebab.type';
 import useOutside from '@/hooks/use-outside';
 import styles from './kebab.module.scss';
@@ -8,11 +8,15 @@ export const DropdownMenuContext = createContext<DropdownMenuContextProps>({
   isOpen: false,
   onOpenToggle: () => {},
   onCloseToggle: () => {},
+  modalRef: null,
 });
 
-export default function DropdownMenu(props: PropsWithChildren<{ value: DropdownMenuContextProps }>) {
+export default function DropdownMenu(props: PropsWithChildren<{ value: Omit<DropdownMenuContextProps, 'modalRef'> }>) {
+  const modalRef = useRef<HTMLUListElement>(null);
+  const value = { ...props.value, modalRef };
+
   return (
-    <DropdownMenuContext.Provider value={props.value}>
+    <DropdownMenuContext.Provider value={value}>
       <div className={styles['dropdown-menu']}>{props.children}</div>
     </DropdownMenuContext.Provider>
   );
@@ -26,22 +30,29 @@ export function useDropdownMenu() {
 
 function DropdownMenuContent(props: PropsWithChildren) {
   const dropdownContext = useDropdownMenu();
-  return dropdownContext.isOpen && <ul className={styles['dropdown-menu__content']}>{props.children}</ul>;
+  return (
+    dropdownContext.isOpen && (
+      <ul className={styles['dropdown-menu__content']} ref={dropdownContext.modalRef}>
+        {props.children}
+      </ul>
+    )
+  );
 }
 
-function DropdownMenuItem(props: PropsWithChildren) {
+function DropdownMenuItem(props: PropsWithChildren<{ onClick?: () => void }>) {
   return (
     <li className={styles['dropdown-list']}>
-      <button>{props.children}</button>
+      <button onClick={props.onClick}>{props.children}</button>
     </li>
   );
 }
 
 function Kebab() {
   const dropdownContext = useContext(DropdownMenuContext);
-  const ref = useOutside<HTMLButtonElement>({
+  const ref = useOutside<HTMLButtonElement, HTMLUListElement>({
     isOpen: dropdownContext.isOpen,
     onCloseToggle: dropdownContext.onCloseToggle,
+    modalRef: dropdownContext.modalRef!,
   });
 
   return (

@@ -15,12 +15,12 @@ export const GENDER_OPTION = [
 export const KIND_OPTION = ['강아지', '고양이'];
 export const NEUTERED_OPTION = [
   {
-    value: 'true',
+    value: true,
     text: '완료',
     id: 'true',
   },
   {
-    value: 'false',
+    value: false,
     text: '미완료',
     id: 'false',
   },

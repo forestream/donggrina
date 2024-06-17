@@ -1,0 +1,19 @@
+@mixin shareButtonBox {
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+@mixin shareButton($background) {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: $background;
+}
+
+@mixin shareText {
+  font-size: 12px;
+  font-weight: 500;
+}

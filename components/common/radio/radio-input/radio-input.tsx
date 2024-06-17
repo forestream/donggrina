@@ -1,17 +1,20 @@
-import { RadioType } from '@/pages/test/radio-test';
-import { InputHTMLAttributes } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  field: ControllerRenderProps<RadioType>;
+interface RadioInputProps {
+  value: string | boolean;
+  id: string;
+  name: string;
+  // eslint-disable-next-line
+  field: ControllerRenderProps<any>;
 }
 
 export default function RadioInput({ value, id, name, field }: RadioInputProps) {
+  const inputValue = typeof value === 'boolean' ? String(value) : value;
   return (
     <input
       type="radio"
       tabIndex={-1}
-      value={value}
+      value={inputValue}
       id={id}
       name={name}
       onChange={() => field.onChange(value)}
