@@ -1,0 +1,26 @@
+.image-wrapper {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  overflow: hidden;
+
+  .profile-image {
+    position: relative;
+    border-radius: 50%;
+    border: 1px solid var(--pet-border);
+  }
+
+  .profile-image-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .profile-input {
+    display: none;
+  }
+
+  .profile-label {
+    cursor: pointer;
+  }
+}

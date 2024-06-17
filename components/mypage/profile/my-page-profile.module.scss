@@ -12,33 +12,6 @@
   gap: 0 20px;
 }
 
-.image-wrapper {
-  position: relative;
-  width: 116px;
-  height: 116px;
-  overflow: hidden;
-
-  .profile-image {
-    position: relative;
-    border-radius: 50%;
-    border: 1px solid var(--pet-border);
-  }
-
-  .profile-image-icon {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-
-  .profile-input {
-    display: none;
-  }
-
-  .profile-label {
-    cursor: pointer;
-  }
-}
-
 .profile-name {
   display: flex;
   align-items: center;
@@ -52,4 +25,20 @@
     font-weight: 700;
     color: #9e9e9e;
   }
+}
+
+.modal-text {
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.modal-button-layout {
+  display: flex;
+  height: 64px;
+  width: 100%;
+  border-top: 1px solid var(--main-color);
 }
