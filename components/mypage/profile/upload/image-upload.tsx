@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './upload.module.scss';
+import styles from './image-upload.module.scss';
 import useUpload from '@/hooks/use-upload';
 import useModal from '@/hooks/use-modal';
 import ImageUploadModal from '@/components/mypage/profile/modal/image-upload-modal';
@@ -9,7 +9,7 @@ interface UploadProps {
   image: string;
 }
 
-export default function Upload(props: UploadProps) {
+export default function ImageUpload(props: UploadProps) {
   const [Modal, handleModal] = useModal();
   const { uploadRef, previewUrl, handlePreview } = useUpload({ handleModal });
 
