@@ -62,7 +62,14 @@ export default function CalendarModal({ updateDateTime, onClose }: CalendarModal
 
   return (
     <div className={styles.outer}>
-      <Image src="/images/calendar/modal-close.svg" alt="닫기" width={20} height={20} className={styles.close} />
+      <Image
+        onClick={onClose}
+        src="/images/calendar/modal-close.svg"
+        alt="닫기"
+        width={20}
+        height={20}
+        className={styles.close}
+      />
       <Calendar
         value={{
           year: selectedYear,
