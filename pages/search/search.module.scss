@@ -28,3 +28,18 @@
   display: flex;
   gap: 6px;
 }
+
+.members {
+  display: flex;
+  gap: 8px;
+}
+
+.member {
+  background-color: var(--white);
+  width: fit-content;
+  padding: 8px 19px 8px 8px;
+  border: 2px solid var(--pet-border);
+  border-radius: 9999px;
+  color: var(--pet-border);
+  cursor: pointer;
+}

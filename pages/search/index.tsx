@@ -5,23 +5,31 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { useForm } from 'react-hook-form';
 import { FILTERS } from '@/utils/constants/search';
 import SearchFilter from '@/components/search/search-filter';
+import useMembersQuery from '@/hooks/queries/search/use-members-query';
+import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-profile';
 
 export default function Search() {
   const pets = usePetsQuery();
+  const membersQuery = useMembersQuery();
   const { register } = useForm();
+
+  if (membersQuery.isPending) return <p>loading</p>;
+  if (membersQuery.isError) return <p>Error: {membersQuery.error.message}</p>;
 
   return (
     <main className={styles.outer}>
       <div className={styles.inner}>
         <SearchBar />
+
         <div className={styles.section}>
           <p>필터</p>
           <div className={styles.filters}>
             {FILTERS.map((filter) => (
-              <SearchFilter filter={filter} />
+              <SearchFilter key={filter.name} filter={filter} />
             ))}
           </div>
         </div>
+
         <div className={styles.section}>
           <p>반려동물</p>
           <div className={styles.pets}>
@@ -30,8 +38,16 @@ export default function Search() {
             ))}
           </div>
         </div>
+
         <div className={styles.section}>
           <p>작성자 필터</p>
+          <div className={styles.members}>
+            {membersQuery.data.members.map((member) => (
+              <div className={styles.member}>
+                <CalendarTodoProfile name={member.name} src={member.profileImageUrl} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </main>
