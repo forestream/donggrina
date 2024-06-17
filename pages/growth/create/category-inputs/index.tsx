@@ -9,6 +9,19 @@ interface CategoryInputsProps {
 }
 
 export default function CategoryInputs({ errors, selectedCategory, register }: CategoryInputsProps) {
+  const formatInputValue = (value: string): string => {
+    return value.replace(/[^0-9]/g, '');
+  };
+  const updateInputValue = (input: HTMLInputElement, value: string) => {
+    input.value = value;
+  };
+  const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = formatInputValue(value);
+    if (value !== formattedValue) {
+      updateInputValue(e.target, formattedValue);
+    }
+  };
   switch (selectedCategory) {
     case '간식':
       return (
@@ -68,7 +81,12 @@ export default function CategoryInputs({ errors, selectedCategory, register }: C
           </div>
           <div className={styles.inputGroup}>
             <label className={styles.label}>금액</label>
-            <input {...register('content.price')} placeholder="1,000 ₩" className={styles.input} />
+            <input
+              {...register('content.price')}
+              placeholder="1,000 ₩"
+              className={styles.input}
+              onInput={handlePriceInput}
+            />
           </div>
         </div>
       );
