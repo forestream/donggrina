@@ -8,6 +8,12 @@ import Nav from '@/components/common/nav/nav';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any;
+  }
+}
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());

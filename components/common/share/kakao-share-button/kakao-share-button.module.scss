@@ -1,0 +1,11 @@
+@import '../share.module.scss';
+
+.kakaoButtonBox {
+  @include shareButtonBox;
+  button {
+    @include shareButton(var(--kakao-background));
+  }
+  span {
+    @include shareText;
+  }
+}

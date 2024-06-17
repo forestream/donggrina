@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diary-image {
+  width: 82px;
+  height: 96px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 32px;
+}

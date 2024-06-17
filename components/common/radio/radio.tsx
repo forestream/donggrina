@@ -3,7 +3,7 @@ import { RadioContainer } from './context/radio-context';
 
 interface RadioPropsType {
   options: {
-    value: string;
+    value: string | boolean;
     text: string;
     id: string;
   }[];
