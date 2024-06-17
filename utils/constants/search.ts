@@ -1,5 +1,17 @@
 export const FILTERS = [
-  { image: '/images/search/calendar.svg', name: '일정기록' },
-  { image: '/images/search/diary.svg', name: '다이어리' },
-  { image: '/images/search/growth.svg', name: '성장기록' },
+  {
+    imageOn: '/images/search/calendar-on.svg',
+    imageOff: '/images/search/calendar-off.svg',
+    name: '일정기록',
+  },
+  {
+    imageOn: '/images/search/diary-on.svg',
+    imageOff: '/images/search/diary-off.svg',
+    name: '다이어리',
+  },
+  {
+    imageOn: '/images/search/growth-on.svg',
+    imageOff: '/images/search/growth-off.svg',
+    name: '성장기록',
+  },
 ];

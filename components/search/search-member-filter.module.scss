@@ -7,6 +7,12 @@
   color: var(--pet-border);
   cursor: pointer;
   position: relative;
+
+  &.selected {
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+    color: var(--white);
+  }
 }
 
 .checkbox {

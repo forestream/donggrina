@@ -11,7 +11,14 @@ import SearchMemberFilter from '@/components/search/search-member-filter';
 export default function Search() {
   const pets = usePetsQuery();
   const membersQuery = useMembersQuery();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm<FieldValues>({
+    defaultValues: {
+      keyword: '',
+      filter: '',
+      petName: [],
+      member: [],
+    },
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = (e) => {
     console.log(e);
@@ -29,7 +36,7 @@ export default function Search() {
           <p>필터</p>
           <div className={styles.filters}>
             {FILTERS.map((filter) => (
-              <SearchFilter key={filter.name} filter={filter} register={register} />
+              <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
             ))}
           </div>
         </div>
@@ -53,7 +60,7 @@ export default function Search() {
           <p>작성자 필터</p>
           <div className={styles.members}>
             {membersQuery.data.members.map((member) => (
-              <SearchMemberFilter key={member.id} member={member} register={register} />
+              <SearchMemberFilter key={member.id} member={member} register={register} selected={watch('member')} />
             ))}
           </div>
         </div>

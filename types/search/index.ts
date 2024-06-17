@@ -1,4 +1,5 @@
 export interface Filter {
-  image: string;
+  imageOn: string;
+  imageOff: string;
   name: string;
 }
