@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { useFetchProfile } from '@/hooks/queries/my/user';
 import useModal from '@/hooks/use-modal';
 import Button from '@/components/common/button/button';
 import Upload from '@/components/mypage/profile/upload/upload';
+import ProfileInput from '@/components/mypage/profile/input/profile-input';
 import styles from '@/components/mypage/profile/my-page-profile.module.scss';
 
 export default function MyPageProfile() {
@@ -17,12 +17,7 @@ export default function MyPageProfile() {
       <h3>마이 페이지</h3>
       <div className={styles['profile-layout']}>
         <Upload onOpenModal={handleModal} image={profileQuery.data!.profileImageUrl} />
-        <div className={styles['profile-name']}>
-          <span>{profileQuery.data!.nickname}</span>
-          <button onClick={() => handleModal(true)}>
-            <Image src="images/edit-gray-icon.svg" alt="닉네임 변경하기" width={17} height={17} />
-          </button>
-        </div>
+        <ProfileInput onOpenModal={handleModal} nickname={profileQuery.data!.nickname} />
 
         <Modal>
           <p className={styles['modal-text']}>프로필 사진을 변경하시겠습니까?</p>
