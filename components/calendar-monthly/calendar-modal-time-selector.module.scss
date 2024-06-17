@@ -32,6 +32,11 @@
   width: 100%;
 }
 
+span.colon {
+  color: var(--text-color-gray);
+  width: 0;
+}
+
 .scroller {
   width: 100%;
   height: 130px; // .selector의 height 값을 보면서 조정
