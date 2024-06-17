@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Profile from '@/components/mypage/profile/profile';
+import MyPageProfile from '@/components/mypage/profile/my-page-profile';
 import styles from '@/pages/mypage/index.module.scss';
 
 export default function MyPage() {
   return (
     <main className={styles.main}>
-      <Profile />
+      <MyPageProfile />
       <ul className={styles['management-list']}>
         <li>
           <Link href="/">

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '@/components/mypage/profile/profile.module.scss';
+import styles from '@/components/mypage/profile/my-page-profile.module.scss';
 
-export default function Profile() {
+export default function MyPageProfile() {
   return (
     <section className={styles.profile}>
       <h3>마이 페이지</h3>
