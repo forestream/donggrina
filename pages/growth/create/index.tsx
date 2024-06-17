@@ -11,10 +11,13 @@ import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growt-
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import { useRouter } from 'next/router';
+import useModal from '@/hooks/use-modal';
+import CompleteModal from './complete-modal';
 
 export default function CreateGrowth() {
   const router = useRouter();
   const { data: pets } = usePetsQuery();
+  const [Modal, handleModal] = useModal();
   const createGrowthMutation = useCreateGrotwthMutation();
 
   const year = useCalenderDateStore.use.year().toString();
@@ -35,7 +38,13 @@ export default function CreateGrowth() {
       category: GROWTH_CATEGORY[0],
     },
   });
-
+  const openModal = () => {
+    handleModal(true);
+  };
+  const closeModal = () => {
+    handleModal(false);
+    router.push('/growth');
+  };
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
   };
@@ -44,7 +53,7 @@ export default function CreateGrowth() {
     createGrowthMutation.mutate(data, {
       onSuccess: (response) => {
         console.log('Success:', response);
-        router.push('/growth');
+        openModal();
       },
       onError: (error) => {
         console.error('Error:', error);
@@ -52,52 +61,59 @@ export default function CreateGrowth() {
     });
   };
   return (
-    <div className={styles.wrapper}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.petSelector}>
-          반려동물 선택
-          <div className={styles.petLabelContainer}>
-            {!!pets.length &&
-              pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />)}
+    <>
+      <div className={styles.wrapper}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.petSelector}>
+            반려동물 선택
+            <div className={styles.petLabelContainer}>
+              {!!pets.length &&
+                pets.map((pet, i) => (
+                  <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+                ))}
+            </div>
+            {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
-          {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
-        </div>
-        <div className={styles.division}></div>
-        <textarea
-          {...register('content.memo', { required: '*내용을 입력해주세요.' })}
-          className={styles.memo}
-          id="content.memo"
-          placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
-        />
-        {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
+          <div className={styles.division}></div>
+          <textarea
+            {...register('content.memo', { required: '*내용을 입력해주세요.' })}
+            className={styles.memo}
+            id="content.memo"
+            placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
+          />
+          {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
 
-        <div className={styles.categorySelectorOuter}>
-          <div className={styles.categorySelectorInner}>
-            {GROWTH_CATEGORY.map((category) => (
-              <label key={category} className={styles.categoryLabel}>
-                <input
-                  {...register('category')}
-                  value={category}
-                  className={styles.categoryInput}
-                  type="radio"
-                  checked={selectedCategory === category}
-                  onChange={handleCategoryChange}
-                />
-                <div className={styles.categoryIcon}></div>
-                <p className={styles.categoryName}>{category}</p>
-              </label>
-            ))}
+          <div className={styles.categorySelectorOuter}>
+            <div className={styles.categorySelectorInner}>
+              {GROWTH_CATEGORY.map((category) => (
+                <label key={category} className={styles.categoryLabel}>
+                  <input
+                    {...register('category')}
+                    value={category}
+                    className={styles.categoryInput}
+                    type="radio"
+                    checked={selectedCategory === category}
+                    onChange={handleCategoryChange}
+                  />
+                  <div className={styles.categoryIcon}></div>
+                  <p className={styles.categoryName}>{category}</p>
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
-        <CategoryInputs errors={errors} selectedCategory={selectedCategory} register={register} />
-        <button
-          className={classNames(styles.submit, {
-            [styles.disabled]: !isValid,
-          })}
-        >
-          등록하기
-        </button>
-      </form>
-    </div>
+          <CategoryInputs errors={errors} selectedCategory={selectedCategory} register={register} />
+          <button
+            className={classNames(styles.submit, {
+              [styles.disabled]: !isValid,
+            })}
+          >
+            등록하기
+          </button>
+        </form>
+      </div>
+      <Modal>
+        <CompleteModal closeModal={closeModal} />
+      </Modal>
+    </>
   );
 }
