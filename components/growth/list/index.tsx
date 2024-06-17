@@ -10,9 +10,18 @@ interface GrowthListProps {
   category: string;
   text: string;
   isMine: boolean;
+  petName: string;
 }
 
-export default function GrowthList({ isMine, nickname, text, writerImage, petImage, category }: GrowthListProps) {
+export default function GrowthList({
+  petName,
+  isMine,
+  nickname,
+  text,
+  writerImage,
+  petImage,
+  category,
+}: GrowthListProps) {
   return (
     <div className={styles.container}>
       <ListHeader
@@ -21,6 +30,7 @@ export default function GrowthList({ isMine, nickname, text, writerImage, petIma
         writerImage={writerImage}
         category={category}
         petImage={petImage}
+        petName={petName}
       />
       <Link href="/" className={styles.text}>
         {text}

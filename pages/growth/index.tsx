@@ -49,6 +49,7 @@ export default function GrowthPage() {
                 category={growth.category}
                 text={nonNullGrowth}
                 isMine={growth.isMine}
+                petName={growth.petName}
               />
             );
           })}

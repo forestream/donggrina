@@ -11,9 +11,10 @@ interface ListHeaderProps {
   petImage: string;
   nickname: string;
   isMine: boolean;
+  petName: string;
 }
 
-export default function ListHeader({ isMine, nickname, category, writerImage, petImage }: ListHeaderProps) {
+export default function ListHeader({ petName, isMine, nickname, category, writerImage, petImage }: ListHeaderProps) {
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
   return (
@@ -24,7 +25,7 @@ export default function ListHeader({ isMine, nickname, category, writerImage, pe
           <div className={styles.categoryName}>{category}</div>
           <div className={styles.profileContainer}>
             <Profile name={nickname} image={writerImage} />
-            <Profile name="뽀삐" className={styles.lastProfile} image={petImage} />
+            <Profile name={petName} className={styles.lastProfile} image={petImage} />
           </div>
         </div>
       </div>

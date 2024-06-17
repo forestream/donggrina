@@ -13,5 +13,6 @@ export interface GrowthData {
   dateTime: LocalDateTime;
   nickname: string;
   isMine: boolean;
+  petName: string;
   content: GrowthDetailsContent;
 }
