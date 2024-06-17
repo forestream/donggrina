@@ -3,12 +3,14 @@ import { LocalDate, LocalDateTime } from '../date';
 export interface GrowthDetails {
   data: GrowthDetailsData;
 }
+
 export interface AddGrowthData {
   date: LocalDate;
   petName: string;
   category: string;
   content: GrowthDetailsContent;
 }
+
 export interface GrowthDetailsData {
   id: number;
   writerProfileImageUrl: string;
@@ -21,13 +23,13 @@ export interface GrowthDetailsData {
 }
 
 export interface GrowthDetailsContent {
-  food: string;
-  snack: string;
-  abnormalSymptom: string;
-  hospitalName: string;
-  symptom: string;
-  diagnosis: string;
-  medicationMethod: string;
-  price: number;
-  memo: string;
+  food: string | null;
+  snack: string | null;
+  abnormalSymptom: string | null;
+  hospitalName: string | null;
+  symptom: string | null;
+  diagnosis: string | null;
+  medicationMethod: string | null;
+  price: number | null;
+  memo: string | null;
 }

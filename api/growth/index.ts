@@ -1,4 +1,4 @@
-import { GrowthData } from '@/types/growth';
+import { Growth } from '@/types/growth';
 import { axiosInstance } from '..';
 import { GrowthDetailsData } from '@/types/growth/details';
 import { FieldValues } from 'react-hook-form';
@@ -12,7 +12,7 @@ export default class GrowthAPI {
   }
 
   async getGrowthByDate(date: string) {
-    return (await axiosInstance.get<GrowthData>(`/growth?date=${date}`)).data;
+    return (await axiosInstance.get<Growth>(`/growth?date=${date}`)).data;
   }
 
   async getGrowthDetails(growthId: number) {
