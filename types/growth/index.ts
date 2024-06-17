@@ -1,5 +1,5 @@
 import { LocalDateTime } from '../date';
-import { GrowthDetailsContent } from './details';
+// import { GrowthDetailsContent } from './details';
 
 export interface Growth {
   data: GrowthData[];
@@ -14,5 +14,5 @@ export interface GrowthData {
   nickname: string;
   isMine: boolean;
   petName: string;
-  content: GrowthDetailsContent;
+  content: string;
 }

@@ -8,7 +8,7 @@ export interface AddGrowthData {
   date: string;
   petName: string;
   category: string;
-  content: GrowthDetailsContent;
+  content: string;
 }
 
 export interface GrowthDetailsData {
@@ -23,13 +23,13 @@ export interface GrowthDetailsData {
 }
 
 export interface GrowthDetailsContent {
-  food: string | null;
-  snack: string | null;
-  abnormalSymptom: string | null;
-  hospitalName: string | null;
-  symptom: string | null;
-  diagnosis: string | null;
-  medicationMethod: string | null;
-  price: number | null;
-  memo: string | null;
+  food: string;
+  snack: string;
+  abnormalSymptom: string;
+  hospitalName: string;
+  symptom: string;
+  diagnosis: string;
+  medicationMethod: string;
+  price: number;
+  memo: string;
 }
