@@ -1,4 +1,4 @@
-import { axiosAuthInstance } from '..';
+import { axiosInstance } from '..';
 
 interface TokenType {
   accessToken: string;
@@ -6,5 +6,5 @@ interface TokenType {
 }
 
 export const reissuanceAt = async (token: TokenType) => {
-  return await axiosAuthInstance.post('/refresh', token);
+  return await axiosInstance.post('/refresh', token);
 };
