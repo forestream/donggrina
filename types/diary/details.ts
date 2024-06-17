@@ -4,7 +4,8 @@ export interface DiaryDetails {
 
 export interface DiaryDetailsData {
   createdDate: Date;
-  authorProfile: string;
+  authorImage: string;
+  author: string;
   petProfile: string;
   content: string;
   favoriteState: boolean;
@@ -16,7 +17,6 @@ export interface DiaryDetailsData {
 export interface DiaryComment {
   commentId: number;
   authorProfile: string;
-  author: string;
   comment: string;
   isMyComment: boolean;
 }
