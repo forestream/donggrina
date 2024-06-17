@@ -11,7 +11,7 @@ interface ProfileProps {
 export default function Profile({ name, className, image }: ProfileProps) {
   return (
     <div className={classNames(styles.profile, className)}>
-      <Image src={image} alt="반려동물 프로필 사진" width="20" height="20" />
+      <Image className={styles.image} src={image} alt="반려동물 프로필 사진" width="20" height="20" />
       <div className={styles.name}>{name}</div>
     </div>
   );
