@@ -4,9 +4,11 @@ import FamilyDiaryLayout from './layout/family-diary-layout';
 import FamilyDiaryContents from './family-diary-contents';
 import Suspensive from '@/components/suspensive/suspensive';
 import { useFetchDiary } from '@/hooks/queries/family';
+import CalendarInstance from '@/utils/date/date.utils';
 
 export default function FamilyDiary() {
-  const diaryQuery = useFetchDiary('2024-06-16');
+  const date = CalendarInstance.getTodayData();
+  const diaryQuery = useFetchDiary(date);
 
   return (
     <FamilyDiaryLayout>
