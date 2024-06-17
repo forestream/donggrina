@@ -29,6 +29,14 @@
     right: 0;
     bottom: 0;
   }
+
+  .profile-input {
+    display: none;
+  }
+
+  .profile-label {
+    cursor: pointer;
+  }
 }
 
 .profile-name {
