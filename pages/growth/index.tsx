@@ -17,7 +17,6 @@ export default function GrowthPage() {
   const localDate = convertToLocalDate({ year, month, day: date });
 
   const { data: growthLists } = useGetGrotwthByDateQuery(localDate);
-  console.log(growthLists?.data);
 
   return (
     <>
