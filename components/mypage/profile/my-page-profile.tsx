@@ -36,6 +36,7 @@ export default function MyPageProfile() {
           <input
             type="file"
             id="profile"
+            accept="image/*"
             className={styles['profile-input']}
             ref={uploadRef}
             onChange={handlePreview}
