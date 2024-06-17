@@ -1,4 +1,4 @@
-import { fetchDailyTodos, postRefreshToken } from '@/api/calendar/request';
+import { fetchDailyTodos } from '@/api/calendar/request';
 import { useQuery } from '@tanstack/react-query';
 
 const useDailyTodosQuery = (yearMonthDate: string) =>
@@ -6,11 +6,6 @@ const useDailyTodosQuery = (yearMonthDate: string) =>
     queryKey: ['dailyTodos', yearMonthDate],
     queryFn: () => fetchDailyTodos(yearMonthDate),
     placeholderData: (prevDailyTodos) => prevDailyTodos,
-    retry: (count) => {
-      if (count > 1) return false;
-      if (count === 0) postRefreshToken();
-      return true;
-    },
   });
 
 export default useDailyTodosQuery;
