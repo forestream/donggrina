@@ -6,12 +6,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
-import classNames from 'classnames';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
 import { useRouter } from 'next/router';
+import Button from '@/components/common/button/button';
 
 export default function Create() {
   const { data: pets } = usePetsQuery();
@@ -126,13 +126,11 @@ export default function Create() {
         </div>
         {errors.dateTime && <p className={styles.error}>{errors.dateTime.message}</p>}
 
-        <button
-          className={classNames(styles.submit, {
-            [styles.disabled]: !isValid,
-          })}
-        >
-          등록하기
-        </button>
+        <div className={styles.submit}>
+          <Button round className={isValid ? 'primary' : 'disabled'}>
+            등록하기
+          </Button>
+        </div>
       </form>
       <Modal>
         <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
