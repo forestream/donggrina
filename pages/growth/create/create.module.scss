@@ -34,7 +34,7 @@
     border: none;
 
     &::placeholder {
-      font-family: 'LaundryGothic';
+      line-height: 21px;
       color: var(--text-color-gray);
     }
   }
