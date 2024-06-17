@@ -15,11 +15,6 @@ interface NameModifyType {
   name: string;
 }
 
-interface AddMemberType {
-  code: string;
-  nickname: string;
-}
-
 export default class MyFamilyApi {
   constructor() {}
 
@@ -43,7 +38,7 @@ export default class MyFamilyApi {
     return axiosInstance.put(`/my/groups/${groupId}`, formData);
   }
 
-  async myFamilyAddMember(formData: AddMemberType) {
+  async myFamilyAddMember(formData: FieldValues) {
     return axiosInstance.post(`/my/groups/members`, formData);
   }
 
