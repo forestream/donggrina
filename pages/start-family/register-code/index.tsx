@@ -1,14 +1,13 @@
 import Title from '@/components/common/title/title';
 import SubTitle from '@/components/common/title/sub-title/sub-title';
-import Form from '@/components/common/Form';
-import Button from '@/components/common/button/button';
 import styles from './index.module.scss';
-import axios from 'axios';
+import Form from '@/components/common/Form';
+import MyFamilyApi from '@/api/my/groups';
 import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import MyFamilyApi from '@/api/my/groups';
-
-export default function CreateFamily() {
+import Button from '@/components/common/button/button';
+import axios from 'axios';
+export default function RegisterCode() {
   const myFamilyApi = new MyFamilyApi();
   const router = useRouter();
   const methods = useForm<FieldValues>({
@@ -18,25 +17,24 @@ export default function CreateFamily() {
   const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      await myFamilyApi.myFamilyCreate(data).then(() => router.replace('/start-family/entry-info/finish'));
+      await myFamilyApi.myFamilyAddMember(data).then(() => router.replace('/family'));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response!.data);
       }
     }
   };
-
   return (
-    <section style={{ padding: '126px 24px 0 24px' }}>
-      <div>
+    <section className={styles.section}>
+      <div className={styles.titleBox}>
         <SubTitle>가족등록하기</SubTitle>
-        <Title>가족신청서</Title>
+        <Title>가족등록신청서</Title>
       </div>
       <Form onSubmit={handleSubmit(onSubmit)} methods={methods}>
         <ul className={styles.formList}>
           <li className={styles.nameInput}>
-            <Form.Label htmlFor="name">가족의 이름을 알려주세요!</Form.Label>
-            <Form.MainInput name="name" />
+            <Form.Label htmlFor="code">가족 참여 코드를 알려주세요!</Form.Label>
+            <Form.MainInput name="code" />
           </li>
           <li>
             <Form.Label htmlFor="nickname">가족 내 본인의 이름을 입력해주세요.</Form.Label>

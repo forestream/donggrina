@@ -4,7 +4,7 @@ import { LinkType } from './types/link-type';
 
 const links: LinkType[] = [
   { href: '/start-family/entry-info', text: '가족만들기', className: 'primary' },
-  { href: '/', text: '가족에 참여하기', className: 'tertiary' },
+  { href: '/start-family/register-code', text: '가족에 참여하기', className: 'tertiary' },
 ];
 
 export default function LinkList() {
