@@ -8,7 +8,7 @@ export interface AddGrowthData {
   date: string;
   petName: string;
   category: string;
-  content: string;
+  content: GrowthDetailsContent;
 }
 
 export interface GrowthDetailsData {
