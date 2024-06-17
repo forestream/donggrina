@@ -1,8 +1,18 @@
-import React, { useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useRef, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import classNames from 'classnames';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
+import { postDiariesImage, postDiaries } from '@/api/diaries/';
 import styles from './diary-create.module.scss';
+
+interface DiaryData {
+  content: string;
+  weather: string;
+  isShare: boolean;
+  date: string;
+  pets: number[];
+  images: number[];
+}
 
 const DiaryCreate = () => {
   const {
@@ -11,31 +21,82 @@ const DiaryCreate = () => {
     watch,
     setValue,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<DiaryData>({
     defaultValues: {
       content: '',
       weather: '',
-      images: Array(5).fill(null),
       isShare: false,
       date: '',
+      pets: [],
+      images: [],
     },
   });
-  const selectedWeather = watch('weather');
-  const imagePreviews = watch('images');
-  const fileInputRefs = useRef(new Array(5).fill(null));
 
-  const handleImageChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const selectedWeather = watch('weather');
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [imageIds, setImageIds] = useState<number[]>([]);
+  const fileInputRefs = useRef<HTMLInputElement[]>([]);
+
+  // const handleImageChange = (index: number) => async (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = event.target.files;
+  //   if (files && files.length > 0) {
+  //     const selectedFiles = Array.from(files);
+  //     const formData = new FormData();
+  //     selectedFiles.forEach((file) => {
+  //       formData.append('images', file);
+  //     });
+
+  //     try {
+  //       const { imageIds } = await postDiariesImage({ images: selectedFiles });
+  //       const newImageIds = [...imageIds];
+  //       newImageIds[index] = imageIds[index];
+  //       setImageIds(newImageIds);
+
+  //       const fileReader = new FileReader();
+  //       fileReader.onload = () => {
+  //         const newImagePreviews = [...imagePreviews];
+  //         newImagePreviews[index] = fileReader.result as string;
+  //         setImagePreviews(newImagePreviews);
+  //       };
+  //       fileReader.readAsDataURL(selectedFiles[0]);
+  //     } catch (error) {
+  //       console.error('Error uploading image:', error);
+  //     }
+  //   }
+  // };
+
+  const handleImageChange = (index: number) => async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
-      const file = files[0];
-      const updatedPhotos = [...imagePreviews];
-      updatedPhotos[index] = URL.createObjectURL(file);
-      setValue('images', updatedPhotos);
+      const fileArray = Array.from(files);
+
+      try {
+        const { imageIds } = await postDiariesImage({ images: fileArray });
+        const newImageIds = [...imageIds];
+        newImageIds[index] = imageIds[index];
+        setImageIds(newImageIds);
+
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+          const newImagePreviews = [...imagePreviews];
+          newImagePreviews[index] = fileReader.result as string;
+          setImagePreviews(newImagePreviews);
+        };
+        fileReader.readAsDataURL(files[0]);
+      } catch (error) {
+        console.error('faile uploade image:', error);
+      }
     }
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<DiaryData> = async (data) => {
+    const completeData = { ...data, images: imageIds };
+    try {
+      const response = await postDiaries(completeData);
+      console.log('Diary posted successfully:', response);
+    } catch (error) {
+      console.error('faile post diary:', error);
+    }
   };
 
   return (
@@ -71,20 +132,20 @@ const DiaryCreate = () => {
         </div>
 
         <div className={styles.imagesContainer}>
-          {imagePreviews.map((src, index) => (
+          {Array.from({ length: 5 }).map((_, index) => (
             <div key={index}>
               <input
-                ref={(el) => (fileInputRefs.current[index] = el)}
+                ref={(el) => (fileInputRefs.current[index] = el!)}
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange(index)}
                 hidden
               />
               <img
-                src={src || '/images/diaries/imageupload-default.svg'}
-                alt="default image"
+                src={imagePreviews[index] || '/images/diaries/imageupload-default.svg'} // 미리보기 또는 기본 이미지
+                alt="Upload preview"
                 className={styles.images}
-                onClick={() => fileInputRefs.current[index]?.click()}
+                onClick={() => fileInputRefs.current[index].click()}
               />
             </div>
           ))}
