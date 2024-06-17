@@ -4,13 +4,27 @@ export interface Pet {
   name: string;
 }
 
-export interface Todo {
+export interface DailyTodo {
   id: number;
   title: string;
   category: string;
   dateTime: string;
   memberProfileImageUrl: string;
   nickname: string;
+  petProfileImageUrl: string;
+  petName: string;
+  isFinished: boolean;
+  isMine: boolean;
+}
+
+export interface TodoById {
+  id: number;
+  title: string;
+  memo: string;
+  category: string;
+  dateTime: string;
+  writerProfileImageUrl: string;
+  writerNickName: string;
   petProfileImageUrl: string;
   petName: string;
   isFinished: boolean;

@@ -1,3 +1,13 @@
 .outer {
   padding: 19px 24px 100px;
 }
+
+.yearContainer {
+  display: flex;
+}
+
+.resetToday {
+  color: var(--main-color);
+  text-decoration: underline;
+  cursor: pointer;
+}

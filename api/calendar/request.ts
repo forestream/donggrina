@@ -1,6 +1,6 @@
-import { IFormInput } from '@/pages/calendar/create';
+import { IFormInput } from '@/types/calendar';
 import { axiosInstance } from '..';
-import { Pet, Todo } from './request.type';
+import { DailyTodo, Pet, TodoById } from './request.type';
 import { getCookie, setCookie } from 'cookies-next';
 
 export async function fetchMonthlyTodos(yearMonth: string) {
@@ -8,7 +8,7 @@ export async function fetchMonthlyTodos(yearMonth: string) {
   return data.data;
 }
 
-export async function fetchDailyTodos(yearMonthDate: string): Promise<Todo[]> {
+export async function fetchDailyTodos(yearMonthDate: string): Promise<DailyTodo[]> {
   const { data } = await axiosInstance.get(`calendar/day?date=${yearMonthDate}`);
 
   if (data.code !== 200) throw new Error(data.message);
@@ -16,10 +16,32 @@ export async function fetchDailyTodos(yearMonthDate: string): Promise<Todo[]> {
   return data.data;
 }
 
+export async function fetchTodoById(calendarId: string, auth: string | null = null): Promise<TodoById> {
+  const { data } = await axiosInstance.get(
+    `/calendar/${calendarId}`,
+    auth
+      ? {
+          headers: {
+            Authorization: 'Bearer ' + auth,
+          },
+        }
+      : {},
+  );
+  return data.data;
+}
+
 export async function postTodo(data: IFormInput) {
+  await axiosInstance.post('/calendar', data);
+}
+
+export async function putTodoById(data: IFormInput, calendarId: number) {
+  await axiosInstance.put(`/calendar/${calendarId}`, data);
+}
+
+export async function deleteTodoById(calendarId: string) {
+  console.log('delete!');
+  const { data } = await axiosInstance.delete(`/calendar/${calendarId}`);
   console.log(data);
-  const response = await axiosInstance.post('/calendar', data);
-  console.log(response);
 }
 
 export async function fetchPets(): Promise<Pet[]> {

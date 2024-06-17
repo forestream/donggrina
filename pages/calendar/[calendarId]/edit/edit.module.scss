@@ -152,6 +152,15 @@
 }
 
 .submit {
+  width: 100%;
+  padding: 14px;
+  color: var(--button-color);
+  background-color: var(--main-color);
+  border-radius: 9999px;
   margin-top: 30px;
-  height: 46px;
+}
+
+.disabled {
+  background-color: var(--disabled-color);
+  color: var(--white);
 }

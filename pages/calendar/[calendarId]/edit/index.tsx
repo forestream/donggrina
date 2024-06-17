@@ -1,4 +1,4 @@
-import styles from './create.module.scss';
+import styles from './edit.module.scss';
 import { useEffect, useState } from 'react';
 import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
@@ -6,16 +6,37 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
+import classNames from 'classnames';
+import { fetchTodoById } from '@/api/calendar/request';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import disintegrateDateTime from '@/utils/disintegrate-date-time';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
-import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
-import Button from '@/components/common/button/button';
-import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
+import useTodoPutMutation from '@/hooks/queries/calendar/use-todo-put-mutation';
+import { useRouter } from 'next/router';
 
-export default function Create() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const {
+    params: { calendarId },
+    req: {
+      cookies: { accessToken },
+    },
+  } = context as Params;
+
+  const data = await fetchTodoById(calendarId, accessToken);
+
+  return { props: { todo: data } };
+}
+
+export default function Edit({ todo }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { id, title, memo, petName: initPetName, category: initCategory, dateTime: initDateTime } = todo;
   const { data: pets } = usePetsQuery();
-  const postMutation = useTodoPostMutation();
+  const putMutation = useTodoPutMutation();
+  const router = useRouter();
+
+  const { year, month, date, ampm, hour, minute } = disintegrateDateTime(initDateTime);
 
   const {
     setValue,
@@ -26,16 +47,13 @@ export default function Create() {
   } = useForm<IFormInput>();
 
   const [dateTime, setDateTime] = useState<DateTime>({
-    year: null,
-    month: null,
-    date: null,
-    ampm: null,
-    hour: null,
-    minute: null,
+    year,
+    month,
+    date,
+    ampm,
+    hour,
+    minute,
   });
-
-  const [DateTimeModal, handleDateTimeModal] = useModal();
-  const [SuccessModal, handleSuccessModal] = useModal();
 
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
@@ -50,13 +68,15 @@ export default function Create() {
   }, [dateTime]);
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    postMutation.mutate(
-      { ...data, dateTime: getDateTimeBackend(data.dateTime) },
+    putMutation.mutate(
+      { data: { ...data, dateTime: getDateTimeBackend(data.dateTime) }, id },
       {
-        onSuccess: () => handleSuccessModal(true),
+        onSuccess: () => router.push('/calendar'),
       },
     );
   };
+
+  const [Modal, handleModal] = useModal();
 
   return (
     <div className={styles.outer}>
@@ -67,6 +87,7 @@ export default function Create() {
           id="title"
           type="text"
           placeholder="제목"
+          defaultValue={title}
         />
         {errors.title && <p className={styles.error}>{errors.title.message}</p>}
 
@@ -75,6 +96,7 @@ export default function Create() {
           className={styles.memo}
           id="memo"
           placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
+          defaultValue={memo}
         />
         {errors.memo && <p className={styles.error}>{errors.memo.message}</p>}
 
@@ -83,7 +105,13 @@ export default function Create() {
           반려동물 선택
           <div className={styles.petLabelContainer}>
             {pets.map((pet, i) => (
-              <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+              <PetRadio
+                key={i}
+                register={register}
+                petName={pet.name}
+                petImage={pet.imageUrl}
+                defaultPet={initPetName}
+              />
             ))}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
@@ -98,6 +126,7 @@ export default function Create() {
                   value={category}
                   className={styles.categoryInput}
                   type="radio"
+                  defaultChecked={category === initCategory}
                 />
                 <div className={styles.categoryIcon}></div>
                 <p>{category}</p>
@@ -108,7 +137,7 @@ export default function Create() {
         </div>
 
         <div className={styles.todoDate}>
-          <button type="button" onClick={handleDateTimeModal.bind(null, true)} className={styles.todoDateText}>
+          <button type="button" onClick={handleModal.bind(null, true)} className={styles.todoDateText}>
             날짜 / 시간
           </button>
           <div className={styles.todoDateSelector}>
@@ -126,18 +155,17 @@ export default function Create() {
         </div>
         {errors.dateTime && <p className={styles.error}>{errors.dateTime.message}</p>}
 
-        <div className={styles.submit}>
-          <Button round className={isValid ? 'primary' : 'disabled'}>
-            등록하기
-          </Button>
-        </div>
+        <button
+          className={classNames(styles.submit, {
+            [styles.disabled]: !isValid,
+          })}
+        >
+          수정하기
+        </button>
       </form>
-      <DateTimeModal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleDateTimeModal.bind(null, false)} />
-      </DateTimeModal>
-      <SuccessModal>
-        <CalendarTodoPostSuccess />
-      </SuccessModal>
+      <Modal>
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
+      </Modal>
     </div>
   );
 }
