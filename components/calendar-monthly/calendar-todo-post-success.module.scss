@@ -1,0 +1,26 @@
+.detector {
+  position: absolute;
+  inset: 0;
+}
+
+.outer {
+  width: 100%;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.button {
+  height: 64px;
+  position: relative;
+  z-index: 1;
+}

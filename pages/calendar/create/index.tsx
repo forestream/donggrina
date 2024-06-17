@@ -10,13 +10,12 @@ import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
-import { useRouter } from 'next/router';
 import Button from '@/components/common/button/button';
+import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
 
 export default function Create() {
   const { data: pets } = usePetsQuery();
   const postMutation = useTodoPostMutation();
-  const router = useRouter();
 
   const {
     setValue,
@@ -35,7 +34,8 @@ export default function Create() {
     minute: null,
   });
 
-  const [Modal, handleModal] = useModal();
+  const [DateTimeModal, handleDateTimeModal] = useModal();
+  const [SuccessModal, handleSuccessModal] = useModal();
 
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
@@ -53,7 +53,7 @@ export default function Create() {
     postMutation.mutate(
       { ...data, dateTime: getDateTimeBackend(data.dateTime) },
       {
-        onSuccess: () => router.push('/calendar'),
+        onSuccess: () => handleSuccessModal(true),
       },
     );
   };
@@ -108,7 +108,7 @@ export default function Create() {
         </div>
 
         <div className={styles.todoDate}>
-          <button type="button" onClick={handleModal.bind(null, true)} className={styles.todoDateText}>
+          <button type="button" onClick={handleDateTimeModal.bind(null, true)} className={styles.todoDateText}>
             날짜 / 시간
           </button>
           <div className={styles.todoDateSelector}>
@@ -132,9 +132,12 @@ export default function Create() {
           </Button>
         </div>
       </form>
-      <Modal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
-      </Modal>
+      <DateTimeModal>
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleDateTimeModal.bind(null, false)} />
+      </DateTimeModal>
+      <SuccessModal>
+        <CalendarTodoPostSuccess />
+      </SuccessModal>
     </div>
   );
 }
