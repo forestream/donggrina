@@ -1,13 +1,12 @@
 import { Growth } from '@/types/growth';
 import { axiosInstance } from '..';
-import { GrowthDetailsData } from '@/types/growth/details';
-import { FieldValues } from 'react-hook-form';
+import { AddGrowthData, GrowthDetailsData } from '@/types/growth/details';
 import { GrowthSearchData } from '@/types/growth/search';
 
 export default class GrowthAPI {
   constructor() {}
 
-  async createGrowth(formData: FieldValues) {
+  async createGrowth(formData: AddGrowthData) {
     return await axiosInstance.post('/growth', formData);
   }
 

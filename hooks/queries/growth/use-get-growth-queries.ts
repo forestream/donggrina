@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import GrowthAPI from '@/api/growth';
+import { LocalDate } from '@/types/date';
 
 const growthAPI = new GrowthAPI();
 
-export const useGetGrotwthByDateQuery = (date: string) => {
+export const useGetGrotwthByDateQuery = (date: LocalDate) => {
   return useQuery({
     queryKey: ['growth', date],
     queryFn: () => growthAPI.getGrowthByDate(date),

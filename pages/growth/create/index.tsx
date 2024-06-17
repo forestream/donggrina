@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './create.module.scss';
-// import PetRadio from '@/components/calendar-monthly/pet-radio';
-// import { Pet } from '@/api/calendar/request.type';
+import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { GROWTH_CATEGORY } from '@/utils/constants/growth';
 import { AddGrowthData } from '@/types/growth/details';
 import classNames from 'classnames';
 import CategoryInputs from './category-inputs';
+import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
+import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growt-query';
+import useCalenderDateStore from '@/store/calendar.store';
+import { convertToLocalDate } from '@/utils/convert-local-date';
 
 export default function CreateGrowth() {
-  // const [pets, setPets] = useState<Pet[]>([]);
+  const { data: pets } = usePetsQuery();
+  const createGrowthMutation = useCreateGrotwthMutation();
+
+  const year = useCalenderDateStore.use.year().toString();
+  const month = (useCalenderDateStore.use.month() + 1).toString();
+  const date = useCalenderDateStore.use.date().toString();
+  const localDate = convertToLocalDate({ year, month, day: date });
+
   const [selectedCategory, setSelectedCategory] = useState(GROWTH_CATEGORY[0]);
 
   const {
@@ -19,6 +29,7 @@ export default function CreateGrowth() {
   } = useForm<AddGrowthData>({
     mode: 'onBlur',
     defaultValues: {
+      date: localDate,
       category: GROWTH_CATEGORY[0],
     },
   });
@@ -29,16 +40,24 @@ export default function CreateGrowth() {
 
   const onSubmit: SubmitHandler<AddGrowthData> = (data) => {
     console.log(data);
+    createGrowthMutation.mutate(data, {
+      onSuccess: (response) => {
+        console.log('Success:', response);
+      },
+      onError: (error) => {
+        console.error('Error:', error);
+      },
+    });
   };
   return (
     <div className={styles.wrapper}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.petSelector}>
           반려동물 선택
-          {/* <div className={styles.petLabelContainer}>
+          <div className={styles.petLabelContainer}>
             {!!pets.length &&
               pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />)}
-          </div> */}
+          </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
         </div>
         <div className={styles.division}></div>
