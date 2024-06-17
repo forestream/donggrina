@@ -17,4 +17,10 @@
     border-color: var(--main-color);
     padding: 12px 11px;
   }
+  .error {
+    color: var(--input-error);
+    font-weight: 400;
+    margin-top: 8px;
+    font-size: 14px;
+  }
 }

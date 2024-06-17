@@ -87,7 +87,7 @@ export default function CreateGrowth() {
             ))}
           </div>
         </div>
-        <CategoryInputs selectedCategory={selectedCategory} register={register} />
+        <CategoryInputs errors={errors} selectedCategory={selectedCategory} register={register} />
         <button
           className={classNames(styles.submit, {
             [styles.disabled]: !isValid,
