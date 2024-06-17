@@ -4,7 +4,7 @@ import { FieldValues } from 'react-hook-form';
 
 interface MyCodeType {
   id: number;
-  code: string;
+  code: number;
 }
 
 interface NameModifyType {
