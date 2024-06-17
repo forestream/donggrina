@@ -37,9 +37,16 @@
 .member {
   background-color: var(--white);
   width: fit-content;
-  padding: 8px 19px 8px 8px;
+  padding: 8px;
   border: 2px solid var(--pet-border);
   border-radius: 9999px;
   color: var(--pet-border);
   cursor: pointer;
+  position: relative;
+}
+
+.checkbox {
+  position: absolute;
+  width: 0;
+  height: 0;
 }

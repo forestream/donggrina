@@ -34,7 +34,13 @@ export default function Search() {
           <p>반려동물</p>
           <div className={styles.pets}>
             {pets.data.map((pet) => (
-              <PetRadio register={register} petImage={pet.imageUrl} petName={pet.name} key={pet.petId} />
+              <PetRadio
+                register={register}
+                petImage={pet.imageUrl}
+                petName={pet.name}
+                key={pet.petId}
+                type="checkbox"
+              />
             ))}
           </div>
         </div>
@@ -43,9 +49,10 @@ export default function Search() {
           <p>작성자 필터</p>
           <div className={styles.members}>
             {membersQuery.data.members.map((member) => (
-              <div className={styles.member}>
+              <label className={styles.member}>
+                <input type="checkbox" name="member" value={member.name} className={styles.checkbox} />
                 <CalendarTodoProfile name={member.name} src={member.profileImageUrl} />
-              </div>
+              </label>
             ))}
           </div>
         </div>

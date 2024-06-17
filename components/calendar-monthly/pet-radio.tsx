@@ -8,14 +8,17 @@ interface PetRadio {
   petName: string;
   petImage: string;
   defaultPet?: string;
+  type?: 'radio' | 'checkbox';
 }
 
 /**
  * @param register - react-hook-form의 register 함수를 넣어주세요.
  * @param {string} petName - 반려동물 이름
  * @param {string} petImage - 반려동물 이미지 url
+ * @param {string} defaultPet - 수정 페이지에서 체크되어 있어야 하는 반려동물 이름
+ * @param {string} type - input type. 'radio' | 'checkbox' 중 선택
  */
-export default function PetRadio({ register, petName, petImage, defaultPet = '' }: PetRadio) {
+export default function PetRadio({ register, petName, petImage, defaultPet = '', type = 'radio' }: PetRadio) {
   return (
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
@@ -23,7 +26,7 @@ export default function PetRadio({ register, petName, petImage, defaultPet = '' 
           {...register('petName', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
-          type="radio"
+          type={type}
           defaultChecked={defaultPet === petName}
         />
         <Image className={styles.petImage} src={petImage} alt="반려동물 프로필 사진" fill />
