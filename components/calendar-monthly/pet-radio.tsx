@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import styles from './pet-radio.module.scss';
 import { UseFormRegister } from 'react-hook-form';
-import { IFormInput } from '@/pages/calendar/create';
+import { IFormInput } from '@/types/calendar';
 
 interface PetRadio {
   register: UseFormRegister<IFormInput>;
   petName: string;
   petImage: string;
+  defaultPet?: string;
 }
 
 /**
@@ -14,7 +15,7 @@ interface PetRadio {
  * @param {string} petName - 반려동물 이름
  * @param {string} petImage - 반려동물 이미지 url
  */
-export default function PetRadio({ register, petName, petImage }: PetRadio) {
+export default function PetRadio({ register, petName, petImage, defaultPet = '' }: PetRadio) {
   return (
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
@@ -23,6 +24,7 @@ export default function PetRadio({ register, petName, petImage }: PetRadio) {
           value={petName}
           className={styles.petInput}
           type="radio"
+          defaultChecked={defaultPet === petName}
         />
         <Image className={styles.petImage} src={petImage} alt="반려동물 프로필 사진" fill />
         <Image

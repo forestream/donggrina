@@ -1,31 +1,22 @@
 import styles from './create.module.scss';
 import { useEffect, useState } from 'react';
-import { CalendarProps } from '..';
 import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { TODO_CATEGORY } from '@/lib/constants/calendar-constants';
+import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
-import classNames from 'classnames';
-import { fetchPets, postTodo } from '@/api/calendar/request';
-import { Pet } from '@/api/calendar/request.type';
-
-export interface DateTime extends CalendarProps {
-  ampm: string | null;
-  hour: number | null;
-  minute: number | null;
-}
-
-export interface IFormInput extends CalendarProps {
-  title: string;
-  memo: string;
-  petName: string;
-  category: string;
-  dateTime: string;
-}
+import { DateTime, IFormInput } from '@/types/calendar';
+import getDateTimeBackend from '@/utils/get-date-time-backend';
+import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
+import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
+import Button from '@/components/common/button/button';
+import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
 
 export default function Create() {
+  const { data: pets } = usePetsQuery();
+  const postMutation = useTodoPostMutation();
+
   const {
     setValue,
     trigger,
@@ -42,9 +33,9 @@ export default function Create() {
     hour: null,
     minute: null,
   });
-  const [pets, setPets] = useState<Pet[]>([]);
 
-  const [Modal, handleModal] = useModal();
+  const [DateTimeModal, handleDateTimeModal] = useModal();
+  const [SuccessModal, handleSuccessModal] = useModal();
 
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
@@ -59,21 +50,13 @@ export default function Create() {
   }, [dateTime]);
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const [date, ampm, time] = data.dateTime.split(' ');
-    const dateTimeBackend = new Date([date, time, ampm === '오전' ? 'am' : 'pm', 'UTC+0'].join(' '))
-      .toISOString()
-      .slice(0, -8);
-    postTodo({ ...data, dateTime: dateTimeBackend });
+    postMutation.mutate(
+      { ...data, dateTime: getDateTimeBackend(data.dateTime) },
+      {
+        onSuccess: () => handleSuccessModal(true),
+      },
+    );
   };
-
-  const handleLoad = async () => {
-    const data = await fetchPets();
-    setPets(data);
-  };
-
-  useEffect(() => {
-    handleLoad();
-  }, []);
 
   return (
     <div className={styles.outer}>
@@ -99,8 +82,9 @@ export default function Create() {
         <div className={styles.petSelector}>
           반려동물 선택
           <div className={styles.petLabelContainer}>
-            {!!pets.length &&
-              pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />)}
+            {pets.map((pet, i) => (
+              <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+            ))}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
         </div>
@@ -124,7 +108,7 @@ export default function Create() {
         </div>
 
         <div className={styles.todoDate}>
-          <button type="button" onClick={handleModal.bind(null, true)} className={styles.todoDateText}>
+          <button type="button" onClick={handleDateTimeModal.bind(null, true)} className={styles.todoDateText}>
             날짜 / 시간
           </button>
           <div className={styles.todoDateSelector}>
@@ -142,17 +126,18 @@ export default function Create() {
         </div>
         {errors.dateTime && <p className={styles.error}>{errors.dateTime.message}</p>}
 
-        <button
-          className={classNames(styles.submit, {
-            [styles.disabled]: !isValid,
-          })}
-        >
-          등록하기
-        </button>
+        <div className={styles.submit}>
+          <Button round className={isValid ? 'primary' : 'disabled'}>
+            등록하기
+          </Button>
+        </div>
       </form>
-      <Modal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
-      </Modal>
+      <DateTimeModal>
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleDateTimeModal.bind(null, false)} />
+      </DateTimeModal>
+      <SuccessModal>
+        <CalendarTodoPostSuccess />
+      </SuccessModal>
     </div>
   );
 }

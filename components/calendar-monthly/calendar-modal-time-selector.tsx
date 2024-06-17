@@ -1,4 +1,4 @@
-import { TIME_SELECTOR } from '@/lib/constants/calendar-constants';
+import { TIME_SELECTOR } from '@/utils/constants/calendar-constants';
 import styles from './calendar-modal-time-selector.module.scss';
 import { useRef, useEffect, BaseSyntheticEvent } from 'react';
 import TimeScroller from './time-scroller';
@@ -51,6 +51,7 @@ export default function CalendarModalTimeSelector({ dateTime, onSelect }: Calend
       <div className={styles.selected}>
         <span>{ampm}</span>
         <span>{hour.toString().padStart(2, '0')}</span>
+        <span className={styles.colon}>:</span>
         <span>{minute.toString().padStart(2, '0')}</span>
       </div>
       <div className={styles.selector}>
@@ -62,6 +63,7 @@ export default function CalendarModalTimeSelector({ dateTime, onSelect }: Calend
             scrollItems={TIME_SELECTOR.hour}
             selectedItem={hour}
           />
+          <span className={styles.colon}>:</span>
           <TimeScroller
             className="minute"
             refPusher={pushMinutesRef}

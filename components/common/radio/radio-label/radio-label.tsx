@@ -1,9 +1,11 @@
-import { RadioType } from '@/pages/test/radio-test';
-import { InputHTMLAttributes, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-interface LabelType extends PropsWithChildren<InputHTMLAttributes<HTMLInputElement>> {
-  field: ControllerRenderProps<RadioType>;
+interface LabelType extends PropsWithChildren {
+  id: string;
+  value: string | boolean;
+  // eslint-disable-next-line
+  field: ControllerRenderProps<any>;
 }
 
 export default function RadioLabel({ id, children, value, field }: LabelType) {

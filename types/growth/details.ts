@@ -1,3 +1,5 @@
+import { LocalDateTime } from '../date';
+
 export interface GrowthDetails {
   data: GrowthDetailsData;
 }
@@ -8,8 +10,9 @@ export interface GrowthDetailsData {
   petProfileImageUrl: string;
   category: string;
   content: GrowthDetailsContent;
-  dateTime: Date;
+  dateTime: LocalDateTime;
   nickname: string;
+  isMine: boolean;
 }
 
 export interface GrowthDetailsContent {

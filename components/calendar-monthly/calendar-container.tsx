@@ -3,16 +3,20 @@ import getSeventhDate from '@/utils/get-seventh-date';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
 import { fetchMonthlyTodos } from '@/api/calendar/request';
+import { useQuery } from '@tanstack/react-query';
 
 export default function CalendarContainer() {
-  const [monthlyTodos, setMonthlyTodos] = useState();
   const calendarContext = useCalendarContext();
   const year = calendarContext.year;
   const month = calendarContext.month + 1;
   const date = calendarContext.date;
   const yearMonth = `${year}-${month.toString().padStart(2, '0')}`;
+
+  const { data: monthlyTodos } = useQuery({
+    queryKey: ['monthlyTodos', yearMonth],
+    queryFn: () => fetchMonthlyTodos(yearMonth),
+  });
 
   const { calendarArray, todoCountsArray } = getCalendarArray(year, month, monthlyTodos);
 
@@ -20,15 +24,6 @@ export default function CalendarContainer() {
     classNames(styles.calendarCell, {
       [styles.red]: getSeventhDate(cellIndex),
     });
-
-  const handleLoad = async () => {
-    const data = await fetchMonthlyTodos(yearMonth);
-    setMonthlyTodos(data);
-  };
-
-  useEffect(() => {
-    handleLoad();
-  }, [year, month]);
 
   return (
     <div className={styles.container}>
