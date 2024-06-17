@@ -1,4 +1,4 @@
-import { MyPageData } from '@/types/my-page/family';
+import { MyPageDetails } from '@/types/my-page/family';
 import { axiosInstance } from '../..';
 import { FieldValues } from 'react-hook-form';
 
@@ -23,7 +23,7 @@ export default class MyFamilyApi {
   }
 
   async myFamilyDetails() {
-    return (await axiosInstance.get<MyPageData>('/my/groups')).data;
+    return (await axiosInstance.get<MyPageDetails>('/my/groups')).data;
   }
 
   async myFamilyCode() {
