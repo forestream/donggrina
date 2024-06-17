@@ -1,6 +1,7 @@
 import AddFamily from '@/components/mypage/family/add-family/add-family';
 import styles from './index.module.scss';
 import FamilyList from '@/components/mypage/family/family-list/family-list';
+import FamilyUtilButtons from '@/components/mypage/family/family-util-buttons/family-util-buttons';
 
 export default function MypageFamily() {
   return (
@@ -9,6 +10,7 @@ export default function MypageFamily() {
         <AddFamily />
         <FamilyList />
       </div>
+      <FamilyUtilButtons />
     </section>
   );
 }
