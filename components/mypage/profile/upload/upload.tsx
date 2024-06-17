@@ -2,18 +2,20 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './upload.module.scss';
 import useUpload from '@/hooks/use-upload';
+import useModal from '@/hooks/use-modal';
+import ImageUploadModal from '@/components/mypage/profile/modal/image-upload-modal';
 
 interface UploadProps {
-  onOpenModal: (isOpen: boolean) => void;
   image: string;
 }
 
 export default function Upload(props: UploadProps) {
-  const { uploadRef, previewUrl, handlePreview } = useUpload();
+  const [Modal, handleModal] = useModal();
+  const { uploadRef, previewUrl, handlePreview } = useUpload({ handleModal });
 
   return (
     <div className={styles['image-wrapper']}>
-      <button onClick={() => props.onOpenModal(true)}>
+      <button onClick={() => handleModal(true)}>
         <Image
           src={previewUrl || props.image}
           objectFit="cover"
@@ -30,6 +32,7 @@ export default function Upload(props: UploadProps) {
           height={34}
         />
       </button>
+      <ImageUploadModal modal={Modal} uploadRef={uploadRef} onPreview={handlePreview} />
     </div>
   );
 }

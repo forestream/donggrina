@@ -11,19 +11,3 @@
   align-items: center;
   gap: 0 20px;
 }
-
-.modal-text {
-  height: 125px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.modal-button-layout {
-  display: flex;
-  height: 64px;
-  width: 100%;
-  border-top: 1px solid var(--main-color);
-}

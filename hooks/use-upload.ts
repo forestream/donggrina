@@ -1,7 +1,11 @@
 import { imageUpload } from '@/api/image-api';
 import { useRef, useState } from 'react';
 
-export default function useUpload() {
+interface UseUpload {
+  handleModal?: (isOpen: boolean) => void;
+}
+
+export default function useUpload({ handleModal }: UseUpload) {
   const [previewUrl, setPreviewUrl] = useState('');
   const uploadRef = useRef<HTMLInputElement>(null);
 
@@ -19,6 +23,8 @@ export default function useUpload() {
     fileReader.onloadend = () => {
       setPreviewUrl(fileReader.result as string);
     };
+
+    handleModal && handleModal(false);
   };
 
   return {
