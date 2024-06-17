@@ -4,6 +4,6 @@ export interface Pet {
 
 export interface PetData {
   petId: number;
-  profileImage: string;
+  imageUrl: string;
   name: string;
 }

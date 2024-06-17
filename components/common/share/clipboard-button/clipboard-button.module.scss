@@ -1,0 +1,11 @@
+@import '../share.module.scss';
+
+.ClipboardButtonBox {
+  @include shareButtonBox;
+  button {
+    @include shareButton(var(--clipboard-color));
+  }
+  span {
+    @include shareText;
+  }
+}
