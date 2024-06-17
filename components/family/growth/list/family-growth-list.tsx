@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import FamilyGrowthItem from './family-growth-item';
+import FamilyGrowthItem from '../item/family-growth-item';
 import 'swiper/css';
 import styles from './family-growth-list.module.scss';
 
