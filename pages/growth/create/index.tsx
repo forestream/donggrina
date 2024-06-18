@@ -112,7 +112,7 @@ export default function CreateGrowth() {
         </form>
       </div>
       <Modal>
-        <CompleteModal closeModal={closeModal} />
+        <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
       </Modal>
     </>
   );
