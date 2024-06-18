@@ -4,6 +4,8 @@ import Profile from '../../profile';
 import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
+import { useDeleteGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';
+import { useRouter } from 'next/router';
 
 interface ListHeaderProps {
   category: string;
@@ -12,11 +14,29 @@ interface ListHeaderProps {
   nickname: string;
   isMine: boolean;
   petName: string;
+  id: number;
 }
 
-export default function ListHeader({ petName, isMine, nickname, category, writerImage, petImage }: ListHeaderProps) {
-  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+export default function ListHeader({
+  id: growthId,
+  petName,
+  isMine,
+  nickname,
+  category,
+  writerImage,
+  petImage,
+}: ListHeaderProps) {
+  const router = useRouter();
 
+  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+  const deleteMutation = useDeleteGrowthMutation(growthId);
+
+  const handleEditClick = () => {};
+  const handleDeleteClick = () => {
+    deleteMutation.mutate(growthId, {
+      onSuccess: () => router.push('/growth'),
+    });
+  };
   return (
     <div className={styles.headerContainer}>
       <div className={styles.wrapper}>
@@ -33,8 +53,8 @@ export default function ListHeader({ petName, isMine, nickname, category, writer
         <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
           <DropdownMenu.Kebab />
           <DropdownMenu.Content>
-            <DropdownMenu.Item>수정</DropdownMenu.Item>
-            <DropdownMenu.Item>삭제</DropdownMenu.Item>
+            <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
+            <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu>
       ) : null}

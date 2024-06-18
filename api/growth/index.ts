@@ -27,10 +27,10 @@ export default class GrowthAPI {
   }
 
   async modifyGrowth(growthId: number) {
-    return await axiosInstance.post(`/growth/${growthId}`);
+    return await axiosInstance.put(`/growth/${growthId}`);
   }
 
   async deleteGrowth(growthId: number) {
-    return await axiosInstance.post(`/growth/${growthId}`);
+    return await axiosInstance.delete(`/growth/${growthId}`);
   }
 }

@@ -7,7 +7,7 @@ import { AddGrowthData } from '@/types/growth/details';
 import classNames from 'classnames';
 import CategoryInputs from './category-inputs';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
-import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growt-query';
+import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import { useRouter } from 'next/router';
