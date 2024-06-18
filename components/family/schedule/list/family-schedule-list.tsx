@@ -1,13 +1,18 @@
 import React from 'react';
-import FamilyScheduleItem from '@/components/family/schedule/item/family-schedule-item';
 import styles from './family-schedule-list.module.scss';
+import { DailyTodo } from '@/api/calendar/request.type';
+import CalendarTodo from '@/components/calendar-monthly/calendar-todo';
 
-export default function FamilyScheduleList() {
+interface FamilyScheduleListProps {
+  data: DailyTodo[];
+}
+
+export default function FamilyScheduleList(props: FamilyScheduleListProps) {
   return (
     <ul className={styles['schedule-list']}>
-      <FamilyScheduleItem />
-      <FamilyScheduleItem />
-      <FamilyScheduleItem />
+      {props.data.map((todo) => (
+        <CalendarTodo key={todo.id} todo={todo} />
+      ))}
     </ul>
   );
 }
