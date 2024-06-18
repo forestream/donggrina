@@ -8,7 +8,9 @@ export default function FamilyList() {
   return (
     <ul>
       {data.members.map((membersData: Member) => {
-        return <FamilyListItem key={membersData.id} membersCount={data.membersCount} {...membersData} />;
+        return (
+          <FamilyListItem key={membersData.id} membersCount={data.membersCount} groupId={data.id} {...membersData} />
+        );
       })}
     </ul>
   );

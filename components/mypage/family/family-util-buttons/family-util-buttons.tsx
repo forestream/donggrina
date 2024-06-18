@@ -1,22 +1,26 @@
-import Button from '@/components/common/button/button';
 import styles from './family-util-buttons.module.scss';
 import FamilyAddButton from './family-add-button/family-add-button';
+import FamilyDeleteButton from './family-delete-button/family-delete-button';
+import FamilyRenameButton from './family-rename-button/family-rename-button';
+import { useGetFamilyAllQuery } from '@/hooks/queries/my/family/useGetFamilyQueries';
 
 export default function FamilyUtilButtons() {
+  const { data } = useGetFamilyAllQuery();
+  if (!data) return null;
+  const renameData = {
+    id: data.id,
+    name: data.name,
+  };
   return (
     <ul className={styles.buttonList}>
       <li>
         <FamilyAddButton />
       </li>
       <li>
-        <Button type="button" className="secondary" round>
-          가족 이름 변경
-        </Button>
+        <FamilyRenameButton renameData={renameData} />
       </li>
       <li>
-        <Button type="button" className="tertiary" round>
-          가족 페쇄
-        </Button>
+        <FamilyDeleteButton groupId={data.id} />
       </li>
     </ul>
   );
