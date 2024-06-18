@@ -14,13 +14,14 @@ interface FamilyListItemType {
 
 export default function FamilyListItem({ profileImageUrl, nickname, membersCount, id }: FamilyListItemType) {
   const [Modal, handleModal] = useModal();
-  const listClass = membersCount === 1 ? `${styles.onlyOne} ${styles.familyList}` : styles.familyList;
-  const handleOpen = () => {
-    handleModal(true);
-  };
+  const userId = localStorage.getItem('userId');
   const deleteModalValue = {
     id: id,
     nickname: nickname,
+  };
+  const listClass = membersCount === 1 ? `${styles.onlyOne} ${styles.familyList}` : styles.familyList;
+  const handleOpen = () => {
+    handleModal(true);
   };
   return (
     <>
@@ -36,9 +37,12 @@ export default function FamilyListItem({ profileImageUrl, nickname, membersCount
           </div>
           <p>{nickname}</p>
         </div>
-        <button className={styles.ExpulsionButton} type="button" title={`${nickname} 추방하기`} onClick={handleOpen}>
-          <ExpulsionSVG />
-        </button>
+
+        {userId !== id.toString() && (
+          <button className={styles.ExpulsionButton} type="button" title={`${nickname} 추방하기`} onClick={handleOpen}>
+            <ExpulsionSVG />
+          </button>
+        )}
       </li>
       <DeleteMemberModal Modal={Modal} handleModal={handleModal} deleteModalValue={deleteModalValue} />
     </>
