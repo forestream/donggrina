@@ -1,3 +1,8 @@
+export interface MonthlyTodos {
+  date: string;
+  count: number;
+}
+
 export interface Pet {
   petId: number;
   imageUrl: string;
