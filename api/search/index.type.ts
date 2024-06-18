@@ -1,5 +1,6 @@
 export interface Member {
   id: number;
+  imageId: number;
   name: string;
   nickname: string;
   profileImageUrl: string;
