@@ -5,13 +5,16 @@ import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 
-// interface ListHeaderProps {
-//   categoryName: string;
-//   writer: string;
-//   pet: string;
-// }
+interface ListHeaderProps {
+  category: string;
+  writerImage: string;
+  petImage: string;
+  nickname: string;
+  isMine: boolean;
+  petName: string;
+}
 
-export default function ListHeader() {
+export default function ListHeader({ petName, isMine, nickname, category, writerImage, petImage }: ListHeaderProps) {
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
   return (
@@ -19,20 +22,22 @@ export default function ListHeader() {
       <div className={styles.wrapper}>
         <CategoryIcon alt="카테고리 아이콘" />
         <div className={styles.subHeader}>
-          <div className={styles.categoryName}>사료</div>
+          <div className={styles.categoryName}>{category}</div>
           <div className={styles.profileContainer}>
-            <Profile name="문지혜" />
-            <Profile name="뽀삐" className={styles.lastProfile} />
+            <Profile name={nickname} image={writerImage} />
+            <Profile name={petName} className={styles.lastProfile} image={petImage} />
           </div>
         </div>
       </div>
-      <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-        <DropdownMenu.Kebab />
-        <DropdownMenu.Content>
-          <DropdownMenu.Item>수정</DropdownMenu.Item>
-          <DropdownMenu.Item>삭제</DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+      {isMine ? (
+        <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+          <DropdownMenu.Kebab />
+          <DropdownMenu.Content>
+            <DropdownMenu.Item>수정</DropdownMenu.Item>
+            <DropdownMenu.Item>삭제</DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu>
+      ) : null}
     </div>
   );
 }

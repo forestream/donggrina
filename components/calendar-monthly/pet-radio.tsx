@@ -2,9 +2,13 @@ import Image from 'next/image';
 import styles from './pet-radio.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '@/types/calendar';
+import { AddGrowthData } from '@/types/growth/details';
 
 interface PetRadio {
-  register: UseFormRegister<IFormInput & FieldValues> | UseFormRegister<FieldValues>;
+  register:
+    | UseFormRegister<IFormInput & FieldValues>
+    | UseFormRegister<FieldValues>
+    | UseFormRegister<AddGrowthData & FieldValues>;
   petName: string;
   petImage: string;
   defaultPet?: string;

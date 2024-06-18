@@ -11,9 +11,9 @@ export default function FamilyScheduleEmpty() {
       </div>
       <p className={styles.content}>오늘의 일정이 없습니다!</p>
       <div className={styles.link}>
-        <Hyperlink href="/" className="primary" round>
+        <Hyperlink href="/calendar/create" className="primary" round>
           <Image src="images/family/add-black-icon.svg" alt="" width="20" height="20" className={styles.icon} />
-          다이어리 작성하러 가기
+          일정기록 작성하러 가기
         </Hyperlink>
       </div>
     </div>
