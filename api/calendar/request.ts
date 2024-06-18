@@ -9,7 +9,7 @@ export async function fetchMonthlyTodos(yearMonth: string): Promise<MonthlyTodos
 }
 
 export async function fetchDailyTodos(yearMonthDate: string): Promise<DailyTodo[]> {
-  const { data } = await axiosInstance.get(`calendar/day?date=${yearMonthDate}`);
+  const { data } = await axiosInstance.get(`/calendar/day?date=${yearMonthDate}`);
 
   if (data.code !== 200) throw new Error(data.message);
 
@@ -27,6 +27,11 @@ export async function fetchTodoById(calendarId: string, auth: string | null = nu
         }
       : {},
   );
+  return data.data;
+}
+
+export async function fetchTodosByQueries(query: string) {
+  const { data } = await axiosInstance.get(`/calendar/search?${query}`);
   return data.data;
 }
 
