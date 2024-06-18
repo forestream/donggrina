@@ -6,15 +6,20 @@ import useModal from '@/hooks/use-modal';
 import DeleteMemberModal from './delete-member-modal/delete-member-modal';
 
 interface FamilyListItemType {
-  profileImageUrl: string;
-  nickname: string;
-  membersCount: number;
-  id: number;
+  membersValue: {
+    profileImageUrl: string;
+    nickname: string;
+    membersCount: number;
+    id: number;
+    owner: number;
+    index: number;
+  };
 }
 
-export default function FamilyListItem({ profileImageUrl, nickname, membersCount, id }: FamilyListItemType) {
+export default function FamilyListItem({ membersValue }: FamilyListItemType) {
+  const { owner, id, nickname, membersCount, profileImageUrl, index } = membersValue;
   const [Modal, handleModal] = useModal();
-  const userId = localStorage.getItem('userId');
+  const ownerCheck = owner === Number(localStorage.getItem('userId'));
   const deleteModalValue = {
     id: id,
     nickname: nickname,
@@ -29,7 +34,7 @@ export default function FamilyListItem({ profileImageUrl, nickname, membersCount
         <div className={styles.profileBox}>
           <div className={styles.imgBox}>
             <Image src={profileImageUrl} alt="프로필 이미지" fill priority sizes="100%" />
-            {id === 1 && (
+            {index === 0 && (
               <div className={styles.svgBox} aria-label="모임장">
                 <OwnerSVG />
               </div>
@@ -38,7 +43,7 @@ export default function FamilyListItem({ profileImageUrl, nickname, membersCount
           <p>{nickname}</p>
         </div>
 
-        {userId !== id.toString() && (
+        {ownerCheck && index !== 0 && (
           <button className={styles.ExpulsionButton} type="button" title={`${nickname} 추방하기`} onClick={handleOpen}>
             <ExpulsionSVG />
           </button>
