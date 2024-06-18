@@ -3,10 +3,13 @@ import Button from '@/components/common/button/button';
 import Form from '@/components/common/Form';
 import { FieldValues, useForm } from 'react-hook-form';
 import styles from './nickname-modal.module.scss';
+import { useUpdateProfile } from '@/hooks/queries/my/user/mutation';
 
 interface NicknameModalProps {
   modal: (props: PropsWithChildren) => React.ReactNode;
   nickname: string;
+  imageId: number | null;
+  onCloseModal: () => void;
 }
 
 export default function NicknameModal(props: NicknameModalProps) {
@@ -17,8 +20,12 @@ export default function NicknameModal(props: NicknameModalProps) {
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const profileMutation = useUpdateProfile();
+
+  const onSubmit = async (data: FieldValues) => {
+    const value = { imageId: props.imageId, nickname: data.nickname };
+    await profileMutation.mutateAsync(value);
+    props.onCloseModal();
   };
 
   const isDisabled = methods.watch().nickname.length === 0 || methods.watch().nickname === props.nickname;

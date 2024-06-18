@@ -7,7 +7,7 @@ export function useUpdateProfile() {
   return useMutation({
     mutationFn: myPageApiInstance.updateProfile,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['my/profiles'] });
+      queryClient.invalidateQueries({ queryKey: ['my/profile'] });
     },
   });
 }

@@ -7,11 +7,12 @@ import ImageUploadModal from '@/components/mypage/profile/modal/image-upload-mod
 
 interface UploadProps {
   image: string;
+  nickname: string;
 }
 
 export default function ImageUpload(props: UploadProps) {
   const [Modal, handleModal] = useModal();
-  const { uploadRef, previewUrl, handlePreview } = useUpload({ handleModal });
+  const { imageId, uploadRef, previewUrl, handlePreview } = useUpload({ handleModal, nickname: props.nickname });
 
   return (
     <div className={styles['image-wrapper']}>
@@ -32,7 +33,13 @@ export default function ImageUpload(props: UploadProps) {
           height={34}
         />
       </button>
-      <ImageUploadModal modal={Modal} uploadRef={uploadRef} onPreview={handlePreview} />
+      <ImageUploadModal
+        modal={Modal}
+        uploadRef={uploadRef}
+        onPreview={handlePreview}
+        imageId={imageId}
+        nickname={props.nickname}
+      />
     </div>
   );
 }
