@@ -29,7 +29,7 @@ export default function ListHeader({
   const router = useRouter();
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
-  const deleteMutation = useDeleteGrowthMutation(growthId);
+  const deleteMutation = useDeleteGrowthMutation();
 
   const handleEditClick = () => {};
   const handleDeleteClick = () => {
