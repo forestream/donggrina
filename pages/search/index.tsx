@@ -7,6 +7,7 @@ import { FILTERS } from '@/utils/constants/search';
 import SearchFilter from '@/components/search/search-filter';
 import useMembersQuery from '@/hooks/queries/search/use-members-query';
 import SearchMemberFilter from '@/components/search/search-member-filter';
+import SearchSection from '@/components/search/search-section';
 
 export default function Search() {
   const pets = usePetsQuery();
@@ -32,17 +33,15 @@ export default function Search() {
       <form className={styles.inner} onSubmit={handleSubmit(onSubmit)}>
         <SearchBar register={register} />
 
-        <div className={styles.section}>
-          <p>필터</p>
+        <SearchSection title="필터">
           <div className={styles.filters}>
             {FILTERS.map((filter) => (
               <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
             ))}
           </div>
-        </div>
+        </SearchSection>
 
-        <div className={styles.section}>
-          <p>반려동물</p>
+        <SearchSection canSelectAll title="반려동물">
           <div className={styles.pets}>
             {pets.data.map((pet) => (
               <PetRadio
@@ -54,16 +53,15 @@ export default function Search() {
               />
             ))}
           </div>
-        </div>
+        </SearchSection>
 
-        <div className={styles.section}>
-          <p>작성자 필터</p>
+        <SearchSection canSelectAll title="작성자 필터">
           <div className={styles.members}>
             {membersQuery.data.members.map((member) => (
               <SearchMemberFilter key={member.id} member={member} register={register} selected={watch('member')} />
             ))}
           </div>
-        </div>
+        </SearchSection>
       </form>
     </main>
   );
