@@ -4,11 +4,11 @@ export interface Diary {
 
 export interface DiaryData {
   diaryId: number;
-  createdDate: Date;
-  authorProfile: string;
+  createdDate: string;
+  authorImage: string;
   author: string;
-  petProfile: string;
-  contentImages: string[];
+  petImages: string[];
+  contentImage: string[];
   content: string;
   commentCount: number;
   favoriteCount: number;
