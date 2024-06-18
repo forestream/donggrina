@@ -12,7 +12,7 @@ import SearchPetCheckbox from '@/components/search/search-pet-checkbox';
 export default function Search() {
   const pets = usePetsQuery();
   const membersQuery = useMembersQuery();
-  const { register, handleSubmit, watch, setValue } = useForm<FieldValues>({
+  const { register, handleSubmit, watch, setValue, getValues, resetField } = useForm<FieldValues>({
     defaultValues: {
       keyword: '',
       filter: '',
@@ -31,6 +31,10 @@ export default function Search() {
   };
 
   const handleClickAll = (fieldName: string) => {
+    if (getValues(fieldName).length === ALL_SELECTED[fieldName].length) {
+      resetField(fieldName);
+      return;
+    }
     setValue(fieldName, ALL_SELECTED[fieldName]);
   };
 
