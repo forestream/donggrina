@@ -3,7 +3,7 @@ export interface PetDetails {
 }
 
 export interface PetDetailsData {
-  url: string;
+  url?: string;
   name: string;
   sex: string;
   birthDate: Date;

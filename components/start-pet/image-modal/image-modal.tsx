@@ -1,15 +1,27 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren, ReactNode, RefObject } from 'react';
 import styles from './image-modal.module.scss';
 import Button from '@/components/common/button/button';
 import CloseSVG from '@/public/images/pets/plus-circle.svg';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 
 interface ImageModalType {
   Modal: ({ children }: PropsWithChildren) => ReactNode;
   handleModal: (isOpen: boolean) => void;
+  fileInputRef: RefObject<HTMLInputElement>;
+  field: ControllerRenderProps<FieldValues, string>;
 }
 
-export default function ImageModal({ Modal, handleModal }: ImageModalType) {
+export default function ImageModal({ Modal, handleModal, fileInputRef, field }: ImageModalType) {
   const handleClose = () => {
+    handleModal(false);
+  };
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+  const handleInitialization = () => {
+    field.onChange(null);
     handleModal(false);
   };
   return (
@@ -17,10 +29,10 @@ export default function ImageModal({ Modal, handleModal }: ImageModalType) {
       <div className={styles.modalContainer}>
         <p>프로필 사진을 변경하시겠습니까?</p>
         <div className={styles.buttonBox}>
-          <Button type="button" className="default">
+          <Button type="button" className="default" onClick={handleInitialization}>
             이미지 초기화 하기
           </Button>
-          <Button type="button" className="primary">
+          <Button type="button" className="primary" onClick={handleButtonClick}>
             이미지 변경하기
           </Button>
         </div>
