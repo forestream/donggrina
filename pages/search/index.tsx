@@ -1,6 +1,5 @@
 import SearchBar from '@/components/search/search-bar';
 import styles from './search.module.scss';
-import PetRadio from '@/components/calendar-monthly/pet-radio';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { FILTERS } from '@/utils/constants/search';
@@ -8,11 +7,12 @@ import SearchFilter from '@/components/search/search-filter';
 import useMembersQuery from '@/hooks/queries/search/use-members-query';
 import SearchMemberFilter from '@/components/search/search-member-filter';
 import SearchSection from '@/components/search/search-section';
+import SearchPetCheckbox from '@/components/search/search-pet-checkbox';
 
 export default function Search() {
   const pets = usePetsQuery();
   const membersQuery = useMembersQuery();
-  const { register, handleSubmit, watch } = useForm<FieldValues>({
+  const { register, handleSubmit, watch, setValue } = useForm<FieldValues>({
     defaultValues: {
       keyword: '',
       filter: '',
@@ -21,8 +21,17 @@ export default function Search() {
     },
   });
 
+  const ALL_SELECTED: { [key: string]: string[] } = {
+    petName: pets.data.map((pet) => pet.name),
+    member: membersQuery.data.members.map((member) => member.name),
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = (e) => {
     console.log(e);
+  };
+
+  const handleClickAll = (fieldName: string) => {
+    setValue(fieldName, ALL_SELECTED[fieldName]);
   };
 
   if (membersQuery.isPending) return <p>loading</p>;
@@ -41,21 +50,21 @@ export default function Search() {
           </div>
         </SearchSection>
 
-        <SearchSection canSelectAll title="반려동물">
+        <SearchSection selectAll={handleClickAll.bind(null, 'petName')} title="반려동물">
           <div className={styles.pets}>
             {pets.data.map((pet) => (
-              <PetRadio
+              <SearchPetCheckbox
                 register={register}
                 petImage={pet.imageUrl}
                 petName={pet.name}
+                selected={watch('petName')}
                 key={pet.petId}
-                type="checkbox"
               />
             ))}
           </div>
         </SearchSection>
 
-        <SearchSection canSelectAll title="작성자 필터">
+        <SearchSection selectAll={handleClickAll.bind(null, 'member')} title="작성자 필터">
           <div className={styles.members}>
             {membersQuery.data.members.map((member) => (
               <SearchMemberFilter key={member.id} member={member} register={register} selected={watch('member')} />

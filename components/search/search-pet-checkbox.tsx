@@ -1,23 +1,17 @@
 import Image from 'next/image';
-import styles from './pet-radio.module.scss';
+import styles from './search-pet-checkbox.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
-import { IFormInput } from '@/types/calendar';
-import { AddGrowthData } from '@/types/growth/details';
 
-interface PetRadio {
-  register: UseFormRegister<IFormInput & FieldValues> | UseFormRegister<AddGrowthData & FieldValues>;
+interface SearchPetCheckboxProps {
+  register: UseFormRegister<FieldValues>;
   petName: string;
   petImage: string;
-  defaultPet?: string;
+  selected: string[];
 }
 
-/**
- * @param register - react-hook-form의 register 함수를 넣어주세요.
- * @param {string} petName - 반려동물 이름
- * @param {string} petImage - 반려동물 이미지 url
- * @param {string} defaultPet - 수정 페이지에서 체크되어 있어야 하는 반려동물 이름
- */
-export default function PetRadio({ register, petName, petImage, defaultPet = '' }: PetRadio) {
+export default function SearchPetCheckbox({ register, petName, petImage, selected }: SearchPetCheckboxProps) {
+  const isSelected = selected.includes(petName);
+
   return (
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
@@ -25,8 +19,8 @@ export default function PetRadio({ register, petName, petImage, defaultPet = '' 
           {...register('petName', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
-          type="radio"
-          defaultChecked={defaultPet === petName}
+          type="checkbox"
+          checked={isSelected}
         />
         <Image className={styles.petImage} src={petImage} alt="반려동물 프로필 사진" fill />
         <Image
