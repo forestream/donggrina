@@ -15,3 +15,26 @@ export const FILTERS = [
     name: '성장기록',
   },
 ];
+
+export const SERVICE_CONFIGS = {
+  family: {
+    isGlobalSearch: true,
+    path: '/family',
+    queries: [],
+  },
+  calendar: {
+    isGlobalSearch: false,
+    path: '/calendar/search/results',
+    queries: ['keyword', 'petNames', 'writerNames'],
+  },
+  growth: {
+    isGlobalSearch: false,
+    path: '/growth',
+    queries: ['keyword', 'petNames', 'writerNames'],
+  },
+  diary: {
+    isGlobalSearch: false,
+    path: '/diary',
+    queries: ['keyword', 'pet', 'author', 'date'],
+  },
+};

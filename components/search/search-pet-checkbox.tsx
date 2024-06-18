@@ -1,28 +1,30 @@
 import Image from 'next/image';
 import styles from './search-pet-checkbox.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { Pet } from '@/api/calendar/request.type';
 
 interface SearchPetCheckboxProps {
   register: UseFormRegister<FieldValues>;
-  petName: string;
-  petImage: string;
-  selected: string[];
+  service: 'family' | 'calendar' | 'diary' | 'growth';
+  pet: Pet;
+  selected: (string | number)[];
 }
 
-export default function SearchPetCheckbox({ register, petName, petImage, selected }: SearchPetCheckboxProps) {
-  const isSelected = selected.includes(petName);
+export default function SearchPetCheckbox({ register, service, pet, selected }: SearchPetCheckboxProps) {
+  const value = service === 'diary' ? pet.petId : pet.name;
+  const isSelected = selected.includes(value);
 
   return (
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
         <input
           {...register('pets', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
-          value={petName}
+          value={value}
           className={styles.petInput}
           type="checkbox"
           checked={isSelected}
         />
-        <Image className={styles.petImage} src={petImage} alt="반려동물 프로필 사진" fill />
+        <Image className={styles.petImage} src={pet.imageUrl} alt="반려동물 프로필 사진" fill />
         <Image
           src="/images/calendar/check-circle.svg"
           alt="체크 표시"
@@ -31,7 +33,7 @@ export default function SearchPetCheckbox({ register, petName, petImage, selecte
           className={styles.check}
         />
       </div>
-      <p className={styles.petName}>{petName}</p>
+      <p className={styles.petName}>{pet.name}</p>
     </label>
   );
 }
