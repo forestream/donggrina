@@ -14,7 +14,6 @@ export default function CalendarContainer({ monthlyTodos }: CalendarContainerPro
   const year = calendarContext.year;
   const month = calendarContext.month + 1;
   const date = calendarContext.date;
-  console.log(monthlyTodos);
 
   const { calendarArray, todoCountsArray } = getCalendarArray(year, month, monthlyTodos);
 

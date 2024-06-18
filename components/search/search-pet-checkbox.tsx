@@ -16,7 +16,7 @@ export default function SearchPetCheckbox({ register, petName, petImage, selecte
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
         <input
-          {...register('petName', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
+          {...register('pets', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
           type="checkbox"

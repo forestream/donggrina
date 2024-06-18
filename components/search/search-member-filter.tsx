@@ -11,7 +11,7 @@ interface SearchMemberFilterProps {
 }
 
 export default function SearchMemberFilter({ member, register, selected }: SearchMemberFilterProps) {
-  const isSelected = selected.includes(member.name);
+  const isSelected = selected.includes(member.nickname);
 
   return (
     <label
@@ -19,8 +19,8 @@ export default function SearchMemberFilter({ member, register, selected }: Searc
         [styles.selected]: isSelected,
       })}
     >
-      <input type="checkbox" value={member.name} className={styles.checkbox} {...register('member')} />
-      <CalendarTodoProfile name={member.name} src={member.profileImageUrl} />
+      <input type="checkbox" value={member.nickname} className={styles.checkbox} {...register('members')} />
+      <CalendarTodoProfile name={member.nickname} src={member.profileImageUrl} />
     </label>
   );
 }
