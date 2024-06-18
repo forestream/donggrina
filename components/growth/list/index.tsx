@@ -4,18 +4,36 @@ import Link from 'next/link';
 import ListHeader from './list-header';
 
 interface GrowthListProps {
+  writerImage: string;
+  petImage: string;
+  nickname: string;
+  category: string;
   text: string;
-  writer: string;
-  pet: string;
-  categoryName: string;
+  isMine: boolean;
+  petName: string;
 }
 
-export default function GrowthList({ text, writer, pet, categoryName }: GrowthListProps) {
+export default function GrowthList({
+  petName,
+  isMine,
+  nickname,
+  text,
+  writerImage,
+  petImage,
+  category,
+}: GrowthListProps) {
   return (
     <div className={styles.container}>
-      <ListHeader writer={writer} categoryName={categoryName} pet={pet} />
+      <ListHeader
+        isMine={isMine}
+        nickname={nickname}
+        writerImage={writerImage}
+        category={category}
+        petImage={petImage}
+        petName={petName}
+      />
       <Link href="/" className={styles.text}>
-        text text text text text text text text text text texttext texttext texttext text text text text
+        {text}
       </Link>
     </div>
   );

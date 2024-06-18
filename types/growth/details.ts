@@ -4,6 +4,13 @@ export interface GrowthDetails {
   data: GrowthDetailsData;
 }
 
+export interface AddGrowthData {
+  date: string;
+  petName: string;
+  category: string;
+  content: GrowthDetailsContent;
+}
+
 export interface GrowthDetailsData {
   id: number;
   writerProfileImageUrl: string;
