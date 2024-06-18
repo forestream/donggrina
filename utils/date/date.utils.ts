@@ -40,6 +40,13 @@ class Calendar extends Core {
   getToday() {
     return `${this.currentMonth + 1}월 ${this.currentDate}일 ${this.calculateDay()}요일`;
   }
+
+  getTodayData() {
+    const currentMonth = (this.currentMonth + 1).toString().padStart(2, '0');
+    const currentDate = this.currentDate.toString().padStart(2, '0');
+
+    return `${this.currentYear}-${currentMonth}-${currentDate}`;
+  }
 }
 
 const CalendarInstance = new Calendar(new Date());

@@ -1,7 +1,7 @@
 import { axiosFileInstance } from '..';
 
 interface ImageType {
-  files: FileList;
+  files: File;
 }
 
 export const imageUpload = async (data: ImageType) => {

@@ -2,9 +2,11 @@ import styles from './family-growth.module.scss';
 import FamilyGrowthContents from '@/components/family/growth/family-growth-contents';
 import Suspensive from '@/components/suspensive/suspensive';
 import { useFetchGrowth } from '@/hooks/queries/family';
+import CalendarInstance from '@/utils/date/date.utils';
 
 export default function FamilyGrowth() {
-  const growthQuery = useFetchGrowth('2024-06-16');
+  const date = CalendarInstance.getTodayData();
+  const growthQuery = useFetchGrowth(date);
 
   return (
     <section className={styles.wrapper}>
