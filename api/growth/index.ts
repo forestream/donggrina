@@ -1,6 +1,6 @@
 import { Growth } from '@/types/growth';
 import { axiosInstance } from '..';
-import { AddGrowthData, GrowthDetailsData } from '@/types/growth/details';
+import { AddGrowthData, GrowthDetails } from '@/types/growth/details';
 import { GrowthSearchData } from '@/types/growth/search';
 
 export default class GrowthAPI {
@@ -15,7 +15,7 @@ export default class GrowthAPI {
   }
 
   async getGrowthDetails(growthId: number) {
-    return (await axiosInstance.get<GrowthDetailsData>(`/growth/${growthId}`)).data;
+    return (await axiosInstance.get<GrowthDetails>(`/growth/${growthId}`)).data;
   }
 
   async getSearchGrowth(keyword: string, petNames: string[], writerNames: string[]) {

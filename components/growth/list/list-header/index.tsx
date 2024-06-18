@@ -41,7 +41,9 @@ export default function ListHeader({
     handleModal(false);
     router.push('/growth');
   };
-  const handleEditClick = () => {};
+  const handleEditClick = () => {
+    router.push(`/growth/${growthId}`);
+  };
   const handleDeleteClick = () => {
     deleteMutation.mutate(growthId, {
       onSuccess: () => openModal(),
