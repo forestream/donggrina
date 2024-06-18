@@ -1,12 +1,14 @@
 import React from 'react';
-import { useFetchSchedule } from '@/hooks/queries/family';
 import FamilyScheduleEmpty from './empty/family-schedule-empty';
 import FamilyScheduleList from './list/family-schedule-list';
+import CalendarInstance from '@/utils/date/date.utils';
+import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 
 export default function FamilyScheduleContents() {
-  const scheduleQueries = useFetchSchedule('2024-06-16');
+  const date = CalendarInstance.getTodayData();
+  const scheduleQuery = useDailyTodosQuery(date);
 
-  if (!scheduleQueries.data!.length) return <FamilyScheduleEmpty />;
+  if (!scheduleQuery.data!.length) return <FamilyScheduleEmpty />;
 
-  return <FamilyScheduleList />;
+  return <FamilyScheduleList data={scheduleQuery.data!} />;
 }

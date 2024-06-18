@@ -8,8 +8,6 @@ export default function CalendarWeekly() {
   const daysInMonth = CalendarInstance.daysInMonth(calendarContext.year, calendarContext.month);
   const dayList = CalendarInstance.DAY_LIST(daysInMonth);
 
-  console.log(daysInMonth);
-
   return (
     <Swiper
       className={styles['date-list']}
