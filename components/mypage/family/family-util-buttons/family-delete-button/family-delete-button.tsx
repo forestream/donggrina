@@ -2,11 +2,7 @@ import Button from '@/components/common/button/button';
 import useModal from '@/hooks/use-modal';
 import DeleteModal from './delete-modal/delete-modal';
 
-interface DeleteButtonType {
-  groupId: number;
-}
-
-export default function FamilyDeleteButton({ groupId }: DeleteButtonType) {
+export default function FamilyDeleteButton() {
   const [Modal, handleModal] = useModal();
   const handleOpen = () => {
     handleModal(true);
@@ -16,7 +12,7 @@ export default function FamilyDeleteButton({ groupId }: DeleteButtonType) {
       <Button type="button" className="tertiary" round onClick={handleOpen}>
         가족 페쇄
       </Button>
-      <DeleteModal Modal={Modal} handleModal={handleModal} groupId={groupId} />
+      <DeleteModal Modal={Modal} handleModal={handleModal} />
     </>
   );
 }

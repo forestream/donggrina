@@ -3,13 +3,10 @@ import RenameModal from './rename-modal/rename-modal';
 import useModal from '@/hooks/use-modal';
 
 interface RenameType {
-  renameData: {
-    name: string;
-    id: number;
-  };
+  name: string;
 }
 
-export default function FamilyRenameButton({ renameData }: RenameType) {
+export default function FamilyRenameButton({ name }: RenameType) {
   const [Modal, handleModal] = useModal();
   const handleOpen = () => {
     handleModal(true);
@@ -19,7 +16,7 @@ export default function FamilyRenameButton({ renameData }: RenameType) {
       <Button type="button" className="secondary" round onClick={handleOpen}>
         가족 이름 변경
       </Button>
-      <RenameModal Modal={Modal} handleModal={handleModal} renameData={renameData} />
+      <RenameModal Modal={Modal} handleModal={handleModal} name={name} />
     </>
   );
 }

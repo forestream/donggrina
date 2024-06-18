@@ -30,19 +30,19 @@ export default class MyFamilyApi {
     return (await axiosInstance.get<MyCodeType>('/my/groups/code')).data;
   }
 
-  async myFamilyDelete(groupId: number) {
-    return axiosInstance.delete(`/my/groups/${groupId}`);
+  async myFamilyDelete() {
+    return axiosInstance.delete(`/my/groups`);
   }
 
-  async myFamilyModify(formData: NameModifyType, groupId: number) {
-    return axiosInstance.put(`/my/groups/${groupId}`, formData);
+  async myFamilyModify(formData: NameModifyType) {
+    return axiosInstance.put(`/my/groups`, formData);
   }
 
   async myFamilyAddMember(formData: FieldValues) {
     return axiosInstance.post(`/my/groups/members`, formData);
   }
 
-  async myFamilyDeleteMember(groupId: number, targetId: number) {
-    return axiosInstance.post(`/my/groups/${groupId}/members/${targetId}`);
+  async myFamilyDeleteMember(targetId: number) {
+    return axiosInstance.post(`/my/groups/members/${targetId}`);
   }
 }

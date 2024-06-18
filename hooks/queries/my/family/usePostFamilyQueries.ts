@@ -11,9 +11,9 @@ export const useMemberDeleteQuery = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (variables: { groupId: number; targetId: number }) => {
-      const { groupId, targetId } = variables;
-      return await myFamilyApi.myFamilyDeleteMember(groupId, targetId);
+    mutationFn: async (variables: { targetId: number }) => {
+      const { targetId } = variables;
+      return await myFamilyApi.myFamilyDeleteMember(targetId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['familyDetails'], refetchType: 'active' });
@@ -24,9 +24,9 @@ export const useFamilyModifyQuery = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (variables: { data: NameModifyType; groupId: number }) => {
-      const { groupId, data } = variables;
-      return await myFamilyApi.myFamilyModify(data, groupId);
+    mutationFn: async (variables: { data: NameModifyType }) => {
+      const { data } = variables;
+      return await myFamilyApi.myFamilyModify(data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['familyDetails'], refetchType: 'active' });

@@ -8,10 +8,9 @@ import { deleteCookie } from 'cookies-next';
 interface DeleteModalType {
   Modal: ({ children }: PropsWithChildren) => ReactNode;
   handleModal: (isOpen: boolean) => void;
-  groupId: number;
 }
 
-export default function DeleteModal({ Modal, handleModal, groupId }: DeleteModalType) {
+export default function DeleteModal({ Modal, handleModal }: DeleteModalType) {
   const myFamilyApi = new MyFamilyApi();
   const router = useRouter();
   const handleClose = () => {
@@ -19,7 +18,7 @@ export default function DeleteModal({ Modal, handleModal, groupId }: DeleteModal
   };
   const handleDelete = async () => {
     try {
-      await myFamilyApi.myFamilyDelete(groupId);
+      await myFamilyApi.myFamilyDelete();
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
       router.push('/login');

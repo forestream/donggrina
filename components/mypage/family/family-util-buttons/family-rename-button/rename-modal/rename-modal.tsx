@@ -8,16 +8,13 @@ import { useFamilyModifyQuery } from '@/hooks/queries/my/family/usePostFamilyQue
 interface RenameModalType {
   Modal: ({ children }: PropsWithChildren) => ReactNode;
   handleModal: (isOpen: boolean) => void;
-  renameData: {
-    name: string;
-    id: number;
-  };
+  name: string;
 }
 
-export default function RenameModal({ Modal, handleModal, renameData }: RenameModalType) {
+export default function RenameModal({ Modal, handleModal, name }: RenameModalType) {
   const methods = useForm<FieldValues>({
     defaultValues: {
-      name: renameData.name,
+      name: name,
     },
     mode: 'onBlur',
   });
@@ -25,7 +22,7 @@ export default function RenameModal({ Modal, handleModal, renameData }: RenameMo
   const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
   const { mutate } = useFamilyModifyQuery();
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    mutate({ data: { name: data.name }, groupId: renameData.id });
+    mutate({ data: { name: data.name } });
     handleModal(false);
   };
   return (
