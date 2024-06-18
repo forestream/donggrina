@@ -1,14 +1,14 @@
 import React from 'react';
-import { useFetchGrowth } from '@/hooks/queries/family';
 import FamilyGrowthList from './list/family-growth-list';
 import FamilyGrowthEmpty from './empty/family-growth-empty';
 import CalendarInstance from '@/utils/date/date.utils';
+import { useGetGrotwthByDateQuery } from '@/hooks/queries/growth/use-get-growth-queries';
 
 export default function FamilyGrowthContents() {
   const date = CalendarInstance.getTodayData();
-  const growthQuery = useFetchGrowth(date);
+  const growthQuery = useGetGrotwthByDateQuery(date);
 
-  if (!growthQuery.data!.length) return <FamilyGrowthEmpty />;
+  if (!growthQuery.data!.data.length) return <FamilyGrowthEmpty />;
 
-  return <FamilyGrowthList />;
+  return <FamilyGrowthList growthList={growthQuery.data!.data} />;
 }
