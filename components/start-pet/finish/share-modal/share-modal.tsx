@@ -30,7 +30,7 @@ export default function ShareModal({ closeModal, code }: ShareModalType) {
           </li>
         </ul>
         <div className={styles.buttonBox}>
-          <Button className="primary" type="button" onClick={closeModal}>
+          <Button className="primary" type="button" onClick={closeModal} leftRound rightRound>
             닫기
           </Button>
         </div>

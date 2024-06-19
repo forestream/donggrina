@@ -34,7 +34,7 @@ export default function RenameModal({ Modal, handleModal, name }: RenameModalTyp
             <Form.MainInput name="name" placeholder="gg" />
           </div>
           <div className={styles.buttonBox}>
-            <Button type="submit" className={buttonClassCondition}>
+            <Button type="submit" className={buttonClassCondition} leftRound rightRound>
               변경하기
             </Button>
           </div>
