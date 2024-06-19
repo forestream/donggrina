@@ -29,10 +29,10 @@ export default function ImageModal({ Modal, handleModal, fileInputRef, field }: 
       <div className={styles.modalContainer}>
         <p>프로필 사진을 변경하시겠습니까?</p>
         <div className={styles.buttonBox}>
-          <Button type="button" className="default" onClick={handleInitialization}>
+          <Button type="button" className="default" onClick={handleInitialization} leftRound>
             이미지 초기화 하기
           </Button>
-          <Button type="button" className="primary" onClick={handleButtonClick}>
+          <Button type="button" className="primary" onClick={handleButtonClick} rightRound>
             이미지 변경하기
           </Button>
         </div>

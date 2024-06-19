@@ -7,7 +7,9 @@ import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/common/button/button';
 import axios from 'axios';
+import myPageApiInstance from '@/api/my/user';
 export default function RegisterCode() {
+  const myProfile = myPageApiInstance;
   const myFamilyApi = new MyFamilyApi();
   const router = useRouter();
   const methods = useForm<FieldValues>({
@@ -17,7 +19,11 @@ export default function RegisterCode() {
   const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      await myFamilyApi.myFamilyAddMember(data).then(() => router.replace('/family'));
+      await myFamilyApi.myFamilyAddMember(data).then(async () => {
+        const response = await myProfile.getProfile();
+        localStorage.setItem('userId', response.id.toString());
+        router.replace('/family');
+      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response!.data);

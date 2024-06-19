@@ -16,7 +16,7 @@ export default function MyPage() {
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/mypage/family">
             <span>가족 관리</span>
             <Image src="images/arrow-right-green.svg" alt="반려동물 관리 페이지 이동하기" width={24} height={24} />
           </Link>

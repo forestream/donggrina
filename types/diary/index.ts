@@ -8,7 +8,7 @@ export interface DiaryData {
   authorImage: string;
   author: string;
   petImages: string[];
-  contentImage: string[];
+  contentImage: string;
   content: string;
   commentCount: number;
   favoriteCount: number;

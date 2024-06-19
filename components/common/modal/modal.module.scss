@@ -2,18 +2,18 @@
   position: absolute;
   inset: 0;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(45, 45, 40, 0.6);
   font-weight: 600;
   overflow: hidden;
   padding: 24px;
 }
 
 .inner {
-  overflow: hidden;
-  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 312px;
   display: flex;
   flex-direction: column;
   align-items: center;

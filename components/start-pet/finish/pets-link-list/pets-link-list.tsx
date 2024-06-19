@@ -1,9 +1,9 @@
 import Hyperlink from '@/components/common/button/hyperlink';
 import Button from '@/components/common/button/button';
 import useModal from '@/hooks/use-modal';
-import ShareModal from '../share-modal/share-modal';
 import MyFamilyApi from '@/api/my/groups';
 import { useState } from 'react';
+import Share from '@/components/common/share/share';
 
 export default function PetsLinkList() {
   const myFamilyApi = new MyFamilyApi();
@@ -20,9 +20,6 @@ export default function PetsLinkList() {
   const openModal = () => {
     handleModal(true);
     handleGetCode();
-  };
-  const closeModal = () => {
-    handleModal(false);
   };
   return (
     <>
@@ -41,9 +38,7 @@ export default function PetsLinkList() {
           다음에 초대하기
         </Hyperlink>
       </li>
-      <Modal>
-        <ShareModal closeModal={closeModal} code={code} />
-      </Modal>
+      <Share Modal={Modal} handleModal={handleModal} code={code} />
     </>
   );
 }

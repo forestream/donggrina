@@ -23,7 +23,7 @@ export default function CalendarTodoPostSuccess() {
           <p>일정기록 등록이 완료되었습니다.</p>
         </div>
         <div className={styles.button}>
-          <Button className="primary" onClick={handleClick}>
+          <Button className="primary" onClick={handleClick} leftRound rightRound>
             확인
           </Button>
         </div>

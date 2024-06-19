@@ -15,6 +15,7 @@ interface PetRadio {
  * @param register - react-hook-form의 register 함수를 넣어주세요.
  * @param {string} petName - 반려동물 이름
  * @param {string} petImage - 반려동물 이미지 url
+ * @param {string} defaultPet - 수정 페이지에서 체크되어 있어야 하는 반려동물 이름
  */
 export default function PetRadio({ register, petName, petImage, defaultPet = '' }: PetRadio) {
   return (

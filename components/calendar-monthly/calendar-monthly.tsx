@@ -1,22 +1,19 @@
-import styles from './calendar-container.module.scss';
+import styles from './calendar-monthly.module.scss';
 import getSeventhDate from '@/utils/get-seventh-date';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
 import classNames from 'classnames';
-import { fetchMonthlyTodos } from '@/api/calendar/request';
-import { useQuery } from '@tanstack/react-query';
+import { MonthlyTodos } from '@/api/calendar/request.type';
 
-export default function CalendarContainer() {
+interface CalendarMonthlyProps {
+  monthlyTodos: MonthlyTodos[];
+}
+
+export default function CalendarMonthly({ monthlyTodos }: CalendarMonthlyProps) {
   const calendarContext = useCalendarContext();
   const year = calendarContext.year;
   const month = calendarContext.month + 1;
   const date = calendarContext.date;
-  const yearMonth = `${year}-${month.toString().padStart(2, '0')}`;
-
-  const { data: monthlyTodos } = useQuery({
-    queryKey: ['monthlyTodos', yearMonth],
-    queryFn: () => fetchMonthlyTodos(yearMonth),
-  });
 
   const { calendarArray, todoCountsArray } = getCalendarArray(year, month, monthlyTodos);
 
