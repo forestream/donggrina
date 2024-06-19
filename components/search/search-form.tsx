@@ -33,12 +33,10 @@ export default function SearchForm({ service }: SearchFormProps) {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (formData) => {
-    console.log(formData);
     const keyword = getQueryString(SERVICE_CONFIGS[service].queries[0], [formData.keyword]);
     const petNames = getQueryString(SERVICE_CONFIGS[service].queries[1], formData.pets);
     const writerNames = getQueryString(SERVICE_CONFIGS[service].queries[2], formData.members);
     const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], []);
-    console.log(date);
 
     router.push(
       `${SERVICE_CONFIGS[service].path}?${keyword}&${petNames}&${writerNames}` +

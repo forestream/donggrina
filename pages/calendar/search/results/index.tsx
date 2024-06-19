@@ -11,7 +11,7 @@ import useSearchTodosQuery from '@/hooks/queries/calendar/use-search-todos-query
 import getQueryString from '@/utils/search/get-query-string';
 import { useEffect, useState } from 'react';
 import countTodosFromSearch from '@/utils/search/count-todos-from-search';
-import { MonthlyTodos } from '@/api/calendar/request.type';
+import { MonthlyTodos, TodoByQueries } from '@/api/calendar/request.type';
 
 export default function CalendarPage() {
   const router = useRouter();
@@ -51,6 +51,18 @@ export default function CalendarPage() {
     return result;
   }, []);
 
+  const dailyTodos = searchTodosQuery.data.reduce<TodoByQueries[]>((result, todo) => {
+    if (
+      todo.dateTime.includes(
+        `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`,
+      )
+    ) {
+      result.push(todo);
+    }
+
+    return result;
+  }, []);
+
   return (
     <main className={styles.outer}>
       <h2 style={{ marginTop: '54px' }}>검색 결과</h2>
@@ -76,7 +88,7 @@ export default function CalendarPage() {
         </div>
         <CalendarContainer monthlyTodos={monthlyTodos} />
         <CalendarTodoDate />
-        <CalendarTodos />
+        <CalendarTodos dailyTodos={dailyTodos} />
         <CreateTodoButton />
       </Calendar>
     </main>

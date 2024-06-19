@@ -7,10 +7,10 @@ import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 import { useRouter } from 'next/router';
-import { DailyTodo } from '@/api/calendar/request.type';
+import { DailyTodo, TodoByQueries } from '@/api/calendar/request.type';
 
 interface CalendarTodoProps {
-  todo: DailyTodo;
+  todo: DailyTodo & TodoByQueries;
 }
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {

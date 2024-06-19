@@ -1,6 +1,6 @@
 import { IFormInput } from '@/types/calendar';
 import { axiosInstance } from '..';
-import { DailyTodo, MonthlyTodos, Pet, TodoById } from './request.type';
+import { DailyTodo, MonthlyTodos, Pet, TodoById, TodoByQueries } from './request.type';
 import { getCookie, setCookie } from 'cookies-next';
 
 export async function fetchMonthlyTodos(yearMonth: string): Promise<MonthlyTodos[]> {
@@ -30,7 +30,7 @@ export async function fetchTodoById(calendarId: string, auth: string | null = nu
   return data.data;
 }
 
-export async function fetchTodosByQueries(query: string) {
+export async function fetchTodosByQueries(query: string): Promise<TodoByQueries[]> {
   const { data } = await axiosInstance.get(`/calendar/search?${query}`);
   return data.data;
 }

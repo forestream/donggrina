@@ -35,3 +35,16 @@ export interface TodoById {
   isFinished: boolean;
   isMine: boolean;
 }
+
+export interface TodoByQueries {
+  id: number;
+  title: string;
+  category: string;
+  dateTime: string;
+  memberProfileImageUrl: string;
+  nickname: string;
+  petProfileImageUrl: string;
+  petName: string;
+  isFinished: boolean;
+  isMine: boolean;
+}

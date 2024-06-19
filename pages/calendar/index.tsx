@@ -8,6 +8,7 @@ import useSelect from '@/hooks/use-select';
 import CalendarTodos from '@/components/calendar-monthly/calendar-todos';
 import Link from 'next/link';
 import useMonthlyTodosQuery from '@/hooks/queries/calendar/use-montly-todos-query';
+import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 
 export default function CalendarPage() {
   const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
@@ -27,8 +28,10 @@ export default function CalendarPage() {
   };
 
   const yearMonth = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}`;
+  const yearMonthDate = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
 
   const monthlyTodosQuery = useMonthlyTodosQuery(yearMonth);
+  const dailyTodosQuery = useDailyTodosQuery(yearMonthDate);
 
   return (
     <main className={styles.outer}>
@@ -57,7 +60,7 @@ export default function CalendarPage() {
         </div>
         <CalendarContainer monthlyTodos={monthlyTodosQuery.data} />
         <CalendarTodoDate />
-        <CalendarTodos />
+        <CalendarTodos dailyTodos={dailyTodosQuery.data!} />
         <CreateTodoButton />
       </Calendar>
     </main>
