@@ -32,7 +32,7 @@ export default function CreateGrowth() {
     symptom: '',
     diagnosis: '',
     medicationMethod: '',
-    price: 0,
+    price: null,
     memo: '',
   };
 
