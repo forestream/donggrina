@@ -1,12 +1,12 @@
 import { Growth } from '@/types/growth';
 import { axiosInstance } from '..';
-import { AddGrowthData, GrowthDetails } from '@/types/growth/details';
+import { GrowthDetails, GrowthDetailsData } from '@/types/growth/details';
 import { GrowthSearchData } from '@/types/growth/search';
 
 export default class GrowthAPI {
   constructor() {}
 
-  async createGrowth(formData: AddGrowthData) {
+  async createGrowth(formData: GrowthDetailsData) {
     return await axiosInstance.post('/growth', formData);
   }
 
@@ -26,8 +26,8 @@ export default class GrowthAPI {
     ).data;
   }
 
-  async modifyGrowth(growthId: number) {
-    return await axiosInstance.put(`/growth/${growthId}`);
+  async modifyGrowth(growthId: number, data: GrowthDetailsData) {
+    return await axiosInstance.put(`/growth/${growthId}`, data);
   }
 
   async deleteGrowth(growthId: number) {

@@ -2,7 +2,7 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { useGetGrowthDetailQuery } from '@/hooks/queries/growth/use-get-growth-queries';
 import { useModifyGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import useModal from '@/hooks/use-modal';
-import { AddGrowthData } from '@/types/growth/details';
+import { GrowthDetailsContent, GrowthDetailsData } from '@/types/growth/details';
 import { GROWTH_CATEGORY } from '@/utils/constants/growth';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
@@ -14,6 +14,8 @@ import CategoryInputs from '../create/category-inputs';
 import classNames from 'classnames';
 import CompleteModal from '../create/complete-modal';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
+import useCalenderDateStore from '@/store/calendar.store';
+import { convertToLocalDate } from '@/utils/convert-local-date';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -31,22 +33,31 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
   const modifyMutation = useModifyGrowthMutation(growthId);
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [memo, setMemo] = useState<string>('');
+  const [content, setContent] = useState({});
+  const [initPetName, setInitPetName] = useState('');
+  const year = useCalenderDateStore.use.year().toString();
+  const month = (useCalenderDateStore.use.month() + 1).toString();
+  const date = useCalenderDateStore.use.date().toString();
+  const localDate = convertToLocalDate({ year, month, day: date });
+
   useEffect(() => {
-    if (growthList?.data?.category) {
-      setSelectedCategory(growthList?.data.category);
+    if (growthList?.data) {
+      setMemo(growthList.data.content.memo);
+      setSelectedCategory(growthList.data.category);
+      setContent(growthList.data.content);
+      setInitPetName(growthList.data.petName);
     }
   }, [growthList]);
-
+  console.log(initPetName);
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<AddGrowthData>({
+  } = useForm<GrowthDetailsData>({
     mode: 'onBlur',
     defaultValues: {
-      date: growthList?.data.dateTime,
-      category: growthList?.data.category,
-      content: growthList?.data.content,
+      dateTime: localDate,
     },
   });
   const openModal = () => {
@@ -60,10 +71,10 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
     setSelectedCategory(event.target.value);
   };
 
-  const onSubmit: SubmitHandler<AddGrowthData> = (data) => {
+  const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
+    console.log(data);
     modifyMutation.mutate(data, {
-      onSuccess: (response) => {
-        console.log('Success:', response);
+      onSuccess: () => {
         openModal();
       },
       onError: (error) => {
@@ -71,7 +82,6 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
       },
     });
   };
-  console.log(growthList?.data);
   return (
     <>
       <div className={styles.wrapper}>
@@ -80,18 +90,26 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
             반려동물 선택
             <div className={styles.petLabelContainer}>
               {!!pets.length &&
+                initPetName !== '' &&
                 pets.map((pet, i) => (
-                  <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+                  <PetRadio
+                    key={i}
+                    defaultPet={initPetName}
+                    register={register}
+                    petName={pet.name}
+                    petImage={pet.imageUrl}
+                  />
                 ))}
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
           <div className={styles.division}></div>
           <textarea
-            {...register('content.memo', { required: '*내용을 입력해주세요.' })}
+            {...register('content.memo')}
             className={styles.memo}
             id="content.memo"
             placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
+            defaultValue={memo}
           />
           {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
 
@@ -106,6 +124,7 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
                     type="radio"
                     checked={selectedCategory === category}
                     onChange={handleCategoryChange}
+                    defaultValue={category}
                   />
                   <div className={styles.categoryIcon}></div>
                   <p className={styles.categoryName}>{category}</p>
@@ -113,7 +132,12 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
               ))}
             </div>
           </div>
-          <CategoryInputs errors={errors} selectedCategory={selectedCategory} register={register} />
+          <CategoryInputs
+            defaultValue={content as GrowthDetailsContent}
+            errors={errors}
+            selectedCategory={selectedCategory}
+            register={register}
+          />
           <button
             className={classNames(styles.submit, {
               [styles.disabled]: !isValid,

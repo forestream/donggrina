@@ -1,20 +1,18 @@
 import GrowthAPI from '@/api/growth';
-import { AddGrowthData } from '@/types/growth/details';
+import { GrowthDetailsData } from '@/types/growth/details';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const growthAPI = new GrowthAPI();
 
 export const useCreateGrotwthMutation = () => {
   return useMutation({
-    mutationFn: async (data: AddGrowthData) => await growthAPI.createGrowth(data),
+    mutationFn: async (data: GrowthDetailsData) => await growthAPI.createGrowth(data),
   });
 };
 
 export const useModifyGrowthMutation = (growthId: number) => {
-  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async () => await growthAPI.modifyGrowth(growthId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['growth', growthId], refetchType: 'active' }),
+    mutationFn: (data: GrowthDetailsData) => growthAPI.modifyGrowth(growthId, data),
   });
 };
 
