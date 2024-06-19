@@ -18,14 +18,24 @@ interface UpdateDiaryData {
   content: string;
 }
 
+export interface Child {
+  commentId: number;
+  commentAuthorImage: string;
+  commentAuthor: string;
+  comment: string;
+  date: string;
+  isMyComment: boolean;
+  children: null;
+}
+
 export interface Comment {
   commentId: number;
   commentAuthorImage: string;
   commentAuthor: string;
-  comment: null;
+  comment: string;
   date: string;
   isMyComment: boolean;
-  children: never[];
+  children: Child[];
 }
 
 interface Diary {
