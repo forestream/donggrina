@@ -98,7 +98,7 @@ export default function CategoryInputs({ defaultValue, errors, selectedCategory,
               placeholder="1,000 ₩"
               className={styles.input}
               onInput={handlePriceInput}
-              defaultValue={price}
+              defaultValue={price as number}
             />
           </div>
         </div>
