@@ -5,7 +5,7 @@ import Profile from '@/components/diaries/diary-content/profile';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
 import Image from 'next/image';
 import Response from '@/components/diaries/diary-content/response';
-import useCommentMutation from '@/hooks/queries/diary/use-comment-mutation';
+import useCommentPostMutation from '@/hooks/queries/diary/use-comment-mutation';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import DiaryComment from '@/components/diaries/diary-content/comment/diary-comment';
@@ -22,7 +22,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
   const router = useRouter();
 
   const diaryQuery = useDiaryQuery(diaryId);
-  const commentMutation = useCommentMutation(diaryId);
+  const commentMutation = useCommentPostMutation(diaryId);
   const diaryMutation = useDiaryMutation(diaryId);
 
   const handleDeleteDiary = () => diaryMutation.mutate(undefined, { onSuccess: () => router.push('/diaries') });

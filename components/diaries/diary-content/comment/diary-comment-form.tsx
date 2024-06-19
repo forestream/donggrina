@@ -11,7 +11,7 @@ interface DiaryCommentFormProps {
     Error,
     {
       content: string;
-      parentCommentId: number | null;
+      parentCommentId?: number | null;
     },
     unknown
   >;
