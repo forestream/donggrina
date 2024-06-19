@@ -18,7 +18,7 @@ interface UpdateDiaryData {
   content: string;
 }
 
-interface Comment {
+export interface Comment {
   commentId: number;
   commentAuthorImage: string;
   commentAuthor: string;

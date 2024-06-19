@@ -5,9 +5,9 @@ import Profile from '@/components/diaries/diary-content/profile';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
 import Image from 'next/image';
 import Response from '@/components/diaries/diary-content/response';
-import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-profile';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useCommentMutation from '@/hooks/queries/diary/use-comment-mutation';
+import DiaryComment from '@/components/diaries/diary-content/comment';
 
 export async function getServerSideProps(context: GetServerSidePropsContext & { params: { diaryId: string } }) {
   const { diaryId } = context.params;
@@ -19,6 +19,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
   const commentMutation = useCommentMutation(diaryId);
 
   const { register, handleSubmit, reset } = useForm<FieldValues>();
+
   const onSubmit: SubmitHandler<FieldValues> = (formData) => {
     commentMutation.mutate(formData.comment, {
       onSuccess: () => reset(),
@@ -48,13 +49,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
       />
 
       {diaryQuery.data.comments.map((comment) => (
-        <div key={comment.commentId}>
-          <CalendarTodoProfile name={comment.commentAuthor} src={comment.commentAuthorImage} />
-
-          <p>{comment.date}</p>
-          <p>{comment.comment}</p>
-          <p>답글</p>
-        </div>
+        <DiaryComment comment={comment} />
       ))}
 
       <form onSubmit={handleSubmit(onSubmit)}>

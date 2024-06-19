@@ -1,0 +1,19 @@
+.outer {
+  padding: 16px;
+}
+
+.commentProfile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentDate {
+  margin-left: 24px;
+  font-size: 12px;
+  color: var(--todo-category);
+}
+
+.commentReply {
+  font-size: 12px;
+  color: var(--text-color-gray);
+}
