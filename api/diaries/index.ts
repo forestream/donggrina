@@ -127,6 +127,15 @@ export const postComment = async (diaryId: string, content: string, parentCommen
   }
 };
 
+export const putComment = async (commentId: number, content: string) => {
+  try {
+    const response = await axiosInstance.put(`/comments/${commentId}`, { content });
+    console.log(response.data);
+  } catch (error) {
+    console.error('Failed to post comment', error);
+  }
+};
+
 export const deleteParentComment = async (commentId: number) => {
   try {
     const response = await axiosInstance.delete(`/comments/parent/${commentId}`);

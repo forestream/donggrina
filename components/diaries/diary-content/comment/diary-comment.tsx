@@ -7,8 +7,9 @@ import useParentCommentMutation from '@/hooks/queries/diary/use-parent-comment-m
 import { useState } from 'react';
 import DiaryCommentForm from './diary-comment-form';
 import DiaryCommentReply from './diary-comment-reply';
-import useCommentPostMutation from '@/hooks/queries/diary/use-comment-mutation';
+import useCommentPostMutation from '@/hooks/queries/diary/use-comment-post-mutation';
 import DiaryCommentEdit from './diary-comment-edit';
+import useCommentPutMutation from '@/hooks/queries/diary/use-comment-put-mutation';
 
 interface DiaryCommentProps {
   comment: Comment;
@@ -19,7 +20,8 @@ export default function DiaryComment({ comment, diaryId }: DiaryCommentProps) {
   const [isReplying, setIsReplying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const commentMutation = useCommentPostMutation(diaryId);
+  const commentPostMutation = useCommentPostMutation(diaryId);
+  const commentPutMutation = useCommentPutMutation(diaryId, comment.commentId);
   const parentCommentMutation = useParentCommentMutation(diaryId, comment.commentId);
 
   const handleDelete = () => parentCommentMutation.mutate();
@@ -48,7 +50,11 @@ export default function DiaryComment({ comment, diaryId }: DiaryCommentProps) {
       </div>
       <p className={styles.commentDate}>{comment.date}</p>
       {isEditing ? (
-        <DiaryCommentEdit diaryId={diaryId} defaultValue={comment.comment} onCancel={handleCancel} />
+        <DiaryCommentEdit
+          defaultValue={comment.comment}
+          mutationFn={commentPutMutation.mutate}
+          onCancel={handleCancel}
+        />
       ) : (
         <p className={styles.commentContent}>{comment.comment}</p>
       )}
@@ -61,7 +67,7 @@ export default function DiaryComment({ comment, diaryId }: DiaryCommentProps) {
             <DiaryCommentReply key={child.commentId} comment={child} diaryId={diaryId} />
           ))}
           <DiaryCommentForm
-            mutateFn={commentMutation.mutate}
+            mutateFn={commentPostMutation.mutate}
             placeholder="답글 입력..."
             parentCommentId={comment.commentId}
           />

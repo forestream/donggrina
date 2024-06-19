@@ -1,20 +1,20 @@
-import useCommentPostMutation from '@/hooks/queries/diary/use-comment-mutation';
 import styles from './diary-comment-edit.module.scss';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { UseMutateFunction } from '@tanstack/react-query';
 
 interface DiaryCommentEditProps {
-  diaryId: string;
   defaultValue: string;
+  mutationFn: UseMutateFunction<void, Error, string, unknown>;
   onCancel: () => void;
 }
 
-export default function DiaryCommentEdit({ diaryId, defaultValue, onCancel }: DiaryCommentEditProps) {
-  const commentMutation = useCommentPostMutation(diaryId);
-
+export default function DiaryCommentEdit({ defaultValue, mutationFn, onCancel }: DiaryCommentEditProps) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (formData) => {
-    commentMutation.mutate({ content: formData.comment });
+    mutationFn(formData.comment, {
+      onSuccess: onCancel,
+    });
   };
 
   return (
