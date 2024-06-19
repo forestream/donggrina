@@ -62,13 +62,14 @@ export default function DiaryComment({ comment, diaryId }: DiaryCommentProps) {
         <p className={styles.commentContent}>{comment.comment}</p>
       )}
       <button onClick={handleClickReply} className={styles.commentReply}>
-        답글
+        답글 {comment.children.length}개
       </button>
       {isReplying && (
         <>
           {comment.children.map((child) => (
             <DiaryCommentReply key={child.commentId} comment={child} diaryId={diaryId} />
           ))}
+          <div style={{ width: '100%', marginBottom: '10px' }}></div>
           <DiaryCommentForm
             mutateFn={commentPostMutation.mutate}
             placeholder="답글 입력..."
