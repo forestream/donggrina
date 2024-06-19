@@ -26,35 +26,39 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
     });
   };
 
+  const weatherIcon = diaryQuery.data && WEATHER_TYPES.find((weather) => weather.label === diaryQuery.data.weather);
+
   if (diaryQuery.isPending) return <p>loading</p>;
   if (diaryQuery.isError) return <p>Error: {diaryQuery.error.message}</p>;
 
-  const weatherIcon = WEATHER_TYPES.find((weather) => weather.label === diaryQuery.data.weather);
-
   return (
     <main className={styles.outer}>
-      <section className={styles.profiles}>
-        <Profile
-          author={diaryQuery.data?.author}
-          authorImage={diaryQuery.data.authorImage}
-          petImages={diaryQuery.data.petImages}
+      <div className={styles.inner}>
+        <section className={styles.profiles}>
+          <Profile
+            author={diaryQuery.data.author}
+            authorImage={diaryQuery.data.authorImage}
+            petImages={diaryQuery.data.petImages}
+          />
+          <Image src={weatherIcon!.selectedIcon} alt={weatherIcon!.label} width={24} height={24} />
+        </section>
+        <section className={styles.content}>{diaryQuery.data.content}</section>
+        <Response
+          commentCount={diaryQuery.data.comments.length}
+          favoriteCount={diaryQuery.data.favoriteCount}
+          favoriteState={diaryQuery.data.favoriteState}
         />
-        <Image src={weatherIcon!.selectedIcon} alt={weatherIcon!.label} width={24} height={24} />
-      </section>
-      <section className={styles.content}>{diaryQuery.data.content}</section>
-      <Response
-        commentCount={diaryQuery.data.comments.length}
-        favoriteCount={diaryQuery.data.favoriteCount}
-        favoriteState={diaryQuery.data.favoriteState}
-      />
 
-      {diaryQuery.data.comments.map((comment) => (
-        <DiaryComment comment={comment} />
-      ))}
+        <div>
+          {diaryQuery.data.comments.map((comment) => (
+            <DiaryComment comment={comment} />
+          ))}
+        </div>
+      </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('comment')} type="text" />
-        <button>
+      <form className={styles.commentForm} onSubmit={handleSubmit(onSubmit)}>
+        <input className={styles.commentInput} {...register('comment')} type="text" placeholder="댓글 입력..." />
+        <button className={styles.commentButton}>
           <Image src="/images/diaries/post-comment-off.svg" alt="댓글 등록 버튼" width={24} height={24} />
         </button>
       </form>
