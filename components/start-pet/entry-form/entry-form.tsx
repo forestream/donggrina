@@ -41,12 +41,10 @@ export default function EntryForm({ onSubmit, defaultData, children }: PropsWith
   const formSubmit: SubmitHandler<FieldValues> = async (data) => {
     onSubmit(data);
   };
-  console.log(watch('imageId'));
   const type = watch('type');
   const prevType = useRef();
   useEffect(() => {
     prevType.current = type;
-    console.log(watch('imageId'));
   }, []);
   useEffect(() => {
     const isDog = type === '강아지';
