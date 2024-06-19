@@ -1,0 +1,29 @@
+.outer {
+  padding: 54px 12px 100px;
+  height: 100vh;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.inner {
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pets {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+}
+
+.members {
+  display: flex;
+  gap: 8px;
+}

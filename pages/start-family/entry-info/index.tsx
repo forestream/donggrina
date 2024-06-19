@@ -7,8 +7,10 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import MyFamilyApi from '@/api/my/groups';
+import myPageApiInstance from '@/api/my/user';
 
 export default function CreateFamily() {
+  const myProfile = myPageApiInstance;
   const myFamilyApi = new MyFamilyApi();
   const router = useRouter();
   const methods = useForm<FieldValues>({
@@ -18,7 +20,11 @@ export default function CreateFamily() {
   const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      await myFamilyApi.myFamilyCreate(data).then(() => router.replace('/start-family/entry-info/finish'));
+      await myFamilyApi.myFamilyCreate(data).then(async () => {
+        const response = await myProfile.getProfile();
+        localStorage.setItem('userId', response.id.toString());
+        router.replace('/start-family/entry-info/finish');
+      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response!.data);

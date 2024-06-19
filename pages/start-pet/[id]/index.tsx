@@ -21,9 +21,9 @@ export default function PetEntryModify() {
       const response = await imageUpload(submitData);
       data.imageId = response.data.data[0];
     }
-    if (data.petProfileImageId && data.imageId === null) {
-      data.imageId = data.petProfileImageId;
-    }
+    // if (data.petProfileImageId && data.imageId === null) {
+    //   data.imageId = data.petProfileImageId;
+    // }
     if (id) {
       mutate({
         data: {
@@ -42,10 +42,14 @@ export default function PetEntryModify() {
     }
   };
   if (isLoading) return null;
+  const defaultValue = {
+    ...data.data,
+    imageId: data.data.petProfileImageId,
+  };
   return (
     <section className={styles.section}>
       <Title>반려동물 수정</Title>
-      <EntryForm onSubmit={handleSubmit} defaultData={data.data}>
+      <EntryForm onSubmit={handleSubmit} defaultData={defaultValue}>
         <Button type="submit" className="primary" round>
           반려동물 수정하기
         </Button>

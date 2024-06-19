@@ -11,8 +11,8 @@ export default function CompleteModal({ closeModal, text }: CompleteModalProps) 
     <div className={styles.box}>
       <p className={styles.text}>{text}</p>
       <div className={styles.buttonBox}>
-        <Button className="primary" type="button" onClick={closeModal}>
-          확인
+        <Button className="primary" type="button" onClick={closeModal} rightRound leftRound>
+          닫기
         </Button>
       </div>
     </div>
