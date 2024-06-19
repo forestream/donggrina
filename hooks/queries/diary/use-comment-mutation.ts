@@ -5,7 +5,7 @@ const useCommentMutation = (diaryId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['comments', diaryId],
+    mutationKey: ['diaries', diaryId, 'comments'],
     mutationFn: ({ content, parentCommentId = null }: { content: string; parentCommentId: number | null }) =>
       postComment(diaryId, content, parentCommentId),
     onSuccess: () =>

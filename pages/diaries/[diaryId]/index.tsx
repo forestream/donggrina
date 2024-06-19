@@ -60,7 +60,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
 
         <div>
           {diaryQuery.data.comments.map((comment) => (
-            <DiaryComment key={comment.commentId} comment={comment} />
+            <DiaryComment key={comment.commentId} comment={comment} diaryId={diaryId} />
           ))}
         </div>
       </div>

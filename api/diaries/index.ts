@@ -109,11 +109,28 @@ export const updateDiary = async (diaryId: number, updateData: UpdateDiaryData) 
 };
 
 export const postComment = async (diaryId: string, content: string, parentCommentId: number | null = null) => {
-  console.log({ content, parentCommentId });
   try {
     const response = await axiosInstance.post(`/comments/${diaryId}`, { content, parentCommentId });
     console.log(response.data);
   } catch (error) {
     console.error('Failed to post comment', error);
+  }
+};
+
+export const deleteParentComment = async (commentId: number) => {
+  try {
+    const response = await axiosInstance.delete(`/comments/parent/${commentId}`);
+    console.log(response.data);
+  } catch (error) {
+    console.error('Failed to delete comment', error);
+  }
+};
+
+export const deleteChildComment = async (commentId: number) => {
+  try {
+    const response = await axiosInstance.delete(`/comments/child/${commentId}`);
+    console.log(response.data);
+  } catch (error) {
+    console.error('Failed to delete comment', error);
   }
 };
