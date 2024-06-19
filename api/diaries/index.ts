@@ -18,6 +18,29 @@ interface UpdateDiaryData {
   content: string;
 }
 
+interface Comment {
+  commentId: number;
+  commentAuthorImage: string;
+  commentAuthor: string;
+  comment: null;
+  date: string;
+  isMyComment: boolean;
+  children: never[];
+}
+
+interface Diary {
+  authorImage: string;
+  author: string;
+  petImages: string[];
+  contentImages: never[];
+  content: string;
+  weather: string;
+  favoriteState: boolean;
+  favoriteCount: number;
+  comments: Comment[];
+  isMyDiary: boolean;
+}
+
 export async function postDiariesImage(ImageData: ImageUpload) {
   const formData = new FormData();
   ImageData.images.forEach((image) => {
@@ -47,6 +70,17 @@ export async function postDiaries(diaryData: DiaryPostType) {
 export async function fetchDiaries(date: string): Promise<DiaryData[]> {
   try {
     const response = await axiosInstance.get<{ data: DiaryData[] }>(`/diaries?date=${date}`);
+    return response.data.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function fetchDiaryById(diaryId: string): Promise<Diary> {
+  try {
+    const response = await axiosInstance.get(`/diaries/${diaryId}`);
+    console.log(response.data.data);
     return response.data.data;
   } catch (error) {
     console.error(error);
