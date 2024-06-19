@@ -1,4 +1,4 @@
-import { MyPageData } from '@/types/my-page/family';
+import { MyPageDetails } from '@/types/my-page/family';
 import { axiosInstance } from '../..';
 import { FieldValues } from 'react-hook-form';
 
@@ -23,26 +23,26 @@ export default class MyFamilyApi {
   }
 
   async myFamilyDetails() {
-    return (await axiosInstance.get<MyPageData>('/my/groups')).data;
+    return (await axiosInstance.get<MyPageDetails>('/my/groups')).data;
   }
 
   async myFamilyCode() {
     return (await axiosInstance.get<MyCodeType>('/my/groups/code')).data;
   }
 
-  async myFamilyDelete(groupId: string) {
-    return axiosInstance.delete(`/my/groups/${groupId}`);
+  async myFamilyDelete() {
+    return axiosInstance.delete(`/my/groups`);
   }
 
-  async myFamilyModify(formData: NameModifyType, groupId: string) {
-    return axiosInstance.put(`/my/groups/${groupId}`, formData);
+  async myFamilyModify(formData: NameModifyType) {
+    return axiosInstance.put(`/my/groups`, formData);
   }
 
   async myFamilyAddMember(formData: FieldValues) {
     return axiosInstance.post(`/my/groups/members`, formData);
   }
 
-  async myFamilyDeleteMember(groupId: string, targetId: string) {
-    return axiosInstance.post(`/my/groups/${groupId}/members/${targetId}`);
+  async myFamilyDeleteMember(targetId: number) {
+    return axiosInstance.post(`/my/groups/members/${targetId}`);
   }
 }
