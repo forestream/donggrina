@@ -36,10 +36,10 @@ export default function DeleteModal({ Modal, handleModal }: DeleteModalType) {
         </p>
       </div>
       <div className={styles.buttonBox}>
-        <Button type="button" className="default" onClick={handleDelete}>
+        <Button type="button" className="default" onClick={handleDelete} leftRound>
           예
         </Button>
-        <Button type="button" className="primary" onClick={handleClose}>
+        <Button type="button" className="primary" onClick={handleClose} rightRound>
           아니오
         </Button>
       </div>
