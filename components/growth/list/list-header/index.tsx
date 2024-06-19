@@ -42,7 +42,7 @@ export default function ListHeader({
     router.push('/growth');
   };
   const handleEditClick = () => {
-    router.push(`/growth/${growthId}`);
+    router.push(`/growth/${growthId}/edit`);
   };
   const handleDeleteClick = () => {
     deleteMutation.mutate(growthId, {
