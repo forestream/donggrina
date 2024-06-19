@@ -44,6 +44,7 @@ interface Diary {
   petImages: string[];
   contentImages: never[];
   content: string;
+  date: string;
   weather: string;
   favoriteState: boolean;
   favoriteCount: number;
