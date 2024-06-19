@@ -6,7 +6,7 @@ export default function AddPet() {
   return (
     <div className={styles.titleBox}>
       <h2>반려동물 관리</h2>
-      <Link href={'/mypage/pet/add'} title="가족 초대 모달 열기">
+      <Link href={'/mypage/pet/add'} title="반려동물 추가 페이지로 이동">
         <OpenSVG />
       </Link>
     </div>
