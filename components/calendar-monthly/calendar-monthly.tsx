@@ -1,15 +1,15 @@
-import styles from './calendar-container.module.scss';
+import styles from './calendar-monthly.module.scss';
 import getSeventhDate from '@/utils/get-seventh-date';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
 import classNames from 'classnames';
 import { MonthlyTodos } from '@/api/calendar/request.type';
 
-interface CalendarContainerProps {
+interface CalendarMonthlyProps {
   monthlyTodos: MonthlyTodos[];
 }
 
-export default function CalendarContainer({ monthlyTodos }: CalendarContainerProps) {
+export default function CalendarMonthly({ monthlyTodos }: CalendarMonthlyProps) {
   const calendarContext = useCalendarContext();
   const year = calendarContext.year;
   const month = calendarContext.month + 1;

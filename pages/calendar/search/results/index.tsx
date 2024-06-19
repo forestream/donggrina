@@ -1,6 +1,5 @@
 import Calendar from '@/components/calendar-compound/calendar';
 import styles from './results.module.scss';
-import CalendarContainer from '@/components/calendar-monthly/calendar-container';
 import CreateTodoButton from '@/components/calendar-monthly/create-todo-button';
 import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 import CalendarInstance from '@/utils/date/date.utils';
@@ -12,6 +11,7 @@ import getQueryString from '@/utils/search/get-query-string';
 import { useEffect, useState } from 'react';
 import countTodosFromSearch from '@/utils/search/count-todos-from-search';
 import { MonthlyTodos, TodoByQueries } from '@/api/calendar/request.type';
+import CalendarMonthly from '@/components/calendar-monthly/calendar-monthly';
 
 export default function CalendarPage() {
   const router = useRouter();
@@ -86,7 +86,7 @@ export default function CalendarPage() {
         <div style={{ position: 'relative', left: '-12px' }}>
           <Calendar.Month />
         </div>
-        <CalendarContainer monthlyTodos={monthlyTodos} />
+        <CalendarMonthly monthlyTodos={monthlyTodos} />
         <CalendarTodoDate />
         <CalendarTodos dailyTodos={dailyTodos} />
         <CreateTodoButton />

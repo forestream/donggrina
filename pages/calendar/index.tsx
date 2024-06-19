@@ -1,6 +1,5 @@
 import Calendar from '@/components/calendar-compound/calendar';
 import styles from './calendar.module.scss';
-import CalendarContainer from '@/components/calendar-monthly/calendar-container';
 import CreateTodoButton from '@/components/calendar-monthly/create-todo-button';
 import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 import CalendarInstance from '@/utils/date/date.utils';
@@ -9,6 +8,7 @@ import CalendarTodos from '@/components/calendar-monthly/calendar-todos';
 import Link from 'next/link';
 import useMonthlyTodosQuery from '@/hooks/queries/calendar/use-montly-todos-query';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
+import CalendarMonthly from '@/components/calendar-monthly/calendar-monthly';
 
 export default function CalendarPage() {
   const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
@@ -58,7 +58,7 @@ export default function CalendarPage() {
         <div style={{ position: 'relative', left: '-12px' }}>
           <Calendar.Month />
         </div>
-        <CalendarContainer monthlyTodos={monthlyTodosQuery.data} />
+        <CalendarMonthly monthlyTodos={monthlyTodosQuery.data} />
         <CalendarTodoDate />
         <CalendarTodos dailyTodos={dailyTodosQuery.data!} />
         <CreateTodoButton />
