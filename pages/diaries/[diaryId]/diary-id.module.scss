@@ -44,6 +44,11 @@
   border: 1px solid var(--text-color-gray);
   border-radius: 9999px;
   padding: 0 24px;
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid var(--main-color);
+  }
 }
 
 .commentButton {
