@@ -20,19 +20,22 @@ export default function DiaryComment({ comment, diaryId }: DiaryCommentProps) {
   const [isReplying, setIsReplying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
+  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+
   const commentPostMutation = useCommentPostMutation(diaryId);
   const commentPutMutation = useCommentPutMutation(diaryId, comment.commentId);
   const parentCommentMutation = useParentCommentMutation(diaryId, comment.commentId);
 
   const handleDelete = () => parentCommentMutation.mutate();
-  const handleEdit = () => setIsEditing(true);
+  const handleEdit = () => {
+    setIsEditing(true);
+    onCloseToggle();
+  };
   const handleCancel = () => setIsEditing(false);
 
   const handleClickReply = () => {
     setIsReplying(!isReplying);
   };
-
-  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
   return (
     <div className={styles.outer} key={comment.commentId}>
