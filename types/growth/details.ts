@@ -2,13 +2,6 @@ export interface GrowthDetails {
   data: GrowthDetailsData;
 }
 
-// export interface AddGrowthData {
-//   date: string;
-//   petName: string;
-//   category: string;
-//   content: GrowthDetailsContent;
-// }
-
 export interface GrowthDetailsData {
   id: number;
   writerProfileImageUrl: string;
@@ -19,6 +12,7 @@ export interface GrowthDetailsData {
   nickname: string;
   isMine: boolean;
   petName: string;
+  date: string;
 }
 
 export interface GrowthDetailsContent {
