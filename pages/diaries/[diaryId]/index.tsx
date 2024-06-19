@@ -5,12 +5,11 @@ import Profile from '@/components/diaries/diary-content/profile';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
 import Image from 'next/image';
 import Response from '@/components/diaries/diary-content/response';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useCommentMutation from '@/hooks/queries/diary/use-comment-mutation';
-import DiaryComment from '@/components/diaries/diary-content/comment';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
-import { useState } from 'react';
+import DiaryComment from '@/components/diaries/diary-content/comment/diary-comment';
+import DiaryCommentForm from '@/components/diaries/diary-content/comment/diary-comment-form';
 
 export async function getServerSideProps(context: GetServerSidePropsContext & { params: { diaryId: string } }) {
   const { diaryId } = context.params;
@@ -18,26 +17,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext & { 
 }
 
 export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [isFocused, setIsFocused] = useState(false);
-
   const diaryQuery = useDiaryQuery(diaryId);
   const commentMutation = useCommentMutation(diaryId);
-
-  const { register, handleSubmit, reset } = useForm<FieldValues>();
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
-  const onSubmit: SubmitHandler<FieldValues> = (formData) => {
-    commentMutation.mutate(formData.comment, {
-      onSuccess: () => reset(),
-    });
-  };
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
@@ -84,26 +65,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
         </div>
       </div>
 
-      <form className={styles.commentForm} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className={styles.commentInput}
-          {...(register('comment'),
-          {
-            onBlur: handleBlur,
-          })}
-          type="text"
-          placeholder="댓글 입력..."
-          onFocus={handleFocus}
-        />
-        <button className={styles.commentButton}>
-          <Image
-            src={isFocused ? '/images/diaries/post-comment-on.svg' : '/images/diaries/post-comment-off.svg'}
-            alt="댓글 등록 버튼"
-            width={24}
-            height={24}
-          />
-        </button>
-      </form>
+      <DiaryCommentForm mutateFn={commentMutation.mutate} placeholder="댓글 입력..." />
     </main>
   );
 }

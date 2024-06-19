@@ -6,7 +6,7 @@ const useCommentMutation = (diaryId: string) => {
 
   return useMutation({
     mutationKey: ['comments', diaryId],
-    mutationFn: (content: string, parentCommentId: number | null = null) =>
+    mutationFn: ({ content, parentCommentId = null }: { content: string; parentCommentId: number | null }) =>
       postComment(diaryId, content, parentCommentId),
     onSuccess: () =>
       queryClient.invalidateQueries({
