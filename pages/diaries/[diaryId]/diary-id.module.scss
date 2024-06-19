@@ -11,6 +11,17 @@
   overflow-y: scroll;
   scrollbar-width: none;
 }
+
+.date {
+  position: relative;
+  width: 100%;
+}
+
+.kebab {
+  position: absolute;
+  right: 0;
+}
+
 .profiles {
   display: flex;
   justify-content: space-between;

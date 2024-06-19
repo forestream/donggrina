@@ -15,17 +15,19 @@ export default function DiaryComment({ comment }: DiaryCommentProps) {
     <div className={styles.outer} key={comment.commentId}>
       <div className={styles.commentProfile}>
         <CalendarTodoProfile name={comment.commentAuthor} src={comment.commentAuthorImage} />
-        <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
-          <DropdownMenu.Kebab />
-          <DropdownMenu.Content>
-            <DropdownMenu.Item onClick={() => {}}>수정</DropdownMenu.Item>
-            <DropdownMenu.Item onClick={() => {}}>삭제</DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu>
+        {comment.isMyComment && (
+          <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
+            <DropdownMenu.Kebab />
+            <DropdownMenu.Content>
+              <DropdownMenu.Item onClick={() => {}}>수정</DropdownMenu.Item>
+              <DropdownMenu.Item onClick={() => {}}>삭제</DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu>
+        )}
       </div>
 
       <p className={styles.commentDate}>{comment.date}</p>
-      <p>{comment.comment}</p>
+      <p className={styles.commentContent}>{comment.comment}</p>
       <p className={styles.commentReply}>답글</p>
     </div>
   );

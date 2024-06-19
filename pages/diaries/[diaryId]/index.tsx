@@ -8,6 +8,8 @@ import Response from '@/components/diaries/diary-content/response';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useCommentMutation from '@/hooks/queries/diary/use-comment-mutation';
 import DiaryComment from '@/components/diaries/diary-content/comment';
+import DropdownMenu from '@/components/kebab/kebab';
+import useToggle from '@/hooks/use-toggle';
 
 export async function getServerSideProps(context: GetServerSidePropsContext & { params: { diaryId: string } }) {
   const { diaryId } = context.params;
@@ -26,6 +28,8 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
     });
   };
 
+  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+
   const weatherIcon = diaryQuery.data && WEATHER_TYPES.find((weather) => weather.label === diaryQuery.data.weather);
 
   if (diaryQuery.isPending) return <p>loading</p>;
@@ -34,6 +38,19 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
   return (
     <main className={styles.outer}>
       <div className={styles.inner}>
+        <section className={styles.date}>
+          {diaryQuery.data.isMyDiary && (
+            <div className={styles.kebab}>
+              <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
+                <DropdownMenu.Kebab />
+                <DropdownMenu.Content>
+                  <DropdownMenu.Item onClick={() => {}}>수정</DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={() => {}}>삭제</DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu>
+            </div>
+          )}
+        </section>
         <section className={styles.profiles}>
           <Profile
             author={diaryQuery.data.author}
