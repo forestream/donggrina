@@ -51,10 +51,12 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
             <div className={styles.kebab}>
               <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
                 <DropdownMenu.Kebab />
-                <DropdownMenu.Content>
-                  <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
-                  <DropdownMenu.Item onClick={handleDeleteDiary}>삭제</DropdownMenu.Item>
-                </DropdownMenu.Content>
+                <div style={{ position: 'relative', right: '16px' }}>
+                  <DropdownMenu.Content>
+                    <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
+                    <DropdownMenu.Item onClick={handleDeleteDiary}>삭제</DropdownMenu.Item>
+                  </DropdownMenu.Content>
+                </div>
               </DropdownMenu>
             </div>
           )}

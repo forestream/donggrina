@@ -44,10 +44,12 @@ export default function DiaryComment({ comment, diaryId }: DiaryCommentProps) {
         {comment.isMyComment && (
           <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
             <DropdownMenu.Kebab />
-            <DropdownMenu.Content>
-              <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
-              <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
-            </DropdownMenu.Content>
+            <div style={{ position: 'relative', right: '2px' }}>
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </div>
           </DropdownMenu>
         )}
       </div>
