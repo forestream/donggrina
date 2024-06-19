@@ -18,8 +18,8 @@ export default function RenameModal({ Modal, handleModal, name }: RenameModalTyp
     },
     mode: 'onBlur',
   });
-  const { handleSubmit, formState } = methods;
-  const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
+  const { handleSubmit, watch } = methods;
+  const buttonClassCondition = !watch('name') ? 'disabled' : 'primary';
   const { mutate } = useFamilyModifyQuery();
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     mutate({ data: { name: data.name } });
@@ -31,7 +31,7 @@ export default function RenameModal({ Modal, handleModal, name }: RenameModalTyp
         <Form onSubmit={handleSubmit(onSubmit)} methods={methods}>
           <div className={styles.inputBox}>
             <Form.Label htmlFor="name">가족이름 변경하기</Form.Label>
-            <Form.MainInput name="name" placeholder="gg" />
+            <Form.MainInput name="name" />
           </div>
           <div className={styles.buttonBox}>
             <Button type="submit" className={buttonClassCondition} leftRound rightRound>
