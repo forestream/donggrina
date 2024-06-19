@@ -1,7 +1,6 @@
 import Title from '@/components/common/title/title';
 import { useRouter } from 'next/router';
 import EntryForm from '@/components/start-pet/entry-form/entry-form';
-import styles from './index.module.scss';
 import Button from '@/components/common/button/button';
 import { usePetsModifyQuery } from '@/hooks/queries/my/pets/usePostPetsQueries';
 import { FieldValues } from 'react-hook-form';
