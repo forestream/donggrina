@@ -10,6 +10,8 @@ import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import DiaryComment from '@/components/diaries/diary-content/comment/diary-comment';
 import DiaryCommentForm from '@/components/diaries/diary-content/comment/diary-comment-form';
+import useDiaryMutation from '@/hooks/queries/diary/use-diary-mutation';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context: GetServerSidePropsContext & { params: { diaryId: string } }) {
   const { diaryId } = context.params;
@@ -17,8 +19,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext & { 
 }
 
 export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
+
   const diaryQuery = useDiaryQuery(diaryId);
   const commentMutation = useCommentMutation(diaryId);
+  const diaryMutation = useDiaryMutation(diaryId);
+
+  const handleDeleteDiary = () => diaryMutation.mutate(undefined, { onSuccess: () => router.push('/diaries') });
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
 
@@ -37,7 +44,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
                 <DropdownMenu.Kebab />
                 <DropdownMenu.Content>
                   <DropdownMenu.Item onClick={() => {}}>수정</DropdownMenu.Item>
-                  <DropdownMenu.Item onClick={() => {}}>삭제</DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={handleDeleteDiary}>삭제</DropdownMenu.Item>
                 </DropdownMenu.Content>
               </DropdownMenu>
             </div>
