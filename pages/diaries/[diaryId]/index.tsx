@@ -26,6 +26,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
   const commentMutation = useCommentPostMutation(diaryId);
   const diaryMutation = useDiaryMutation(diaryId);
 
+  const handleEdit = () => router.push(`/diaries/${diaryId}/edit`);
   const handleDeleteDiary = () => diaryMutation.mutate(undefined, { onSuccess: () => router.push('/diaries') });
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
@@ -51,7 +52,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
               <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
                 <DropdownMenu.Kebab />
                 <DropdownMenu.Content>
-                  <DropdownMenu.Item onClick={() => {}}>수정</DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
                   <DropdownMenu.Item onClick={handleDeleteDiary}>삭제</DropdownMenu.Item>
                 </DropdownMenu.Content>
               </DropdownMenu>
