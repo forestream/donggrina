@@ -11,6 +11,6 @@ export const useDiaries = (date: string) => {
 
 export const useDiaryQuery = (diaryId: string) =>
   useQuery({
-    queryKey: ['diary', diaryId],
+    queryKey: ['diaries', diaryId],
     queryFn: () => fetchDiaryById(diaryId),
   });

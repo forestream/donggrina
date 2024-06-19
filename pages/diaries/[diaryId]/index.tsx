@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Response from '@/components/diaries/diary-content/response';
 import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-profile';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import useCommentMutation from '@/hooks/queries/diary/use-comment-mutation';
 
 export async function getServerSideProps(context: GetServerSidePropsContext & { params: { diaryId: string } }) {
   const { diaryId } = context.params;
@@ -15,10 +16,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext & { 
 
 export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const diaryQuery = useDiaryQuery(diaryId);
+  const commentMutation = useCommentMutation(diaryId);
 
-  const { register, handleSubmit } = useForm<FieldValues>();
-  const onSubmit: SubmitHandler<FieldValues> = (comment) => {
-    console.log(comment);
+  const { register, handleSubmit, reset } = useForm<FieldValues>();
+  const onSubmit: SubmitHandler<FieldValues> = (formData) => {
+    commentMutation.mutate(formData.comment, {
+      onSuccess: () => reset(),
+    });
   };
 
   if (diaryQuery.isPending) return <p>loading</p>;
@@ -46,8 +50,10 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
       {diaryQuery.data.comments.map((comment) => (
         <div key={comment.commentId}>
           <CalendarTodoProfile name={comment.commentAuthor} src={comment.commentAuthorImage} />
+
           <p>{comment.date}</p>
           <p>{comment.comment}</p>
+          <p>답글</p>
         </div>
       ))}
 

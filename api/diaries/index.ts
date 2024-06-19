@@ -107,3 +107,13 @@ export const updateDiary = async (diaryId: number, updateData: UpdateDiaryData) 
     throw error;
   }
 };
+
+export const postComment = async (diaryId: string, content: string, parentCommentId: number | null = null) => {
+  console.log({ content, parentCommentId });
+  try {
+    const response = await axiosInstance.post(`/comments/${diaryId}`, { content, parentCommentId });
+    console.log(response.data);
+  } catch (error) {
+    console.error('Failed to post comment', error);
+  }
+};
