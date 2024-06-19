@@ -45,7 +45,7 @@ export default function CreateGrowth() {
   } = useForm<GrowthDetailsData>({
     mode: 'onBlur',
     defaultValues: {
-      dateTime: localDate,
+      date: localDate,
       category: GROWTH_CATEGORY[0],
     },
   });
