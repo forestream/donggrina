@@ -1,0 +1,15 @@
+.calendarDetailsSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  & > div:nth-of-type(1) {
+    display: flex;
+    gap: 8px;
+    .categoryBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-top: 22px;
+    }
+  }
+}

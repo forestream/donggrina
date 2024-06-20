@@ -21,5 +21,8 @@
   --input-description: #616161;
   --disabled-color: #c8c8c8;
   --clipboard-color: #e9e9eb;
+  --hospital-color: #9498ff;
+  --abnormalSymptom-color: #f5877e;
+  --snack-color: #ffb23f;
   --skeleton-color: #bbbbbb;
 }

@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './create.module.scss';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { GROWTH_CATEGORY } from '@/utils/constants/growth';
-import { AddGrowthData } from '@/types/growth/details';
+import { GrowthDetailsData, GrowthDetailsContent } from '@/types/growth/details';
 import classNames from 'classnames';
 import CategoryInputs from './category-inputs';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
-import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growt-query';
+import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import { useRouter } from 'next/router';
@@ -24,6 +24,17 @@ export default function CreateGrowth() {
   const month = (useCalenderDateStore.use.month() + 1).toString();
   const date = useCalenderDateStore.use.date().toString();
   const localDate = convertToLocalDate({ year, month, day: date });
+  const content: GrowthDetailsContent = {
+    food: '',
+    snack: '',
+    abnormalSymptom: '',
+    hospitalName: '',
+    symptom: '',
+    diagnosis: '',
+    medicationMethod: '',
+    price: null,
+    memo: '',
+  };
 
   const [selectedCategory, setSelectedCategory] = useState(GROWTH_CATEGORY[0]);
 
@@ -31,7 +42,7 @@ export default function CreateGrowth() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<AddGrowthData>({
+  } = useForm<GrowthDetailsData>({
     mode: 'onBlur',
     defaultValues: {
       date: localDate,
@@ -49,7 +60,7 @@ export default function CreateGrowth() {
     setSelectedCategory(event.target.value);
   };
 
-  const onSubmit: SubmitHandler<AddGrowthData> = (data) => {
+  const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
     createGrowthMutation.mutate(data, {
       onSuccess: (response) => {
         console.log('Success:', response);
@@ -76,7 +87,7 @@ export default function CreateGrowth() {
           </div>
           <div className={styles.division}></div>
           <textarea
-            {...register('content.memo', { required: '*내용을 입력해주세요.' })}
+            {...register('content.memo')}
             className={styles.memo}
             id="content.memo"
             placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
@@ -101,7 +112,12 @@ export default function CreateGrowth() {
               ))}
             </div>
           </div>
-          <CategoryInputs errors={errors} selectedCategory={selectedCategory} register={register} />
+          <CategoryInputs
+            defaultValue={content}
+            errors={errors}
+            selectedCategory={selectedCategory}
+            register={register}
+          />
           <button
             className={classNames(styles.submit, {
               [styles.disabled]: !isValid,
@@ -112,7 +128,7 @@ export default function CreateGrowth() {
         </form>
       </div>
       <Modal>
-        <CompleteModal closeModal={closeModal} />
+        <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
       </Modal>
     </>
   );

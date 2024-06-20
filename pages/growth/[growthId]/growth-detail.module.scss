@@ -1,0 +1,55 @@
+.outer {
+  padding: 54px 24px 100px;
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    .headerContainer {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      .tempImg {
+        margin-top: 20px;
+        height: 20px;
+        width: 20px;
+        border-radius: 9999px;
+        background-color: var(--main-color);
+      }
+      .headerText {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 8px;
+        .category {
+          font-weight: 600;
+        }
+        .snack {
+          color: var(--snack-color);
+        }
+        .food {
+          color: var(--main-color);
+        }
+        .abnormalSymptom {
+          color: var(--abnormalSymptom-color);
+        }
+        .hospital {
+          color: var(--hospital-color);
+        }
+        .profiles {
+          display: flex;
+          gap: 10px;
+        }
+      }
+      .kebab {
+        margin-top: 16px;
+      }
+    }
+    .memoContainer {
+      display: flex;
+      gap: 12px;
+      flex-grow: 1;
+    }
+  }
+}
