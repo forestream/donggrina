@@ -72,15 +72,17 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
               <CalendarTodoProfile src={todo.petProfileImageUrl} name={todo.petName} />
             </div>
           </div>
-          <div className={styles.kebab}>
-            <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
-              <DropdownMenu.Kebab />
-              <DropdownMenu.Content>
-                <DropdownMenu.Item onClick={handleClickEdit}>수정</DropdownMenu.Item>
-                <DropdownMenu.Item onClick={handleClickDelete}>삭제</DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu>
-          </div>
+          {todo.isMine && (
+            <div className={styles.kebab}>
+              <DropdownMenu value={{ isOpen, onCloseToggle, onOpenToggle }}>
+                <DropdownMenu.Kebab />
+                <DropdownMenu.Content>
+                  <DropdownMenu.Item onClick={handleClickEdit}>수정</DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={handleClickDelete}>삭제</DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu>
+            </div>
+          )}
         </div>
 
         <div className={styles.memoContainer}>
