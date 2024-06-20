@@ -35,7 +35,7 @@ export default function GrowthList({
         petName={petName}
         id={id}
       />
-      <Link href="/" className={styles.text}>
+      <Link href={`growth/${id}`} className={styles.text}>
         {text}
       </Link>
     </div>

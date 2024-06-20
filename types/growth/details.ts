@@ -23,6 +23,6 @@ export interface GrowthDetailsContent {
   symptom: string;
   diagnosis: string;
   medicationMethod: string;
-  price: number;
+  price: number | null;
   memo: string;
 }
