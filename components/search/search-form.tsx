@@ -50,7 +50,7 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
     const keyword = getQueryString(SERVICE_CONFIGS[service].queries[0], [formData.keyword]);
     const petNames = getQueryString(SERVICE_CONFIGS[service].queries[1], formData.pets);
     const writerNames = getQueryString(SERVICE_CONFIGS[service].queries[2], formData.members);
-    const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], ['']);
+    const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], ['2024-06-19']);
 
     setSearchParams(`?${keyword}&${petNames}&${writerNames}` + (service === 'diary' ? `&${date}` : ''));
   };
