@@ -10,7 +10,7 @@ export default function FamilyDeleteButton() {
   return (
     <>
       <Button type="button" className="tertiary" round onClick={handleOpen}>
-        가족 페쇄
+        가족 폐쇄
       </Button>
       <DeleteModal Modal={Modal} handleModal={handleModal} />
     </>
