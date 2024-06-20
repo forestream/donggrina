@@ -7,11 +7,16 @@ import { Story } from '@/types/story';
 export default function StoryItem(props: Story) {
   return (
     <li>
-      <StoryItemHeader content={props.content} author={props.author} authorImage={props.authorImage} />
+      <StoryItemHeader
+        content={props.content}
+        author={props.author}
+        authorImage={props.authorImage}
+        weather={props.weather}
+      />
       {props.images.length !== 0 && <StoryItemSwiper images={props.images} />}
       <StoryItemInfo
         authorGroup={props.authorGroup}
-        createdDate={props.createdDate}
+        date={props.date}
         content={props.content}
         favoriteCount={props.favoriteCount}
         commentCount={props.commentCount}

@@ -8,14 +8,14 @@ export interface Story {
   commentCount: number;
   favoriteCount: number;
   favoriteState: boolean;
-  createdDate: string;
+  date: string;
   isMyStory: boolean;
+  petImages: string[];
+  weather: string;
 }
 
 export interface StoryData {
   currentPage: number;
   hasMore: boolean;
-  data: {
-    response: Story[];
-  };
+  response: Story[];
 }

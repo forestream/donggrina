@@ -5,12 +5,12 @@ import { Story } from '@/types/story';
 import CalendarInstance from '@/utils/date/date.utils';
 
 export default function StoryItemInfo(
-  props: Pick<Story, 'authorGroup' | 'createdDate' | 'content' | 'favoriteCount' | 'commentCount'>,
+  props: Pick<Story, 'authorGroup' | 'date' | 'content' | 'favoriteCount' | 'commentCount'>,
 ) {
   return (
     <article>
       <div className={styles['info-layout']}>
-        <time>{CalendarInstance.getDateTime(props.createdDate)}</time>
+        <time>{CalendarInstance.getDateTime(props.date)}</time>
         <span>{props.authorGroup}</span>
       </div>
       <div className={styles['info-description']}>
