@@ -39,7 +39,7 @@ export async function postDiaries(diaryData: DiaryPostType) {
     const response = await axiosInstance.post('/diaries', diaryData);
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error('Failed to post diary', error);
     throw error;
   }
 }
@@ -49,7 +49,7 @@ export async function fetchDiaries(date: string): Promise<DiaryData[]> {
     const response = await axiosInstance.get<{ data: DiaryData[] }>(`/diaries?date=${date}`);
     return response.data.data;
   } catch (error) {
-    console.error(error);
+    console.error('Failed to fetch diary', error);
     throw error;
   }
 }
