@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchDiaries } from '@/api/diaries';
+import { fetchDiaries, fetchDiaryById } from '@/api/diaries';
 import { DiaryData } from '@/types/diary/';
 
 export const useDiaries = (date: string) => {
@@ -8,3 +8,9 @@ export const useDiaries = (date: string) => {
     queryFn: () => fetchDiaries(date),
   });
 };
+
+export const useDiaryQuery = (diaryId: string) =>
+  useQuery({
+    queryKey: ['diaries', diaryId],
+    queryFn: () => fetchDiaryById(diaryId),
+  });

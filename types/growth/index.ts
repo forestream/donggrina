@@ -1,5 +1,4 @@
 import { LocalDateTime } from '../date';
-// import { GrowthDetailsContent } from './details';
 
 export interface Growth {
   data: GrowthData[];
