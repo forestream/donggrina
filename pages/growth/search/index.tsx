@@ -22,6 +22,7 @@ export default function Search() {
             petName={result.petName}
             text={result.content}
             writerImage={result.writerProfileImageUrl}
+            id={result.id}
           />
         </div>
       ))}

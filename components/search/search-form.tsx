@@ -2,8 +2,7 @@ import SearchBar from '@/components/search/search-bar';
 import styles from './search-form.module.scss';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { FILTERS, SERVICE_CONFIGS } from '@/utils/constants/search';
-import SearchFilter from '@/components/search/search-filter';
+import { SERVICE_CONFIGS } from '@/utils/constants/search';
 import useMembersQuery from '@/hooks/queries/search/use-members-query';
 import SearchMemberFilter from '@/components/search/search-member-filter';
 import SearchSection from '@/components/search/search-section';
@@ -11,17 +10,19 @@ import SearchPetCheckbox from '@/components/search/search-pet-checkbox';
 import getQueryString from '@/utils/search/get-query-string';
 import { SearchFormProps } from '@/types/search';
 import useResultsQuery from '@/hooks/queries/search/use-results-query';
-import { useEffect, useState } from 'react';
-import { TodoByQueries } from '@/api/search/index.type';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import { DiaryByQueries, GrowthByQueries, TodoByQueries } from '@/api/search/index.type';
 import Calendar from '../calendar-compound/calendar';
 import useSelect from '@/hooks/use-select';
 import CalendarInstance from '@/utils/date/date.utils';
 
-export default function SearchForm({ service, onSubmit: handleResults }: SearchFormProps) {
+export default function SearchForm({ service, onSubmit: handleResults, children }: PropsWithChildren<SearchFormProps>) {
   const [searchParams, setSearchParams] = useState('');
 
   const resultsQuery = useResultsQuery(
-    SERVICE_CONFIGS[service].get as (searchParams: string) => Promise<TodoByQueries[]>,
+    SERVICE_CONFIGS[service].get as (
+      searchParams: string,
+    ) => Promise<TodoByQueries[] & DiaryByQueries[] & GrowthByQueries[]>,
     searchParams,
   );
   const petsQuery = usePetsQuery();
@@ -31,7 +32,9 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
     resultsQuery.refetch();
   }, [searchParams]);
 
-  handleResults(resultsQuery.data!);
+  useEffect(() => {
+    resultsQuery.data && handleResults(resultsQuery.data);
+  }, [resultsQuery.data]);
 
   const { register, handleSubmit, watch, setValue, getValues, resetField } = useForm<FieldValues>({
     defaultValues: {
@@ -90,15 +93,7 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
     <form className={styles.inner} onSubmit={handleSubmit(onSubmit)}>
       <SearchBar register={register} />
 
-      {SERVICE_CONFIGS[service].isGlobalSearch && (
-        <SearchSection title="필터">
-          <div className={styles.filters}>
-            {FILTERS.map((filter) => (
-              <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
-            ))}
-          </div>
-        </SearchSection>
-      )}
+      {children}
 
       {SERVICE_CONFIGS[service].hasCalendar && (
         <SearchSection title="날짜">

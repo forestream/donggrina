@@ -1,7 +1,10 @@
-import { TodoByQueries } from '@/api/calendar/request.type';
+import { DiaryByQueries, GrowthByQueries, TodoByQueries } from '@/api/search/index.type';
 import { useQuery } from '@tanstack/react-query';
 
-const useResultsQuery = (queryFn: (searchParams: string) => Promise<TodoByQueries[]>, searchParams: string) =>
+const useResultsQuery = (
+  queryFn: (searchParams: string) => Promise<TodoByQueries[] & DiaryByQueries[] & GrowthByQueries[]>,
+  searchParams: string,
+) =>
   useQuery({
     queryKey: ['results'],
     queryFn: () => queryFn(searchParams),
