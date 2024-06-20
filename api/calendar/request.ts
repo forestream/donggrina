@@ -30,8 +30,9 @@ export async function fetchTodoById(calendarId: string, auth: string | null = nu
   return data.data;
 }
 
-export async function fetchTodosByQueries(query: string): Promise<TodoByQueries[]> {
-  const { data } = await axiosInstance.get(`/calendar/search?${query}`);
+export async function fetchTodosByQueries(searchParams: string): Promise<TodoByQueries[]> {
+  if (!searchParams) return [];
+  const { data } = await axiosInstance.get(`/calendar/search?${searchParams}`);
   return data.data;
 }
 

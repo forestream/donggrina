@@ -1,3 +1,5 @@
+import { TodoByQueries } from '@/api/calendar/request.type';
+
 export interface Filter {
   imageOn: string;
   imageOff: string;
@@ -5,5 +7,6 @@ export interface Filter {
 }
 
 export interface SearchFormProps {
+  onSubmit: (newItems: TodoByQueries[]) => void;
   service: 'family' | 'calendar' | 'diary' | 'growth';
 }

@@ -9,14 +9,28 @@ import SearchMemberFilter from '@/components/search/search-member-filter';
 import SearchSection from '@/components/search/search-section';
 import SearchPetCheckbox from '@/components/search/search-pet-checkbox';
 import getQueryString from '@/utils/search/get-query-string';
-import { useRouter } from 'next/router';
 import { SearchFormProps } from '@/types/search';
+import { TodoByQueries } from '@/api/calendar/request.type';
+import useResultsQuery from '@/hooks/queries/search/use-results-query';
+import { useEffect, useState } from 'react';
 
-export default function SearchForm({ service }: SearchFormProps) {
-  const router = useRouter();
+export default function SearchForm({ service, onSubmit: handleResults }: SearchFormProps) {
+  const [searchParams, setSearchParams] = useState('');
 
+  const resultsQuery = useResultsQuery(
+    SERVICE_CONFIGS[service].get as (searchParams: string) => Promise<TodoByQueries[]>,
+    searchParams,
+  );
   const petsQuery = usePetsQuery();
   const membersQuery = useMembersQuery();
+
+  useEffect(() => {
+    resultsQuery.refetch();
+  }, [searchParams]);
+
+  handleResults(resultsQuery.data!);
+
+  console.log(resultsQuery.data);
 
   const { register, handleSubmit, watch, setValue, getValues, resetField } = useForm<FieldValues>({
     defaultValues: {
@@ -38,10 +52,7 @@ export default function SearchForm({ service }: SearchFormProps) {
     const writerNames = getQueryString(SERVICE_CONFIGS[service].queries[2], formData.members);
     const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], []);
 
-    router.push(
-      `${SERVICE_CONFIGS[service].path}?${keyword}&${petNames}&${writerNames}` +
-        (service === 'diary' ? `&${date}` : ''),
-    );
+    setSearchParams(`?${keyword}&${petNames}&${writerNames}` + (service === 'diary' ? `&${date}` : ''));
   };
 
   const handleClickAll = (fieldName: string) => {
@@ -57,42 +68,40 @@ export default function SearchForm({ service }: SearchFormProps) {
   if (petsQuery.isError) return <p>Error: {petsQuery.error.message}</p>;
 
   return (
-    <main className={styles.outer}>
-      <form className={styles.inner} onSubmit={handleSubmit(onSubmit)}>
-        <SearchBar register={register} />
+    <form className={styles.inner} onSubmit={handleSubmit(onSubmit)}>
+      <SearchBar register={register} />
 
-        {SERVICE_CONFIGS[service].isGlobalSearch && (
-          <SearchSection title="필터">
-            <div className={styles.filters}>
-              {FILTERS.map((filter) => (
-                <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
-              ))}
-            </div>
-          </SearchSection>
-        )}
-
-        <SearchSection selectAll={handleClickAll.bind(null, 'pets')} title="반려동물">
-          <div className={styles.pets}>
-            {petsQuery.data.map((pet) => (
-              <SearchPetCheckbox
-                register={register}
-                service={service}
-                pet={pet}
-                selected={watch('pets')}
-                key={pet.petId}
-              />
+      {SERVICE_CONFIGS[service].isGlobalSearch && (
+        <SearchSection title="필터">
+          <div className={styles.filters}>
+            {FILTERS.map((filter) => (
+              <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
             ))}
           </div>
         </SearchSection>
+      )}
 
-        <SearchSection selectAll={handleClickAll.bind(null, 'members')} title="작성자 필터">
-          <div className={styles.members}>
-            {membersQuery.data.members.map((member) => (
-              <SearchMemberFilter key={member.id} member={member} register={register} selected={watch('members')} />
-            ))}
-          </div>
-        </SearchSection>
-      </form>
-    </main>
+      <SearchSection selectAll={handleClickAll.bind(null, 'pets')} title="반려동물">
+        <div className={styles.pets}>
+          {petsQuery.data.map((pet) => (
+            <SearchPetCheckbox
+              register={register}
+              service={service}
+              pet={pet}
+              selected={watch('pets')}
+              key={pet.petId}
+            />
+          ))}
+        </div>
+      </SearchSection>
+
+      <SearchSection selectAll={handleClickAll.bind(null, 'members')} title="작성자 필터">
+        <div className={styles.members}>
+          {membersQuery.data.members.map((member) => (
+            <SearchMemberFilter key={member.id} member={member} register={register} selected={watch('members')} />
+          ))}
+        </div>
+      </SearchSection>
+    </form>
   );
 }

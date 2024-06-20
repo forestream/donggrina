@@ -1,3 +1,5 @@
+import { fetchTodosByQueries } from '@/api/calendar/request';
+
 export const FILTERS = [
   {
     imageOn: '/images/search/calendar-on.svg',
@@ -20,21 +22,35 @@ export const SERVICE_CONFIGS = {
   family: {
     isGlobalSearch: true,
     path: '/family',
+    api: '',
     queries: [],
+    get() {},
   },
   calendar: {
     isGlobalSearch: false,
     path: '/calendar/search/results',
+    api: '/calendar/search',
     queries: ['keyword', 'petNames', 'writerNames'],
+    get(searchParams: string) {
+      return fetchTodosByQueries(searchParams);
+    },
   },
   growth: {
     isGlobalSearch: false,
     path: '/growth',
+    api: '/growth/search',
     queries: ['keyword', 'petNames', 'writerNames'],
+    get(searchParams: string) {
+      return fetchTodosByQueries(searchParams);
+    },
   },
   diary: {
     isGlobalSearch: false,
     path: '/diary',
+    api: '/diary/search',
     queries: ['keyword', 'pet', 'author', 'date'],
+    get(searchParams: string) {
+      return fetchTodosByQueries(searchParams);
+    },
   },
 };
