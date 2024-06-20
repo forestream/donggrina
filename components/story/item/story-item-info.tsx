@@ -1,27 +1,31 @@
 import React from 'react';
 import styles from './story-item-info.module.scss';
 import Image from 'next/image';
+import { Story } from '@/types/story';
+import CalendarInstance from '@/utils/date/date.utils';
 
-export default function StoryItemInfo() {
+export default function StoryItemInfo(
+  props: Pick<Story, 'authorGroup' | 'createdDate' | 'content' | 'favoriteCount' | 'commentCount'>,
+) {
   return (
-    <div>
+    <article>
       <div className={styles['info-layout']}>
-        <time>2024-06-20</time>
-        <span>가족이름명</span>
+        <time>{CalendarInstance.getDateTime(props.createdDate)}</time>
+        <span>{props.authorGroup}</span>
       </div>
       <div className={styles['info-description']}>
-        <p>오늘 뽀삐랑 같이 산책을 다녀왔어!</p>
+        <p>{props.content}</p>
       </div>
       <div className={styles['info-features']}>
         <div className={styles['info-feature']}>
           <Image src="images/comment-icon.svg" alt="댓글 개수" width={20} height={20} />
-          <span>0</span>
+          <span>{props.commentCount}</span>
         </div>
         <div className={styles['info-feature']}>
           <Image src="images/like-icon.svg" alt="좋아요 개수" width={20} height={20} />
-          <span>0</span>
+          <span>{props.favoriteCount}</span>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

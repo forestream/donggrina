@@ -1,10 +1,6 @@
 export interface Story {
-  data: StoryData;
-}
-
-export interface StoryData {
   storyId: number;
-  authorProfile: string;
+  authorImage: string;
   author: string;
   authorGroup: string;
   images: string[];
@@ -12,6 +8,14 @@ export interface StoryData {
   commentCount: number;
   favoriteCount: number;
   favoriteState: boolean;
-  createdDate: Date;
+  createdDate: string;
   isMyStory: boolean;
+}
+
+export interface StoryData {
+  currentPage: number;
+  hasMore: boolean;
+  data: {
+    response: Story[];
+  };
 }
