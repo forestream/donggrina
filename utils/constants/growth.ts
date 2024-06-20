@@ -15,3 +15,9 @@ export const GROWTH_MEMO_IMAGES: CategoryImages = {
   '이상 증상': '/images/growth/abnormalSymptom-memo.svg',
   '병원 기록': '/images/growth/hospital-memo.svg',
 };
+export const GROWTH_CATEGORY_ICON: CategoryImages = {
+  사료: '/images/category/food-icon.png',
+  간식: '/images/category/snack-icon.png',
+  '이상 증상': '/images/category/abnormalSymptom-icon.png',
+  '병원 기록': '/images/category/hospital-icon.png',
+};
