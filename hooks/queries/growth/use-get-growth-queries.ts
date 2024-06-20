@@ -10,10 +10,10 @@ export const useGetGrotwthByDateQuery = (date: string) => {
   });
 };
 
-export const useGetGrowthDetailQuery = (groupId: number) => {
+export const useGetGrowthDetailQuery = (growthId: number) => {
   return useQuery({
-    queryKey: ['growth', groupId],
-    queryFn: () => growthAPI.getGrowthDetails(groupId),
+    queryKey: ['growth', growthId],
+    queryFn: () => growthAPI.getGrowthDetails(growthId),
   });
 };
 
