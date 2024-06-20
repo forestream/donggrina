@@ -21,6 +21,7 @@ export const FILTERS = [
 export const SERVICE_CONFIGS = {
   family: {
     isGlobalSearch: true,
+    hasCalendar: false,
     path: '/family',
     api: '',
     queries: [],
@@ -28,6 +29,7 @@ export const SERVICE_CONFIGS = {
   },
   calendar: {
     isGlobalSearch: false,
+    hasCalendar: false,
     path: '/calendar/search/results',
     api: '/calendar/search',
     queries: ['keyword', 'petNames', 'writerNames'],
@@ -37,6 +39,7 @@ export const SERVICE_CONFIGS = {
   },
   growth: {
     isGlobalSearch: false,
+    hasCalendar: false,
     path: '/growth',
     api: '/growth/search',
     queries: ['keyword', 'petNames', 'writerNames'],
@@ -46,6 +49,7 @@ export const SERVICE_CONFIGS = {
   },
   diary: {
     isGlobalSearch: false,
+    hasCalendar: true,
     path: '/diary',
     api: '/diaries/search',
     queries: ['keyword', 'pet', 'author', 'date'],

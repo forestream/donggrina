@@ -13,6 +13,9 @@ import { SearchFormProps } from '@/types/search';
 import useResultsQuery from '@/hooks/queries/search/use-results-query';
 import { useEffect, useState } from 'react';
 import { TodoByQueries } from '@/api/search/index.type';
+import Calendar from '../calendar-compound/calendar';
+import useSelect from '@/hooks/use-select';
+import CalendarInstance from '@/utils/date/date.utils';
 
 export default function SearchForm({ service, onSubmit: handleResults }: SearchFormProps) {
   const [searchParams, setSearchParams] = useState('');
@@ -29,8 +32,6 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
   }, [searchParams]);
 
   handleResults(resultsQuery.data!);
-
-  console.log(resultsQuery.data);
 
   const { register, handleSubmit, watch, setValue, getValues, resetField } = useForm<FieldValues>({
     defaultValues: {
@@ -50,7 +51,7 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
     const keyword = getQueryString(SERVICE_CONFIGS[service].queries[0], [formData.keyword]);
     const petNames = getQueryString(SERVICE_CONFIGS[service].queries[1], formData.pets);
     const writerNames = getQueryString(SERVICE_CONFIGS[service].queries[2], formData.members);
-    const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], ['2024-06-19']);
+    const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], [yearMonthDate]);
 
     setSearchParams(`?${keyword}&${petNames}&${writerNames}` + (service === 'diary' ? `&${date}` : ''));
   };
@@ -62,6 +63,24 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
     }
     setValue(fieldName, ALL_SELECTED[fieldName]);
   };
+
+  const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
+    CalendarInstance.currentYear,
+  );
+  const { selectedItem: selectedMonth, handleSelectedItem: onSelectedMonth } = useSelect<number>(
+    CalendarInstance.currentMonth,
+  );
+  const { selectedItem: selectedDate, handleSelectedItem: onSelectedDate } = useSelect<number>(
+    CalendarInstance.currentDate,
+  );
+
+  const onResetToday = () => {
+    onSelectedYear(CalendarInstance.currentYear);
+    onSelectedMonth(CalendarInstance.currentMonth);
+    onSelectedDate(CalendarInstance.currentDate);
+  };
+
+  const yearMonthDate = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
 
   if (membersQuery.isPending || petsQuery.isPending) return <p>loading</p>;
   if (membersQuery.isError) return <p>Error: {membersQuery.error.message}</p>;
@@ -77,6 +96,28 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
             {FILTERS.map((filter) => (
               <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
             ))}
+          </div>
+        </SearchSection>
+      )}
+
+      {SERVICE_CONFIGS[service].hasCalendar && (
+        <SearchSection title="날짜">
+          <div className={styles.dateContainer}>
+            <Calendar
+              value={{
+                year: selectedYear,
+                month: selectedMonth,
+                date: selectedDate,
+                onSelectedYear,
+                onSelectedMonth,
+                onSelectedDate,
+                onResetToday,
+              }}
+            >
+              <Calendar.Year />
+              <Calendar.Month />
+              <Calendar.Weekly />
+            </Calendar>
           </div>
         </SearchSection>
       )}
