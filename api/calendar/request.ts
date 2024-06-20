@@ -1,6 +1,6 @@
 import { IFormInput } from '@/types/calendar';
 import { axiosInstance } from '..';
-import { DailyTodo, MonthlyTodos, Pet, TodoById, TodoByQueries } from './request.type';
+import { DailyTodo, MonthlyTodos, Pet, TodoById } from './request.type';
 import { getCookie, setCookie } from 'cookies-next';
 
 export async function fetchMonthlyTodos(yearMonth: string): Promise<MonthlyTodos[]> {
@@ -30,12 +30,6 @@ export async function fetchTodoById(calendarId: string, auth: string | null = nu
   return data.data;
 }
 
-export async function fetchTodosByQueries(searchParams: string): Promise<TodoByQueries[]> {
-  if (!searchParams) return [];
-  const { data } = await axiosInstance.get(`/calendar/search?${searchParams}`);
-  return data.data;
-}
-
 export async function postTodo(data: IFormInput) {
   await axiosInstance.post('/calendar', data);
 }
@@ -52,6 +46,7 @@ export async function deleteTodoById(calendarId: string) {
 
 export async function fetchPets(): Promise<Pet[]> {
   const { data } = await axiosInstance.get(`/my/pets`);
+  console.log(data.data);
   return data.data;
 }
 

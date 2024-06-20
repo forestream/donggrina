@@ -1,4 +1,4 @@
-import { fetchTodosByQueries } from '@/api/calendar/request';
+import { fetchDiariesByQueries, fetchGrowthsByQueries, fetchTodosByQueries } from '@/api/search';
 
 export const FILTERS = [
   {
@@ -41,16 +41,16 @@ export const SERVICE_CONFIGS = {
     api: '/growth/search',
     queries: ['keyword', 'petNames', 'writerNames'],
     get(searchParams: string) {
-      return fetchTodosByQueries(searchParams);
+      return fetchGrowthsByQueries(searchParams);
     },
   },
   diary: {
     isGlobalSearch: false,
     path: '/diary',
-    api: '/diary/search',
+    api: '/diaries/search',
     queries: ['keyword', 'pet', 'author', 'date'],
     get(searchParams: string) {
-      return fetchTodosByQueries(searchParams);
+      return fetchDiariesByQueries(searchParams);
     },
   },
 };

@@ -10,9 +10,9 @@ import SearchSection from '@/components/search/search-section';
 import SearchPetCheckbox from '@/components/search/search-pet-checkbox';
 import getQueryString from '@/utils/search/get-query-string';
 import { SearchFormProps } from '@/types/search';
-import { TodoByQueries } from '@/api/calendar/request.type';
 import useResultsQuery from '@/hooks/queries/search/use-results-query';
 import { useEffect, useState } from 'react';
+import { TodoByQueries } from '@/api/search/index.type';
 
 export default function SearchForm({ service, onSubmit: handleResults }: SearchFormProps) {
   const [searchParams, setSearchParams] = useState('');
@@ -42,7 +42,7 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
   });
 
   const ALL_SELECTED: { [key: string]: (string | number)[] } = {
-    pets: petsQuery.data.map((pet) => (service === 'diary' ? pet.petId : pet.name)),
+    pets: petsQuery.data.map((pet) => pet.name),
     members: membersQuery.data.members.map((member) => member.nickname),
   };
 
@@ -50,7 +50,7 @@ export default function SearchForm({ service, onSubmit: handleResults }: SearchF
     const keyword = getQueryString(SERVICE_CONFIGS[service].queries[0], [formData.keyword]);
     const petNames = getQueryString(SERVICE_CONFIGS[service].queries[1], formData.pets);
     const writerNames = getQueryString(SERVICE_CONFIGS[service].queries[2], formData.members);
-    const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], []);
+    const date = getQueryString(SERVICE_CONFIGS['diary'].queries[3], ['']);
 
     setSearchParams(`?${keyword}&${petNames}&${writerNames}` + (service === 'diary' ? `&${date}` : ''));
   };

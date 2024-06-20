@@ -11,8 +11,9 @@ interface SearchPetCheckboxProps {
 }
 
 export default function SearchPetCheckbox({ register, service, pet, selected }: SearchPetCheckboxProps) {
-  const value = service === 'diary' ? pet.petId : pet.name;
+  const value = pet.name;
   const isSelected = selected.includes(value);
+  console.log(selected);
 
   return (
     <label className={styles.petLabel}>
