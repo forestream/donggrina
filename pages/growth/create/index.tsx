@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './create.module.scss';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { GROWTH_CATEGORY } from '@/utils/constants/growth';
+import { GROWTH_CATEGORY, GROWTH_CATEGORY_ICON } from '@/utils/constants/growth';
 import { GrowthDetailsData, GrowthDetailsContent } from '@/types/growth/details';
 import classNames from 'classnames';
 import CategoryInputs from './category-inputs';
@@ -13,6 +13,7 @@ import { convertToLocalDate } from '@/utils/convert-local-date';
 import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
 import CompleteModal from './complete-modal';
+import Image from 'next/image';
 
 export default function CreateGrowth() {
   const router = useRouter();
@@ -58,6 +59,19 @@ export default function CreateGrowth() {
   };
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
+  };
+
+  const getCategoryClassName = (category: string) => {
+    switch (category) {
+      case '간식':
+        return 'snack';
+      case '이상 증상':
+        return 'abnormalSymptom';
+      case '병원 기록':
+        return 'hospital';
+      default:
+        return 'food';
+    }
   };
 
   const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
@@ -106,7 +120,9 @@ export default function CreateGrowth() {
                     checked={selectedCategory === category}
                     onChange={handleCategoryChange}
                   />
-                  <div className={styles.categoryIcon}></div>
+                  <div className={`${styles.categoryIcon} ${styles[getCategoryClassName(category)]}`}>
+                    <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={50} height={50} />
+                  </div>
                   <p className={styles.categoryName}>{category}</p>
                 </label>
               ))}

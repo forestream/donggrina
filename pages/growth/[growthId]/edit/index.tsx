@@ -3,7 +3,7 @@ import { useGetGrowthDetailQuery } from '@/hooks/queries/growth/use-get-growth-q
 import { useModifyGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import useModal from '@/hooks/use-modal';
 import { GrowthDetailsContent, GrowthDetailsData } from '@/types/growth/details';
-import { GROWTH_CATEGORY } from '@/utils/constants/growth';
+import { GROWTH_CATEGORY, GROWTH_CATEGORY_ICON } from '@/utils/constants/growth';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import { useRouter } from 'next/router';
@@ -16,6 +16,7 @@ import CompleteModal from '../../create/complete-modal';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
+import Image from 'next/image';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -69,6 +70,18 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
   };
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
+  };
+  const getCategoryClassName = (category: string) => {
+    switch (category) {
+      case '간식':
+        return 'snack';
+      case '이상 증상':
+        return 'abnormalSymptom';
+      case '병원 기록':
+        return 'hospital';
+      default:
+        return 'food';
+    }
   };
 
   const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
@@ -126,7 +139,9 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
                     onChange={handleCategoryChange}
                     defaultValue={category}
                   />
-                  <div className={styles.categoryIcon}></div>
+                  <div className={`${styles.categoryIcon} ${styles[getCategoryClassName(category)]}`}>
+                    <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={50} height={50} />
+                  </div>
                   <p className={styles.categoryName}>{category}</p>
                 </label>
               ))}

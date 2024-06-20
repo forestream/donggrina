@@ -13,7 +13,7 @@ import Image from 'next/image';
 import CompleteModal from '../create/complete-modal';
 import { GrowthDetailsContent, GrowthDetailsData } from '@/types/growth/details';
 import { GROWTH_CATEGORY_IMAGES, GROWTH_MEMO_IMAGES } from '@/utils/constants/growth';
-import Content from './content';
+import Content from '../../../components/growth/content';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
