@@ -1,0 +1,24 @@
+.container {
+  width: 74px;
+  height: 115px;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--skeleton-color);
+  //   border: 1px solid var(--main-color);
+  .category {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  .profile {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #fff;
+  }
+}
