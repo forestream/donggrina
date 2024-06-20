@@ -39,3 +39,15 @@ export interface DiaryByQueries {
   favoriteState: boolean;
   isMyDiary: boolean;
 }
+
+export interface GrowthByQueries {
+  id: number;
+  writerProfileImageUrl: string;
+  petProfileImageUrl: string;
+  category: string;
+  content: string;
+  dateTime: string;
+  nickname: string;
+  petName: string;
+  isMine: boolean;
+}
