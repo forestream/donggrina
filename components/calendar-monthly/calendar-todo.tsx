@@ -56,13 +56,17 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
       </div>
 
       <div ref={optionRef} className={styles.kebabCheck}>
-        <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-          <DropdownMenu.Kebab />
-          <DropdownMenu.Content>
-            <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
-            <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu>
+        <div className={styles.kebab}>
+          {todo.isMine && (
+            <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+              <DropdownMenu.Kebab />
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={handleEdit}>수정</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu>
+          )}
+        </div>
         <label className={styles.checkContainer}>
           <input
             id={todo.id.toString()}
