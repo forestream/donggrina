@@ -64,7 +64,7 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
               </span>
               <span className={styles.dot}></span>
               <span>
-                {ampm} {hour.toString().padStart(2, '0')}:{minute.toString().padStart(2, '0')}
+                {ampm} {hour && hour.toString().padStart(2, '0')}:{minute && minute.toString().padStart(2, '0')}
               </span>
             </p>
             <div className={styles.profiles}>
