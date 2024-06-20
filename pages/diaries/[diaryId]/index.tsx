@@ -61,6 +61,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
             </div>
           )}
         </section>
+
         <section className={styles.profiles}>
           <Profile
             author={diaryQuery.data.author}
@@ -69,7 +70,17 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
           />
           <Image src={weatherIcon!.selectedIcon} alt={weatherIcon!.label} width={24} height={24} />
         </section>
+
+        <section className={styles.imagesContainer}>
+          {diaryQuery.data.contentImages.map((image) => (
+            <div className={styles.image}>
+              <Image src={image} alt="다이어리 사진" fill />
+            </div>
+          ))}
+        </section>
+
         <section className={styles.content}>{diaryQuery.data.content}</section>
+
         <Response
           commentCount={diaryQuery.data.comments.length}
           favoriteCount={diaryQuery.data.favoriteCount}

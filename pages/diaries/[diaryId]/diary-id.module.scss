@@ -37,6 +37,25 @@
   margin-top: 30px;
 }
 
+.imagesContainer {
+  margin: 16px 0;
+  width: 100%;
+  height: 300px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  display: flex;
+  flex-wrap: none;
+  scroll-snap-type: x mandatory;
+}
+
+.image {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .content {
   width: 100%;
   min-height: 100px;
