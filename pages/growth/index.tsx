@@ -42,6 +42,7 @@ export default function GrowthPage() {
                 text={growth.content}
                 isMine={growth.isMine}
                 petName={growth.petName}
+                id={growth.id}
               />
             );
           })}

@@ -1,43 +1,55 @@
-import React, { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import styles from './create.module.scss';
-import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { GROWTH_CATEGORY, GROWTH_CATEGORY_ICON } from '@/utils/constants/growth';
-import { GrowthDetailsData, GrowthDetailsContent } from '@/types/growth/details';
-import classNames from 'classnames';
-import CategoryInputs from './category-inputs';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
-import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growth-query';
+import { useGetGrowthDetailQuery } from '@/hooks/queries/growth/use-get-growth-queries';
+import { useModifyGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';
+import useModal from '@/hooks/use-modal';
+import { GrowthDetailsContent, GrowthDetailsData } from '@/types/growth/details';
+import { GROWTH_CATEGORY, GROWTH_CATEGORY_ICON } from '@/utils/constants/growth';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import styles from '../../create/create.module.scss';
+import CategoryInputs from '../../create/category-inputs';
+import classNames from 'classnames';
+import CompleteModal from '../../create/complete-modal';
+import PetRadio from '@/components/calendar-monthly/pet-radio';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
-import { useRouter } from 'next/router';
-import useModal from '@/hooks/use-modal';
-import CompleteModal from './complete-modal';
 import Image from 'next/image';
 
-export default function CreateGrowth() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const {
+    params: { growthId },
+  } = context as Params;
+
+  return { props: { growthId } };
+}
+
+export default function GrowthModify({ growthId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
+  const { data: growthList } = useGetGrowthDetailQuery(growthId);
   const { data: pets } = usePetsQuery();
   const [Modal, handleModal] = useModal();
-  const createGrowthMutation = useCreateGrotwthMutation();
+  const modifyMutation = useModifyGrowthMutation(growthId);
 
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [memo, setMemo] = useState<string>('');
+  const [content, setContent] = useState({});
+  const [initPetName, setInitPetName] = useState('');
   const year = useCalenderDateStore.use.year().toString();
   const month = (useCalenderDateStore.use.month() + 1).toString();
   const date = useCalenderDateStore.use.date().toString();
   const localDate = convertToLocalDate({ year, month, day: date });
-  const content: GrowthDetailsContent = {
-    food: '',
-    snack: '',
-    abnormalSymptom: '',
-    hospitalName: '',
-    symptom: '',
-    diagnosis: '',
-    medicationMethod: '',
-    price: null,
-    memo: '',
-  };
 
-  const [selectedCategory, setSelectedCategory] = useState(GROWTH_CATEGORY[0]);
+  useEffect(() => {
+    if (growthList?.data) {
+      setMemo(growthList.data.content.memo);
+      setSelectedCategory(growthList.data.category);
+      setContent(growthList.data.content);
+      setInitPetName(growthList.data.petName);
+    }
+  }, [growthList]);
 
   const {
     register,
@@ -47,7 +59,6 @@ export default function CreateGrowth() {
     mode: 'onBlur',
     defaultValues: {
       date: localDate,
-      category: GROWTH_CATEGORY[0],
     },
   });
   const openModal = () => {
@@ -60,7 +71,6 @@ export default function CreateGrowth() {
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
   };
-
   const getCategoryClassName = (category: string) => {
     switch (category) {
       case '간식':
@@ -75,9 +85,9 @@ export default function CreateGrowth() {
   };
 
   const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
-    createGrowthMutation.mutate(data, {
-      onSuccess: (response) => {
-        console.log('Success:', response);
+    console.log(data);
+    modifyMutation.mutate(data, {
+      onSuccess: () => {
         openModal();
       },
       onError: (error) => {
@@ -93,8 +103,15 @@ export default function CreateGrowth() {
             반려동물 선택
             <div className={styles.petLabelContainer}>
               {!!pets.length &&
+                initPetName !== '' &&
                 pets.map((pet, i) => (
-                  <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
+                  <PetRadio
+                    key={i}
+                    defaultPet={initPetName}
+                    register={register}
+                    petName={pet.name}
+                    petImage={pet.imageUrl}
+                  />
                 ))}
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
@@ -105,6 +122,7 @@ export default function CreateGrowth() {
             className={styles.memo}
             id="content.memo"
             placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
+            defaultValue={memo}
           />
           {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
 
@@ -119,6 +137,7 @@ export default function CreateGrowth() {
                     type="radio"
                     checked={selectedCategory === category}
                     onChange={handleCategoryChange}
+                    defaultValue={category}
                   />
                   <div className={`${styles.categoryIcon} ${styles[getCategoryClassName(category)]}`}>
                     <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={50} height={50} />
@@ -129,7 +148,7 @@ export default function CreateGrowth() {
             </div>
           </div>
           <CategoryInputs
-            defaultValue={content}
+            defaultValue={content as GrowthDetailsContent}
             errors={errors}
             selectedCategory={selectedCategory}
             register={register}
