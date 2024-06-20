@@ -5,7 +5,7 @@ import styles from './family-growth-empty.module.scss';
 
 export default function FamilyGrowthEmpty() {
   return (
-    <Link href="/" className={styles.wrapper}>
+    <Link href="/growth/create" className={styles.wrapper}>
       <div className={styles['link-button']}>
         <Image src="images/family/add-black-icon.svg" alt="" width="20" height="20" />
       </div>
