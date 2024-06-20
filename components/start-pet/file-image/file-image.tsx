@@ -20,7 +20,7 @@ export default function FileImage({ imageValue, imageUrl, watchType }: ImageValu
         setImageSrc(URL.createObjectURL(file));
         return () => URL.revokeObjectURL(imageSrc); // 메모리 누수 방지
       }
-    } else if (!imageUrl) {
+    } else if (!imageUrl || !imageValue) {
       setImageSrc(defaultImageUrl);
     }
   }, [imageValue, imageUrl, watchType, defaultImageUrl]);

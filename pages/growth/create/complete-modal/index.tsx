@@ -10,7 +10,7 @@ export default function CompleteModal({ closeModal }: CompleteModalProps) {
     <div className={styles.box}>
       <p className={styles.text}>성장기록 등록이 완료되었습니다.</p>
       <div className={styles.buttonBox}>
-        <Button className="primary" type="button" onClick={closeModal}>
+        <Button className="primary" type="button" onClick={closeModal} rightRound leftRound>
           닫기
         </Button>
       </div>
