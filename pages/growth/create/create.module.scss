@@ -65,9 +65,21 @@
           background-color: var(--todo-category);
           border-radius: 10px;
           margin: 0 0 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .categoryInput:checked ~ .categoryIcon {
+        .categoryInput:checked + .categoryIcon.food {
           background-color: var(--main-color);
+        }
+        .categoryInput:checked + .categoryIcon.snack {
+          background-color: var(--snack-color);
+        }
+        .categoryInput:checked + .categoryIcon.abnormalSymptom {
+          background-color: var(--abnormalSymptom-color);
+        }
+        .categoryInput:checked + .categoryIcon.hospital {
+          background-color: var(--hospital-color);
         }
       }
       .categoryName {
