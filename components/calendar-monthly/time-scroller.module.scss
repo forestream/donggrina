@@ -20,6 +20,10 @@
   }
 }
 
+.pauseSnap {
+  scroll-snap-type: none;
+}
+
 .scrollItem {
   scroll-snap-align: center;
 }

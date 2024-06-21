@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import styles from './time-scroller.module.scss';
 import getTimeScrollPosition from '@/utils/get-time-scroll-position';
 
@@ -11,6 +11,8 @@ interface TimeScrollerProps {
 
 export default function TimeScroller({ scrollItems, refPusher, className, selectedItem }: TimeScrollerProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [offsetY, setOffsetY] = useState(0);
+  const [mouseDown, setMouseDown] = useState(false);
 
   const handleWheel = (e: WheelEvent) => {
     if ((e.deltaY > 5 || e.deltaY < -5) && ref.current) {
@@ -18,6 +20,30 @@ export default function TimeScroller({ scrollItems, refPusher, className, select
       ref.current.scrollTop += e.deltaY * 0.2;
     }
   };
+
+  const handleMouseDown: MouseEventHandler = (e) => {
+    setMouseDown(true);
+    setOffsetY(e.clientY);
+    ref.current && ref.current.classList.add(styles.pauseSnap);
+  };
+  const handleMouseMove: MouseEventHandler = (e) => {
+    if (!mouseDown || !ref.current) return;
+    ref.current.scrollTop -= e.movementY;
+  };
+  const handleMouseUp: MouseEventHandler = () => {
+    setMouseDown(false);
+    ref.current && ref.current.classList.remove(styles.pauseSnap);
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('mousemove', handleMouseMove as unknown as EventListenerOrEventListenerObject);
+    document.body.addEventListener('mouseup', handleMouseUp as unknown as EventListenerOrEventListenerObject);
+
+    return () => {
+      document.body.removeEventListener('mousemove', handleMouseMove as unknown as EventListenerOrEventListenerObject);
+      document.body.removeEventListener('mouseup', handleMouseUp as unknown as EventListenerOrEventListenerObject);
+    };
+  }, [mouseDown, offsetY]);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -32,7 +58,7 @@ export default function TimeScroller({ scrollItems, refPusher, className, select
   }, []);
 
   return (
-    <div ref={ref} className={styles.scroller}>
+    <div ref={ref} onMouseDown={handleMouseDown} className={styles.scroller}>
       {scrollItems.map((item, i) => (
         <div
           key={i}
