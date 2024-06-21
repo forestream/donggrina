@@ -34,6 +34,14 @@ export default function TimeScroller({ scrollItems, refPusher, className, select
     setMouseDown(false);
     ref.current && ref.current.classList.remove(styles.pauseSnap);
   };
+  const handleClickItem: MouseEventHandler = (e) => {
+    if (!ref.current) return;
+    ref.current.scrollTop = getTimeScrollPosition(
+      ref.current?.scrollHeight,
+      className,
+      (e.target as HTMLElement).innerText,
+    );
+  };
 
   useEffect(() => {
     document.body.addEventListener('mousemove', handleMouseMove as unknown as EventListenerOrEventListenerObject);
@@ -63,6 +71,7 @@ export default function TimeScroller({ scrollItems, refPusher, className, select
         <div
           key={i}
           ref={refPusher}
+          onClick={handleClickItem}
           className={`${className} ${styles.scrollItem} ${item === selectedItem.toString().padStart(2, '0') ? styles.magnify : ''}`}
         >
           {item}

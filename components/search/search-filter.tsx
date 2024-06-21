@@ -11,7 +11,7 @@ interface SearchFilterProps {
 }
 
 export default function SearchFilter({ filter, register, selected }: SearchFilterProps) {
-  const isSelected = filter.name === selected;
+  const isSelected = filter.value === selected;
 
   return (
     <label
@@ -19,7 +19,7 @@ export default function SearchFilter({ filter, register, selected }: SearchFilte
         [styles.selected]: isSelected,
       })}
     >
-      <input className={styles.input} type="radio" value={filter.name} {...register('filter')} />
+      <input className={styles.input} type="radio" value={filter.value} {...register('filter')} />
       <Image src={isSelected ? filter.imageOn : filter.imageOff} alt={`${filter.name} 필터`} width={20} height={20} />
       <p className={styles.filterName}>{filter.name}</p>
     </label>
