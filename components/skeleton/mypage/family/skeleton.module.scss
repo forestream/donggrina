@@ -1,0 +1,33 @@
+.familySkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .img {
+      width: 41px;
+      height: 41px;
+      border-radius: 50%;
+      background-color: var(--skeleton-color);
+    }
+    .name {
+      height: 28px;
+      width: 200px;
+      background-color: var(--skeleton-color);
+      border-radius: 10px;
+    }
+  }
+}
+
+.buttonSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  li {
+    height: 44px;
+    border-radius: 32px;
+    background-color: var(--skeleton-color);
+  }
+}

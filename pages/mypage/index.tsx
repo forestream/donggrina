@@ -10,7 +10,7 @@ export default function MyPage() {
       <MyPageProfile />
       <ul className={styles['management-list']}>
         <li>
-          <Link href="/">
+          <Link href="/mypage/pet">
             <span>반려동물 관리</span>
             <Image src="images/arrow-right-green.svg" alt="반려동물 관리 페이지 이동하기" width={24} height={24} />
           </Link>
