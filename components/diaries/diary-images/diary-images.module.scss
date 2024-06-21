@@ -39,3 +39,19 @@
 .imageDot.selected {
   background-color: var(--main-color);
 }
+
+.previous {
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  left: 0;
+}
+
+.next {
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  right: 0;
+}

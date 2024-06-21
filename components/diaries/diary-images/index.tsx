@@ -20,9 +20,8 @@ export default function DiaryImages({ images }: DiaryImagesProps) {
     const { scrollWidth, scrollLeft } = ref.current;
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
-      console.log('set');
       setDisplayed(Math.round((scrollLeft / scrollWidth) * images.length));
-    }, 400);
+    }, 200);
   };
 
   const handleScroll = () => findImageDisplayed();
@@ -57,12 +56,23 @@ export default function DiaryImages({ images }: DiaryImagesProps) {
     };
   }, [mouseDown, offsetX]);
 
+  const handleClickPrevious = () => {
+    if (!ref.current) return;
+    ref.current.scrollLeft -= ref.current.scrollWidth / images.length;
+  };
+  const handleClickNext = () => {
+    if (!ref.current) return;
+    ref.current.scrollLeft += ref.current.scrollWidth / images.length;
+  };
+
   return (
     <section>
       <div ref={ref} onScroll={handleScroll} onMouseDown={handleMouseDown} className={styles.imagesContainer}>
         {images.map((image, i) => (
           <div key={i} className={styles.image}>
             <Image src={image} alt="다이어리 사진" fill style={{ objectFit: 'cover' }} />
+            <div onClick={handleClickPrevious} className={styles.previous}></div>
+            <div onClick={handleClickNext} className={styles.next}></div>
           </div>
         ))}
       </div>
