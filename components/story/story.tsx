@@ -3,6 +3,7 @@ import StoryList from '@/components/story/list/story-list';
 import useIntersect from '../../hooks/use-intersect';
 import { useInfiniteStory } from '../../hooks/queries/story/index';
 import styles from './story.module.scss';
+import StoryListSkeleton from '../skeleton/story/list/story-list-skeleton';
 
 export default function Story() {
   const storyQuery = useInfiniteStory();
@@ -14,7 +15,7 @@ export default function Story() {
     }
   });
 
-  if (storyQuery.isLoading) return '로딩중...';
+  if (storyQuery.isLoading) return <StoryListSkeleton />;
 
   return (
     <div className={styles.wrapper}>
