@@ -2,6 +2,16 @@
   padding: 54px 0 100px;
 }
 
+.petSelect {
+  padding: 0 24px;
+  margin-top: 30px;
+}
+
+.pets {
+  display: flex;
+  gap: 15px;
+}
+
 .content {
   font-size: 14px;
   display: block;
@@ -121,7 +131,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--disabled-button);
+  background-color: var(--disabled-color);
   transition: 0.4s;
   border-radius: 27px;
 }
@@ -192,7 +202,7 @@ input:checked + .toggleSlide:before {
 }
 
 .disabled {
-  background-color: var(--disabled-button);
+  background-color: var(--disabled-color);
   color: var(--white);
 }
 
