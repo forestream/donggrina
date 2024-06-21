@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './kebab.module.scss';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import { deleteDiary } from '@/api/diaries';
@@ -22,13 +23,15 @@ const Kebab: React.FC<KebabProps> = ({ diaryId }) => {
   };
 
   return (
-    <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-      <DropdownMenu.Kebab />
-      <DropdownMenu.Content>
-        <DropdownMenu.Item>수정</DropdownMenu.Item>
-        <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu>
+    <div className={styles.kebab}>
+      <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+        <DropdownMenu.Kebab />
+        <DropdownMenu.Content>
+          <DropdownMenu.Item>수정</DropdownMenu.Item>
+          <DropdownMenu.Item onClick={handleDelete}>삭제</DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    </div>
   );
 };
 
