@@ -1,0 +1,74 @@
+.section {
+  flex-grow: 1;
+  .calendarDetailsSkeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding-top: 32px;
+    & > div:nth-of-type(1) {
+      display: flex;
+      gap: 8px;
+      .categoryBox {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-top: 22px;
+        background-color: var(--skeleton-color);
+      }
+      .contentsBox {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        span {
+          display: block;
+          width: 22px;
+          height: 14px;
+          background-color: var(--skeleton-color);
+          border-radius: 10px;
+        }
+        h2 {
+          width: 66px;
+          height: 19px;
+          background-color: var(--skeleton-color);
+          border-radius: 10px;
+        }
+        p {
+          width: 197px;
+          height: 17px;
+          background-color: var(--skeleton-color);
+          border-radius: 10px;
+        }
+        div {
+          width: 121px;
+          height: 20px;
+          background-color: var(--skeleton-color);
+          border-radius: 10px;
+        }
+      }
+    }
+    & > div:nth-of-type(2) {
+      display: flex;
+      gap: 6px;
+      div {
+        width: 20px;
+        height: 20px;
+        background-color: var(--skeleton-color);
+        border-radius: 10px;
+        flex-shrink: 0;
+      }
+      p {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        span {
+          display: block;
+          width: 100%;
+          height: 20px;
+          background-color: var(--skeleton-color);
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}

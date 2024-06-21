@@ -5,6 +5,7 @@ import FamilyRenameButton from './family-rename-button/family-rename-button';
 import { MyPageDetails } from '@/types/my-page/family';
 
 export default function FamilyUtilButtons({ data }: MyPageDetails) {
+  if (!data) return null;
   return (
     <ul className={styles.buttonList}>
       <li>

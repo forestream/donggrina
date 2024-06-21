@@ -4,18 +4,19 @@ import FamilyList from '@/components/mypage/family/family-list/family-list';
 import FamilyUtilButtons from '@/components/mypage/family/family-util-buttons/family-util-buttons';
 import Script from 'next/script';
 import { useGetFamilyAllQuery } from '@/hooks/queries/my/family/useGetFamilyQueries';
+import FamilySkeleton from '@/components/skeleton/mypage/family/family-skeleton';
+import FamilyButtonSkeleton from '@/components/skeleton/mypage/family/family-button-skeleton';
 
 export default function MypageFamily() {
-  const { data } = useGetFamilyAllQuery();
-  if (!data) return null;
+  const { data, isLoading } = useGetFamilyAllQuery();
   return (
     <>
       <section className={styles.section}>
         <div className={styles.familyContainer}>
           <AddFamily />
-          <FamilyList data={data} />
+          {isLoading ? <FamilySkeleton /> : <FamilyList data={data} />}
         </div>
-        <FamilyUtilButtons data={data} />
+        {isLoading ? <FamilyButtonSkeleton /> : <FamilyUtilButtons data={data} />}
       </section>
       <Script
         src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"

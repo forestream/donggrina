@@ -6,6 +6,7 @@ import { usePetsModifyQuery } from '@/hooks/queries/my/pets/usePostPetsQueries';
 import { FieldValues } from 'react-hook-form';
 import { imageUpload } from '@/api/image-api';
 import { useGetPetsDetailsQuery } from '@/hooks/queries/my/pets/useGetPetsQueries';
+import PetFormSkeleton from '@/components/skeleton/mypage/pet/pet-form-skeleton';
 
 interface ModifyPetFormType {
   routeUrl: string;
@@ -49,7 +50,7 @@ export default function ModifyPetForm({ routeUrl }: ModifyPetFormType) {
       );
     }
   };
-  if (isLoading) return null;
+  if (isLoading) return <PetFormSkeleton />;
   const defaultValue = {
     ...data.data,
     imageId: data.data.petProfileImageId,

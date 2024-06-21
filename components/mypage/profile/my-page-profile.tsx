@@ -2,11 +2,12 @@ import { useFetchProfile } from '@/hooks/queries/my/user/query';
 import ImageUpload from '@/components/mypage/profile/upload/image-upload';
 import ProfileInput from '@/components/mypage/profile/input/profile-input';
 import styles from '@/components/mypage/profile/my-page-profile.module.scss';
+import ProfileSkeleton from '@/components/skeleton/mypage/profile-skeleton';
 
 export default function MyPageProfile() {
   const profileQuery = useFetchProfile();
 
-  if (profileQuery.isLoading) return <p>Loading...</p>;
+  if (profileQuery.isLoading) return <ProfileSkeleton />;
 
   return (
     <section className={styles.profile}>
