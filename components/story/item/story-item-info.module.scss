@@ -21,4 +21,9 @@
 .info-feature {
   display: flex;
   gap: 0 3px;
+
+  button {
+    width: 20px;
+    height: 20px;
+  }
 }

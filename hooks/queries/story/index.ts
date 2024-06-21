@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import storyApiInstance from '../../../api/story';
+import storyApiInstance from '@/api/story';
 
 interface Story {
   page?: number;
@@ -26,5 +26,12 @@ export function useInfiniteStory() {
         return lastPageParams + 1;
       }
     },
+  });
+}
+
+export function useFetchDetailStory(diaryId: number) {
+  return useQuery({
+    queryKey: ['story-detail', diaryId],
+    queryFn: () => storyApiInstance.fetchDetailStory(diaryId),
   });
 }

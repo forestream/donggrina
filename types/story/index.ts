@@ -1,5 +1,5 @@
 export interface Story {
-  storyId: number;
+  diaryId: number;
   authorImage: string;
   author: string;
   authorGroup: string;
