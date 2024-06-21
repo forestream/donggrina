@@ -14,7 +14,8 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
   const { data, isError, isLoading } = useDiaries(date);
 
   if (isLoading) return <p>Loading...</p>;
-  if (isError || !data || data.length === 0) return <></>;
+  if (!data || data.length === 0) return <></>;
+  if (isError) return <p>error</p>;
 
   return (
     <div>
