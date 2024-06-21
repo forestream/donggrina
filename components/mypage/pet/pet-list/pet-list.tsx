@@ -8,7 +8,6 @@ export default function PetList() {
 
   if (isLoading) return <FamilySkeleton />;
   if (!data) return null;
-
   return (
     <ul>
       {data.data.map((petData: PetData) => (
