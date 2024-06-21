@@ -3,13 +3,14 @@ import Link from 'next/link';
 import { useFetchProfile } from '@/hooks/queries/my/user';
 import useUpload from '@/hooks/use-upload';
 import styles from '@/components/mypage/profile/my-page-profile.module.scss';
+import ProfileSkeleton from '@/components/skeleton/mypage/profile-skeleton';
 
 export default function MyPageProfile() {
   const profileQuery = useFetchProfile();
 
   const { uploadRef, previewUrl, handlePreview } = useUpload();
 
-  if (profileQuery.isLoading) return <p>Loading...</p>;
+  if (profileQuery.isLoading) return <ProfileSkeleton />;
 
   return (
     <section className={styles.profile}>

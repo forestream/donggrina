@@ -63,9 +63,9 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
                 {year}년 {month}월 {date}일
               </span>
               <span className={styles.dot}></span>
-              {/* <span>
+              <span>
                 {ampm} {hour.toString().padStart(2, '0')}:{minute.toString().padStart(2, '0')}
-              </span> */}
+              </span>
             </p>
             <div className={styles.profiles}>
               <CalendarTodoProfile src={todo.writerProfileImageUrl} name={todo.writerNickName} />

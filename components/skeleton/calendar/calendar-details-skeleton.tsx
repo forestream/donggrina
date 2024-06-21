@@ -2,20 +2,26 @@ import styles from './calendar-details-skeleton.module.scss';
 
 export default function CalendarDetailsSkeleton() {
   return (
-    <div className={styles.calendarDetailsSkeleton}>
-      <div>
-        <div className={styles.categoryBox}></div>
+    <section className={styles.section}>
+      <div className={styles.calendarDetailsSkeleton}>
         <div>
-          <span></span>
-          <h2></h2>
-          <p></p>
+          <div className={styles.categoryBox}></div>
+          <div className={styles.contentsBox}>
+            <span></span>
+            <h2></h2>
+            <p></p>
+            <div></div>
+          </div>
+        </div>
+        <div>
           <div></div>
+          <p>
+            <span></span>
+            <span></span>
+            <span></span>
+          </p>
         </div>
       </div>
-      <div>
-        <div></div>
-        <p></p>
-      </div>
-    </div>
+    </section>
   );
 }
