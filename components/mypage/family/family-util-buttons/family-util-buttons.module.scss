@@ -1,0 +1,8 @@
+.buttonList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  li {
+    height: 44px;
+  }
+}

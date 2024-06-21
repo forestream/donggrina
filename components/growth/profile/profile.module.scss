@@ -1,0 +1,13 @@
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  .image {
+    border-radius: 9999px;
+  }
+  .name {
+    font-size: 14px;
+    color: var(--text-color-gray);
+    padding-right: 4px;
+  }
+}

@@ -1,0 +1,17 @@
+.optionContainer {
+  width: 100%;
+
+  .optionList {
+    .optionItem {
+      color: #959595;
+      font-size: 14px;
+
+      .optionButton {
+        border-top: 1px solid #959595;
+        display: flex;
+        padding: 13px 0;
+        width: 100%;
+      }
+    }
+  }
+}

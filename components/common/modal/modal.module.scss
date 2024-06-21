@@ -1,0 +1,38 @@
+.outer {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(45, 45, 40, 0.6);
+  font-weight: 600;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.inner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 312px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.message {
+  width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
+  padding: 24px;
+}
+
+.buttonContainer {
+  display: flex;
+  height: 64px;
+  width: 100%;
+}

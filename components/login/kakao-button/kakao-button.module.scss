@@ -1,0 +1,9 @@
+@import '/components/common/button/button.module.scss';
+
+.kakaoButton {
+  @include button();
+  background-color: var(--kakao-background);
+  color: var(--kakao-color);
+  gap: 14px;
+  border-radius: 32px;
+}

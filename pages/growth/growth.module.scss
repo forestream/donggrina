@@ -1,0 +1,15 @@
+.wrapper {
+  padding: 0 24px;
+  .date {
+    padding: 40px 0 16px;
+    font-weight: 600;
+    color: #a9a9a9;
+  }
+  .listContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 558px;
+  }
+}

@@ -1,0 +1,10 @@
+@import '/components/common/button/button.module.scss';
+
+.googleButton {
+  @include button();
+  background-color: var(--white);
+  border: 1px solid var(--google-border);
+  color: var(--google-color);
+  gap: 14px;
+  border-radius: 32px;
+}

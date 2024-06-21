@@ -1,0 +1,162 @@
+.outer {
+  padding: 54px 24px 100px;
+  position: relative;
+  font-family: 'LaundryGothic';
+  color: var(--text-color-gray);
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.title {
+  margin-top: 20px;
+  padding: 11px 0;
+  font-size: 24px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--text-color-gray);
+
+  &::placeholder {
+    font-family: 'LaundryGothic';
+    color: var(--text-color-gray);
+  }
+}
+
+.memo {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  height: 160px;
+  margin: 22px 0;
+  resize: none;
+  border: none;
+
+  &::placeholder {
+    font-family: 'LaundryGothic';
+    color: var(--text-color-gray);
+  }
+}
+
+.division {
+  border-bottom: 5px solid #f5f5f5;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+}
+
+.petSelector {
+  padding: 32px 0;
+  display: block;
+  font-family: LaundryGothic;
+  font-weight: 700;
+}
+
+.petLabelContainer {
+  display: flex;
+  padding-top: 16px;
+  gap: 17px;
+}
+
+.categorySelectorOuter {
+  padding: 30px 0;
+  margin: 0 0 30px;
+  border-bottom: 1px solid var(--text-color-time-selector);
+  border-top: 1px solid var(--text-color-time-selector);
+}
+
+.categorySelectorInner {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.categoryLabel {
+  text-align: center;
+}
+
+.categoryInput {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.categoryInput ~ .categoryIcon {
+  width: 66px;
+  height: 66px;
+  cursor: pointer;
+  background-color: var(--todo-category);
+  border-radius: 10px;
+  margin: 0 0 8px;
+}
+
+.categoryInput:checked ~ .categoryIcon {
+  background-color: var(--main-color);
+}
+
+.todoDate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: LaundryGothic;
+  width: 100%;
+}
+
+.todoDateText {
+  background-color: var(--main-color);
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--white);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.todoDateSelector {
+  width: 60%;
+}
+
+.input {
+  text-align: right;
+  color: var(--text-color-gray);
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  align-self: last baseline;
+  width: 100%;
+  cursor: default;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.year,
+.month {
+  &::after {
+    content: '-';
+  }
+}
+
+.date,
+.ampm {
+  margin-right: 8px;
+}
+
+.hour::after {
+  content: ':';
+}
+
+.error {
+  color: var(--input-error);
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+.submit {
+  margin-top: 30px;
+  height: 46px;
+}

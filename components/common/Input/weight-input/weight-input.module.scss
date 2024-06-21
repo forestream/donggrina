@@ -1,0 +1,26 @@
+@import '../mixins.scss';
+
+.container {
+  @include container;
+  .inputContainer {
+    padding: 11px 12px;
+    display: flex;
+    gap: 3px;
+    border-bottom: 1.5px solid var(--main-color);
+
+    span {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+  .input {
+    @include input;
+    width: 40px;
+    border: 0;
+    text-align: center;
+  }
+}
+
+.error {
+  @include error;
+}

@@ -1,0 +1,44 @@
+.profileContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 4px;
+
+  .author {
+    font-size: 14px;
+    color: var(--text-color-gray);
+    font-weight: 400;
+  }
+
+  .authorImage {
+    border-radius: 50%;
+    border: 1px solid var(--main-color);
+  }
+
+  .petImagesContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+  }
+
+  .petImage {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -5px;
+    border: 1px solid var(--main-color);
+  }
+
+  .extraImages {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-left: -5px;
+  }
+}

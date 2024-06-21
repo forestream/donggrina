@@ -1,0 +1,71 @@
+.diary-card {
+  width: 242px;
+  border: 1px solid var(--main-color);
+  border-radius: 10px;
+  padding: 14px 17px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+
+  &.primary {
+    border: 1px solid var(--main-color);
+  }
+
+  &.empty {
+    border: 1px solid var(--todo-category);
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+  }
+
+  .content-text {
+    font-size: 12px;
+    font-weight: 700;
+    height: 42px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+  }
+}
+
+.ballon {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -1px);
+}
+
+/*=============================================
+=               다이어리 이미지 있을 때             =
+=============================================*/
+.diary-card.isImage {
+  gap: 0 12px;
+
+  .diary-card__profile {
+    position: absolute;
+  }
+
+  .diary-card__contents {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .content-text {
+    margin-top: 25px;
+    width: calc(100% - (67px + 12px));
+  }
+
+  .content-image {
+    width: 67px;
+    height: 67px;
+    background-color: #eee;
+  }
+}

@@ -1,0 +1,35 @@
+@mixin button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 700;
+  font-size: inherit;
+  color: inherit;
+  border: none;
+}
+
+.primary {
+  @include button();
+  background-color: var(--main-color);
+}
+.secondary {
+  @include button();
+  background-color: var(--white);
+  border: 1px solid var(--main-color);
+}
+.tertiary {
+  @include button();
+  background-color: var(--tertiary);
+}
+.default {
+  @include button();
+  background-color: var(--white);
+}
+.disabled {
+  @include button();
+  background-color: var(--disabled-color);
+  color: var(--white);
+}
