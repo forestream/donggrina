@@ -8,11 +8,11 @@ export default function middleware(request: NextRequest) {
   const { cookies, nextUrl } = request;
   const path = nextUrl.pathname;
   const hasCookie = cookies.has('accessToken');
-  const hasFamily = cookies.has('isFamily');
+  const hasFamily = cookies.get('isFamily')?.value === 'true';
   const isProtectedPage = PROTECTED_PAGES.some((page) => path.startsWith(page));
   const isPublicPage = PUBLIC_PAGES.includes(path);
   const isNonFamilyPage = NON_FAMILY_PAGES.includes(path);
-  const isFamilyPage = FAMILY_PAGES.includes(path);
+  const isFamilyPage = FAMILY_PAGES.some((page) => path.startsWith(page));
 
   // 정적 파일 요청 필터링
   if (
@@ -47,12 +47,13 @@ export default function middleware(request: NextRequest) {
   }
 
   // 가족이 있을 때 접근 불가
-  if (hasFamily && isNonFamilyPage) {
+  if (hasCookie && hasFamily && isNonFamilyPage) {
     return NextResponse.redirect(new URL('/family', request.nextUrl));
   }
+  console.log(isFamilyPage, !hasFamily, hasCookie);
 
   // 가족이 없을 때 접근 불가
-  if (!hasFamily && isFamilyPage) {
+  if (hasCookie && !hasFamily && isFamilyPage) {
     return NextResponse.redirect(new URL('/start-family', request.nextUrl));
   }
   return NextResponse.next();
