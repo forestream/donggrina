@@ -11,8 +11,8 @@ export function Header() {
   };
   return (
     <header className={styles.header}>
-      <button className={styles.leftArrow} onClick={handleClick}>
-        <Image src="/images/header/arrow-left-black.svg" alt="뒤로 가기" fill />
+      <button className={styles.leftIcon} onClick={handleClick}>
+        <Image src="/images/header/arrow-left-black.svg" alt="뒤로 가기" width={24} height={24} />
       </button>
       <div className={styles.imageBox}>
         <Link href="/family">

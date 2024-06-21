@@ -9,16 +9,24 @@ export function Header() {
   const handleClick = () => {
     router.back();
   };
+
+  const handleSearchClick = () => {
+    console.log('검색페이지 url 필요');
+    // router.push() : 검색페이지 url 필요
+  };
   return (
     <header className={styles.header}>
-      <button className={styles.leftArrow} onClick={handleClick}>
-        <Image src="/images/header/arrow-left-black.svg" alt="뒤로 가기" fill />
+      <button className={styles.leftIcon} onClick={handleClick}>
+        <Image src="/images/header/mypage-icon.svg" alt="마이페이지 아이콘" width={20} height={20} />
       </button>
       <div className={styles.imageBox}>
         <Link href="/family">
           <Image src="/images/header/logo.svg" alt="로고" fill />
         </Link>
       </div>
+      <button className={styles.rightIcon} onClick={handleSearchClick}>
+        <Image src="/images/header/search.svg" alt="검색 아이콘" width={20} height={20} />
+      </button>
     </header>
   );
 }

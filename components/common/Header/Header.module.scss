@@ -12,10 +12,8 @@
   border-bottom: 1px solid var(--main-color);
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  .leftArrow {
+  .leftIcon {
     position: absolute;
-    width: 24px;
-    height: 24px;
     margin: auto 0;
     left: 16px;
     top: 50%;
@@ -26,5 +24,12 @@
     width: 84px;
     height: 16px;
     margin: auto;
+  }
+  .rightIcon {
+    position: absolute;
+    margin: auto 0;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
