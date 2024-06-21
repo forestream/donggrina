@@ -11,6 +11,7 @@ interface GrowthListProps {
   text: string;
   isMine: boolean;
   petName: string;
+  id: number;
 }
 
 export default function GrowthList({
@@ -21,6 +22,7 @@ export default function GrowthList({
   writerImage,
   petImage,
   category,
+  id,
 }: GrowthListProps) {
   return (
     <div className={styles.container}>
@@ -31,8 +33,9 @@ export default function GrowthList({
         category={category}
         petImage={petImage}
         petName={petName}
+        id={id}
       />
-      <Link href="/" className={styles.text}>
+      <Link href={`growth/${id}`} className={styles.text}>
         {text}
       </Link>
     </div>

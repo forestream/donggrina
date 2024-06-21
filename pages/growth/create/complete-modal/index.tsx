@@ -4,11 +4,12 @@ import Button from '@/components/common/button/button';
 
 interface CompleteModalProps {
   closeModal: () => void;
+  text: string;
 }
-export default function CompleteModal({ closeModal }: CompleteModalProps) {
+export default function CompleteModal({ closeModal, text }: CompleteModalProps) {
   return (
     <div className={styles.box}>
-      <p className={styles.text}>성장기록 등록이 완료되었습니다.</p>
+      <p className={styles.text}>{text}</p>
       <div className={styles.buttonBox}>
         <Button className="primary" type="button" onClick={closeModal} rightRound leftRound>
           닫기

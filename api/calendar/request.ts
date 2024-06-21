@@ -1,7 +1,6 @@
 import { IFormInput } from '@/types/calendar';
 import { axiosInstance } from '..';
-import { DailyTodo, MonthlyTodos, Pet, TodoById, TodoByQueries } from './request.type';
-import { getCookie, setCookie } from 'cookies-next';
+import { DailyTodo, MonthlyTodos, Pet, TodoById } from './request.type';
 
 export async function fetchMonthlyTodos(yearMonth: string): Promise<MonthlyTodos[]> {
   const { data } = await axiosInstance.get(`/calendar/month?yearMonth=${yearMonth}`);
@@ -30,11 +29,6 @@ export async function fetchTodoById(calendarId: string, auth: string | null = nu
   return data.data;
 }
 
-export async function fetchTodosByQueries(query: string): Promise<TodoByQueries[]> {
-  const { data } = await axiosInstance.get(`/calendar/search?${query}`);
-  return data.data;
-}
-
 export async function postTodo(data: IFormInput) {
   await axiosInstance.post('/calendar', data);
 }
@@ -44,9 +38,7 @@ export async function putTodoById(data: IFormInput, calendarId: number) {
 }
 
 export async function deleteTodoById(calendarId: string) {
-  console.log('delete!');
-  const { data } = await axiosInstance.delete(`/calendar/${calendarId}`);
-  console.log(data);
+  await axiosInstance.delete(`/calendar/${calendarId}`);
 }
 
 export async function fetchPets(): Promise<Pet[]> {
@@ -55,17 +47,5 @@ export async function fetchPets(): Promise<Pet[]> {
 }
 
 export async function putTodoFinished(calendarId: string) {
-  const { data } = await axiosInstance.put(`/calendar/completion/${calendarId}`);
-  console.log(data);
-}
-
-export async function postRefreshToken() {
-  const accessToken = getCookie('accessToken');
-  const refreshToken = getCookie('refreshToken');
-
-  const { data } = await axiosInstance.post('/refresh', {
-    accessToken,
-    refreshToken,
-  });
-  setCookie('accessToken', data.data);
+  await axiosInstance.put(`/calendar/completion/${calendarId}`);
 }
