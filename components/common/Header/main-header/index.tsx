@@ -3,7 +3,7 @@ import styles from '../Header.module.scss';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-export function Header() {
+export default function MainHeader() {
   const router = useRouter();
 
   const handleClick = () => {
@@ -16,7 +16,7 @@ export function Header() {
   };
   return (
     <header className={styles.header}>
-      <button className={styles.leftIcon} onClick={handleClick}>
+      <button className={`${styles.leftIcon} ${styles.mypageIcon}`} onClick={handleClick}>
         <Image src="/images/header/mypage-icon.svg" alt="마이페이지 아이콘" width={20} height={20} />
       </button>
       <div className={styles.imageBox}>

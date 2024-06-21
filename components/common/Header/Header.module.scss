@@ -15,9 +15,14 @@
   .leftIcon {
     position: absolute;
     margin: auto 0;
-    left: 16px;
-    top: 50%;
+    top: 54%;
     transform: translateY(-50%);
+  }
+  .mypageIcon {
+    left: 25px;
+  }
+  .backIcon {
+    left: 16px;
   }
   .imageBox {
     position: relative;
@@ -31,5 +36,14 @@
     right: 28px;
     top: 50%;
     transform: translateY(-50%);
+  }
+  .headerName {
+    color: var(--text-color-gray);
+    letter-spacing: 0.64px;
+  }
+  .createButton {
+    font-size: 14px;
+    color: var(--text-color-gray);
+    letter-spacing: -0.6px;
   }
 }

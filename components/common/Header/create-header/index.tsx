@@ -1,24 +1,31 @@
 import Image from 'next/image';
 import styles from '../Header.module.scss';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import useModal from '@/hooks/use-modal';
+import WarningModal from '../warning-modal';
 
-export function Header() {
-  const router = useRouter();
+interface HeaderProps {
+  handleCreateClick?: () => void;
+  headerName: string;
+}
 
-  const handleClick = () => {
-    router.back();
+export default function CreateHeader({ handleCreateClick, headerName }: HeaderProps) {
+  const [Modal, handleModal] = useModal();
+  const handleOpen = () => {
+    handleModal(true);
   };
+
   return (
-    <header className={styles.header}>
-      <button className={styles.leftArrow} onClick={handleClick}>
-        <Image src="/images/header/arrow-left-black.svg" alt="뒤로 가기" fill />
-      </button>
-      <div className={styles.imageBox}>
-        <Link href="/family">
-          <Image src="/images/header/logo.svg" alt="로고" fill />
-        </Link>
-      </div>
-    </header>
+    <>
+      <header className={styles.header}>
+        <button className={`${styles.leftIcon} ${styles.backIcon}`} onClick={handleOpen}>
+          <Image src="/images/header/arrow-left-black.svg" alt="뒤로 가기" width={20} height={20} />
+        </button>
+        <div className={`${styles.imageBox} ${styles.headerName}`}>{headerName}</div>
+        <button className={`${styles.rightIcon} ${styles.createButton}`} onClick={handleCreateClick}>
+          등록
+        </button>
+      </header>
+      <WarningModal Modal={Modal} handleModal={handleModal} />
+    </>
   );
 }
