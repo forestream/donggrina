@@ -5,8 +5,10 @@ import PetList from '@/components/mypage/pet/pet-list/pet-list';
 export default function MypagePet() {
   return (
     <section className={styles.section}>
-      <AddPet />
-      <PetList />
+      <div className={styles.container}>
+        <AddPet />
+        <PetList />
+      </div>
     </section>
   );
 }

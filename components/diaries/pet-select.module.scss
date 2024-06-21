@@ -1,0 +1,25 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.selectContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color-gray);
+}
+
+.selectAll {
+  text-decoration: underline;
+  color: var(--text-color-gray);
+  font-size: 12px;
+  cursor: pointer;
+}

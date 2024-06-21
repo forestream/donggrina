@@ -10,8 +10,8 @@ interface SearchPetCheckboxProps {
   selected: (string | number)[];
 }
 
-export default function SearchPetCheckbox({ register, service, pet, selected }: SearchPetCheckboxProps) {
-  const value = service === 'diary' ? pet.petId : pet.name;
+export default function SearchPetCheckbox({ register, pet, selected }: SearchPetCheckboxProps) {
+  const value = pet.name;
   const isSelected = selected.includes(value);
 
   return (
