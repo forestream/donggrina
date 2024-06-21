@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
             {!isHeader(router) && <Header />}
             {isDragging && <Spinner />}
             <Component {...pageProps} />
-            {!isNav(router) && <Nav />}
+            {isNav(router) && <Nav />}
           </main>
         </div>
       </QueryClientProvider>
