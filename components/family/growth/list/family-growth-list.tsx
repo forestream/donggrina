@@ -14,7 +14,7 @@ export default function FamilyGrowthList(props: FamilyGrowthListProps) {
     <Swiper className={styles['growth-list']} slidesPerView="auto" spaceBetween={10} wrapperTag="ul">
       {props.growthList.map((growth) => (
         <SwiperSlide className={styles['growth-list__item']} tag="li" key={growth.id}>
-          <FamilyGrowthItem />
+          <FamilyGrowthItem {...growth} />
         </SwiperSlide>
       ))}
     </Swiper>
