@@ -1,12 +1,12 @@
 import styles from './family-growth.module.scss';
 import FamilyGrowthContents from '@/components/family/growth/family-growth-contents';
 import Suspensive from '@/components/suspensive/suspensive';
-import { useFetchGrowth } from '@/hooks/queries/family';
+import { useGetGrotwthByDateQuery } from '@/hooks/queries/growth/use-get-growth-queries';
 import CalendarInstance from '@/utils/date/date.utils';
 
 export default function FamilyGrowth() {
   const date = CalendarInstance.getTodayData();
-  const growthQuery = useFetchGrowth(date);
+  const growthQuery = useGetGrotwthByDateQuery(date);
 
   return (
     <section className={styles.wrapper}>

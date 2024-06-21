@@ -28,6 +28,6 @@ export const NAV_LIST_DATA = [
   {
     text: '스토리',
     RenderSvgComponent: SmileSVG,
-    href: '/스토리',
+    href: '/story',
   },
 ];

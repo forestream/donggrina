@@ -8,7 +8,7 @@ export default function FamilyDiaryContentsEmpty() {
     <div className={styles['diary-card']}>
       <p className={styles['diary-card__text']}>다이어리에 아직 작성 된 내용이 없어요!</p>
       <div className={styles['diary-card__button']}>
-        <Hyperlink href="/" className="primary" round>
+        <Hyperlink href="/diary" className="primary" round>
           <Image src="images/family/add-black-icon.svg" alt="" width="20" height="20" className={styles.icon} />
           다이어리 작성하러 가기
         </Hyperlink>
