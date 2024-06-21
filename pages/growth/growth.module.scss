@@ -10,5 +10,10 @@
     flex-direction: column;
     gap: 12px;
     max-height: 558px;
+    .skeletonContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
   }
 }
