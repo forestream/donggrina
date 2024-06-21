@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './diary-images.module.scss';
 import { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
 
 interface DiaryImagesProps {
   images: string[];
@@ -9,7 +10,22 @@ interface DiaryImagesProps {
 export default function DiaryImages({ images }: DiaryImagesProps) {
   const [mouseDown, setMouseDown] = useState(false);
   const [offsetX, setOffsetX] = useState(0);
-  const ref = useRef<HTMLElement>(null);
+  const [displayed, setDisplayed] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  let timer: NodeJS.Timeout;
+  const findImageDisplayed = () => {
+    if (!ref.current) return;
+
+    const { scrollWidth, scrollLeft } = ref.current;
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      console.log('set');
+      setDisplayed(Math.round((scrollLeft / scrollWidth) * images.length));
+    }, 400);
+  };
+
+  const handleScroll = () => findImageDisplayed();
 
   const handleMouseDown: MouseEventHandler = (e) => {
     e.preventDefault();
@@ -22,10 +38,12 @@ export default function DiaryImages({ images }: DiaryImagesProps) {
 
     ref.current.scrollLeft -= e.movementX;
   };
-  const handleMouseUp: MouseEventHandler = (e) => {
+  const handleMouseUp: MouseEventHandler = () => {
     setMouseDown(false);
 
     ref.current && ref.current.classList.remove(styles.pauseAlign);
+
+    findImageDisplayed();
   };
 
   useEffect(() => {
@@ -40,12 +58,24 @@ export default function DiaryImages({ images }: DiaryImagesProps) {
   }, [mouseDown, offsetX]);
 
   return (
-    <section ref={ref} onMouseDown={handleMouseDown} className={styles.imagesContainer}>
-      {images.map((image, i) => (
-        <div key={i} className={styles.image}>
-          <Image src={image} alt="다이어리 사진" fill />
-        </div>
-      ))}
+    <section>
+      <div ref={ref} onScroll={handleScroll} onMouseDown={handleMouseDown} className={styles.imagesContainer}>
+        {images.map((image, i) => (
+          <div key={i} className={styles.image}>
+            <Image src={image} alt="다이어리 사진" fill style={{ objectFit: 'cover' }} />
+          </div>
+        ))}
+      </div>
+      <div className={styles.imageDots}>
+        {images.map((_, i) => (
+          <div
+            key={i}
+            className={classNames(styles.imageDot, {
+              [styles.selected]: i === displayed,
+            })}
+          ></div>
+        ))}
+      </div>
     </section>
   );
 }
