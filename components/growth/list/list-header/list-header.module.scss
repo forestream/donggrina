@@ -1,6 +1,7 @@
 .headerContainer {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   .wrapper {
     display: flex;
     gap: 6px;

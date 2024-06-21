@@ -6,6 +6,7 @@ import StoryListItemSkeleton from '@/components/skeleton/story/item/story-list-i
 import { useFetchDetailStory } from '@/hooks/queries/story';
 import { useRouter } from 'next/router';
 import React from 'react';
+import StoryCommentListSkeleton from '@/components/skeleton/story/comment/list/story-comment-list-skeleton';
 
 export default function StoryDetailPage() {
   const router = useRouter();
@@ -15,7 +16,15 @@ export default function StoryDetailPage() {
   return (
     <div style={{ padding: '54px 24px 0px 24px' }}>
       <StoryDetailHeader isMyStory={detailQuery.data?.isMyStory} />
-      <Suspensive isLoading={detailQuery.isLoading} fallback={<StoryListItemSkeleton />}>
+      <Suspensive
+        isLoading={detailQuery.isLoading}
+        fallback={
+          <>
+            <StoryListItemSkeleton />
+            <StoryCommentListSkeleton />
+          </>
+        }
+      >
         <StoryDetailPost />
       </Suspensive>
     </div>

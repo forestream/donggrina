@@ -15,5 +15,6 @@ export class MiddlewareData {
     '/calendar/:path*',
     '/growth/:path*',
     '/story/:path*',
+    '/mypage/:path*',
   ];
 }
