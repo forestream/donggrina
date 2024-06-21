@@ -23,7 +23,7 @@ export const NAV_LIST_DATA = [
   {
     text: '성장기록',
     RenderSvgComponent: GrowthSVG,
-    href: '/성장기록',
+    href: '/growth',
   },
   {
     text: '스토리',

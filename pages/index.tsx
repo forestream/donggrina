@@ -1,10 +1,12 @@
-// import { Inter } from 'next/font/google';
-// const inter = Inter({ subsets: ['latin'] });
+import styles from './index.module.scss';
+import LoginTop from '@/components/login/login-top/login-top';
+import LoginButtons from '@/components/login/login-buttons/login-buttons';
 
-export default function Home() {
+export default function Login() {
   return (
-    <>
-      <div style={{ paddingTop: '54px' }}>안녕</div>
-    </>
+    <section className={styles.section}>
+      <LoginTop />
+      <LoginButtons />
+    </section>
   );
 }
