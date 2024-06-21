@@ -56,7 +56,8 @@ const setupInterceptors = (instance: AxiosInstance) => {
             alert('토큰 갱신을 실패하였습니다. 로그인 페이지로 이동합니다.');
             deleteCookie('refreshToken');
             deleteCookie('accessToken');
-            window.location.href = '/login';
+            deleteCookie('isFamily');
+            window.location.href = '/';
             isRefreshing = false;
           }
         }
