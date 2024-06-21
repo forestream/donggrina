@@ -1,3 +1,5 @@
+@import '../../skeleton-animation.module.scss';
+
 .inner {
   padding: 0 24px;
   display: flex;
@@ -11,7 +13,7 @@
       height: 66px;
       width: 66px;
       border-radius: 100%;
-      background-color: var(--skeleton-color);
+      @include skeleton-animation;
     }
     .headerText {
       display: flex;
@@ -23,13 +25,13 @@
         width: 60px;
         height: 20px;
         border-radius: 10px;
-        background-color: var(--skeleton-color);
+        @include skeleton-animation;
       }
       .profile {
         width: 120px;
         height: 20px;
         border-radius: 10px;
-        background-color: var(--skeleton-color);
+        @include skeleton-animation;
       }
     }
   }
@@ -41,13 +43,13 @@
       width: 60px;
       height: 20px;
       border-radius: 10px;
-      background-color: var(--skeleton-color);
+      @include skeleton-animation;
     }
     .content {
       width: 200px;
       height: 20px;
       border-radius: 10px;
-      background-color: var(--skeleton-color);
+      @include skeleton-animation;
     }
   }
 }
