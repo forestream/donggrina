@@ -6,6 +6,10 @@
   .input {
     @include input;
     padding: 12px 11px;
+
+    &::placeholder {
+      color: #bdbdbd;
+    }
   }
 }
 
