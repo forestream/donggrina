@@ -5,8 +5,9 @@ import { NavListProps } from '../types/nav';
 
 export default function NavListItem({ href, text, RenderSvgComponent }: NavListProps) {
   const { pathname } = useRouter();
+  console.log(pathname, href);
   return (
-    <li className={pathname.includes(href) ? `${styles.on} ${styles.navList}` : styles.navList}>
+    <li className={pathname === href ? `${styles.on} ${styles.navList}` : styles.navList}>
       <Link href={href}>
         <div className={styles.imgBox} aria-label={text}>
           <RenderSvgComponent />
