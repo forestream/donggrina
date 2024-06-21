@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
-import { Header } from '@/components/common/Header';
+import { Header } from '@/components/common/Header/back-header';
 import { isHeader } from '@/utils/is-header';
 import { isNav } from '@/utils/is-nav';
 import { useRouter } from 'next/router';
