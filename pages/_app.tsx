@@ -10,6 +10,7 @@ import usePullReload from '@/hooks/use-pull-to-refresh';
 import Spinner from '@/components/spinner/spinner';
 import MainHeader from '@/components/common/Header/main-header';
 import CreateHeader from '@/components/common/Header/create-header';
+import Header from '@/components/common/Header';
 
 declare global {
   interface Window {
@@ -29,8 +30,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <div id="__wrap">
           <main id="__container" ref={containerRef}>
-            {!isHeader(router) && <CreateHeader headerName="일정 등록" />}
+            {/* {!isHeader(router) && <CreateHeader headerName="일정 등록" />} */}
             {/* {!isHeader(router) && <MainHeader />} */}
+            <Header router={router} />
             {isDragging && <Spinner />}
             <Component {...pageProps} />
             {isNav(router) && <Nav />}
