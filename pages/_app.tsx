@@ -30,8 +30,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <div id="__wrap">
           <main id="__container" ref={containerRef}>
-            {/* {!isHeader(router) && <CreateHeader headerName="일정 등록" />} */}
-            {/* {!isHeader(router) && <MainHeader />} */}
             <Header router={router} />
             {isDragging && <Spinner />}
             <Component {...pageProps} />
