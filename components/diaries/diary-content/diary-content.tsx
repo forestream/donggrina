@@ -1,47 +1,42 @@
-import { useQuery } from '@tanstack/react-query';
 import styles from './diary-content.module.scss';
-import Kebab from '@/public/images/diaries/more-horizontal.svg';
 import Profile from '../diary-content/profile';
 import Content from '../diary-content/content';
 import Response from '../diary-content/response';
+import Kebab from '../diary-content/kebab';
 import ContentImage from '../diary-content/content-image';
-import { MOCK_DATA } from '../mock-data';
+import { useDiaries } from '@/hooks/queries/diary/use-diary-query';
 
-const fetchDiaries = async () => {
-  return Promise.resolve(MOCK_DATA);
-};
+interface DiaryContentProps {
+  date: string;
+}
 
-const DiaryContent = () => {
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ['diaries'],
-    queryFn: fetchDiaries,
-  });
+const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
+  const { data, isError, isLoading } = useDiaries(date);
 
   if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error loading diaries!</p>;
+  if (!data || data.length === 0) return <></>;
+  if (isError) return <p>error</p>;
 
   return (
-    <>
-      <div>
-        {data?.map((diary) => (
-          <div key={diary.diaryId} className={styles.diaryContent}>
-            <div className={styles.leftContainer}>
-              <Profile author={diary.author} />
-              <Content content={diary.content} />
-              <Response
-                commentCount={diary.commentCount}
-                favoriteCount={diary.favoriteCount}
-                favoriteState={diary.favoriteState}
-              />
-            </div>
-            <div className={styles.rightContainer}>
-              <Kebab />
-              <ContentImage />
-            </div>
+    <div>
+      {data?.map((diary) => (
+        <div key={diary.diaryId} className={styles.diaryContent}>
+          <div className={styles.leftContainer}>
+            <Profile author={diary.author} authorImage={diary.authorImage} petImages={diary.petImages} />
+            <Content content={diary.content} />
+            <Response
+              commentCount={diary.commentCount}
+              favoriteCount={diary.favoriteCount}
+              favoriteState={diary.favoriteState}
+            />
           </div>
-        ))}
-      </div>
-    </>
+          <div className={styles.rightContainer}>
+            {diary.isMyDiary && <Kebab diaryId={diary.diaryId} />}
+            <ContentImage contentImage={diary.contentImage} />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

@@ -18,16 +18,16 @@ export const NAV_LIST_DATA = [
   {
     text: '다이어리',
     RenderSvgComponent: HomeSVG,
-    href: '/다이어리',
+    href: '/diaries',
   },
   {
     text: '성장기록',
     RenderSvgComponent: GrowthSVG,
-    href: '/성장기록',
+    href: '/growth',
   },
   {
     text: '스토리',
     RenderSvgComponent: SmileSVG,
-    href: '/스토리',
+    href: '/story',
   },
 ];

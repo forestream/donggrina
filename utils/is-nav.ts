@@ -1,6 +1,7 @@
 import { NextRouter } from 'next/router';
 
 export const isNav = (router: NextRouter) => {
-  const navPaths = ['/login', '/start-family', '/404', '/start-pet'];
-  return navPaths.some((path) => router.pathname.includes(path));
+  const navPaths = ['/calendar', '/family', '/diaries', '/growth', '/story'];
+  console.log(navPaths.some((path) => router.pathname === path));
+  return navPaths.some((path) => router.pathname === path);
 };

@@ -1,0 +1,24 @@
+.inner {
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.dateContainer {
+  height: 140px;
+  position: relative;
+  top: -54px;
+  left: -12px;
+}
+
+.pets {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.members {
+  display: flex;
+  gap: 8px;
+}

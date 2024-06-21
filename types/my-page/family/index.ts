@@ -1,5 +1,5 @@
 export interface MyPageDetails {
-  data: MyPageData;
+  data?: MyPageData;
 }
 
 export interface MyPageData {

@@ -1,0 +1,14 @@
+.profile-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 8px 8px;
+  border-bottom: 1px solid #bdbdbd;
+  width: calc(100% - 20px - 116px);
+
+  span {
+    font-size: 16px;
+    font-weight: 700;
+    color: #9e9e9e;
+  }
+}

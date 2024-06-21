@@ -9,7 +9,7 @@ import { setCookie } from 'cookies-next';
 
 export default function StartFamily() {
   const {
-    query: { accessToken, refreshToken },
+    query: { accessToken, refreshToken, isFamily },
     isReady,
   } = useRouter();
 
@@ -20,6 +20,9 @@ export default function StartFamily() {
     }
     if (refreshToken) {
       setCookie('refreshToken', refreshToken);
+    }
+    if (isFamily) {
+      setCookie('isFamily', isFamily);
     }
   }, [isReady]);
 

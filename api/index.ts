@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { getCookie, setCookie } from 'cookies-next';
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import { reissuanceAt } from './auth';
 
 export const axiosInstance = axios.create({
@@ -53,7 +53,11 @@ const setupInterceptors = (instance: AxiosInstance) => {
             isRefreshing = false;
             return axios(originalRequest);
           } catch (error) {
-            console.log(`토큰 갱신 실패 ${error}`);
+            alert('토큰 갱신을 실패하였습니다. 로그인 페이지로 이동합니다.');
+            deleteCookie('refreshToken');
+            deleteCookie('accessToken');
+            deleteCookie('isFamily');
+            window.location.href = '/';
             isRefreshing = false;
           }
         }
