@@ -57,7 +57,7 @@ const setupInterceptors = (instance: AxiosInstance) => {
             deleteCookie('refreshToken');
             deleteCookie('accessToken');
             deleteCookie('isFamily');
-            window.location.href = '/login';
+            window.location.href = '/';
             isRefreshing = false;
           }
         }

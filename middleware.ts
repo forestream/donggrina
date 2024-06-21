@@ -30,7 +30,7 @@ export default function middleware(request: NextRequest) {
     if (hasQuery || hasCookie) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL('/login', request.nextUrl));
+      return NextResponse.redirect(new URL('/', request.nextUrl));
     }
   }
   // -----------------------------------------------------------------------
@@ -43,7 +43,7 @@ export default function middleware(request: NextRequest) {
 
   // 비로그인 상태일 때 접근 불가
   if (!hasCookie && isProtectedPage) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl));
+    return NextResponse.redirect(new URL('/', request.nextUrl));
   }
 
   // 가족이 있을 때 접근 불가
