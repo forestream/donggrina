@@ -1,8 +1,8 @@
 import { axiosInstance } from '../index';
 import { StoryData } from '../../types/story/index';
-import { StoryDetailsData } from '@/types/story/details';
+import { CreateCommentData, StoryDetailsData } from '@/types/story/details';
 
-class StoryAPI {
+export class StoryAPI {
   async fetchStory(page = 0, size = 10) {
     return (await axiosInstance.get(`stories?page=${page}&size=${size}`)).data.data as StoryData;
   }
@@ -19,16 +19,9 @@ class StoryAPI {
     return (await axiosInstance.delete(`hearts/${diaryId}`)).data;
   }
 
-  async createCommentStory({ diaryId, data }: CommentData) {
+  async createCommentStory({ diaryId, data }: CreateCommentData) {
     return (await axiosInstance.post(`comments/${diaryId}`, data)).data;
   }
-}
-
-interface CommentData {
-  diaryId: number;
-  data: {
-    content: string;
-  };
 }
 
 const storyApiInstance = new StoryAPI();

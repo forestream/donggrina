@@ -1,3 +1,5 @@
+import { StoryAPI } from '@/api/story';
+
 export interface StoryDetails {
   data: StoryDetailsData;
 }
@@ -22,4 +24,12 @@ export interface StoryComment {
   commentsAuthorProfile: string;
   commentAuthor: string;
   comment: string;
+}
+
+export interface CreateCommentData {
+  diaryId: number;
+  data: {
+    content: string;
+    parentCommentId?: number | null;
+  };
 }

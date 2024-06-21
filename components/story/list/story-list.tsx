@@ -9,7 +9,7 @@ interface StoryListProps {
 export default function StoryList(props: StoryListProps) {
   return (
     <ul className={styles.wrapper}>
-      {props.data.map((page) => page.response.map((story) => <StoryItem {...story} />))}
+      {props.data.map((page) => page.response.map((story) => <StoryItem key={story.diaryId} {...story} />))}
     </ul>
   );
 }

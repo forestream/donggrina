@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StoryItemHeader from '@/components/story/item/story-item-header';
 import { useRouter } from 'next/router';
 import { useFetchDetailStory } from '@/hooks/queries/story';
@@ -11,6 +11,11 @@ export default function StoryDetailPost() {
   const router = useRouter();
   const storyId = +router.query.storyId!;
   const detailQuery = useFetchDetailStory(storyId);
+
+  const [replyId, setReplyId] = useState<number | null>(0);
+
+  const handleReplyClick = (id: number) => setReplyId(id);
+  const handleReplyReset = () => setReplyId(null);
 
   return (
     <>
@@ -31,8 +36,8 @@ export default function StoryDetailPost() {
         favoriteCount={detailQuery.data!.favoriteCount}
         commentCount={detailQuery.data!.comments.length}
       />
-      <StoryDetailComments comments={detailQuery.data!.comments} />
-      <StoryDetailAddComment storyId={storyId} />
+      <StoryDetailComments comments={detailQuery.data!.comments} onReplyClick={handleReplyClick} />
+      <StoryDetailAddComment storyId={storyId} replyId={replyId} onReplyReset={handleReplyReset} />
     </>
   );
 }
