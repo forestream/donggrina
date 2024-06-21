@@ -116,17 +116,22 @@
 }
 
 .todoDateSelector {
-  display: flex;
+  width: 60%;
 }
 
 .input {
-  text-align: center;
+  text-align: right;
   color: var(--text-color-gray);
   font-weight: 600;
   font-size: 14px;
   border: none;
   align-self: last baseline;
-  width: fit-content;
+  width: 100%;
+  cursor: default;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .year,

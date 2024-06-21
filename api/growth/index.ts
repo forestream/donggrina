@@ -1,12 +1,12 @@
 import { Growth } from '@/types/growth';
 import { axiosInstance } from '..';
-import { AddGrowthData, GrowthDetailsData } from '@/types/growth/details';
+import { GrowthDetails, GrowthDetailsData } from '@/types/growth/details';
 import { GrowthSearchData } from '@/types/growth/search';
 
 export default class GrowthAPI {
   constructor() {}
 
-  async createGrowth(formData: AddGrowthData) {
+  async createGrowth(formData: GrowthDetailsData) {
     return await axiosInstance.post('/growth', formData);
   }
 
@@ -15,7 +15,7 @@ export default class GrowthAPI {
   }
 
   async getGrowthDetails(growthId: number) {
-    return (await axiosInstance.get<GrowthDetailsData>(`/growth/${growthId}`)).data;
+    return (await axiosInstance.get<GrowthDetails>(`/growth/${growthId}`)).data;
   }
 
   async getSearchGrowth(keyword: string, petNames: string[], writerNames: string[]) {
@@ -26,11 +26,11 @@ export default class GrowthAPI {
     ).data;
   }
 
-  async modifyGrowth(growthId: number) {
-    return await axiosInstance.post(`/growth/${growthId}`);
+  async modifyGrowth(growthId: number, data: GrowthDetailsData) {
+    return await axiosInstance.put(`/growth/${growthId}`, data);
   }
 
   async deleteGrowth(growthId: number) {
-    return await axiosInstance.post(`/growth/${growthId}`);
+    return await axiosInstance.delete(`/growth/${growthId}`);
   }
 }

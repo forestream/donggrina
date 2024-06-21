@@ -1,0 +1,18 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.selectAll {
+  text-decoration: underline;
+  color: var(--text-color-gray);
+  font-size: 12px;
+  cursor: pointer;
+}
