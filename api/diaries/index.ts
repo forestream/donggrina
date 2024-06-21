@@ -91,7 +91,6 @@ export async function fetchDiaries(date: string): Promise<DiaryData[]> {
 export async function fetchDiaryById(diaryId: string): Promise<Diary> {
   try {
     const response = await axiosInstance.get(`/diaries/${diaryId}`);
-    console.log(response.data.data);
     return response.data.data;
   } catch (error) {
     console.error(error);
