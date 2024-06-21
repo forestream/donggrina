@@ -18,7 +18,7 @@ export const NAV_LIST_DATA = [
   {
     text: '다이어리',
     RenderSvgComponent: HomeSVG,
-    href: '/다이어리',
+    href: '/diaries',
   },
   {
     text: '성장기록',

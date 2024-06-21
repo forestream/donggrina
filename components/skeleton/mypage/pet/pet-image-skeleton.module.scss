@@ -1,0 +1,12 @@
+.petImageSkeleton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+  li {
+    width: 116px;
+    height: 116px;
+    background-color: var(--skeleton-color);
+    border-radius: 50%;
+  }
+}

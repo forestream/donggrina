@@ -1,0 +1,15 @@
+@mixin skeleton-animation {
+  background: linear-gradient(to right, #aaa, #ddd, #aaa);
+  background-size: 200% 100%;
+  animation: skeleton-gradient 1.5s alternate ease infinite;
+}
+
+@keyframes skeleton-gradient {
+  0% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 100%;
+  }
+}
