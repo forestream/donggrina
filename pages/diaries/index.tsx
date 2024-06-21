@@ -3,6 +3,7 @@ import DiaryContent from '@/components/diaries/diary-content/diary-content';
 import Calendar from '@/components/calendar-compound/calendar';
 import useCalenderDateStore from '@/store/calendar.store';
 import getDay from '@/utils/get-day';
+import AddButton from '@/components/common/add-button/add-button';
 import styles from './create.module.scss';
 
 const Diaries = () => {
@@ -29,6 +30,7 @@ const Diaries = () => {
           <DiaryContent date={formattedDate} />
         </div>
       </div>
+      <AddButton href={'/diaries/create'} />
     </>
   );
 };
