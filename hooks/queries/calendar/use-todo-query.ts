@@ -10,7 +10,7 @@ const useTodoQuery = (id: string) =>
       id: -1,
       title: '',
       memo: '',
-      category: '',
+      category: '산책',
       dateTime: '',
       writerProfileImageUrl: '',
       writerNickName: '',
