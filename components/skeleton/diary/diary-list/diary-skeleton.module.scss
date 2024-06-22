@@ -1,3 +1,5 @@
+@import '../../skeleton-animation.module.scss';
+
 .skeletonContainer {
   display: flex;
   flex-direction: row;
@@ -13,7 +15,7 @@
 .skeletonHeader {
   height: 20px;
   width: 163px;
-  background-color: var(--skeleton-color);
+  @include skeleton-animation;
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -21,7 +23,7 @@
 .skeletonContent {
   height: 20px;
   width: 200px;
-  background-color: var(--skeleton-color);
+  @include skeleton-animation;
   border-radius: 10px;
   margin-bottom: 42px;
 }
@@ -29,14 +31,14 @@
 .skeletonBody {
   height: 20px;
   width: 82px;
-  background-color: var(--skeleton-color);
+  @include skeleton-animation;
   border-radius: 10px;
 }
 
 .skeletonImage {
   height: 79px;
   width: 79px;
-  background-color: var(--skeleton-color);
+  @include skeleton-animation;
   border-radius: 10px;
   margin-top: 33px;
 }
