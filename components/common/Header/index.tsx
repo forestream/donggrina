@@ -16,7 +16,6 @@ export default function Header({ router }: HeaderProps) {
     return <MainHeader />;
   } else {
     let headerName = '';
-
     if (router.pathname.includes('edit') || router.pathname.includes('create')) {
       if (router.pathname.includes('/calendar')) {
         headerName = '일정 등록';
