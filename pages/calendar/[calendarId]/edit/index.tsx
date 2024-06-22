@@ -71,7 +71,7 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
     putMutation.mutate(
       { data: { ...data, dateTime: getDateTimeBackend(data.dateTime) }, id },
       {
-        onSuccess: () => router.push('/calendar'),
+        onSuccess: () => router.push(`/calendar/${todo.id}`),
       },
     );
   };
