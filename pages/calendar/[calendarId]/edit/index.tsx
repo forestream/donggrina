@@ -78,6 +78,11 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
 
   const [Modal, handleModal] = useModal();
 
+  const handleCloseModal = () => {
+    handleModal(false);
+    trigger('dateTime');
+  };
+
   return (
     <div className={styles.outer}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -152,7 +157,7 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
         </button>
       </form>
       <Modal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleCloseModal} />
       </Modal>
     </div>
   );

@@ -22,6 +22,7 @@ export default function Create() {
     trigger,
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<IFormInput>();
 
@@ -36,6 +37,14 @@ export default function Create() {
 
   const [DateTimeModal, handleDateTimeModal] = useModal();
   const [SuccessModal, handleSuccessModal] = useModal();
+  const handleCloseDateTimeModal = () => {
+    handleDateTimeModal(false);
+  };
+
+  useEffect(() => {
+    if (!watch('dateTime')) return;
+    trigger('dateTime');
+  }, [watch('dateTime')]);
 
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
@@ -126,7 +135,7 @@ export default function Create() {
         </div>
       </form>
       <DateTimeModal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleDateTimeModal.bind(null, false)} />
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleCloseDateTimeModal} />
       </DateTimeModal>
       <SuccessModal>
         <CalendarTodoPostSuccess />

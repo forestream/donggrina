@@ -127,6 +127,10 @@
   border: none;
   align-self: last baseline;
   width: fit-content;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .year,
