@@ -16,6 +16,7 @@ export default function Search() {
   return (
     <main className={styles.outer}>
       <SearchForm service="diary" onSubmit={handleResults} />
+
       {results.map((result) => (
         <div key={result.diaryId} className={styles.diaryContent}>
           <div className={styles.leftContainer}>
