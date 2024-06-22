@@ -91,10 +91,34 @@
   background-color: var(--todo-category);
   border-radius: 10px;
   margin: 0 0 8px;
+  position: relative;
 }
 
 .categoryInput:checked ~ .categoryIcon {
-  background-color: var(--main-color);
+  &.anniversary {
+    background-color: #f4a4b1;
+  }
+  &.feed {
+    background-color: #8fcc93;
+  }
+  &.grooming {
+    background-color: #61a0ff;
+  }
+  &.medicine {
+    background-color: #a4bdff;
+  }
+  &.other {
+    background-color: #9ebf58;
+  }
+  &.shower {
+    background-color: #80d1ff;
+  }
+  &.vet {
+    background-color: #9498ff;
+  }
+  &.walk {
+    background-color: #ffbf5f;
+  }
 }
 
 .todoDate {

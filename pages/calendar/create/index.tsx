@@ -4,7 +4,7 @@ import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
+import { CALENDAR_CATEGORIES, TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
@@ -12,6 +12,8 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
 import Button from '@/components/common/button/button';
 import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
+import Image from 'next/image';
+import classNames from 'classnames';
 
 export default function Create() {
   const { data: pets, isLoading } = usePetsQuery();
@@ -103,7 +105,9 @@ export default function Create() {
                   className={styles.categoryInput}
                   type="radio"
                 />
-                <div className={styles.categoryIcon}></div>
+                <div className={classNames(styles.categoryIcon, styles[CALENDAR_CATEGORIES[category].value])}>
+                  <Image src={CALENDAR_CATEGORIES[category].image} alt={category} fill />
+                </div>
                 <p>{category}</p>
               </label>
             ))}
