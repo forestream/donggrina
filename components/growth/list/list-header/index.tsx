@@ -19,6 +19,7 @@ interface ListHeaderProps {
   isMine: boolean;
   petName: string;
   id: number;
+  optionRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function ListHeader({
@@ -29,6 +30,7 @@ export default function ListHeader({
   category,
   writerImage,
   petImage,
+  optionRef,
 }: ListHeaderProps) {
   const router = useRouter();
   const [Modal, handleModal] = useModal();
@@ -77,13 +79,15 @@ export default function ListHeader({
           </div>
         </div>
         {isMine ? (
-          <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-            <DropdownMenu.Kebab />
-            <DropdownMenu.Content>
-              <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
-              <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu>
+          <div ref={optionRef}>
+            <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+              <DropdownMenu.Kebab />
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu>
+          </div>
         ) : null}
       </div>
       <Modal>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { MouseEventHandler, useRef } from 'react';
 import styles from './list.module.scss';
 import Link from 'next/link';
 import ListHeader from './list-header';
+import { useRouter } from 'next/router';
 
 interface GrowthListProps {
   writerImage: string;
@@ -24,8 +25,14 @@ export default function GrowthList({
   category,
   id,
 }: GrowthListProps) {
+  const router = useRouter();
+  const optionRef = useRef<HTMLDivElement>(null);
+  const handleClick: MouseEventHandler = (e) => {
+    if (optionRef.current?.contains(e.target as Node)) return;
+    router.push(`/growth/${id}`);
+  };
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <ListHeader
         isMine={isMine}
         nickname={nickname}
@@ -34,6 +41,7 @@ export default function GrowthList({
         petImage={petImage}
         petName={petName}
         id={id}
+        optionRef={optionRef}
       />
       <Link href={`growth/${id}`} className={styles.text}>
         {text}
