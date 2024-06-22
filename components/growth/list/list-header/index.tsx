@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './list-header.module.scss';
 import Profile from '../../profile';
-import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import { useDeleteGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';

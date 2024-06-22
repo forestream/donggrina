@@ -1,7 +1,16 @@
 import Image from 'next/image';
 import styles from './pet-checkbox.module.scss';
 import { UseFormRegister, FieldValues } from 'react-hook-form';
-import { DiaryData } from '@/types/diary';
+// import { DiaryData } from '@/types/diary';
+
+interface DiaryData {
+  content: string;
+  weather: string;
+  isShare: boolean;
+  date: string;
+  pets: number[];
+  images: number[];
+}
 
 interface PetCheckboxProps {
   register: UseFormRegister<DiaryData & FieldValues>;

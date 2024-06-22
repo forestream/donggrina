@@ -8,6 +8,8 @@ interface ContentProps {
 }
 
 export default function Content({ category, content }: ContentProps) {
+  if (!content) return;
+
   const getTitleColor = (category: string) => {
     switch (category) {
       case '간식':
