@@ -1,22 +1,23 @@
 import React from 'react';
 import Avatar from '@/components/avatar/avatar';
 import styles from './family-diary-item.module.scss';
+import { DiaryData } from '@/types/diary';
+import Image from 'next/image';
 
-export default function FamilyDiaryItem() {
-  const isImage = false;
+export default function FamilyDiaryItem(props: DiaryData) {
+  const isImage = props.contentImage;
   const isImageClassName = isImage ? `${styles['diary-card']} ${styles.isImage}` : styles['diary-card'];
 
   return (
     <div className={isImageClassName}>
       <div className={styles['diary-card__profile']}>
-        <Avatar />
+        <Avatar image={props.authorImage} name={props.author} />
       </div>
       <div className={styles['diary-card__contents']}>
-        <p className={styles['content-text']}>
-          오늘 뽀삐랑 같이 산책을 다녀왔어!오늘 뽀삐랑 같이 산책을 다녀왔어! ...오늘 뽀삐랑 같이 산책을 다녀왔어!오늘
-          뽀삐랑 같이 산책을 다녀왔어! ...오늘 뽀삐랑 같이 산책을 다녀왔어!오늘 뽀삐랑 같이 산책을 다녀왔어! ...
-        </p>
-        <div className={styles['content-image']}></div>
+        <p className={styles['content-text']}>{props.content}</p>
+        <div className={styles['content-image']}>
+          {isImage && <Image src={props.contentImage} alt="이미지 썸네일" fill />}
+        </div>
       </div>
       <div className={styles.ballon}>
         <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">

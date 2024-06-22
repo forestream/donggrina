@@ -6,8 +6,10 @@ import { useDiaries } from '@/hooks/queries/diary/use-diary-query';
 export default function FamilyDiaryContents() {
   const date = CalendarInstance.getTodayData();
   const diaryQuery = useDiaries(date);
+  const randomIndex = Math.floor(Math.random() * diaryQuery.data!.length);
+  const diary = diaryQuery.data![randomIndex];
 
   if (!diaryQuery.data!.length) return <FamilyDiaryContentsEmpty />;
 
-  return <FamilyDiaryItem />;
+  return <FamilyDiaryItem {...diary} />;
 }
