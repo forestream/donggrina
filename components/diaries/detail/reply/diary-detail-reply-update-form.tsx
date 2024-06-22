@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, FormEventHandler, KeyboardEventHandler } from 'react';
-import { useUpdateReplyComment } from '@/hooks/queries/story/mutation';
-import styles from './story-detail-reply-update-form.module.scss';
+
+import styles from './diary-detail-reply-update-form.module.scss';
+import { useUpdateReplyComment } from '@/hooks/queries/diary/mutation';
 
 interface ReplyUpdateForm {
   commentId: number;
@@ -9,7 +10,7 @@ interface ReplyUpdateForm {
   onUpdateReplyValue: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export default function StoryDetailReplyUpdateForm(props: ReplyUpdateForm) {
+export default function DiaryDetailReplyUpdateForm(props: ReplyUpdateForm) {
   const updateReplyMutation = useUpdateReplyComment();
 
   const handleUpdateSubmit: FormEventHandler<HTMLFormElement> = (event) => {

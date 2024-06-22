@@ -15,7 +15,7 @@ export default function StoryDetailPage() {
     <div style={{ padding: '54px 24px 0px 24px' }}>
       <StoryDetailHeader isMyStory={detailQuery.data?.isMyStory} />
       <Suspensive isLoading={detailQuery.isLoading}>
-        <StoryDetailPost />
+        <StoryDetailPost id="storyId" />
       </Suspensive>
     </div>
   );

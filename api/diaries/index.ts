@@ -1,3 +1,4 @@
+import { UpdateCommentData } from '@/types/story/details';
 import { axiosInstance, axiosFileInstance } from '..';
 import { DiaryData } from '@/types/diary/';
 
@@ -38,7 +39,7 @@ export interface Comment {
   children: Child[];
 }
 
-interface Diary {
+export interface Diary {
   authorImage: string;
   author: string;
   petImages: string[];
@@ -127,9 +128,9 @@ export const postComment = async (diaryId: string, content: string, parentCommen
   }
 };
 
-export const putComment = async (commentId: number, content: string) => {
+export const putComment = async ({ commentId, data }: UpdateCommentData) => {
   try {
-    const response = await axiosInstance.put(`/comments/${commentId}`, { content });
+    const response = await axiosInstance.put(`/comments/${commentId}`, data);
     console.log(response.data);
   } catch (error) {
     console.error('Failed to post comment', error);

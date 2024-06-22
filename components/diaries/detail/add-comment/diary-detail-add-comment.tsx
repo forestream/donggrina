@@ -1,18 +1,18 @@
 import { FormEvent, FormEventHandler, KeyboardEventHandler, useEffect } from 'react';
-import { useCreateComment } from '@/hooks/queries/story/mutation';
 import useRouterId from '@/hooks/utils/use-router-id';
 import useTextarea from '@/hooks/utils/use-textarea';
-import styles from './story-detail-add-comment.module.scss';
+import styles from './diary-detail-add-comment.module.scss';
+import useCommentPostMutation from '@/hooks/queries/diary/use-comment-post-mutation';
 
-interface StoryDetailAddCommentProps {
+interface DiaryDetailAddCommentProps {
   replyOwner: { author: string; replyId: number } | null;
   onReplyReset: () => void;
 }
 
-export default function StoryDetailAddComment(props: StoryDetailAddCommentProps) {
-  const storyId = +useRouterId('storyId');
+export default function DiaryDetailAddComment(props: DiaryDetailAddCommentProps) {
+  const diaryId = +useRouterId('diaryId');
   const { ref, value, isDisbaled, handleValueChange, handleResizeHeight, handleResetValue } = useTextarea();
-  const commentMutation = useCreateComment();
+  const commentMutation = useCommentPostMutation(String(diaryId));
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -23,7 +23,7 @@ export default function StoryDetailAddComment(props: StoryDetailAddCommentProps)
       ? { content: value, parentCommentId: props.replyOwner.replyId }
       : { content: value, parentCommentId: null };
 
-    commentMutation.mutate({ diaryId: storyId, data });
+    commentMutation.mutate(data);
     handleResetValue();
     handleResizeHeight();
     props.onReplyReset();

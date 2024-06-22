@@ -1,0 +1,29 @@
+.info-layout {
+  display: flex;
+  gap: 0 8px;
+  color: #9e9e9e;
+  font-size: 12px;
+}
+
+.info-description {
+  font-size: 14px;
+  margin: 8px 0 12px 0;
+}
+
+.info-features {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #9e9e9e;
+  gap: 0 18px;
+}
+
+.info-feature {
+  display: flex;
+  gap: 0 3px;
+
+  button {
+    width: 20px;
+    height: 20px;
+  }
+}

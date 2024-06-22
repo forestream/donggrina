@@ -1,22 +1,20 @@
 import React from 'react';
 import { AvatarImage, AvatarName } from '@/components/avatar/avatar';
-
+import DiaryDetailReplyComments from '../reply/diary-detail-reply-comments';
 import useToggle from '@/hooks/use-toggle';
-import { useDeleteComment } from '@/hooks/queries/story/mutation';
-import { StoryComment } from '@/types/story/details';
-import styles from './story-detail-comment-item.module.scss';
+import styles from './diary-detail-comment-item.module.scss';
 import Kebab from '@/components/kebab';
 
 import useTextarea from '@/hooks/utils/use-textarea';
+import { Comment } from '@/api/diaries';
+import DiaryDetailReplyUpdateForm from '../reply/diary-detail-reply-update-form';
+import { useDeleteComment } from '@/hooks/queries/diary/mutation';
 
-import StoryDetailReplyUpdateForm from '../reply/story-detail-reply-update-form';
-import StoryDetailReplyComments from '../reply/story-detail-reply-comments';
-
-interface StoryDetailCommentItemProps extends StoryComment {
+interface DiaryDetailCommentItemProps extends Comment {
   onReplyClick: (data: { author: string; replyId: number }) => void;
 }
 
-export default function StoryDetailCommentItem(props: StoryDetailCommentItemProps) {
+export default function DiaryDetailCommentItem(props: DiaryDetailCommentItemProps) {
   const {
     isToggle: isOpenTextarea,
     handleCloseToggle: handleCloseTextarea,
@@ -33,7 +31,7 @@ export default function StoryDetailCommentItem(props: StoryDetailCommentItemProp
     <>
       <li className={styles['comment-item']}>
         <div className={styles['comment-item__info']}>
-          <AvatarImage image={props.commentsAuthorProfile} />
+          <AvatarImage image={props.commentAuthorImage} />
           <div>
             <AvatarName>{props.commentAuthor}</AvatarName>
             <time className={styles['comment-item__date']}>2024-06-21</time>
@@ -41,7 +39,7 @@ export default function StoryDetailCommentItem(props: StoryDetailCommentItemProp
         </div>
         <div className={styles['comment-item__contents']}>
           {isOpenTextarea ? (
-            <StoryDetailReplyUpdateForm
+            <DiaryDetailReplyUpdateForm
               commentId={props.commentId}
               updateReplyValue={updateReplyValue}
               onCloseTextarea={handleCloseTextarea}
@@ -60,7 +58,7 @@ export default function StoryDetailCommentItem(props: StoryDetailCommentItemProp
         <div className={styles['comment-item__kebab']}>
           <Kebab updateFn={updateFn} deleteFn={deleteFn} />
         </div>
-        <StoryDetailReplyComments replyList={props.children} />
+        <DiaryDetailReplyComments replyList={props.children} />
       </li>
     </>
   );

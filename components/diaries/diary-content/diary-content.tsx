@@ -23,7 +23,7 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
         <div key={diary.diaryId} className={styles.diaryContent}>
           <div className={styles.leftContainer}>
             <Profile author={diary.author} authorImage={diary.authorImage} petImages={diary.petImages} />
-            <Content content={diary.content} />
+            <Content content={diary.content} id={diary.diaryId} />
             <Response
               commentCount={diary.commentCount}
               favoriteCount={diary.favoriteCount}
