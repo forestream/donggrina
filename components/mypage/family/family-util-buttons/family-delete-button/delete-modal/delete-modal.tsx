@@ -21,7 +21,7 @@ export default function DeleteModal({ Modal, handleModal }: DeleteModalType) {
       await myFamilyApi.myFamilyDelete();
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
-      router.push('/login');
+      router.push('/');
     } catch {
       console.log('에러');
     }

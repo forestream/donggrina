@@ -1,26 +1,20 @@
-.outer {
-  padding: 54px 12px 100px;
-  height: 100vh;
-  overflow: scroll;
-  scrollbar-width: none;
-}
-
 .inner {
-  padding: 30px 24px;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+}
+
+.dateContainer {
+  height: 140px;
+  position: relative;
+  top: -54px;
+  left: -12px;
 }
 
 .pets {
   display: flex;
-  gap: 16px;
-  width: 100%;
-}
-
-.filters {
-  display: flex;
   gap: 6px;
+  width: 100%;
 }
 
 .members {

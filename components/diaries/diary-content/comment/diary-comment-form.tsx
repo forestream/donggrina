@@ -32,7 +32,6 @@ export default function DiaryCommentForm({ placeholder, mutateFn, parentCommentI
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (formData) => {
-    console.log(formData);
     mutateFn(
       { content: formData.comment, parentCommentId },
       {

@@ -3,19 +3,23 @@ export interface StoryDetails {
 }
 
 export interface StoryDetailsData {
-  authorProfile: string;
+  author: string;
   authorGroup: string;
-  images: string[];
-  content: string;
-  createdDate: Date;
-  favoriteState: boolean;
-  favoriteCount: number;
+  authorImage: string;
   comments: StoryComment[];
+  content: string;
+  date: string;
+  favoriteCount: number;
+  favoriteState: boolean;
+  images: string[];
+  petImages: string[];
+  weather: '맑음';
+  isMyStory: boolean;
 }
 
 export interface StoryComment {
   commentId: number;
   commentsAuthorProfile: string;
   commentAuthor: string;
-  content: string;
+  comment: string;
 }

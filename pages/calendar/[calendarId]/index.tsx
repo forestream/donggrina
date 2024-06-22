@@ -12,6 +12,7 @@ import useTodoQuery from '@/hooks/queries/calendar/use-todo-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
+import { CALENDAR_CATEGORIES } from '@/utils/constants/calendar-constants';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -23,7 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function CalendarById({ calendarId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const queryClient = useQueryClient();
-  const { data: todo } = useTodoQuery(calendarId);
+  const { data: todo, isPending, isError, error } = useTodoQuery(calendarId);
   const finishedMutation = useTodoFinishedMutation(todo);
   const deleteMutation = useTodoDeleteMutation(todo);
 
@@ -48,12 +49,20 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
     });
   };
 
+  if (isPending) return <p>loading</p>;
+  if (isError) return <p>Error: {error.message}</p>;
+
   return (
     <main className={styles.outer}>
       <div className={styles.inner}>
         <div className={styles.headerContainer}>
           <div>
-            <div className={styles.tempImg}></div>
+            <div
+              className={styles.categoryImage}
+              style={{ backgroundColor: CALENDAR_CATEGORIES[todo.category].backgroundColor }}
+            >
+              <Image src={CALENDAR_CATEGORIES[todo.category].image} alt={todo.category} fill />
+            </div>
           </div>
           <div className={styles.headerText}>
             <p className={styles.category}>{todo.category}</p>
@@ -64,7 +73,7 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
               </span>
               <span className={styles.dot}></span>
               <span>
-                {ampm} {hour.toString().padStart(2, '0')}:{minute.toString().padStart(2, '0')}
+                {ampm} {hour && hour.toString().padStart(2, '0')}:{minute && minute.toString().padStart(2, '0')}
               </span>
             </p>
             <div className={styles.profiles}>

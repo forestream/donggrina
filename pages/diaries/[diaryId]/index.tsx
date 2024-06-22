@@ -13,6 +13,7 @@ import DiaryCommentForm from '@/components/diaries/diary-content/comment/diary-c
 import useDiaryMutation from '@/hooks/queries/diary/use-diary-mutation';
 import { useRouter } from 'next/router';
 import disintegrateDateTime from '@/utils/disintegrate-date-time';
+import DiaryImages from '@/components/diaries/diary-images';
 
 export async function getServerSideProps(context: GetServerSidePropsContext & { params: { diaryId: string } }) {
   const { diaryId } = context.params;
@@ -61,15 +62,20 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
             </div>
           )}
         </section>
+
         <section className={styles.profiles}>
           <Profile
             author={diaryQuery.data.author}
             authorImage={diaryQuery.data.authorImage}
             petImages={diaryQuery.data.petImages}
           />
-          <Image src={weatherIcon!.selectedIcon} alt={weatherIcon!.label} width={24} height={24} />
+          {weatherIcon && <Image src={weatherIcon.selectedIcon} alt={weatherIcon.label} width={24} height={24} />}
         </section>
+
+        {!!diaryQuery.data.contentImages.length && <DiaryImages images={diaryQuery.data.contentImages} />}
+
         <section className={styles.content}>{diaryQuery.data.content}</section>
+
         <Response
           commentCount={diaryQuery.data.comments.length}
           favoriteCount={diaryQuery.data.favoriteCount}

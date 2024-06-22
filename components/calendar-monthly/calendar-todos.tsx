@@ -1,7 +1,9 @@
-import { DailyTodo, TodoByQueries } from '@/api/calendar/request.type';
+import { DailyTodo } from '@/api/calendar/request.type';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import CalendarTodo from './calendar-todo';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
+import CalendarListSkeleton from '../skeleton/calendar/calendar-list-skeleton';
+import { TodoByQueries } from '@/api/search/index.type';
 
 interface CalendarTodosProps {
   dailyTodos: TodoByQueries[] | DailyTodo[];
@@ -12,10 +14,9 @@ export default function CalendarTodos({ dailyTodos }: CalendarTodosProps) {
   const { year, month, date } = calendarContext;
   const yearMonthDate = [year, (month + 1).toString().padStart(2, '0'), date.toString().padStart(2, '0')].join('-');
 
-  const { error, isPending, isError, isFetchedAfterMount } = useDailyTodosQuery(yearMonthDate);
+  const { error, isError, isLoading } = useDailyTodosQuery(yearMonthDate);
 
-  if (!isFetchedAfterMount) return;
-  if (isPending) return <span>loading</span>;
+  if (isLoading) return <CalendarListSkeleton />;
   if (isError) return <span>Error: {error.message}</span>;
 
   return (

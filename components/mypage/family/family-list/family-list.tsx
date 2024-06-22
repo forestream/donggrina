@@ -2,6 +2,7 @@ import FamilyListItem from '../family-list-item/family-list-item';
 import { Member, MyPageDetails } from '@/types/my-page/family';
 
 export default function FamilyList({ data }: MyPageDetails) {
+  if (!data) return null;
   const owner = data.members[0].id;
   return (
     <ul>

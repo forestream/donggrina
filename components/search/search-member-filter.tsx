@@ -1,8 +1,7 @@
 import { Member } from '@/api/search/index.type';
-import CalendarTodoProfile from '../calendar-monthly/calendar-todo-profile';
 import styles from './search-member-filter.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
-import classNames from 'classnames';
+import Image from 'next/image';
 
 interface SearchMemberFilterProps {
   member: Member;
@@ -14,13 +13,18 @@ export default function SearchMemberFilter({ member, register, selected }: Searc
   const isSelected = selected.includes(member.nickname);
 
   return (
-    <label
-      className={classNames(styles.member, {
-        [styles.selected]: isSelected,
-      })}
-    >
-      <input type="checkbox" value={member.nickname} className={styles.checkbox} {...register('members')} />
-      <CalendarTodoProfile name={member.nickname} src={member.profileImageUrl} />
+    <label className={styles.label}>
+      <div className={styles.imageContainer}>
+        <input
+          {...register('members', { validate: (selected: string) => !!selected || '*멤버를 선택해주세요.' })}
+          value={member.nickname}
+          className={styles.input}
+          type="checkbox"
+          checked={isSelected}
+        />
+        <Image src="/images/search/check.svg" alt="체크 표시" width={8} height={6} className={styles.check} />
+      </div>
+      <p className={styles.name}>{member.nickname}</p>
     </label>
   );
 }

@@ -8,6 +8,8 @@ import { useDeleteGrowthMutation } from '@/hooks/queries/growth/use-post-growth-
 import { useRouter } from 'next/router';
 import CompleteModal from '@/pages/growth/create/complete-modal';
 import useModal from '@/hooks/use-modal';
+import { GROWTH_CATEGORY_IMAGES } from '@/utils/constants/growth';
+import Image from 'next/image';
 
 interface ListHeaderProps {
   category: string;
@@ -17,6 +19,7 @@ interface ListHeaderProps {
   isMine: boolean;
   petName: string;
   id: number;
+  optionRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function ListHeader({
@@ -27,13 +30,26 @@ export default function ListHeader({
   category,
   writerImage,
   petImage,
+  optionRef,
 }: ListHeaderProps) {
   const router = useRouter();
   const [Modal, handleModal] = useModal();
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
   const deleteMutation = useDeleteGrowthMutation();
-
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case '간식':
+        return styles.snack;
+      case '이상 증상':
+        return styles.abnormalSymptom;
+      case '병원 기록':
+        return styles.hospital;
+      default:
+        return styles.food;
+    }
+  };
+  const imageUrl = GROWTH_CATEGORY_IMAGES[category];
   const openModal = () => {
     handleModal(true);
   };
@@ -53,9 +69,9 @@ export default function ListHeader({
     <>
       <div className={styles.headerContainer}>
         <div className={styles.wrapper}>
-          <CategoryIcon alt="카테고리 아이콘" />
+          <Image src={imageUrl} alt="카테고리 아이콘" width={46} height={46} />
           <div className={styles.subHeader}>
-            <div className={styles.categoryName}>{category}</div>
+            <div className={`${styles.categoryName} ${getCategoryColor(category)}`}>{category}</div>
             <div className={styles.profileContainer}>
               <Profile name={nickname} image={writerImage} />
               <Profile name={petName} className={styles.lastProfile} image={petImage} />
@@ -63,13 +79,15 @@ export default function ListHeader({
           </div>
         </div>
         {isMine ? (
-          <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-            <DropdownMenu.Kebab />
-            <DropdownMenu.Content>
-              <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
-              <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu>
+          <div ref={optionRef}>
+            <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+              <DropdownMenu.Kebab />
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu>
+          </div>
         ) : null}
       </div>
       <Modal>

@@ -1,0 +1,43 @@
+.page404 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  width: 100%;
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    .textBox {
+      text-align: center;
+      p {
+        font-size: 100px;
+        color: var(--main-color);
+        margin-bottom: 40px;
+        line-height: 76px;
+      }
+      span {
+        font-size: 30px;
+        font-weight: 700;
+        color: #686868;
+      }
+    }
+    .mainTextBox {
+      text-align: center;
+      p {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-color-gray);
+        line-height: 52px;
+        margin-top: 19px;
+      }
+    }
+    .buttonBox {
+      height: 46px;
+    }
+  }
+}

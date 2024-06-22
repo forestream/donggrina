@@ -1,0 +1,35 @@
+@import '../../skeleton-animation.module.scss';
+
+.familySkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .img {
+      width: 41px;
+      height: 41px;
+      border-radius: 50%;
+      @include skeleton-animation;
+    }
+    .name {
+      height: 28px;
+      width: 200px;
+      @include skeleton-animation;
+      border-radius: 10px;
+    }
+  }
+}
+
+.buttonSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  li {
+    height: 44px;
+    border-radius: 32px;
+    @include skeleton-animation;
+  }
+}
