@@ -11,6 +11,7 @@ export default function StoryDetailPost() {
   const router = useRouter();
   const storyId = +router.query.storyId!;
   const detailQuery = useFetchDetailStory(storyId);
+  if (detailQuery.isLoading) return <div>로딩</div>;
 
   return (
     <>

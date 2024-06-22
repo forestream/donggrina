@@ -25,8 +25,8 @@ export default function usePullReload({ queryClient, containerRef }: UsePullRelo
         const currentY = e.clientY;
         distance = currentY - startY;
         if (distance < 0) distance = 0;
-        if (distance > 100) {
-          distance = 100;
+        if (distance > 80) {
+          distance = 80;
           setTest(true);
         } // 최대 높이를 200px로 제한
         if (containerRef.current) {
@@ -36,7 +36,7 @@ export default function usePullReload({ queryClient, containerRef }: UsePullRelo
     };
 
     const handleMouseUp = () => {
-      if (distance > 100) {
+      if (distance > 80) {
         queryClient.invalidateQueries();
       }
       isDragging = false;
