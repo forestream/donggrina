@@ -1,18 +1,17 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import styles from './content.module.scss';
 
 interface ContentProps {
   content: string;
-  id: number;
 }
 
-const Content: React.FC<ContentProps> = ({ content, id }) => {
+const Content: React.FC<ContentProps> = ({ content }) => {
   return (
     <div className={styles.contentContainer}>
-      <Link href={`/diaries/${id}`}>
-        <p className={styles.content}>{content}</p>
-      </Link>
+      {/* <Link href="/"> */}
+      <p className={styles.content}>{content}</p>
+      {/* </Link> */}
     </div>
   );
 };

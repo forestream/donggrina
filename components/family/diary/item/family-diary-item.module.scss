@@ -64,8 +64,11 @@
   }
 
   .content-image {
+    position: relative;
     width: 67px;
     height: 67px;
     background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
   }
 }

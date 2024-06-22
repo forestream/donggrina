@@ -13,13 +13,8 @@ export default function SearchSection({ children, title, selectAll }: PropsWithC
 
   return (
     <div className={styles.section}>
-      <div className={styles.title}>
+      <div onClick={handleClick} className={styles.title}>
         <p>{title}</p>
-        {selectAll && (
-          <p onClick={handleClick} className={styles.selectAll}>
-            전체 선택
-          </p>
-        )}
       </div>
       {children}
     </div>

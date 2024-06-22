@@ -50,7 +50,6 @@ export default function middleware(request: NextRequest) {
   if (hasCookie && hasFamily && isNonFamilyPage) {
     return NextResponse.redirect(new URL('/family', request.nextUrl));
   }
-  console.log(isFamilyPage, !hasFamily, hasCookie);
 
   // 가족이 없을 때 접근 불가
   if (hasCookie && !hasFamily && isFamilyPage) {

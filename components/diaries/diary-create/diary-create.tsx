@@ -10,6 +10,7 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { useQueryClient } from '@tanstack/react-query';
 import PetSelect from '@/components/diaries/pet-select';
 import PetCheckbox from '@/components/diaries/pet-checkbox';
+import { useRouter } from 'next/router';
 
 interface DiaryData {
   content: string;
@@ -40,6 +41,7 @@ const DiaryCreate: React.FC = () => {
   });
 
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const year = useCalenderDateStore.use.year().toString();
   const month = (useCalenderDateStore.use.month() + 1).toString().padStart(2, '0');
@@ -72,7 +74,7 @@ const DiaryCreate: React.FC = () => {
       try {
         const response = await postDiariesImage({ images: fileArray });
         const newImageIds = [...imageIds];
-        newImageIds[index] = response.data[index];
+        newImageIds[index] = response.data[0];
         setImageIds(newImageIds);
 
         const fileReader = new FileReader();
@@ -94,6 +96,7 @@ const DiaryCreate: React.FC = () => {
       const response = await postDiaries(completeData);
       console.log('Diary posted successfully:', response);
       queryClient.invalidateQueries({ queryKey: ['diaries'] });
+      router.push('/diaries');
     } catch (error) {
       console.error('failed to post diary:', error);
     }
