@@ -1,28 +1,28 @@
-.petLabel {
+.label {
   display: flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
 }
 
-.petImageContainer {
+.imageContainer {
   position: relative;
   width: 14px;
   height: 14px;
   border: 2px solid var(--pet-border);
   border-radius: 4px;
 
-  &:has(.petInput:checked) {
+  &:has(.input:checked) {
     border: 2px solid var(--main-color);
     background-color: var(--main-color);
   }
 }
 
-.petImage {
+.image {
   border-radius: 9999px;
 }
 
-.petInput:checked ~ .check {
+.input:checked ~ .check {
   display: block;
   position: absolute;
   top: 50%;
@@ -34,12 +34,12 @@
   display: none;
 }
 
-.petInput {
+.input {
   width: 0;
   height: 0;
 }
 
-.petName {
+.value {
   font-weight: 400;
   font-size: 12px;
 }
