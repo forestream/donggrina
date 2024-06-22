@@ -1,8 +1,9 @@
-import { DailyTodo, TodoByQueries } from '@/api/calendar/request.type';
+import { DailyTodo } from '@/api/calendar/request.type';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import CalendarTodo from './calendar-todo';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 import CalendarListSkeleton from '../skeleton/calendar/calendar-list-skeleton';
+import { TodoByQueries } from '@/api/search/index.type';
 
 interface CalendarTodosProps {
   dailyTodos: TodoByQueries[] | DailyTodo[];

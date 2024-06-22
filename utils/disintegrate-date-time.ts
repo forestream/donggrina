@@ -1,7 +1,7 @@
 import { CALENDAR_DAYS_KOREAN } from './constants/calendar-constants';
 
 export default function disintegrateDateTime(dateTime: string | undefined) {
-  if (!dateTime) return {};
+  if (!dateTime) return { year: 2000, month: 1, date: 1, ampm: '오전', hour: 12, minute: 0, day: '일요일' };
 
   const year = new Date(dateTime).getFullYear();
   const month = new Date(dateTime).getMonth() + 1;
