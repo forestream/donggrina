@@ -1,0 +1,45 @@
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.imageContainer {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--pet-border);
+  border-radius: 4px;
+
+  &:has(.input:checked) {
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+  }
+}
+
+.image {
+  border-radius: 9999px;
+}
+
+.input:checked ~ .check {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.check {
+  display: none;
+}
+
+.input {
+  width: 0;
+  height: 0;
+}
+
+.value {
+  font-weight: 400;
+  font-size: 12px;
+}

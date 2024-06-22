@@ -9,7 +9,7 @@ import { convertToLocalDate } from '@/utils/convert-local-date';
 import useCalenderDateStore from '@/store/calendar.store';
 import GrowthListSkeleton from '@/components/skeleton/growth/growth-list';
 import { motion } from 'framer-motion';
-import { childrenHorizontalVariants, containerVariants } from '@/components/framer';
+import { containerVariants } from '@/components/framer';
 
 export default function GrowthPage() {
   const calenderStore = useCalenderDateStore();
@@ -20,7 +20,6 @@ export default function GrowthPage() {
   const localDate = convertToLocalDate({ year, month, day: date });
 
   const { data: growthLists, isLoading } = useGetGrotwthByDateQuery(localDate);
-
   return (
     <>
       <Calendar value={calenderStore}>
@@ -33,7 +32,32 @@ export default function GrowthPage() {
         <p className={styles.date}>
           {month}월 {date}일 {day}
         </p>
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className={styles.listContainer}>
+        {isLoading ? (
+          <div className={styles.skeletonContainer}>
+            <GrowthListSkeleton />
+            <GrowthListSkeleton />
+            <GrowthListSkeleton />
+          </div>
+        ) : (
+          <motion.div className={styles.listContainer} variants={containerVariants} initial="hidden" animate="visible">
+            {growthLists?.data.map((growth, index) => {
+              return (
+                <GrowthList
+                  key={index}
+                  nickname={growth.nickname}
+                  petImage={growth.petProfileImageUrl}
+                  writerImage={growth.writerProfileImageUrl}
+                  category={growth.category}
+                  text={growth.content}
+                  isMine={growth.isMine}
+                  petName={growth.petName}
+                  id={growth.id}
+                />
+              );
+            })}
+          </motion.div>
+        )}
+        {/* <motion.div className={styles.listContainer} variants={containerVariants} initial="hidden" animate="visible">
           {isLoading ? (
             <div className={styles.skeletonContainer}>
               <GrowthListSkeleton />
@@ -57,7 +81,7 @@ export default function GrowthPage() {
               );
             })
           )}
-        </motion.div>
+        </motion.div> */}
         <AddButton href={'/growth/create'} />
       </div>
     </>

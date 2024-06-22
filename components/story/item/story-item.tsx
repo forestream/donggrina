@@ -4,10 +4,12 @@ import StoryItemHeader from './story-item-header';
 import StoryItemSwiper from './story-item-swiper';
 import StoryItemInfo from './story-item-info';
 import { Story } from '@/types/story';
+import { motion } from 'framer-motion';
+import { childrenHorizontalVariants } from '@/components/framer';
 
 export default function StoryItem(props: Story) {
   return (
-    <li>
+    <motion.li variants={childrenHorizontalVariants}>
       <Link href={`/story/${props.diaryId}`}>
         <StoryItemHeader
           content={props.content}
@@ -27,6 +29,6 @@ export default function StoryItem(props: Story) {
           commentCount={props.commentCount}
         />
       </Link>
-    </li>
+    </motion.li>
   );
 }

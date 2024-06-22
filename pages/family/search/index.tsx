@@ -7,12 +7,10 @@ import Response from '@/components/diaries/diary-content/response';
 import Kebab from '@/components/diaries/diary-content/kebab';
 import ContentImage from '@/components/diaries/diary-content/content-image';
 import Profile from '@/components/diaries/diary-content/profile';
-import SearchSection from '@/components/search/search-section';
-import { FILTERS } from '@/utils/constants/search';
-import SearchFilter from '@/components/search/search-filter';
 import { FieldValues, useForm } from 'react-hook-form';
 import CalendarTodo from '@/components/calendar-monthly/calendar-todo';
 import GrowthList from '@/components/growth/list';
+import Radio from '@/components/common/radio/radio';
 
 export default function Search() {
   const [results, setResults] = useState<TodoByQueries[] | DiaryByQueries[] | GrowthByQueries[]>([]);
@@ -21,7 +19,7 @@ export default function Search() {
   const handleResults = (newResults: TodoByQueries[] | DiaryByQueries[] | GrowthByQueries[]) =>
     setResults(() => newResults);
 
-  const { register, watch } = useForm<FieldValues>({
+  const { watch, control } = useForm<FieldValues>({
     defaultValues: {
       filter: 'calendar',
     },
@@ -35,13 +33,17 @@ export default function Search() {
   return (
     <main className={styles.outer}>
       <SearchForm service={watch('filter')} onSubmit={handleResults}>
-        <SearchSection title="필터">
-          <div className={styles.filters}>
-            {FILTERS.map((filter) => (
-              <SearchFilter key={filter.name} filter={filter} register={register} selected={watch('filter')} />
-            ))}
-          </div>
-        </SearchSection>
+        <div className={styles.filters}>
+          <Radio
+            control={control}
+            name="filter"
+            options={[
+              { value: 'calendar', text: '일정기록', id: '일정기록' },
+              { value: 'diary', text: '다이어리', id: '다이어리' },
+              { value: 'growth', text: '성장기록', id: '성장기록' },
+            ]}
+          />
+        </div>
       </SearchForm>
 
       {resultType === 'calendar' &&

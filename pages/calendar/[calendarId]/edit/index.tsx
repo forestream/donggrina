@@ -4,7 +4,6 @@ import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
 import { fetchTodoById } from '@/api/calendar/request';
@@ -16,6 +15,7 @@ import getDateTimeBackend from '@/utils/get-date-time-backend';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPutMutation from '@/hooks/queries/calendar/use-todo-put-mutation';
 import { useRouter } from 'next/router';
+import CalendarCategory from '@/components/calendar-monthly/calendar-category';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -71,12 +71,17 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
     putMutation.mutate(
       { data: { ...data, dateTime: getDateTimeBackend(data.dateTime) }, id },
       {
-        onSuccess: () => router.push('/calendar'),
+        onSuccess: () => router.push(`/calendar/${todo.id}`),
       },
     );
   };
 
   const [Modal, handleModal] = useModal();
+
+  const handleCloseModal = () => {
+    handleModal(false);
+    trigger('dateTime');
+  };
 
   return (
     <div className={styles.outer}>
@@ -119,19 +124,7 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
 
         <div className={styles.categorySelectorOuter}>
           <div className={styles.categorySelectorInner}>
-            {TODO_CATEGORY.map((category) => (
-              <label key={category} className={styles.categoryLabel}>
-                <input
-                  {...register('category', { validate: (selected) => !!selected || '*카테고리를 선택해주세요.' })}
-                  value={category}
-                  className={styles.categoryInput}
-                  type="radio"
-                  defaultChecked={category === initCategory}
-                />
-                <div className={styles.categoryIcon}></div>
-                <p>{category}</p>
-              </label>
-            ))}
+            <CalendarCategory register={register} initCategory={initCategory} />
           </div>
           {errors.category && <p className={styles.error}>{errors.category.message}</p>}
         </div>
@@ -164,7 +157,7 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
         </button>
       </form>
       <Modal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleCloseModal} />
       </Modal>
     </div>
   );

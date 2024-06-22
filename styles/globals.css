@@ -21,18 +21,24 @@ button {
   font: inherit;
   color: inherit;
   cursor: pointer;
-  /* outline: none; */
   box-shadow: none;
+}
+
+html,
+body {
+  overflow-y: hidden;
 }
 
 #__container {
   max-width: var(--global-width);
   overflow-x: hidden;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
   border: 1px solid #ddd;
   border-top: none;
   border-bottom: none;
   position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }

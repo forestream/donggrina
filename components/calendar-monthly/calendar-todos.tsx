@@ -1,4 +1,4 @@
-import { DailyTodo, TodoByQueries } from '@/api/calendar/request.type';
+import { DailyTodo } from '@/api/calendar/request.type';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import CalendarTodo from './calendar-todo';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { childrenHorizontalVariants, containerVariants } from '../framer';
 
 interface CalendarTodosProps {
-  dailyTodos: TodoByQueries[] | DailyTodo[];
+  dailyTodos: DailyTodo[];
 }
 
 export default function CalendarTodos({ dailyTodos }: CalendarTodosProps) {

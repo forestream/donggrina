@@ -16,9 +16,9 @@ export default function FamilyGrowthList(props: FamilyGrowthListProps) {
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <Swiper className={styles['growth-list']} slidesPerView="auto" spaceBetween={10} wrapperTag="ul">
         {props.growthList.map((growth) => (
-          <SwiperSlide style={{ width: '74px' }} tag="li" key={growth.id}>
-            <motion.div className={styles['growth-list__item']} variants={childrenHorizontalVariants}>
-              <FamilyGrowthItem />
+          <SwiperSlide className={styles['growth-list__item']} tag="li" key={growth.id}>
+            <motion.div className={styles.motionBox} variants={childrenHorizontalVariants}>
+              <FamilyGrowthItem {...growth} />
             </motion.div>
           </SwiperSlide>
         ))}

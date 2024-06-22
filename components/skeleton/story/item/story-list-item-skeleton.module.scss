@@ -1,0 +1,51 @@
+@import '../../skeleton-animation.module.scss';
+
+.profileBox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #bdbdbd;
+  div {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    @include skeleton-animation;
+  }
+  p {
+    height: 16px;
+    width: 40px;
+    border-radius: 10px;
+    @include skeleton-animation;
+  }
+}
+.imgBox {
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+  @include skeleton-animation;
+  margin: 12px 0;
+  margin-bottom: 32px;
+}
+.textBox {
+  span {
+    display: block;
+    width: 120px;
+    height: 14px;
+    border-radius: 10px;
+    @include skeleton-animation;
+  }
+  p {
+    width: 100%;
+    height: 16px;
+    border-radius: 10px;
+    @include skeleton-animation;
+    margin: 8px 0 12px 0;
+  }
+}
+.commentBox {
+  width: 100px;
+  height: 20px;
+  border-radius: 10px;
+  @include skeleton-animation;
+}

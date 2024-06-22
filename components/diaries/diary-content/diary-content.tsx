@@ -7,6 +7,7 @@ import ContentImage from '../diary-content/content-image';
 import { useDiaries } from '@/hooks/queries/diary/use-diary-query';
 import { motion } from 'framer-motion';
 import { childrenHorizontalVariants, containerVariants } from '@/components/framer';
+import { useRouter } from 'next/router';
 
 interface DiaryContentProps {
   date: string;
@@ -15,29 +16,40 @@ interface DiaryContentProps {
 const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
   const { data, isError, isLoading } = useDiaries(date);
 
+  const router = useRouter();
+
   if (isLoading) return <p>Loading...</p>;
   if (!data || data.length === 0) return <></>;
   if (isError) return <p>error</p>;
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
-      {data?.map((diary) => (
-        <motion.div variants={childrenHorizontalVariants} key={diary.diaryId} className={styles.diaryContent}>
-          <div className={styles.leftContainer}>
-            <Profile author={diary.author} authorImage={diary.authorImage} petImages={diary.petImages} />
-            <Content content={diary.content} />
-            <Response
-              commentCount={diary.commentCount}
-              favoriteCount={diary.favoriteCount}
-              favoriteState={diary.favoriteState}
-            />
-          </div>
-          <div className={styles.rightContainer}>
-            {diary.isMyDiary && <Kebab diaryId={diary.diaryId} />}
-            <ContentImage contentImage={diary.contentImage} />
-          </div>
-        </motion.div>
-      ))}
+      {data?.map((diary) => {
+        const handleClick = () => router.push(`/diaries/${diary.diaryId}`);
+
+        return (
+          <motion.div
+            variants={childrenHorizontalVariants}
+            key={diary.diaryId}
+            className={styles.diaryContent}
+            onClick={handleClick}
+          >
+            <div className={styles.leftContainer}>
+              <Profile author={diary.author} authorImage={diary.authorImage} petImages={diary.petImages} />
+              <Content content={diary.content} />
+              <Response
+                commentCount={diary.commentCount}
+                favoriteCount={diary.favoriteCount}
+                favoriteState={diary.favoriteState}
+              />
+            </div>
+            <div className={styles.rightContainer}>
+              {diary.isMyDiary && <Kebab diaryId={diary.diaryId} />}
+              <ContentImage contentImage={diary.contentImage} />
+            </div>
+          </motion.div>
+        );
+      })}
     </motion.div>
   );
 };

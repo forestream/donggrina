@@ -1,3 +1,5 @@
+@import '../../skeleton-animation.module.scss';
+
 .familySkeleton {
   display: flex;
   flex-direction: column;
@@ -10,12 +12,12 @@
       width: 41px;
       height: 41px;
       border-radius: 50%;
-      background-color: var(--skeleton-color);
+      @include skeleton-animation;
     }
     .name {
       height: 28px;
       width: 200px;
-      background-color: var(--skeleton-color);
+      @include skeleton-animation;
       border-radius: 10px;
     }
   }
@@ -28,6 +30,6 @@
   li {
     height: 44px;
     border-radius: 32px;
-    background-color: var(--skeleton-color);
+    @include skeleton-animation;
   }
 }

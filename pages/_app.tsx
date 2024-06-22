@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
-import { Header } from '@/components/common/Header';
 import { isHeader } from '@/utils/is-header';
 import { isNav } from '@/utils/is-nav';
 import { useRouter } from 'next/router';
@@ -9,6 +8,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, useRef } from 'react';
 import usePullReload from '@/hooks/use-pull-to-refresh';
 import Spinner from '@/components/spinner/spinner';
+import MainHeader from '@/components/common/Header/main-header';
+import CreateHeader from '@/components/common/Header/create-header';
+import Header from '@/components/common/Header';
 
 declare global {
   interface Window {
@@ -28,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <div id="__wrap">
           <main id="__container" ref={containerRef}>
-            {!isHeader(router) && <Header />}
+            <Header router={router} />
             {isDragging && <Spinner />}
             <Component {...pageProps} />
             {isNav(router) && <Nav />}
