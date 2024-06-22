@@ -8,6 +8,8 @@ import { useGetGrotwthByDateQuery } from '@/hooks/queries/growth/use-get-growth-
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import useCalenderDateStore from '@/store/calendar.store';
 import GrowthListSkeleton from '@/components/skeleton/growth/growth-list';
+import { motion } from 'framer-motion';
+import { childrenHorizontalVariants, containerVariants } from '@/components/framer';
 
 export default function GrowthPage() {
   const calenderStore = useCalenderDateStore();
@@ -31,7 +33,7 @@ export default function GrowthPage() {
         <p className={styles.date}>
           {month}월 {date}일 {day}
         </p>
-        <div className={styles.listContainer}>
+        <motion.div variants={containerVariants} initial="hidden" animate="visible" className={styles.listContainer}>
           {isLoading ? (
             <div className={styles.skeletonContainer}>
               <GrowthListSkeleton />
@@ -55,7 +57,7 @@ export default function GrowthPage() {
               );
             })
           )}
-        </div>
+        </motion.div>
         <AddButton href={'/growth/create'} />
       </div>
     </>

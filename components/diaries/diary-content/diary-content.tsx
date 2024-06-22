@@ -5,6 +5,8 @@ import Response from '../diary-content/response';
 import Kebab from '../diary-content/kebab';
 import ContentImage from '../diary-content/content-image';
 import { useDiaries } from '@/hooks/queries/diary/use-diary-query';
+import { motion } from 'framer-motion';
+import { childrenHorizontalVariants, containerVariants } from '@/components/framer';
 
 interface DiaryContentProps {
   date: string;
@@ -18,9 +20,9 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
   if (isError) return <p>error</p>;
 
   return (
-    <div>
+    <motion.div variants={containerVariants} initial="hidden" animate="visible">
       {data?.map((diary) => (
-        <div key={diary.diaryId} className={styles.diaryContent}>
+        <motion.div variants={childrenHorizontalVariants} key={diary.diaryId} className={styles.diaryContent}>
           <div className={styles.leftContainer}>
             <Profile author={diary.author} authorImage={diary.authorImage} petImages={diary.petImages} />
             <Content content={diary.content} />
@@ -34,9 +36,9 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
             {diary.isMyDiary && <Kebab diaryId={diary.diaryId} />}
             <ContentImage contentImage={diary.contentImage} />
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
