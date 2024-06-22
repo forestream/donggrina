@@ -1,4 +1,10 @@
-export const CALENDAR_CATEGORIES = {
+export const CALENDAR_CATEGORIES: {
+  [key: string]: {
+    value: string;
+    image: string;
+    backgroundColor: string;
+  };
+} = {
   기념: {
     value: 'anniversary',
     image: '/images/calendar/category-anniversary.svg',
