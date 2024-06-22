@@ -1,3 +1,46 @@
+export const CALENDAR_CATEGORIES = {
+  기념: {
+    value: 'anniversary',
+    image: '/images/calendar/category-anniversary.svg',
+    backgroundColor: '#F4A4B1',
+  },
+  '사료 구입': {
+    value: 'feed',
+    image: '/images/calendar/category-feed.svg',
+    backgroundColor: '#8FCC93',
+  },
+  미용: {
+    value: 'grooming',
+    image: '/images/calendar/category-grooming.svg',
+    backgroundColor: '#61A0FF',
+  },
+  투약: {
+    value: 'medicine',
+    image: '/images/calendar/category-medicine.svg',
+    backgroundColor: '#A4BDFF',
+  },
+  기타: {
+    value: 'other',
+    image: '/images/calendar/category-other.svg',
+    backgroundColor: '#9EBF58',
+  },
+  목욕: {
+    value: 'shower',
+    image: '/images/calendar/category-shower.svg',
+    backgroundColor: '#80D1FF',
+  },
+  병원: {
+    value: 'vet',
+    image: '/images/calendar/category-vet.svg',
+    backgroundColor: '#9498FF',
+  },
+  산책: {
+    value: 'walk',
+    image: '/images/calendar/category-walk.svg',
+    backgroundColor: '#FFBF5F',
+  },
+};
+
 export const CALENDAR_DAYS = ['월', '화', '수', '목', '금', '토', '일'];
 
 export const CALENDAR_EMPTY_DATES = [6, 0, 1, 2, 3, 4, 5];
