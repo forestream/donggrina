@@ -1,44 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import StoryItemHeader from '@/components/story/item/story-item-header';
-import { useRouter } from 'next/router';
 import { useFetchDetailStory } from '@/hooks/queries/story';
+import useReplyOwner from '@/hooks/detail/use-reply-owner';
 import StoryItemInfo from '@/components/story/item/story-item-info';
 import StoryItemSwiper from '@/components/story/item/story-item-swiper';
 import StoryDetailComments from '@/components/story/detail/comments/story-detail-comments';
 import StoryDetailAddComment from '@/components/story/detail/add-comment/story-detail-add-comment';
+import useRouterId from '@/hooks/utils/use-router-id';
 
 export default function StoryDetailPost() {
-  const router = useRouter();
-  const storyId = +router.query.storyId!;
+  const storyId = +useRouterId('storyId');
   const detailQuery = useFetchDetailStory(storyId);
+  const { replyOwner, handleReplyClick, handleReplyReset } = useReplyOwner();
 
-  const [replyOwner, setReplyOwner] = useState<{ author: string; replyId: number } | null>(null);
-
-  const handleReplyClick = (data: { author: string; replyId: number }) => setReplyOwner(data);
-  const handleReplyReset = () => setReplyOwner(null);
+  const isImage = detailQuery.data!.images.length !== 0;
 
   return (
     <>
-      <StoryItemHeader
-        content={detailQuery.data!.content}
-        author={detailQuery.data!.author}
-        authorImage={detailQuery.data!.authorImage}
-        weather={detailQuery.data!.weather}
-        petImages={detailQuery.data!.petImages}
-        images={detailQuery.data!.images}
-      />
-      {detailQuery.data!.images.length !== 0 && <StoryItemSwiper images={detailQuery.data!.images} />}
-      <StoryItemInfo
-        storyId={storyId}
-        favoriteState={detailQuery.data!.favoriteState}
-        authorGroup={detailQuery.data!.authorGroup}
-        date={detailQuery.data!.date}
-        content={detailQuery.data!.content}
-        favoriteCount={detailQuery.data!.favoriteCount}
-        commentCount={detailQuery.data!.comments.length}
-      />
+      <StoryItemHeader {...detailQuery.data!} />
+      {isImage && <StoryItemSwiper images={detailQuery.data!.images} />}
+      <StoryItemInfo {...detailQuery.data!} commentCount={detailQuery.data!.comments.length} storyId={storyId} />
       <StoryDetailComments comments={detailQuery.data!.comments} onReplyClick={handleReplyClick} />
-      <StoryDetailAddComment storyId={storyId} replyOwner={replyOwner} onReplyReset={handleReplyReset} />
+      <StoryDetailAddComment replyOwner={replyOwner} onReplyReset={handleReplyReset} />
     </>
   );
 }

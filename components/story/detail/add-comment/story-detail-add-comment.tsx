@@ -1,61 +1,41 @@
-import React, { ChangeEventHandler, FormEvent, FormEventHandler, KeyboardEventHandler, useRef, useState } from 'react';
+import { FormEvent, FormEventHandler, KeyboardEventHandler } from 'react';
 import { useCreateComment } from '@/hooks/queries/story/mutation';
+import useRouterId from '@/hooks/utils/use-router-id';
+import useTextarea from '@/hooks/utils/use-textarea';
 import styles from './story-detail-add-comment.module.scss';
 
 interface StoryDetailAddCommentProps {
-  storyId: number;
   replyOwner: { author: string; replyId: number } | null;
   onReplyReset: () => void;
 }
 
 export default function StoryDetailAddComment(props: StoryDetailAddCommentProps) {
-  const [commentValue, setCommentValue] = useState('');
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const handleResizeHeight = () => {
-    if (!textareaRef.current) return;
-    textareaRef.current.style.height = 'auto';
-    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
-  };
-
-  const handleCommentChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => setCommentValue(event.target.value);
-
-  const isDisbaled = commentValue.trim().length === 0;
-
+  const storyId = +useRouterId('storyId');
+  const { ref, value, isDisbaled, handleValueChange, handleResizeHeight, handleResetValue } = useTextarea();
   const commentMutation = useCreateComment();
-
-  const handleResetComment = () => setCommentValue('');
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    let data: { content: string; parentCommentId: number | null };
+    if (isDisbaled) return;
 
-    if (commentValue.trim().length === 0) return;
+    const data = props.replyOwner
+      ? { content: value, parentCommentId: props.replyOwner.replyId }
+      : { content: value, parentCommentId: null };
 
-    if (props.replyOwner) {
-      data = { content: commentValue, parentCommentId: props.replyOwner.replyId };
-    } else {
-      data = { content: commentValue, parentCommentId: null };
-    }
-
-    console.log(data)
-
-    commentMutation.mutate({ diaryId: props.storyId, data });
-    handleResetComment();
+    commentMutation.mutate({ diaryId: storyId, data });
+    handleResetValue();
     handleResizeHeight();
     props.onReplyReset();
   };
 
-  const handleCommentKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
     if (event.nativeEvent.isComposing) return;
-
-    if (event.key === 'Enter' && event.shiftKey) {
-      return;
-    } else if (event.key === 'Enter') {
+    if (event.key === 'Enter' && event.shiftKey) return;
+    if (event.key === 'Enter') {
       event.preventDefault();
       handleSubmit(event as unknown as FormEvent<HTMLFormElement>);
-      handleResetComment();
+      handleResetValue();
     }
   };
 
@@ -70,12 +50,12 @@ export default function StoryDetailAddComment(props: StoryDetailAddCommentProps)
         <textarea
           className={textareaClassName}
           placeholder="댓글을 입력하세요"
-          ref={textareaRef}
-          onInput={handleResizeHeight}
+          ref={ref}
           rows={1}
-          onChange={handleCommentChange}
-          value={commentValue}
-          onKeyDown={handleCommentKeyDown}
+          value={value}
+          onInput={handleResizeHeight}
+          onChange={handleValueChange}
+          onKeyDown={handleKeyDown}
         ></textarea>
         <button className={styles.submit} type="submit">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

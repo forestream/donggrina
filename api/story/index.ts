@@ -1,7 +1,6 @@
 import { axiosInstance } from '../index';
 import { StoryData } from '../../types/story/index';
 import { CreateCommentData, StoryDetailsData, UpdateCommentData } from '@/types/story/details';
-import { get } from 'http';
 
 export class StoryAPI {
   async fetchStory(page = 0, size = 10) {

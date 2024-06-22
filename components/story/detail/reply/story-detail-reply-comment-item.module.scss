@@ -37,25 +37,3 @@
   right: 0;
   top: 20px;
 }
-
-.textarea {
-  width: 100%;
-  resize: none;
-  border-radius: 5px;
-  padding: 10px;
-  outline: none;
-  border: 1px solid var(--main-color);
-}
-
-.reply-form {
-  position: relative;
-
-  &__button {
-    font-size: 12px;
-    text-decoration: underline;
-    color: var(--main-color);
-    width: 100%;
-    text-align: end;
-    margin-top: 5px;
-  }
-}

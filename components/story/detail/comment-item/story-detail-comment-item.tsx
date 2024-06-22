@@ -1,30 +1,30 @@
 import React from 'react';
-import DropdownMenu from '@/components/kebab/kebab';
 import { AvatarImage, AvatarName } from '@/components/avatar/avatar';
 import StoryDetailReplyComments from '@/components/story/detail/reply/story-detail-reply-comments';
 import useToggle from '@/hooks/use-toggle';
 import { useDeleteComment } from '@/hooks/queries/story/mutation';
 import { StoryComment } from '@/types/story/details';
 import styles from './story-detail-comment-item.module.scss';
+import Kebab from '@/components/kebab';
+import StoryDetailReplyUpdateForm from '../reply/story-detail-reply-update-form';
+import useTextarea from '@/hooks/utils/use-textarea';
 
 interface StoryDetailCommentItemProps extends StoryComment {
   onReplyClick: (data: { author: string; replyId: number }) => void;
 }
 
 export default function StoryDetailCommentItem(props: StoryDetailCommentItemProps) {
-  const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
+  const {
+    isToggle: isOpenTextarea,
+    handleCloseToggle: handleCloseTextarea,
+    handleOpenToggle: handleOpenTextarea,
+  } = useToggle();
 
   const deleteMutation = useDeleteComment();
+  const { value: updateReplyValue, handleValueChange: handleUpdateReplyValue } = useTextarea(props.comment);
 
-  const updateFn = () => {
-    console.log('Update');
-    onCloseToggle();
-  };
-
-  const deleteFn = () => {
-    deleteMutation.mutate(props.commentId);
-    onCloseToggle();
-  };
+  const updateFn = async () => handleOpenTextarea();
+  const deleteFn = () => deleteMutation.mutate(props.commentId);
 
   return (
     <>
@@ -37,7 +37,16 @@ export default function StoryDetailCommentItem(props: StoryDetailCommentItemProp
           </div>
         </div>
         <div className={styles['comment-item__contents']}>
-          <p>{props.comment}</p>
+          {isOpenTextarea ? (
+            <StoryDetailReplyUpdateForm
+              commentId={props.commentId}
+              updateReplyValue={updateReplyValue}
+              onCloseTextarea={handleCloseTextarea}
+              onUpdateReplyValue={handleUpdateReplyValue}
+            />
+          ) : (
+            <p>{props.comment}</p>
+          )}
         </div>
         <button
           className={styles['comment-item__reply']}
@@ -46,13 +55,7 @@ export default function StoryDetailCommentItem(props: StoryDetailCommentItemProp
           댓글
         </button>
         <div className={styles['comment-item__kebab']}>
-          <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-            <DropdownMenu.Kebab color="gray" />
-            <DropdownMenu.Content>
-              <DropdownMenu.Item onClick={updateFn}>수정</DropdownMenu.Item>
-              <DropdownMenu.Item onClick={deleteFn}>삭제</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu>
+          <Kebab updateFn={updateFn} deleteFn={deleteFn} />
         </div>
         <StoryDetailReplyComments replyList={props.children} />
       </li>
