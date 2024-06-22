@@ -16,6 +16,11 @@ interface DiaryPostType {
 
 interface UpdateDiaryData {
   content: string;
+  weather: string;
+  isShare: boolean;
+  date: string;
+  pets: number[];
+  images: (number | File)[];
 }
 
 export interface Child {
@@ -38,7 +43,7 @@ export interface Comment {
   children: Child[];
 }
 
-interface Diary {
+export interface Diary {
   authorImage: string;
   author: string;
   petImages: string[];
@@ -90,8 +95,7 @@ export async function fetchDiaries(date: string): Promise<DiaryData[]> {
 
 export async function fetchDiaryById(diaryId: string): Promise<Diary> {
   try {
-    const response = await axiosInstance.get(`/diaries/${diaryId}`);
-    return response.data.data;
+    return (await axiosInstance.get<{ data: Diary }>(`/diaries/${diaryId}`)).data.data;
   } catch (error) {
     console.error(error);
     throw error;
@@ -109,13 +113,49 @@ export const deleteDiary = async (diaryId: number) => {
 };
 
 export const updateDiary = async (diaryId: number, updateData: UpdateDiaryData) => {
-  try {
-    const response = await axiosInstance.put(`/diaries/${diaryId}`, updateData);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to update diary', error);
-    throw error;
-  }
+  console.log(updateData);
+
+  // const data = {
+  //   pets:
+  //   pedtsId: []
+  //   images: []
+  //   content:
+  //   isShare:
+  //   weather:
+  //   date: updateData.data
+  // };
+
+  // const response = await axiosFileInstance.put(`/diaries/${diaryId}`, formData);
+
+  // const formData = new FormData();
+  // formData.append('content', updateData.content);
+  // formData.append('weather', updateData.weather);
+  // formData.append('isShare', updateData.isShare);
+  // formData.append('date', updateData.date);
+
+  // updateData.pets
+  //   .filter((pet) => pet !== undefined)
+  //   .forEach((pet, index) => {
+  //     formData.append(`pets[${index}]`, pet.toString());
+  //   });
+
+  // updateData.images
+  //   .filter((image) => image !== undefined)
+  //   .forEach((image, index) => {
+  //     if (image instanceof File) {
+  //       formData.append('images', image);
+  //     } else {
+  //       formData.append(`images[${index}]`, image.toString());
+  //     }
+  //   });
+
+  // try {
+
+  //   return response.data;
+  // } catch (error) {
+  //   console.error('Failed to update diary: ', error);
+  //   throw error;
+  // }
 };
 
 export const postComment = async (diaryId: string, content: string, parentCommentId: number | null = null) => {

@@ -21,6 +21,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext & { 
 }
 
 export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log(diaryId);
   const router = useRouter();
 
   const diaryQuery = useDiaryQuery(diaryId);
