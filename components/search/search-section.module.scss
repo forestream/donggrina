@@ -1,12 +1,15 @@
 .section {
   display: flex;
   gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--pet-border);
 }
 
 .title {
   flex-shrink: 0;
   width: 50px;
   font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
 }
 
