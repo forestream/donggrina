@@ -69,10 +69,10 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
             authorImage={diaryQuery.data.authorImage}
             petImages={diaryQuery.data.petImages}
           />
-          <Image src={weatherIcon!.selectedIcon} alt={weatherIcon!.label} width={24} height={24} />
+          {weatherIcon && <Image src={weatherIcon.selectedIcon} alt={weatherIcon.label} width={24} height={24} />}
         </section>
 
-        <DiaryImages images={diaryQuery.data.contentImages} />
+        {!!diaryQuery.data.contentImages.length && <DiaryImages images={diaryQuery.data.contentImages} />}
 
         <section className={styles.content}>{diaryQuery.data.content}</section>
 

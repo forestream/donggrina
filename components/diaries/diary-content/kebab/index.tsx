@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import styles from './kebab.module.scss';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
@@ -22,8 +22,10 @@ const Kebab: React.FC<KebabProps> = ({ diaryId }) => {
     }
   };
 
+  const handleClick: MouseEventHandler = (e) => e.stopPropagation();
+
   return (
-    <div className={styles.kebab}>
+    <div className={styles.kebab} onClick={handleClick}>
       <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
         <DropdownMenu.Kebab />
         <DropdownMenu.Content>
