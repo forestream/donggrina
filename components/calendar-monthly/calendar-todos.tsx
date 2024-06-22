@@ -3,6 +3,8 @@ import { useCalendarContext } from '../calendar-compound/calendar';
 import CalendarTodo from './calendar-todo';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 import CalendarListSkeleton from '../skeleton/calendar/calendar-list-skeleton';
+import { motion } from 'framer-motion';
+import { childrenVariants, containerVariants } from '../framer';
 
 interface CalendarTodosProps {
   dailyTodos: TodoByQueries[] | DailyTodo[];
@@ -20,9 +22,18 @@ export default function CalendarTodos({ dailyTodos }: CalendarTodosProps) {
 
   return (
     <>
-      {dailyTodos.map((todo) => (
-        <CalendarTodo key={todo.id} todo={todo} />
-      ))}
+      <motion.div
+        style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {dailyTodos.map((todo) => (
+          <motion.div key={todo.id} variants={childrenVariants}>
+            <CalendarTodo todo={todo} />
+          </motion.div>
+        ))}
+      </motion.div>
     </>
   );
 }
