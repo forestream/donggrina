@@ -76,8 +76,7 @@ export default function CreateGrowth() {
 
   const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
     createGrowthMutation.mutate(data, {
-      onSuccess: (response) => {
-        console.log('Success:', response);
+      onSuccess: () => {
         openModal();
       },
       onError: (error) => {
@@ -121,7 +120,7 @@ export default function CreateGrowth() {
                     onChange={handleCategoryChange}
                   />
                   <div className={`${styles.categoryIcon} ${styles[getCategoryClassName(category)]}`}>
-                    <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={50} height={50} />
+                    <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={56} height={56} />
                   </div>
                   <p className={styles.categoryName}>{category}</p>
                 </label>
