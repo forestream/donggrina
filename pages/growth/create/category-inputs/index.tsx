@@ -11,6 +11,7 @@ interface CategoryInputsProps {
 
 export default function CategoryInputs({ defaultValue, errors, selectedCategory, register }: CategoryInputsProps) {
   if (!defaultValue) return;
+
   const { food, snack, abnormalSymptom, hospitalName, symptom, diagnosis, medicationMethod, price } = defaultValue;
   const formatInputValue = (value: string): string => {
     return value.replace(/[^0-9]/g, '');
