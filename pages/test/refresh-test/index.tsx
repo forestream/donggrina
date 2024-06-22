@@ -1,4 +1,4 @@
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 
 export default function RefreshTest() {
   const petsApi = new MyFamilyApi();

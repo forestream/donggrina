@@ -2,7 +2,7 @@ import DropdownMenu from '@/components/kebab/kebab';
 import styles from './diary-comment-reply.module.scss';
 import useToggle from '@/hooks/use-toggle';
 import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-profile';
-import { Child } from '@/api/diaries';
+import { Child } from '@/apis/diaries';
 import useChildCommentMutation from '@/hooks/queries/diary/use-child-comment-mutation';
 import { useState } from 'react';
 import DiaryCommentEdit from './diary-comment-edit';

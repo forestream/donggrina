@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './family-schedule-list.module.scss';
-import { DailyTodo } from '@/api/calendar/request.type';
+import { DailyTodo } from '@/apis/calendar/request.type';
 import CalendarTodo from '@/components/calendar-monthly/calendar-todo';
 
 interface FamilyScheduleListProps {

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import PetsApi, { PetsAddDataType } from '@/api/my/pets';
+import PetsApi, { PetsAddDataType } from '@/apis/my/pets';
 
 const petsApi = new PetsApi();
 

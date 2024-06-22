@@ -3,7 +3,7 @@ import getSeventhDate from '@/utils/get-seventh-date';
 import { useCalendarContext } from '../calendar-compound/calendar';
 import getCalendarArray from '@/utils/get-calendar-array';
 import classNames from 'classnames';
-import { MonthlyTodos } from '@/api/calendar/request.type';
+import { MonthlyTodos } from '@/apis/calendar/request.type';
 
 interface CalendarMonthlyProps {
   monthlyTodos: MonthlyTodos[];

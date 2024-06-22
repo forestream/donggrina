@@ -1,4 +1,4 @@
-import { putComment } from '@/api/diaries';
+import { putComment } from '@/apis/diaries';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const useCommentPutMutation = (diaryId: string, commentId: number) => {

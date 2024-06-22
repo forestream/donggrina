@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchDiaries, fetchDiaryById } from '@/api/diaries';
+import { fetchDiaries, fetchDiaryById } from '@/apis/diaries';
 import { DiaryData } from '@/types/diary/';
 
 export const useDiaries = (date: string) => {

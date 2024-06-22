@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import storyApiInstance from '@/api/story';
+import storyApiInstance from '@/apis/story';
 
 export function usePostLike(status: boolean) {
   const queryClient = useQueryClient();

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import GrowthAPI from '@/api/growth';
+import GrowthAPI from '@/apis/growth';
 
 const growthAPI = new GrowthAPI();
 

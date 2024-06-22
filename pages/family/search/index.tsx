@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './search.module.scss';
 import SearchForm from '@/components/search/search-form';
-import { DiaryByQueries, GrowthByQueries, TodoByQueries } from '@/api/search/index.type';
+import { DiaryByQueries, GrowthByQueries, TodoByQueries } from '@/apis/search/index.type';
 import Content from '@/components/diaries/diary-content/content';
 import Response from '@/components/diaries/diary-content/response';
 import Kebab from '@/components/diaries/diary-content/kebab';

@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import classNames from 'classnames';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
-import { postDiariesImage, postDiaries } from '@/api/diaries/';
+import { postDiariesImage, postDiaries } from '@/apis/diaries/';
 import styles from './diary-create.module.scss';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';

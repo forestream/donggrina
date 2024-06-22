@@ -9,7 +9,7 @@ import getQueryString from '@/utils/search/get-query-string';
 import { SearchFormProps } from '@/types/search';
 import useResultsQuery from '@/hooks/queries/search/use-results-query';
 import { PropsWithChildren, useEffect, useState } from 'react';
-import { DiaryByQueries, GrowthByQueries, TodoByQueries } from '@/api/search/index.type';
+import { DiaryByQueries, GrowthByQueries, TodoByQueries } from '@/apis/search/index.type';
 import SearchCheckbox from './search-checkbox';
 
 export default function SearchForm({ service, onSubmit: handleResults, children }: PropsWithChildren<SearchFormProps>) {
