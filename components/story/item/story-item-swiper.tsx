@@ -16,8 +16,8 @@ export default function StoryItemSwiper(props: Pick<Story, 'images'>) {
       modules={[Pagination]}
       pagination={{ clickable: true }}
     >
-      {props.images.map((image) => (
-        <SwiperSlide className={styles['image-wrapper']} tag="li" key={image}>
+      {props.images.map((image, index) => (
+        <SwiperSlide className={styles['image-wrapper']} tag="li" key={image + index}>
           <Image src={image} alt="" fill objectFit="cover" objectPosition="center" />
         </SwiperSlide>
       ))}

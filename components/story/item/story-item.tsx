@@ -15,6 +15,7 @@ export default function StoryItem(props: Story) {
           authorImage={props.authorImage}
           weather={props.weather}
           petImages={props.petImages}
+          images={props.images}
         />
         {props.images.length !== 0 && <StoryItemSwiper images={props.images} />}
         <StoryItemInfo

@@ -1,4 +1,4 @@
-import StoryDetailHeader from '@/components/story/detail/story-detail-header';
+import StoryDetailHeader from '@/components/story/detail/header/story-detail-header';
 import StoryDetailPost from '@/components/story/detail/story-detail-post';
 import Suspensive from '@/components/suspensive/suspensive';
 

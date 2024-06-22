@@ -1,6 +1,7 @@
 import { axiosInstance } from '../index';
 import { StoryData } from '../../types/story/index';
-import { CreateCommentData, StoryDetailsData } from '@/types/story/details';
+import { CreateCommentData, StoryDetailsData, UpdateCommentData } from '@/types/story/details';
+import { get } from 'http';
 
 export class StoryAPI {
   async fetchStory(page = 0, size = 10) {
@@ -21,6 +22,22 @@ export class StoryAPI {
 
   async createCommentStory({ diaryId, data }: CreateCommentData) {
     return (await axiosInstance.post(`comments/${diaryId}`, data)).data;
+  }
+
+  async deleteCommentStory(commentId: number) {
+    return await axiosInstance.delete(`comments/parent/${commentId}`);
+  }
+
+  async updateCommentStory({ commentId, data }: UpdateCommentData) {
+    return await axiosInstance.put(`comments/${commentId}`, data);
+  }
+
+  async deleteReplyStroy(commentId: number) {
+    return await axiosInstance.delete(`comments/child/${commentId}`);
+  }
+
+  async deleteStory(diaryId: number) {
+    return await axiosInstance.delete(`stories/${diaryId}`);
   }
 }
 

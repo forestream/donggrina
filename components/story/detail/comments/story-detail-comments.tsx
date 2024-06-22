@@ -1,11 +1,11 @@
 import React from 'react';
 import { StoryComment } from '@/types/story/details';
-import StoryDetailCommentItem from '@/components/story/detail/story-detail-comment-item';
+import StoryDetailCommentItem from '@/components/story/detail/comment-item/story-detail-comment-item';
 import styles from './story-detail-comments.module.scss';
 
 interface StoryDetailCommentsProps {
   comments: StoryComment[];
-  onReplyClick: (id: number) => void;
+  onReplyClick: (data: { author: string; replyId: number }) => void;
 }
 
 export default function StoryDetailComments(props: StoryDetailCommentsProps) {

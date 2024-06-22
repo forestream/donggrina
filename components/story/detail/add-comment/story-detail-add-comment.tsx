@@ -1,10 +1,10 @@
-import React, { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
-import styles from './story-detail-add-comment.module.scss';
+import React, { ChangeEventHandler, FormEvent, FormEventHandler, KeyboardEventHandler, useRef, useState } from 'react';
 import { useCreateComment } from '@/hooks/queries/story/mutation';
+import styles from './story-detail-add-comment.module.scss';
 
 interface StoryDetailAddCommentProps {
   storyId: number;
-  replyId: number | null;
+  replyOwner: { author: string; replyId: number } | null;
   onReplyReset: () => void;
 }
 
@@ -31,28 +31,51 @@ export default function StoryDetailAddComment(props: StoryDetailAddCommentProps)
 
     let data: { content: string; parentCommentId: number | null };
 
-    if (props.replyId) {
-      data = { content: commentValue, parentCommentId: props.replyId };
+    if (commentValue.trim().length === 0) return;
+
+    if (props.replyOwner) {
+      data = { content: commentValue, parentCommentId: props.replyOwner.replyId };
     } else {
       data = { content: commentValue, parentCommentId: null };
     }
 
+    console.log(data)
+
     commentMutation.mutate({ diaryId: props.storyId, data });
     handleResetComment();
+    handleResizeHeight();
     props.onReplyReset();
   };
 
+  const handleCommentKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+    if (event.nativeEvent.isComposing) return;
+
+    if (event.key === 'Enter' && event.shiftKey) {
+      return;
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit(event as unknown as FormEvent<HTMLFormElement>);
+      handleResetComment();
+    }
+  };
+
+  const textareaClassName = `${isDisbaled ? '' : styles.active} ${styles.textarea}`;
+
   return (
     <div className={styles.layout}>
+      {props.replyOwner && (
+        <span className={styles.reply}>{props.replyOwner.author}님에게 댓글을 남기는 중입니다..</span>
+      )}
       <form className={styles.form} onSubmit={handleSubmit}>
         <textarea
-          className={styles.textarea}
+          className={textareaClassName}
           placeholder="댓글을 입력하세요"
           ref={textareaRef}
           onInput={handleResizeHeight}
           rows={1}
           onChange={handleCommentChange}
           value={commentValue}
+          onKeyDown={handleCommentKeyDown}
         ></textarea>
         <button className={styles.submit} type="submit">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
