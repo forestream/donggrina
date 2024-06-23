@@ -14,6 +14,7 @@ import CompleteModal from '../create/complete-modal';
 import { GrowthDetailsContent, GrowthDetailsData } from '@/types/growth/details';
 import { GROWTH_CATEGORY_IMAGES, GROWTH_MEMO_IMAGES } from '@/utils/constants/growth';
 import Content from '../../../components/growth/content';
+import { AnimatePresence } from 'framer-motion';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -32,7 +33,7 @@ export default function GrowthDetailPage({ growthId }: GrowthDetailPageProps) {
   const { data: growthDatas } = useGetGrowthDetailQuery(growthId);
   const deleteMutation = useDeleteGrowthMutation();
   const router = useRouter();
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isModalOpen] = useModal();
 
   const [category, setCategory] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
@@ -127,9 +128,13 @@ export default function GrowthDetailPage({ growthId }: GrowthDetailPageProps) {
           <section className={styles.memo}>{content.memo}</section>
         </div>
       </div>
-      <Modal>
-        <CompleteModal closeModal={closeModal} text="성장 기록이 삭제되었습니다." />
-      </Modal>
+      <AnimatePresence>
+        {isModalOpen && (
+          <Modal>
+            <CompleteModal closeModal={closeModal} text="성장 기록이 삭제되었습니다." />
+          </Modal>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

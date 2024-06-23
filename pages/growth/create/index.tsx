@@ -14,11 +14,12 @@ import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
 import CompleteModal from './complete-modal';
 import Image from 'next/image';
+import { AnimatePresence } from 'framer-motion';
 
 export default function CreateGrowth() {
   const router = useRouter();
   const { data: pets } = usePetsQuery();
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isOpen] = useModal();
   const createGrowthMutation = useCreateGrotwthMutation();
 
   const year = useCalenderDateStore.use.year().toString();
@@ -142,9 +143,13 @@ export default function CreateGrowth() {
           </button>
         </form>
       </div>
-      <Modal>
-        <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
-      </Modal>
+      <AnimatePresence>
+        {isOpen && (
+          <Modal>
+            <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
+          </Modal>
+        )}
+      </AnimatePresence>
     </>
   );
 }

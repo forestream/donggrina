@@ -1,18 +1,12 @@
 import Button from '@/components/common/button/button';
-import { PropsWithChildren, ReactNode } from 'react';
 import styles from './delete-modal.module.scss';
 import MyFamilyApi from '@/api/my/groups';
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
 import { AnimatePresence } from 'framer-motion';
+import { ModalType } from '@/hooks/use-modal';
 
-interface DeleteModalType {
-  Modal: ({ children }: PropsWithChildren) => ReactNode;
-  handleModal: (isOpen: boolean) => void;
-  isOpen: boolean;
-}
-
-export default function DeleteModal({ Modal, handleModal, isOpen }: DeleteModalType) {
+export default function DeleteModal({ Modal, handleModal, isOpen }: ModalType) {
   const myFamilyApi = new MyFamilyApi();
   const router = useRouter();
   const handleClose = () => {

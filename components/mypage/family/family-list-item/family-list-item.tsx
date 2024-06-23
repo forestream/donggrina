@@ -18,7 +18,7 @@ interface FamilyListItemType {
 
 export default function FamilyListItem({ membersValue }: FamilyListItemType) {
   const { owner, id, nickname, membersCount, profileImageUrl, index } = membersValue;
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isOpen] = useModal();
   const ownerCheck = owner === Number(localStorage.getItem('userId'));
   const deleteModalValue = {
     id: id,
@@ -49,7 +49,7 @@ export default function FamilyListItem({ membersValue }: FamilyListItemType) {
           </button>
         )}
       </li>
-      <DeleteMemberModal Modal={Modal} handleModal={handleModal} deleteModalValue={deleteModalValue} />
+      <DeleteMemberModal Modal={Modal} handleModal={handleModal} deleteModalValue={deleteModalValue} isOpen={isOpen} />
     </>
   );
 }
