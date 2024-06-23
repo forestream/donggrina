@@ -8,11 +8,18 @@ interface PetCheckboxProps {
   petId: number;
   petName: string;
   petImage: string;
-  selectedPets: number[];
+  selectedPets?: number[];
   onTogglePet: (petId: number) => void;
 }
 
-const PetCheckbox: React.FC<PetCheckboxProps> = ({ register, petId, petName, petImage, selectedPets, onTogglePet }) => {
+const PetCheckbox: React.FC<PetCheckboxProps> = ({
+  register,
+  petId,
+  petName,
+  petImage,
+  selectedPets = [],
+  onTogglePet,
+}) => {
   const isSelected = selectedPets.includes(petId);
 
   return (
