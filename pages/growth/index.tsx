@@ -57,31 +57,6 @@ export default function GrowthPage() {
             })}
           </motion.div>
         )}
-        {/* <motion.div className={styles.listContainer} variants={containerVariants} initial="hidden" animate="visible">
-          {isLoading ? (
-            <div className={styles.skeletonContainer}>
-              <GrowthListSkeleton />
-              <GrowthListSkeleton />
-              <GrowthListSkeleton />
-            </div>
-          ) : (
-            growthLists?.data.map((growth, index) => {
-              return (
-                <GrowthList
-                  key={index}
-                  nickname={growth.nickname}
-                  petImage={growth.petProfileImageUrl}
-                  writerImage={growth.writerProfileImageUrl}
-                  category={growth.category}
-                  text={growth.content}
-                  isMine={growth.isMine}
-                  petName={growth.petName}
-                  id={growth.id}
-                />
-              );
-            })
-          )}
-        </motion.div> */}
         <AddButton href={'/growth/create'} />
       </div>
     </>
