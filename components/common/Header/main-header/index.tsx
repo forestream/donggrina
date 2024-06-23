@@ -7,7 +7,7 @@ export default function MainHeader() {
   const router = useRouter();
 
   const handleClick = () => {
-    router.back();
+    router.push('/mypage');
   };
 
   const handleSearchClick = () => {
