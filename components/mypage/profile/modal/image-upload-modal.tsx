@@ -19,7 +19,8 @@ export default function ImageUploadModal(props: ModalImageProps) {
     props.handleModal(false);
   };
   const profileMutation = useUpdateProfile();
-  const handleResetImage = () => profileMutation.mutate({ imageId: null, nickname: props.nickname });
+  const handleResetImage = () =>
+    profileMutation.mutate({ imageId: null, nickname: props.nickname }, { onSuccess: () => props.handleModal(false) });
 
   return (
     <AnimatePresence>

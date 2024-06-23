@@ -9,7 +9,7 @@ import { convertToLocalDate } from '@/utils/convert-local-date';
 import useCalenderDateStore from '@/store/calendar.store';
 import GrowthListSkeleton from '@/components/skeleton/growth/growth-list';
 import { motion } from 'framer-motion';
-import { childrenHorizontalVariants, containerVariants } from '@/components/framer';
+import { horizontalVariants } from '@/components/framer';
 
 export default function GrowthPage() {
   const calenderStore = useCalenderDateStore();
@@ -39,10 +39,16 @@ export default function GrowthPage() {
             <GrowthListSkeleton />
           </div>
         ) : (
-          <motion.div className={styles.listContainer} variants={containerVariants} initial="hidden" animate="visible">
+          <div className={styles.listContainer}>
             {growthLists?.data.map((growth, index) => {
               return (
-                <motion.div variants={childrenHorizontalVariants} key={index}>
+                <motion.div
+                  variants={horizontalVariants}
+                  key={growth.id}
+                  custom={index}
+                  initial="hidden"
+                  animate="visible"
+                >
                   <GrowthList
                     key={index}
                     nickname={growth.nickname}
@@ -57,7 +63,7 @@ export default function GrowthPage() {
                 </motion.div>
               );
             })}
-          </motion.div>
+          </div>
         )}
         <AddButton href={'/growth/create'} />
       </div>

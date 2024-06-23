@@ -4,7 +4,7 @@ import CalendarTodo from './calendar-todo';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 import CalendarListSkeleton from '../skeleton/calendar/calendar-list-skeleton';
 import { motion } from 'framer-motion';
-import { childrenHorizontalVariants, containerVariants } from '../framer';
+import { horizontalVariants } from '../framer';
 
 interface CalendarTodosProps {
   dailyTodos: DailyTodo[];
@@ -22,18 +22,13 @@ export default function CalendarTodos({ dailyTodos }: CalendarTodosProps) {
 
   return (
     <>
-      <motion.div
-        style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {dailyTodos.map((todo) => (
-          <motion.div key={todo.id} variants={childrenHorizontalVariants}>
+      <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {dailyTodos.map((todo, index) => (
+          <motion.li key={todo.id} custom={index} variants={horizontalVariants} initial="hidden" animate="visible">
             <CalendarTodo todo={todo} />
-          </motion.div>
+          </motion.li>
         ))}
-      </motion.div>
+      </ul>
     </>
   );
 }
