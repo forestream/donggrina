@@ -18,7 +18,7 @@ export default function RenameModal({ Modal, handleModal, name, isOpen }: Rename
     mode: 'onBlur',
   });
   const { handleSubmit, watch } = methods;
-  const buttonClassCondition = !watch('name') ? 'disabled' : 'primary';
+  const buttonClassCondition = !watch('name') || watch('name') === name ? 'disabled' : 'primary';
   const { mutate } = useFamilyModifyQuery();
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     mutate({ data: { name: data.name } });

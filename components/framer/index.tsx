@@ -1,7 +1,7 @@
 export const horizontalVariants = {
   hidden: {
     opacity: 0,
-    x: '-80px',
+    x: '80px',
   },
   visible: (index: number) => ({
     opacity: 1,
