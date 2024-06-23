@@ -40,7 +40,7 @@ export default function NicknameModal(props: NicknameModalProps) {
             <Form.MainInput name="nickname" placeholder="변경할 닉네임을 작성해주세요." />
           </div>
           <div className={styles.button}>
-            <Button type="submit" className={buttonClassName} disabled={isDisabled}>
+            <Button type="submit" className={buttonClassName} disabled={isDisabled} leftRound rightRound>
               변경하기
             </Button>
           </div>
