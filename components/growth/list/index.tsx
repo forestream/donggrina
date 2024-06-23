@@ -3,8 +3,6 @@ import styles from './list.module.scss';
 import Link from 'next/link';
 import ListHeader from './list-header';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import { childrenHorizontalVariants } from '@/components/framer';
 
 interface GrowthListProps {
   writerImage: string;
@@ -34,7 +32,7 @@ export default function GrowthList({
     router.push(`/growth/${id}`);
   };
   return (
-    <motion.div variants={childrenHorizontalVariants} className={styles.container} onClick={handleClick}>
+    <div className={styles.container} onClick={handleClick}>
       <ListHeader
         isMine={isMine}
         nickname={nickname}
@@ -48,6 +46,6 @@ export default function GrowthList({
       <Link href={`growth/${id}`} className={styles.text}>
         {text}
       </Link>
-    </motion.div>
+    </div>
   );
 }

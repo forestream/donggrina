@@ -9,7 +9,7 @@ import { convertToLocalDate } from '@/utils/convert-local-date';
 import useCalenderDateStore from '@/store/calendar.store';
 import GrowthListSkeleton from '@/components/skeleton/growth/growth-list';
 import { motion } from 'framer-motion';
-import { containerVariants } from '@/components/framer';
+import { childrenHorizontalVariants, containerVariants } from '@/components/framer';
 
 export default function GrowthPage() {
   const calenderStore = useCalenderDateStore();
@@ -42,17 +42,19 @@ export default function GrowthPage() {
           <motion.div className={styles.listContainer} variants={containerVariants} initial="hidden" animate="visible">
             {growthLists?.data.map((growth, index) => {
               return (
-                <GrowthList
-                  key={index}
-                  nickname={growth.nickname}
-                  petImage={growth.petProfileImageUrl}
-                  writerImage={growth.writerProfileImageUrl}
-                  category={growth.category}
-                  text={growth.content}
-                  isMine={growth.isMine}
-                  petName={growth.petName}
-                  id={growth.id}
-                />
+                <motion.div variants={childrenHorizontalVariants} key={index}>
+                  <GrowthList
+                    key={index}
+                    nickname={growth.nickname}
+                    petImage={growth.petProfileImageUrl}
+                    writerImage={growth.writerProfileImageUrl}
+                    category={growth.category}
+                    text={growth.content}
+                    isMine={growth.isMine}
+                    petName={growth.petName}
+                    id={growth.id}
+                  />
+                </motion.div>
               );
             })}
           </motion.div>
