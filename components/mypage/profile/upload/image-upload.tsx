@@ -13,7 +13,7 @@ interface UploadProps {
 export default function ImageUpload(props: UploadProps) {
   const [Modal, handleModal] = useModal();
   const { imageId, uploadRef, previewUrl, handlePreview } = useUpload({ handleModal, nickname: props.nickname });
-
+  const handleCloseModal = () => handleModal(false);
   return (
     <div className={styles['image-wrapper']}>
       <button onClick={() => handleModal(true)}>
@@ -39,6 +39,7 @@ export default function ImageUpload(props: UploadProps) {
         onPreview={handlePreview}
         imageId={imageId}
         nickname={props.nickname}
+        onCloseModal={handleCloseModal}
       />
     </div>
   );

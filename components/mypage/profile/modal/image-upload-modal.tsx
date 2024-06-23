@@ -1,7 +1,8 @@
 import React, { PropsWithChildren, RefObject } from 'react';
 import Button from '@/components/common/button/button';
-import styles from './image-upload-modal.module.scss';
+import CloseSVG from '@/public/images/pets/plus-circle.svg';
 import { useUpdateProfile } from '@/hooks/queries/my/user/mutation';
+import styles from './image-upload-modal.module.scss';
 
 interface ModalImageProps {
   modal: (props: PropsWithChildren) => React.ReactNode;
@@ -9,6 +10,7 @@ interface ModalImageProps {
   onPreview: () => void;
   imageId: number | null;
   nickname: string;
+  onCloseModal: () => void;
 }
 
 export default function ImageUploadModal(props: ModalImageProps) {
@@ -21,10 +23,10 @@ export default function ImageUploadModal(props: ModalImageProps) {
     <props.modal>
       <p className={styles['modal-text']}>프로필 사진을 변경하시겠습니까?</p>
       <div className={styles['modal-button-layout']}>
-        <Button className="default" onClick={handleResetImage}>
+        <Button className="default" onClick={handleResetImage} leftRound>
           이미지 초기화 하기
         </Button>
-        <Button className="primary" onClick={handleUpload}>
+        <Button className="primary" onClick={handleUpload} rightRound>
           이미지 변경하기
         </Button>
       </div>
@@ -36,6 +38,9 @@ export default function ImageUploadModal(props: ModalImageProps) {
         ref={props.uploadRef}
         onChange={props.onPreview}
       />
+      <button className={styles.modalCloseButton} type="button" title="모달 닫기" onClick={props.onCloseModal}>
+        <CloseSVG />
+      </button>
     </props.modal>
   );
 }
