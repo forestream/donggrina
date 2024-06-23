@@ -20,7 +20,7 @@ export default function StoryDetailHeader(props: StoryDetailHeaderProps) {
 
   const updateFn = () => {
     // 다이어리 수정 페이지로 이동해야함.
-    router.push(`/diaries/${storyId}`);
+    router.push(`/diaries/${storyId}/edit`);
     onCloseToggle();
   };
 

@@ -197,3 +197,13 @@ export const deleteChildComment = async (commentId: number) => {
     console.error('Failed to delete comment', error);
   }
 };
+
+class DiaryAPI {
+  async fetchDiary(diaryId: number) {
+    return (await axiosInstance.get(`/diaries/${diaryId}`)).data;
+  }
+}
+
+const diaryApiInstance = new DiaryAPI();
+
+export default diaryApiInstance;
