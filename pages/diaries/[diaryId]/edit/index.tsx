@@ -11,6 +11,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import PetSelect from '@/components/diaries/pet-select';
 import PetCheckbox from '@/components/diaries/pet-checkbox';
+import Image from 'next/image';
+import { imageUpload } from '@/api/image-api';
 
 interface DiaryData {
   content: string;
@@ -32,6 +34,7 @@ const DiaryEdit: React.FC = () => {
     setValue,
     formState: { errors, isValid },
     resetField,
+    getValues,
   } = useForm<DiaryData & FieldValues>({
     defaultValues: {
       content: '',
@@ -61,19 +64,24 @@ const DiaryEdit: React.FC = () => {
       (async () => {
         try {
           const diary = await fetchDiaryById(String(diaryId));
+          console.log(diary);
           setValue('content', diary.content);
           setValue('weather', diary.weather);
-          setValue('isShare', diary.isShare);
           setValue('date', diary.date);
-          setValue('pets', diary.pets);
-          setValue('images', diary.images);
-          setSelectedPets(diary.pets);
+          // setValue('pets', diary.pets);
+          setValue('images', diary.contentImages);
+          // setSelectedPets(diary.pets);
         } catch (error) {
           console.error('Failed to fetch diary', error);
         }
       })();
     }
   }, [diaryId, setValue]);
+
+  /**
+   * ! 처음 이미지 받아옴.
+   * ! preview 이미지도 받아와야함.
+   */
 
   const selectedWeather = watch('weather');
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
@@ -89,7 +97,7 @@ const DiaryEdit: React.FC = () => {
     }
   }, [watchDate, setValue]);
 
-  const handleImageChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (index: number) => async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
       const newImageFiles = [...imageFiles];
@@ -103,6 +111,9 @@ const DiaryEdit: React.FC = () => {
         setImagePreviews(newImagePreviews);
       };
       fileReader.readAsDataURL(files[0]);
+
+      const result = (await imageUpload({ files: files[0]! })).data;
+      setValue('images', result.data);
     }
   };
 
@@ -112,11 +123,12 @@ const DiaryEdit: React.FC = () => {
     //   return;
     // }
 
-    const completeData = { ...data, images: imageFiles };
-    console.log(completeData, diaryId);
+    // const completeData = { ...data, images: imageFiles };
+
     try {
-      const response = await updateDiary(Number(diaryId), completeData);
-      console.log('Diary updated successfully:', response);
+      const response = await updateDiary(Number(diaryId), data);
+      console.log(response);
+      // console.log('Diary updated successfully:', response);
       queryClient.invalidateQueries({ queryKey: ['diaries'] });
       router.push('/diaries');
     } catch (error) {
@@ -145,6 +157,8 @@ const DiaryEdit: React.FC = () => {
       setValue('pets', allPetIds);
     }
   };
+
+  console.log(imagePreviews);
 
   return (
     <div className={styles.container}>
@@ -187,10 +201,13 @@ const DiaryEdit: React.FC = () => {
               <button
                 key={weather.id}
                 type="button"
-                onClick={() => setValue('weather', weather.id)}
-                className={selectedWeather === weather.id ? styles.selected : ''}
+                onClick={() => setValue('weather', weather.label)}
+                className={selectedWeather === weather.label ? styles.selected : ''}
               >
-                <img src={selectedWeather === weather.id ? weather.selectedIcon : weather.icon} alt={weather.label} />
+                <img
+                  src={selectedWeather === weather.label ? weather.selectedIcon : weather.icon}
+                  alt={weather.label}
+                />
               </button>
             ))}
           </div>
@@ -198,7 +215,7 @@ const DiaryEdit: React.FC = () => {
 
         <div className={styles.imagesContainer}>
           {Array.from({ length: 5 }).map((_, index) => (
-            <div key={index}>
+            <div key={index} className={styles.images}>
               <input
                 ref={(el) => (fileInputRefs.current[index] = el!)}
                 type="file"
@@ -206,11 +223,25 @@ const DiaryEdit: React.FC = () => {
                 onChange={handleImageChange(index)}
                 hidden
               />
-              <img
+              {/* {getValues('images')[index] ? (
+                <Image src={getValues('images')[index]} alt="" width={110} height={110} />
+              ) : (
+                <Image
+                  src={imagePreviews[index] || '/images/diaries/imageupload-default.svg'}
+                  alt="Upload preview"
+                  className={styles.images}
+                  onClick={() => fileInputRefs.current[index].click()}
+                  width={110}
+                  height={110}
+                />
+              )} */}
+              <Image
                 src={imagePreviews[index] || '/images/diaries/imageupload-default.svg'}
                 alt="Upload preview"
                 className={styles.images}
                 onClick={() => fileInputRefs.current[index].click()}
+                width={110}
+                height={110}
               />
             </div>
           ))}

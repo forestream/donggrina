@@ -88,6 +88,8 @@
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .button {

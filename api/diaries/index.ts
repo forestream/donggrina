@@ -1,6 +1,7 @@
 import { UpdateCommentData } from '@/types/story/details';
 import { axiosInstance, axiosFileInstance } from '..';
 import { DiaryData } from '@/types/diary/';
+import { UpdateDiaryData } from '@/api/diaries';
 
 interface ImageUpload {
   images: File[];
@@ -15,7 +16,7 @@ interface DiaryPostType {
   date: string;
 }
 
-interface UpdateDiaryData {
+export interface UpdateDiaryData {
   content: string;
   weather: string;
   isShare: boolean;
@@ -114,7 +115,9 @@ export const deleteDiary = async (diaryId: number) => {
 };
 
 export const updateDiary = async (diaryId: number, updateData: UpdateDiaryData) => {
-  console.log(updateData);
+  const transformedData = { ...updateData, pets: [Number(updateData.pets[0])] };
+  console.log(diaryId, transformedData);
+  return (await axiosInstance.put(`/diaries/${diaryId}`, transformedData)).data;
 
   // const data = {
   //   pets:

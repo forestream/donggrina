@@ -19,8 +19,9 @@ export default function DiaryDetailHeader(props: DiaryDetailHeaderProps) {
   const deleteDiaryMutation = useDeleteDiary();
 
   const updateFn = () => {
+    console.log('?');
     // 다이어리 수정 페이지로 이동해야함.
-    router.push(`/diaries/${diaryId}`);
+    router.push(`/diaries/${diaryId}/edit`);
     onCloseToggle();
   };
 
