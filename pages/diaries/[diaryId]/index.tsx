@@ -37,7 +37,6 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
   const weatherIcon = diaryQuery.data && WEATHER_TYPES.find((weather) => weather.label === diaryQuery.data.weather);
 
   const { year, month, date, day } = disintegrateDateTime(diaryQuery.data && diaryQuery.data.date);
-
   return (
     <main className={styles.outer}>
       <div className={styles.inner}>
@@ -69,7 +68,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
           </div>
         ) : diaryQuery.isError ? (
           <p>Error: {diaryQuery.error.message}</p>
-        ) : (
+        ) : diaryQuery.data ? (
           <>
             <section className={styles.profiles}>
               <Profile
@@ -98,7 +97,7 @@ export default function DiaryById({ diaryId }: InferGetServerSidePropsType<typeo
               ))}
             </div>
           </>
-        )}
+        ) : null}
       </div>
 
       <DiaryCommentForm mutateFn={commentMutation.mutate} placeholder="댓글 입력..." />

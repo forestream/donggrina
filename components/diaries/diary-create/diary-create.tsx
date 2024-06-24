@@ -13,7 +13,7 @@ import PetCheckbox from '@/components/diaries/pet-checkbox';
 import ImageSkeleton from '@/components/skeleton/image/';
 import { useRouter } from 'next/router';
 
-interface DiaryData {
+export interface DiaryData {
   content: string;
   weather: string;
   isShare: boolean;
@@ -183,7 +183,9 @@ const DiaryCreate: React.FC = () => {
           {Array.from({ length: 5 }).map((_, index) => (
             <div key={index}>
               <input
-                ref={(el) => (fileInputRefs.current[index] = el!)}
+                ref={(el) => {
+                  fileInputRefs.current[index] = el!;
+                }}
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange(index)}
