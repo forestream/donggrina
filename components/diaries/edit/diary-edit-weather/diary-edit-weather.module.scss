@@ -1,5 +1,10 @@
-.weatherContainer {
+.wrapper {
   padding: 0 24px;
+}
+
+.weatherContainer {
+  padding-top: 30px;
+  border-top: 1px solid #d5d9dc;
   margin-bottom: 30px;
   .label {
     padding-left: 10px;

@@ -5,6 +5,8 @@ import useRouterId from '@/hooks/utils/use-router-id';
 import { FormProvider, useForm } from 'react-hook-form';
 import Suspensive from '@/components/suspensive/suspensive';
 import MemoItem from '@/components/diaries/edit/memo';
+import WeatherItem from '@/components/diaries/edit/diary-edit-weather';
+import DiaryEditImage from '@/components/diaries/edit/diary-edit-image/diary-edit-image';
 
 export default function DiaryEditPage() {
   const diaryId = +useRouterId('diaryId')!;
@@ -12,6 +14,8 @@ export default function DiaryEditPage() {
   const methods = useForm<{
     pets: string | string[];
     memo: string;
+    weather: string;
+    images: number[];
   }>();
 
   if (diaryQuery.isLoading) return '';
@@ -30,6 +34,8 @@ export default function DiaryEditPage() {
             <DiaryEditPets />
           </Suspensive>
           <MemoItem />
+          <WeatherItem defaultWeather={diaryQuery.data?.weather} />
+          <DiaryEditImage />
         </FormProvider>
 
         <button type="submit">check</button>
