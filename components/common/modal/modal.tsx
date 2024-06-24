@@ -27,9 +27,9 @@ export default function Modal({ children, onClose }: ModalCommonProps) {
     >
       <motion.div
         key="inner"
-        initial={{ scale: 0, x: '-50%', y: '-50%' }}
-        animate={{ scale: 1, x: '-50%', y: '-50%' }}
-        exit={{ scale: 0, x: '-50%', y: '-50%' }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0 }}
         className={styles.inner}
         onClick={handleClick}
       >

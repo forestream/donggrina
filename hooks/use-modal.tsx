@@ -1,5 +1,5 @@
 import ModalPortal from '@/components/common/modal/modal-portal';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 
 export interface ModalType {
   Modal: ({ children }: PropsWithChildren) => ReactNode;
@@ -26,7 +26,16 @@ export default function useModal(): [
   const handleClose = () => {
     setIsOpen(false);
   };
-
+  useEffect(() => {
+    const container = document.getElementById('__container');
+    if (container) {
+      if (isOpen) {
+        container.style.overflow = 'hidden';
+      } else {
+        container.style.overflow = 'auto';
+      }
+    }
+  }, [isOpen]);
   const Modal = ({ children }: PropsWithChildren) => (
     <>{isOpen && <ModalPortal onClose={handleClose}>{children}</ModalPortal>}</>
   );
