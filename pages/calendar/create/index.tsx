@@ -19,6 +19,7 @@ export default function Create() {
   const postMutation = useTodoPostMutation();
 
   const {
+    reset,
     setValue,
     trigger,
     register,
@@ -63,7 +64,10 @@ export default function Create() {
     postMutation.mutate(
       { ...data, dateTime: getDateTimeBackend(data.dateTime) },
       {
-        onSuccess: () => handleSuccessModal(true),
+        onSuccess: () => {
+          handleSuccessModal(true);
+          reset();
+        },
       },
     );
   };
