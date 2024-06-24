@@ -6,6 +6,8 @@ import Kebab from '../diary-content/kebab';
 import ContentImage from '../diary-content/content-image';
 import DiarySkeleton from '../../skeleton/diary/diary-list/';
 import { useDiaries } from '@/hooks/queries/diary/use-diary-query';
+import { motion } from 'framer-motion';
+import { horizontalVariants } from '@/components/framer';
 import { useRouter } from 'next/router';
 
 interface DiaryContentProps {
@@ -22,12 +24,20 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
   if (isError) return <p>error</p>;
 
   return (
-    <div>
-      {data?.map((diary) => {
+    <>
+      {data?.map((diary, index) => {
         const handleClick = () => router.push(`/diaries/${diary.diaryId}`);
 
         return (
-          <div key={diary.diaryId} className={styles.diaryContent} onClick={handleClick}>
+          <motion.div
+            custom={index}
+            variants={horizontalVariants}
+            initial="hidden"
+            animate="visible"
+            key={diary.diaryId}
+            className={styles.diaryContent}
+            onClick={handleClick}
+          >
             <div className={styles.leftContainer}>
               <Profile author={diary.author} authorImage={diary.authorImage} petImages={diary.petImages} />
               <Content content={diary.content} />
@@ -41,10 +51,10 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
               {diary.isMyDiary && <Kebab diaryId={diary.diaryId} />}
               <ContentImage contentImage={diary.contentImage} />
             </div>
-          </div>
+          </motion.div>
         );
       })}
-    </div>
+    </>
   );
 };
 

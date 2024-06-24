@@ -11,6 +11,7 @@ import Spinner from '@/components/spinner/spinner';
 import MainHeader from '@/components/common/Header/main-header';
 import CreateHeader from '@/components/common/Header/create-header';
 import Header from '@/components/common/Header';
+import { AnimatePresence } from 'framer-motion';
 
 declare global {
   interface Window {
@@ -32,7 +33,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <main id="__container" ref={containerRef}>
             <Header router={router} />
             {isDragging && <Spinner />}
-            <Component {...pageProps} />
+            <AnimatePresence mode="wait">
+              <div key={router.route}>
+                <Component {...pageProps} key={router.route} />
+              </div>
+            </AnimatePresence>
             {isNav(router) && <Nav />}
           </main>
         </div>

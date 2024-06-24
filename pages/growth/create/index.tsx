@@ -16,11 +16,12 @@ import CompleteModal from './complete-modal';
 import Image from 'next/image';
 import MemoItem from '@/components/diaries/jihye/diary-edit-memo';
 import ImageSkeleton from '@/components/skeleton/image/';
+import { AnimatePresence } from 'framer-motion';
 
 export default function CreateGrowth() {
+  const [Modal, handleModal, isOpen] = useModal();
   const router = useRouter();
   const { data: pets, isLoading } = usePetsQuery();
-  const [Modal, handleModal] = useModal();
   const createGrowthMutation = useCreateGrotwthMutation();
 
   const year = useCalenderDateStore.use.year().toString();
@@ -141,9 +142,13 @@ export default function CreateGrowth() {
           </button>
         </form>
       </div>
-      <Modal>
-        <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
-      </Modal>
+      <AnimatePresence>
+        {isOpen && (
+          <Modal>
+            <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
+          </Modal>
+        )}
+      </AnimatePresence>
     </>
   );
 }
