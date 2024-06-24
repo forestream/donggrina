@@ -1,0 +1,27 @@
+.image-area {
+  padding-left: 24px;
+}
+
+.image-item {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  input {
+    display: none;
+  }
+
+  label {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+  }
+}

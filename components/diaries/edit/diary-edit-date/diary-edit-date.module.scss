@@ -1,0 +1,43 @@
+.outer {
+  margin-bottom: 30px;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: LaundryGothic;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.todoDateText {
+  background-color: var(--main-color);
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--white);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.input {
+  text-align: right;
+  color: var(--text-color-gray);
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  align-self: last baseline;
+  width: 100%;
+  cursor: default;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.error {
+  padding: 0 24px;
+  margin: 8px 0;
+  color: var(--input-error);
+}

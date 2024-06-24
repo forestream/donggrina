@@ -1,8 +1,8 @@
 import { axiosInstance } from '../index';
 import { StoryData } from '../../types/story/index';
-import { StoryDetailsData } from '@/types/story/details';
+import { CreateCommentData, StoryDetailsData, UpdateCommentData } from '@/types/story/details';
 
-class StoryAPI {
+export class StoryAPI {
   async fetchStory(page = 0, size = 10) {
     return (await axiosInstance.get(`stories?page=${page}&size=${size}`)).data.data as StoryData;
   }
@@ -19,16 +19,25 @@ class StoryAPI {
     return (await axiosInstance.delete(`hearts/${diaryId}`)).data;
   }
 
-  async createCommentStory({ diaryId, data }: CommentData) {
+  async createCommentStory({ diaryId, data }: CreateCommentData) {
     return (await axiosInstance.post(`comments/${diaryId}`, data)).data;
   }
-}
 
-interface CommentData {
-  diaryId: number;
-  data: {
-    content: string;
-  };
+  async deleteCommentStory(commentId: number) {
+    return await axiosInstance.delete(`comments/parent/${commentId}`);
+  }
+
+  async updateCommentStory({ commentId, data }: UpdateCommentData) {
+    return await axiosInstance.put(`comments/${commentId}`, data);
+  }
+
+  async deleteReplyStroy(commentId: number) {
+    return await axiosInstance.delete(`comments/child/${commentId}`);
+  }
+
+  async deleteStory(diaryId: number) {
+    return await axiosInstance.delete(`stories/${diaryId}`);
+  }
 }
 
 const storyApiInstance = new StoryAPI();

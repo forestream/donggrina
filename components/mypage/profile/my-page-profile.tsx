@@ -11,7 +11,7 @@ export default function MyPageProfile() {
 
   return (
     <section className={styles.profile}>
-      <h3>마이 페이지</h3>
+      <h3 className={styles.title}>마이 페이지</h3>
       <div className={styles['profile-layout']}>
         <ImageUpload image={profileQuery.data!.profileImageUrl} nickname={profileQuery.data!.nickname} />
         <ProfileInput nickname={profileQuery.data!.nickname} imageId={profileQuery.data!.imageId} />
