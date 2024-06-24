@@ -8,6 +8,7 @@ export interface DiaryDetailsData {
   author: string;
   petProfile: string;
   content: string;
+  weather: string;
   favoriteState: boolean;
   favoriteCount: number;
   comments: DiaryComment[];

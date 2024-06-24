@@ -31,4 +31,4 @@ export const WEATHER_TYPES = [
     icon: '/images/diaries/weather7.svg',
     selectedIcon: '/images/diaries/weather7-click.svg',
   },
-];
+] as const;
