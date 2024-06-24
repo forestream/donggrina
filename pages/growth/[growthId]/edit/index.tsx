@@ -118,7 +118,6 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
-          <div className={styles.division}></div>
           <MemoItem register={register} fieldName="content.memo" defaultValue={memo} />
 
           <div className={styles.categorySelectorOuter}>

@@ -106,7 +106,6 @@ export default function CreateGrowth() {
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
-          <div className={styles.division}></div>
           <MemoItem register={register} fieldName="content.memo" />
           <div className={styles.categorySelectorOuter}>
             <div className={styles.categorySelectorInner}>

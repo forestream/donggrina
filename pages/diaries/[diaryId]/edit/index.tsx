@@ -66,7 +66,7 @@ export default function DiaryEditPage(props: InferGetServerSidePropsType<typeof 
           <DiaryEditShare />
           <DiaryEditDate initialDate={props.diaryData.date} />
 
-          <div className={styles.button}>
+          <div className={styles['button-container']}>
             <button
               className={classNames(styles.submit, {
                 [styles.disabled]: !isValid,

@@ -152,7 +152,7 @@ export default function DiaryCreate() {
             </PetSelect>
           </div>
           <MemoItem register={register} fieldName="content" />
-          <hr className={styles.division} />
+          {/* <hr className={styles.division} /> */}
 
           <WeatherItem />
 
