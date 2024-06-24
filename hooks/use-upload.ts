@@ -34,10 +34,13 @@ export default function useUpload({ handleModal, nickname }: UseUpload) {
     handleModal && handleModal(false);
   };
 
+  const resetPrview = () => setPreviewUrl('');
+
   return {
     uploadRef,
     previewUrl,
     handlePreview,
+    resetPrview,
     imageId,
   };
 }

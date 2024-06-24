@@ -11,39 +11,60 @@ import diaryApiInstance from '@/api/diaries';
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
 import { fetchPets } from '@/api/calendar/request';
-import { Pet } from '@/api/calendar/request.type';
+// import { Pet } from '@/api/calendar/request.type';
+import DiaryEditDate from '@/components/diaries/edit/diary-edit-date';
+import { useRouter } from 'next/router';
+import { useUpdateDiary } from '@/hooks/queries/diary/mutation';
+
+interface FormFields {
+  pets: number[];
+  content: string;
+  weather: string;
+  images: number[];
+  isShare: boolean;
+  date: string;
+}
 
 export default function DiaryEditPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const methods = useForm<{
-    pets: number[];
-    memo: string;
-    weather: string;
-    images: number[];
-    isShare: boolean;
-  }>({
+  const router = useRouter();
+  const updateDiaryMutation = useUpdateDiary();
+
+  const methods = useForm<FormFields>({
     defaultValues: {
       pets: [],
-      memo: props.diarydata!.content,
-      images: props.diarydata!.contentImageIds,
-      isShare: false,
-      weather: props.diarydata!.weather,
+      content: props.diaryData!.content,
+      images: props.diaryData!.contentImageIds,
+      isShare: props.diaryData!.isShare,
+      weather: props.diaryData!.weather,
+      date: '',
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: FormFields) => {
     const petsIds = data.pets.map((pet: number) => +pet);
-    console.log(data);
+    const transformedData = {
+      ...data,
+      petsIds,
+    };
+
+    try {
+      await updateDiaryMutation.mutateAsync({ diaryId: props.diaryId, data: transformedData });
+      router.push(`/diaries/${props.diaryId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <main style={{ paddingTop: '54px' }}>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <DiaryEditPets pets={props.petData} selectedPets={props.diarydata.petIds} />
-          <MemoItem />
+          <DiaryEditPets pets={props.petData} selectedPets={props.diaryData.petIds} />
+          <MemoItem register={methods.register} fieldName="content" />
           <WeatherItem />
-          <DiaryEditImage images={props.diarydata.contentImages} />
+          <DiaryEditImage images={props.diaryData.contentImages} />
           <DiaryEditShare />
+          <DiaryEditDate />
 
           <div className={styles.button}>
             <Button className="primary" type="submit" round>
@@ -68,10 +89,11 @@ export const getServerSideProps = (async ({ req, query }) => {
   try {
     const diaryData = await diaryApiInstance.fetchDiary(diaryId);
     const petsData = await fetchPets();
+
     return {
       props: {
         diaryId,
-        diarydata: diaryData,
+        diaryData: diaryData,
         petData: petsData,
       },
     };

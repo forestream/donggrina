@@ -1,6 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import storyApiInstance from '@/api/story';
-import { deleteChildComment, deleteDiary, deleteParentComment, putComment } from '../../../api/diaries';
+import diaryApiInstance, {
+  deleteChildComment,
+  deleteDiary,
+  deleteParentComment,
+  putComment,
+} from '../../../api/diaries';
 
 export function usePostLike(status: boolean) {
   const queryClient = useQueryClient();
@@ -56,6 +61,18 @@ export function useDeleteDiary() {
   return useMutation({
     mutationKey: ['story'],
     mutationFn: deleteDiary,
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+}
+
+export function useUpdateDiary() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ['diaries'],
+    mutationFn: diaryApiInstance.updateDiary,
     onSuccess: () => {
       queryClient.invalidateQueries();
     },

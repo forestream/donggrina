@@ -1,4 +1,8 @@
 .outer {
+  margin-bottom: 30px;
+}
+
+.inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,4 +34,10 @@
   &:focus-visible {
     outline: none;
   }
+}
+
+.error {
+  padding: 0 24px;
+  margin: 8px 0;
+  color: var(--input-error);
 }

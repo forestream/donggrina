@@ -50,19 +50,8 @@ export default function NicknameModal(props: NicknameModalProps) {
               </div>
             </Form>
           </div>
-<<<<<<< HEAD
-          <div className={styles.button}>
-            <Button type="submit" className={buttonClassName} disabled={isDisabled} leftRound rightRound>
-              변경하기
-            </Button>
-          </div>
-        </Form>
-      </div>
-    </props.modal>
-=======
         </props.modal>
       )}
     </AnimatePresence>
->>>>>>> 7c494cf1b7948d5de365b5ca20fb4e18cbf5c0cc
   );
 }

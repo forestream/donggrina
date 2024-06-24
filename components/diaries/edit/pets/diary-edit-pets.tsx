@@ -21,7 +21,9 @@ export default function DiaryEditPets(props: DiaryEditPetsProps) {
     <div className={styles.wrapper}>
       <div className={styles.layout}>
         <h2>반려동물 선택</h2>
-        <button onClick={handleAllSelectedPet}>전체 선택</button>
+        <button onClick={handleAllSelectedPet} type="button">
+          전체 선택
+        </button>
       </div>
       <DiaryEditPetList pets={props.pets} selectedPets={props.selectedPets} />
     </div>

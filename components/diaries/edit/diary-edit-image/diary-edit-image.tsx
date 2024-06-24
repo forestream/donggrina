@@ -11,9 +11,18 @@ interface DiaryEditImageProps {
 }
 
 export default function DiaryEditImage(props: DiaryEditImageProps) {
+  const IMAGES_COUNT = 5;
+  const existingImageCount = IMAGES_COUNT - props.images.length;
+
   return (
     <Swiper spaceBetween={10} slidesPerView="auto" tag="div" wrapperTag="ul" className={styles['image-area']}>
-      {Array(5)
+      {props.images.map((image, index) => (
+        <SwiperSlide tag="li" className={styles['image-item']} key={image}>
+          <DiaryEditImageItem index={index} image={image} />
+        </SwiperSlide>
+      ))}
+
+      {Array(existingImageCount)
         .fill(0)
         .map((_, index) => (
           <SwiperSlide tag="li" className={styles['image-item']} key={index}>
@@ -24,7 +33,7 @@ export default function DiaryEditImage(props: DiaryEditImageProps) {
   );
 }
 
-export function DiaryEditImageItem({ index }: { index: number }) {
+export function DiaryEditImageItem({ index, image }: { index: number; image?: string }) {
   const [previewUrl, setPreviewUrl] = useState('');
   const uploadRef = useRef<HTMLInputElement>(null);
   const { setValue, getValues } = useFormContext();
@@ -37,7 +46,6 @@ export function DiaryEditImageItem({ index }: { index: number }) {
       const result = (await diaryImageUpload({ images: file! })).data;
       const values = getValues('images');
       values ? setValue('images', [...values, result.data[0]]) : setValue('images', [result.data[0]]);
-      console.log(getValues('images'));
       // setImageId(result.data[0]);
       // profileMutation.mutateAsync({ imageId: result.data[0], nickname });
     } catch (error) {
@@ -49,7 +57,9 @@ export function DiaryEditImageItem({ index }: { index: number }) {
       setPreviewUrl(fileReader.result as string);
     };
   };
-  return (
+  return image ? (
+    <Image src={image} alt="" fill objectFit="cover" objectPosition="center" />
+  ) : (
     <>
       <label htmlFor={`image-${index}`}></label>
       <input type="file" id={`image-${index}`} onChange={handlePreview} ref={uploadRef} />

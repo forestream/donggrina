@@ -7,6 +7,15 @@ interface ImageUpload {
   images: File[];
 }
 
+export interface FormFields {
+  pets: number[];
+  content: string;
+  weather: string;
+  images: number[];
+  isShare: boolean;
+  date: string;
+}
+
 interface DiaryPostType {
   pets: number[];
   images: number[];
@@ -49,7 +58,7 @@ export interface Diary {
   authorImage: string;
   author: string;
   petImages: string[];
-  contentImages: never[];
+  contentImages: string[];
   content: string;
   date: string;
   weather: string;
@@ -59,6 +68,7 @@ export interface Diary {
   isMyDiary: boolean;
   petIds: number[];
   contentImageIds: number[];
+  isShare: boolean;
 }
 
 export async function postDiariesImage(ImageData: ImageUpload) {
@@ -203,6 +213,10 @@ export const deleteChildComment = async (commentId: number) => {
 class DiaryAPI {
   async fetchDiary(diaryId: number) {
     return (await axiosInstance.get(`/diaries/${diaryId}`)).data.data as Diary;
+  }
+
+  async updateDiary({ diaryId, data }: { diaryId: number; data: FormFields }) {
+    return await axiosInstance.put(`/diaries/${diaryId}`, data);
   }
 }
 
