@@ -1,19 +1,21 @@
 .layout {
   position: fixed;
   bottom: 0;
-  width: 380px;
-  height: 100px;
+  width: 100%;
+  max-width: 428px;
   background-color: var(--white);
   padding-top: 25px;
+  padding: 28px 24px;
+  margin-left: -24px;
+  border-top: 1px solid #ddd;
 }
 
 .reply {
   color: var(--main-color);
   font-size: 12px;
-  margin-bottom: 7px;
   display: block;
   position: absolute;
-  top: 0;
+  top: 7px;
 }
 
 .form {
@@ -30,6 +32,7 @@
   font-size: 16px;
   line-height: 28px;
   outline: none;
+  overflow-y: hidden;
 
   &::placeholder {
     font-size: 16px;

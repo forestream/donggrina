@@ -7,13 +7,13 @@ import Link from 'next/link';
 export default function PetListItem({ imageUrl, name, petId }: PetData) {
   return (
     <>
-      <div className={styles.petProfile}>
-        <div className={styles.imgBox}>
-          <Image src={imageUrl} alt="반려동물 프로필" fill priority sizes="100%" />
+      <Link href={`/mypage/pet/${petId}`} title="반려동물 수정하기로 이동" className={styles.petProfile}>
+        <div className={styles.container}>
+          <div className={styles.imgBox}>
+            <Image src={imageUrl} alt="반려동물 프로필" fill priority sizes="100%" />
+          </div>
+          <p>{name}</p>
         </div>
-        <p>{name}</p>
-      </div>
-      <Link href={`/mypage/pet/${petId}`} title="반려동물 수정하기로 이동" className={styles.linkButton}>
         <ArrowSVG />
       </Link>
     </>
