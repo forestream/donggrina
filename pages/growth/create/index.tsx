@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
 import CompleteModal from './complete-modal';
 import Image from 'next/image';
+import MemoItem from '@/components/diaries/jihye/diary-edit-memo';
 import ImageSkeleton from '@/components/skeleton/image/';
 
 export default function CreateGrowth() {
@@ -76,6 +77,7 @@ export default function CreateGrowth() {
   };
 
   const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
+    console.log(data);
     createGrowthMutation.mutate(data, {
       onSuccess: () => {
         openModal();
@@ -103,14 +105,7 @@ export default function CreateGrowth() {
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
           <div className={styles.division}></div>
-          <textarea
-            {...register('content.memo')}
-            className={styles.memo}
-            id="content.memo"
-            placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
-          />
-          {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
-
+          <MemoItem register={register} fieldName="content.memo" />
           <div className={styles.categorySelectorOuter}>
             <div className={styles.categorySelectorInner}>
               {GROWTH_CATEGORY.map((category) => (
