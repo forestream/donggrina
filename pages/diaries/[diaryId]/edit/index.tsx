@@ -3,6 +3,7 @@ import DiaryEditHeader from '@/components/diaries/edit/diary-edit-header';
 import { useFetchDiaryById } from '@/hooks/queries/diary/queries';
 import useRouterId from '@/hooks/utils/use-router-id';
 import { FormProvider, useForm } from 'react-hook-form';
+import Suspensive from '@/components/suspensive/suspensive';
 
 export default function DiaryEditPage() {
   const diaryId = +useRouterId('diaryId')!;
@@ -13,10 +14,11 @@ export default function DiaryEditPage() {
 
   return (
     <main style={{ paddingTop: '54px' }}>
-      <FormProvider {...methods}>
-        <DiaryEditHeader />
-      </FormProvider>
-      {/* <Suspensive isLoading={diaryQuery.isLoading}></Suspensive> */}
+      <Suspensive isLoading={diaryQuery.isLoading}>
+        <FormProvider {...methods}>
+          <DiaryEditHeader />
+        </FormProvider>
+      </Suspensive>
     </main>
   );
 }
