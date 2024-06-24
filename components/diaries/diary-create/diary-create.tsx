@@ -10,6 +10,7 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { useQueryClient } from '@tanstack/react-query';
 import PetSelect from '@/components/diaries/pet-select';
 import PetCheckbox from '@/components/diaries/pet-checkbox';
+import ImageSkeleton from '@/components/skeleton/image/';
 import { useRouter } from 'next/router';
 
 interface DiaryData {
@@ -105,7 +106,6 @@ const DiaryCreate: React.FC = () => {
   const { data: pets, isLoading, isError, error } = usePetsQuery();
   const [selectedPets, setSelectedPets] = useState<number[]>([]);
 
-  if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error: {error.message}</p>;
 
   const handleTogglePet = (petId: number) => {
@@ -131,17 +131,21 @@ const DiaryCreate: React.FC = () => {
         <div className={styles.petSelect}>
           <PetSelect selectAll={handleClickAll} title="반려동물 선택">
             <div className={styles.pets}>
-              {pets.map((pet) => (
-                <PetCheckbox
-                  key={pet.petId}
-                  register={register}
-                  petId={pet.petId}
-                  petName={pet.name}
-                  petImage={pet.imageUrl}
-                  selectedPets={selectedPets}
-                  onTogglePet={handleTogglePet}
-                />
-              ))}
+              {isLoading ? (
+                <ImageSkeleton />
+              ) : (
+                pets.map((pet) => (
+                  <PetCheckbox
+                    key={pet.petId}
+                    register={register}
+                    petId={pet.petId}
+                    petName={pet.name}
+                    petImage={pet.imageUrl}
+                    selectedPets={selectedPets}
+                    onTogglePet={handleTogglePet}
+                  />
+                ))
+              )}
             </div>
           </PetSelect>
         </div>

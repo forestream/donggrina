@@ -2,6 +2,10 @@
 
 .skeletonContainer {
   display: flex;
+  gap: 15px;
+}
+.skeletonImage {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;

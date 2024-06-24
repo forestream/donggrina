@@ -12,6 +12,7 @@ import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation
 import Button from '@/components/common/button/button';
 import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
 import CalendarCategory from '@/components/calendar-monthly/calendar-category';
+import ImageSkeleton from '@/components/skeleton/image/';
 
 export default function Create() {
   const { data: pets, isLoading } = usePetsQuery();
@@ -91,12 +92,10 @@ export default function Create() {
         <div className={styles.petSelector}>
           반려동물 선택
           <div className={styles.petLabelContainer}>
-            {pets.map((pet, i) =>
-              isLoading ? (
-                <div></div>
-              ) : (
-                <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
-              ),
+            {isLoading ? (
+              <ImageSkeleton />
+            ) : (
+              pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />)
             )}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
