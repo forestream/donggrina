@@ -6,9 +6,11 @@ import { useRef, useState } from 'react';
 import { diaryImageUpload } from '@/api/image-api';
 import { useFormContext } from 'react-hook-form';
 
-export default function DiaryEditImage() {
-  // const [imageId, setImageId] = useState<number | null>(null);
+interface DiaryEditImageProps {
+  images: string[];
+}
 
+export default function DiaryEditImage(props: DiaryEditImageProps) {
   return (
     <Swiper spaceBetween={10} slidesPerView="auto" tag="div" wrapperTag="ul" className={styles['image-area']}>
       {Array(5)

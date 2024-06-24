@@ -1,15 +1,21 @@
 import { useFormContext } from 'react-hook-form';
 import DiaryEditPetList from '@/components/diaries/edit/pets/diary-edit-pet-list';
-import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import styles from './diary-edit-pets.module.scss';
+import { Pet } from '@/api/calendar/request.type';
 
-export default function DiaryEditPets() {
-  const petsQuery = usePetsQuery();
+interface DiaryEditPetsProps {
+  pets: Pet[];
+  selectedPets: number[];
+}
+
+export default function DiaryEditPets(props: DiaryEditPetsProps) {
   const { setValue } = useFormContext();
-
-  if (petsQuery.isLoading) return '로딩중...';
-
-  const handleAllSelectedPet = () => petsQuery.data!.map((pet) => setValue(pet.name, pet.name));
+  const handleAllSelectedPet = () => {
+    setValue(
+      'pets',
+      props.pets.map((pet) => String(pet.petId)),
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -17,7 +23,7 @@ export default function DiaryEditPets() {
         <h2>반려동물 선택</h2>
         <button onClick={handleAllSelectedPet}>전체 선택</button>
       </div>
-      <DiaryEditPetList />
+      <DiaryEditPetList pets={props.pets} selectedPets={props.selectedPets} />
     </div>
   );
 }

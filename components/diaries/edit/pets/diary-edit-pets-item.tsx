@@ -1,6 +1,5 @@
 import React from 'react';
 import { Pet } from '@/api/calendar/request.type';
-import { DiaryDetail } from '@/types/diary/details';
 import { useFormContext } from 'react-hook-form';
 import PetCheckbox from '@/components/calendar-monthly/pet-checkbox';
 

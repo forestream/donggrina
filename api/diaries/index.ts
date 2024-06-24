@@ -57,6 +57,8 @@ export interface Diary {
   favoriteCount: number;
   comments: Comment[];
   isMyDiary: boolean;
+  petIds: number[];
+  contentImageIds: number[];
 }
 
 export async function postDiariesImage(ImageData: ImageUpload) {

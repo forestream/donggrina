@@ -4,6 +4,7 @@ import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '@/types/calendar';
 import { GrowthDetailsData } from '@/types/growth/details';
 import { DiaryDetail } from '@/types/diary/details';
+import { ChangeEvent } from 'react';
 
 interface PetRadio {
   register:
@@ -27,8 +28,8 @@ export default function PetCheckbox({ petId, register, petName, petImage, defaul
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
         <input
-          {...register('pets', { validate: (selected: string) => [selected] || '*반려동물을 선택해주세요.' })}
-          value={petId}
+          {...register('pets')}
+          value={+petId}
           className={styles.petInput}
           type="checkbox"
           name="pets"

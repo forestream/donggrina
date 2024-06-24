@@ -1,9 +1,6 @@
 import React from 'react';
 import DiaryEditPets from '@/components/diaries/edit/pets/diary-edit-pets';
-import { useFetchDiaryById } from '@/hooks/queries/diary/queries';
-import useRouterId from '@/hooks/utils/use-router-id';
 import { FormProvider, useForm } from 'react-hook-form';
-import Suspensive from '@/components/suspensive/suspensive';
 import MemoItem from '@/components/diaries/edit/memo';
 import WeatherItem from '@/components/diaries/edit/diary-edit-weather';
 import DiaryEditImage from '@/components/diaries/edit/diary-edit-image/diary-edit-image';
@@ -11,56 +8,41 @@ import DiaryEditShare from '@/components/diaries/edit/diary-edit-share/diary-edi
 import Button from '@/components/common/button/button';
 import styles from './index.module.scss';
 import diaryApiInstance from '@/api/diaries';
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import { axiosInstance } from '@/api';
+import { fetchPets } from '@/api/calendar/request';
+import { Pet } from '@/api/calendar/request.type';
 
-export default function DiaryEditPage() {
-  const diaryId = +useRouterId('diaryId')!;
-  const diaryQuery = useFetchDiaryById(diaryId);
-
+export default function DiaryEditPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const methods = useForm<{
-    pets: string[];
+    pets: number[];
     memo: string;
     weather: string;
     images: number[];
     isShare: boolean;
   }>({
-    defaultValues: async () => {
-      const data = await diaryApiInstance.fetchDiary(diaryId);
-      return {
-        pets: [],
-        memo: '',
-        images: [],
-        isShare: false,
-        weather: data.weather,
-        resetOptions: {
-          keepDirtyValues: true,
-        },
-      };
+    defaultValues: {
+      pets: [],
+      memo: props.diarydata!.content,
+      images: props.diarydata!.contentImageIds,
+      isShare: false,
+      weather: props.diarydata!.weather,
     },
   });
 
-  if (diaryQuery.isLoading) return '';
-
   const onSubmit = (data: any) => {
+    const petsIds = data.pets.map((pet: number) => +pet);
     console.log(data);
   };
-
-  // console.log(methods.watch('weather'));
-
-  // const handleSubmit = () => {
-  //   console.log('?');
-  //   methods.handleSubmit(onSubmit);
-  // };
-
-  // console.log(diaryQuery.data);
 
   return (
     <main style={{ paddingTop: '54px' }}>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <DiaryEditPets />
+          <DiaryEditPets pets={props.petData} selectedPets={props.diarydata.petIds} />
           <MemoItem />
-          <WeatherItem defaultWeather={diaryQuery.data?.weather} />
-          <DiaryEditImage />
+          <WeatherItem />
+          <DiaryEditImage images={props.diarydata.contentImages} />
           <DiaryEditShare />
 
           <div className={styles.button}>
@@ -74,6 +56,26 @@ export default function DiaryEditPage() {
   );
 }
 
-export const getServersideProps = () => {
+export const getServerSideProps = (async ({ req, query }) => {
+  const diaryId = +query.diaryId!;
+  if (!diaryId) return { notFound: true };
 
-} satisfies GetServersideProps
+  const cookie = req.cookies;
+  if (!cookie) return { notFound: true };
+
+  axiosInstance.defaults.headers['Authorization'] = `Bearer ${req.cookies.accessToken!}`;
+
+  try {
+    const diaryData = await diaryApiInstance.fetchDiary(diaryId);
+    const petsData = await fetchPets();
+    return {
+      props: {
+        diaryId,
+        diarydata: diaryData,
+        petData: petsData,
+      },
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
+}) satisfies GetServerSideProps;

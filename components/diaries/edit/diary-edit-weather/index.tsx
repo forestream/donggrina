@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './diary-edit-weather.module.scss';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
 import Image from 'next/image';
@@ -10,21 +10,11 @@ interface WeatherItem {
   defaultWeather?: string;
 }
 
-export default function WeatherItem(props: WeatherItem) {
+export default function WeatherItem() {
   const { setValue, watch } = useFormContext<{ weather: string }>();
-  // const [selectedWeather, setSelectedWeather] = useState<string | null>(props.defaultWeather || '맑음');
 
-  // if (props.defaultWeather) {
-  //   setValue('weather', props.defaultWeather);
-  // }
-
-  const handleClick = (weather: WeatherType) => {
-    setValue('weather', weather.label);
-  };
-
+  const handleClick = (weather: WeatherType) => setValue('weather', weather.label);
   const selectedWeather = watch('weather');
-
-  console.log(selectedWeather);
 
   return (
     <div className={styles.wrapper}>
