@@ -11,17 +11,20 @@ interface WeatherItem {
 }
 
 export default function WeatherItem(props: WeatherItem) {
-  const { setValue } = useFormContext();
-  const [selectedWeather, setSelectedWeather] = useState<string | null>(props.defaultWeather || '맑음');
+  const { setValue, watch } = useFormContext<{ weather: string }>();
+  // const [selectedWeather, setSelectedWeather] = useState<string | null>(props.defaultWeather || '맑음');
 
-  if (props.defaultWeather) {
-    setValue('weather', props.defaultWeather);
-  }
+  // if (props.defaultWeather) {
+  //   setValue('weather', props.defaultWeather);
+  // }
 
   const handleClick = (weather: WeatherType) => {
-    setSelectedWeather(weather.label);
     setValue('weather', weather.label);
   };
+
+  const selectedWeather = watch('weather');
+
+  console.log(selectedWeather);
 
   return (
     <div className={styles.wrapper}>
