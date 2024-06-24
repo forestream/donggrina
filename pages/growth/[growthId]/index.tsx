@@ -10,7 +10,7 @@ import { useDeleteGrowthMutation } from '@/hooks/queries/growth/use-post-growth-
 import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
 import Image from 'next/image';
-import CompleteModal from '../create/complete-modal';
+import CompleteModal from '../../../components/growth/complete-modal';
 import { GrowthDetailsContent, GrowthDetailsData } from '@/types/growth/details';
 import { GROWTH_CATEGORY_IMAGES, GROWTH_MEMO_IMAGES } from '@/utils/constants/growth';
 import Content from '../../../components/growth/content';
@@ -54,7 +54,7 @@ export default function GrowthDetailPage({ growthId }: GrowthDetailPageProps) {
   const [petName, setPetName] = useState<string>('');
 
   useEffect(() => {
-    if (growthDatas?.data) {
+    if (growthDatas) {
       const { category, nickname, writerProfileImageUrl, petProfileImageUrl, content, isMine, petName } =
         growthDatas.data as GrowthDetailsData;
 

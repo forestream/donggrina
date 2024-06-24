@@ -5,7 +5,7 @@ import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import { useDeleteGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import { useRouter } from 'next/router';
-import CompleteModal from '@/pages/growth/create/complete-modal';
+import CompleteModal from '../../complete-modal';
 import useModal from '@/hooks/use-modal';
 import { GROWTH_CATEGORY_IMAGES } from '@/utils/constants/growth';
 import Image from 'next/image';
