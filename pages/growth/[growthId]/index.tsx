@@ -54,7 +54,7 @@ export default function GrowthDetailPage({ growthId }: GrowthDetailPageProps) {
   const [petName, setPetName] = useState<string>('');
 
   useEffect(() => {
-    if (growthDatas?.data) {
+    if (growthDatas) {
       const { category, nickname, writerProfileImageUrl, petProfileImageUrl, content, isMine, petName } =
         growthDatas.data as GrowthDetailsData;
 

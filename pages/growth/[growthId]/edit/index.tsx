@@ -44,7 +44,7 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
   const localDate = convertToLocalDate({ year, month, day: date });
 
   useEffect(() => {
-    if (growthList?.data) {
+    if (growthList) {
       setMemo(growthList.data.content.memo);
       setSelectedCategory(growthList.data.category);
       setContent(growthList.data.content);

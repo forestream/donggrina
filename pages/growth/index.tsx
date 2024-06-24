@@ -38,9 +38,9 @@ export default function GrowthPage() {
             <GrowthListSkeleton />
             <GrowthListSkeleton />
           </div>
-        ) : (
+        ) : growthLists ? (
           <div className={styles.listContainer}>
-            {growthLists?.data.map((growth, index) => {
+            {growthLists.data.map((growth, index) => {
               return (
                 <motion.div
                   variants={horizontalVariants}
@@ -64,7 +64,7 @@ export default function GrowthPage() {
               );
             })}
           </div>
-        )}
+        ) : null}
         <AddButton href={'/growth/create'} />
       </div>
     </>
