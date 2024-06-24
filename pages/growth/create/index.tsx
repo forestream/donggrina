@@ -14,10 +14,11 @@ import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
 import CompleteModal from './complete-modal';
 import Image from 'next/image';
+import ImageSkeleton from '@/components/skeleton/image/';
 
 export default function CreateGrowth() {
   const router = useRouter();
-  const { data: pets } = usePetsQuery();
+  const { data: pets, isLoading } = usePetsQuery();
   const [Modal, handleModal] = useModal();
   const createGrowthMutation = useCreateGrotwthMutation();
 
@@ -91,10 +92,13 @@ export default function CreateGrowth() {
           <div className={styles.petSelector}>
             반려동물 선택
             <div className={styles.petLabelContainer}>
-              {!!pets.length &&
+              {isLoading ? (
+                <ImageSkeleton />
+              ) : (
                 pets.map((pet, i) => (
                   <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
-                ))}
+                ))
+              )}
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
