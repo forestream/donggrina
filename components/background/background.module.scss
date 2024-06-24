@@ -6,32 +6,65 @@
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
-}
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: 145px;
-  width: 633px;
-  header {
-    padding-top: 37px;
-  }
-  div {
+  .section {
     display: flex;
     flex-direction: column;
-    gap: 26px;
-    h2,
-    strong {
-      font-size: 72px;
-      line-height: 100px;
-      font-family: 'LaundryGothic';
+    gap: 145px;
+    width: 633px;
+    header {
+      z-index: 1;
+      padding-top: 37px;
     }
-    strong {
-      color: #32a753;
-    }
-    p {
-      font-size: 18px;
-      line-height: 26px;
-      font-weight: 500;
+    .titleBox {
+      z-index: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      h2,
+      strong {
+        font-size: 72px;
+        line-height: 100px;
+        font-family: 'LaundryGothic';
+      }
+      strong {
+        color: #32a753;
+      }
+      p {
+        font-size: 18px;
+        line-height: 26px;
+        font-weight: 500;
+      }
     }
   }
+}
+.circle {
+  width: 1000px;
+  height: 892px;
+  display: block;
+  background: linear-gradient(45deg, #caf0cd, rgba(212, 249, 215, 0));
+  border-radius: 50%;
+}
+.smallCircle {
+  width: 554px;
+  height: 554px;
+  display: block;
+  background: linear-gradient(45deg, #caf0cd, rgba(212, 249, 215, 0) 70%);
+  border-radius: 50%;
+}
+.circleBox1 {
+  position: absolute;
+  top: -224px;
+  left: 0;
+}
+.circleBox2 {
+  position: absolute;
+  top: 540px;
+  left: 130px;
+  transform: rotate(180deg);
+}
+.circleBox3 {
+  position: absolute;
+  right: -180px;
+  bottom: 0;
 }
