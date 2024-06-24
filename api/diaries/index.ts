@@ -200,7 +200,7 @@ export const deleteChildComment = async (commentId: number) => {
 
 class DiaryAPI {
   async fetchDiary(diaryId: number) {
-    return (await axiosInstance.get(`/diaries/${diaryId}`)).data;
+    return (await axiosInstance.get(`/diaries/${diaryId}`)).data.data as Diary;
   }
 }
 

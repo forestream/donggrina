@@ -21,15 +21,15 @@ interface PetRadio {
  * @param {string} petImage - 반려동물 이미지 url
  * @param {string} defaultPet - 수정 페이지에서 체크되어 있어야 하는 반려동물 이름
  */
-export default function PetRadio({ register, petName, petImage, defaultPet = '' }: PetRadio) {
+export default function PetCheckbox({ register, petName, petImage, defaultPet = '' }: PetRadio) {
   return (
     <label className={styles.petLabel}>
       <div className={styles.petImageContainer}>
         <input
-          {...register('petName', { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
+          {...register(petName, { validate: (selected: string) => !!selected || '*반려동물을 선택해주세요.' })}
           value={petName}
           className={styles.petInput}
-          type="radio"
+          type="checkbox"
           defaultChecked={defaultPet === petName}
         />
         <Image className={styles.petImage} src={petImage} alt="반려동물 프로필 사진" fill />
