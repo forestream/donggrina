@@ -12,8 +12,9 @@ import PetSelect from '@/components/diaries/pet-select';
 import PetCheckbox from '@/components/diaries/pet-checkbox';
 import ImageSkeleton from '@/components/skeleton/image/';
 import { useRouter } from 'next/router';
+import WeatherItem from '../jihye/diary-edit-weather';
 
-interface DiaryData {
+export interface DiaryData {
   content: string;
   weather: string;
   isShare: boolean;
@@ -92,6 +93,7 @@ const DiaryCreate: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<DiaryData & FieldValues> = async (data) => {
+    console.log(data);
     const completeData = { ...data, images: imageIds };
     try {
       const response = await postDiaries(completeData);
@@ -160,7 +162,7 @@ const DiaryCreate: React.FC = () => {
 
         <hr className={styles.division} />
 
-        <div className={styles.weatherContainer}>
+        {/* <div className={styles.weatherContainer}>
           <div className={styles.weather}>
             <img src="/images/diaries/bar.svg" alt="Weather bar" />
             날씨
@@ -177,7 +179,8 @@ const DiaryCreate: React.FC = () => {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
+        <WeatherItem setValue={setValue} />
 
         <div className={styles.imagesContainer}>
           {Array.from({ length: 5 }).map((_, index) => (

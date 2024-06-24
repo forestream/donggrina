@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './diary-edit-pets.module.scss';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
-import DiaryEditPetsItem from '@/components/diaries/edit/diary-edit-pets-item';
+import DiaryEditPetsItem from '@/components/diaries/edit/pets/diary-edit-pets-item';
+import styles from './diary-edit-pet-list.module.scss';
 
-export default function DiaryEditPets() {
+export default function DiaryEditPetList() {
   const petsQuery = usePetsQuery();
 
   return (
