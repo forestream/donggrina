@@ -1,20 +1,27 @@
 .petProfile {
   display: flex;
   align-items: center;
-  gap: 12px;
-  .imgBox {
-    position: relative;
-    width: 41px;
-    height: 41px;
-    img {
-      border-radius: 50%;
-      border: 2px solid var(--pet-border);
+  justify-content: space-between;
+  width: 100%;
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .imgBox {
+      position: relative;
+      width: 41px;
+      height: 41px;
+      img {
+        border-radius: 50%;
+        border: 2px solid var(--pet-border);
+      }
     }
-  }
-  p {
-    font-family: 'LaundryGothic';
-    font-weight: 700;
-    font-size: 24px;
+    p {
+      font-family: 'LaundryGothic';
+      font-weight: 700;
+      font-size: 24px;
+    }
   }
 }
 .linkButton {
