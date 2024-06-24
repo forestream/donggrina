@@ -32,7 +32,7 @@ export default function Content({ category, content }: ContentProps) {
         return styles.foodContent;
     }
   };
-  const getTitleAndContent = (): { title: string; content: React.ReactNode } => {
+  const getTitleAndContent = () => {
     switch (category) {
       case '간식':
         return { title: '간식', content: content.snack };
