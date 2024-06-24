@@ -74,4 +74,6 @@ export default function DiaryEditPage() {
   );
 }
 
-export const getServersideProps = () => {};
+export const getServersideProps = () => {
+
+} satisfies GetServersideProps
