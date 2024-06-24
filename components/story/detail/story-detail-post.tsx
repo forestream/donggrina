@@ -6,15 +6,13 @@ import StoryItemInfo from '@/components/story/item/story-item-info';
 import StoryItemSwiper from '@/components/story/item/story-item-swiper';
 import StoryDetailComments from '@/components/story/detail/comments/story-detail-comments';
 import StoryDetailAddComment from '@/components/story/detail/add-comment/story-detail-add-comment';
-import useRouterId from '@/hooks/utils/use-router-id';
 
 interface StoryDetailPostProps {
-  id: string;
+  storyId: number;
 }
 
 export default function StoryDetailPost(props: StoryDetailPostProps) {
-  const storyId = +useRouterId(props.id || 'storyId');
-  const detailQuery = useFetchDetailStory(storyId);
+  const detailQuery = useFetchDetailStory(props.storyId);
   const { replyOwner, handleReplyClick, handleReplyReset } = useReplyOwner();
 
   const isImage = detailQuery.data!.images.length !== 0;
@@ -26,9 +24,9 @@ export default function StoryDetailPost(props: StoryDetailPostProps) {
     <>
       <StoryItemHeader {...detailQuery.data!} />
       {isImage && <StoryItemSwiper images={detailQuery.data!.images} />}
-      <StoryItemInfo {...detailQuery.data!} storyId={storyId} commentCount={totalCommentcount} />
+      <StoryItemInfo {...detailQuery.data!} storyId={props.storyId} commentCount={totalCommentcount} />
       <StoryDetailComments comments={detailQuery.data!.comments} onReplyClick={handleReplyClick} />
-      <StoryDetailAddComment replyOwner={replyOwner} onReplyReset={handleReplyReset} />
+      <StoryDetailAddComment replyOwner={replyOwner} onReplyReset={handleReplyReset} storyId={props.storyId} />
     </>
   );
 }

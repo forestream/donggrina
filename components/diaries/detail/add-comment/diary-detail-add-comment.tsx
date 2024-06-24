@@ -1,5 +1,4 @@
 import { FormEvent, FormEventHandler, KeyboardEventHandler, useEffect } from 'react';
-import useRouterId from '@/hooks/utils/use-router-id';
 import useTextarea from '@/hooks/utils/use-textarea';
 import styles from './diary-detail-add-comment.module.scss';
 import useCommentPostMutation from '@/hooks/queries/diary/use-comment-post-mutation';
@@ -7,12 +6,12 @@ import useCommentPostMutation from '@/hooks/queries/diary/use-comment-post-mutat
 interface DiaryDetailAddCommentProps {
   replyOwner: { author: string; replyId: number } | null;
   onReplyReset: () => void;
+  diaryId: number;
 }
 
 export default function DiaryDetailAddComment(props: DiaryDetailAddCommentProps) {
-  const diaryId = +useRouterId('diaryId');
   const { ref, value, isDisbaled, handleValueChange, handleResizeHeight, handleResetValue } = useTextarea();
-  const commentMutation = useCommentPostMutation(String(diaryId));
+  const commentMutation = useCommentPostMutation(String(props.diaryId));
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();

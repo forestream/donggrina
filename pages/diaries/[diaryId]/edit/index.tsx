@@ -5,7 +5,6 @@ import MemoItem from '@/components/diaries/edit/memo';
 import WeatherItem from '@/components/diaries/edit/diary-edit-weather';
 import DiaryEditImage from '@/components/diaries/edit/diary-edit-image/diary-edit-image';
 import DiaryEditShare from '@/components/diaries/edit/diary-edit-share/diary-edit-share';
-import Button from '@/components/common/button/button';
 import styles from './index.module.scss';
 import diaryApiInstance from '@/api/diaries';
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
@@ -15,6 +14,7 @@ import { fetchPets } from '@/api/calendar/request';
 import DiaryEditDate from '@/components/diaries/edit/diary-edit-date';
 import { useRouter } from 'next/router';
 import { useUpdateDiary } from '@/hooks/queries/diary/mutation';
+import classNames from 'classnames';
 
 interface FormFields {
   pets: number[];
@@ -39,7 +39,7 @@ export default function DiaryEditPage(props: InferGetServerSidePropsType<typeof 
       date: '',
     },
   });
-
+  const { isValid } = methods.formState;
   const onSubmit = async (data: FormFields) => {
     const petsIds = data.pets.map((pet: number) => +pet);
     const transformedData = {
@@ -64,12 +64,16 @@ export default function DiaryEditPage(props: InferGetServerSidePropsType<typeof 
           <WeatherItem />
           <DiaryEditImage images={props.diaryData.contentImages} />
           <DiaryEditShare />
-          <DiaryEditDate />
+          <DiaryEditDate initialDate={props.diaryData.date} />
 
           <div className={styles.button}>
-            <Button className="primary" type="submit" round>
+            <button
+              className={classNames(styles.submit, {
+                [styles.disabled]: !isValid,
+              })}
+            >
               등록하기
-            </Button>
+            </button>
           </div>
         </form>
       </FormProvider>

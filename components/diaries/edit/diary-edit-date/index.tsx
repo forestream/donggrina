@@ -6,7 +6,11 @@ import { useEffect, useState } from 'react';
 import { DateTime } from '@/types/calendar';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 
-export default function DiaryEditDate() {
+interface DiaryEditDateProps {
+  initialDate: string;
+}
+
+export default function DiaryEditDate({ initialDate }: DiaryEditDateProps) {
   const {
     register,
     watch,
@@ -16,12 +20,12 @@ export default function DiaryEditDate() {
   } = useFormContext();
 
   const [dateTime, setDateTime] = useState<DateTime>({
-    year: null,
-    month: null,
-    date: null,
-    ampm: null,
-    hour: null,
-    minute: null,
+    year: +initialDate.slice(0, 4),
+    month: +initialDate.slice(5, 7),
+    date: +initialDate.slice(8, 10),
+    ampm: '오전',
+    hour: 12,
+    minute: 0,
   });
 
   useEffect(() => {

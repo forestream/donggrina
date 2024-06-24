@@ -1,4 +1,12 @@
-.button {
-  margin: 0 24px;
-  height: 46px;
+.submit {
+  width: 100%;
+  padding: 14px;
+  color: var(--button-color);
+  background-color: var(--main-color);
+  border-radius: 9999px;
+}
+
+.disabled {
+  background-color: var(--disabled-color);
+  color: var(--white);
 }

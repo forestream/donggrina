@@ -6,10 +6,6 @@ import { useFormContext } from 'react-hook-form';
 
 type WeatherType = (typeof WEATHER_TYPES)[number];
 
-interface WeatherItem {
-  defaultWeather?: string;
-}
-
 export default function WeatherItem() {
   const { setValue, watch } = useFormContext<{ weather: string }>();
 

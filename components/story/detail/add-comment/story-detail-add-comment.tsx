@@ -1,16 +1,15 @@
 import { FormEvent, FormEventHandler, KeyboardEventHandler, useEffect } from 'react';
 import { useCreateComment } from '@/hooks/queries/story/mutation';
-import useRouterId from '@/hooks/utils/use-router-id';
 import useTextarea from '@/hooks/utils/use-textarea';
 import styles from './story-detail-add-comment.module.scss';
 
 interface StoryDetailAddCommentProps {
   replyOwner: { author: string; replyId: number } | null;
   onReplyReset: () => void;
+  storyId: number;
 }
 
 export default function StoryDetailAddComment(props: StoryDetailAddCommentProps) {
-  const storyId = +useRouterId('storyId');
   const { ref, value, isDisbaled, handleValueChange, handleResizeHeight, handleResetValue } = useTextarea();
   const commentMutation = useCreateComment();
 
@@ -23,7 +22,7 @@ export default function StoryDetailAddComment(props: StoryDetailAddCommentProps)
       ? { content: value, parentCommentId: props.replyOwner.replyId }
       : { content: value, parentCommentId: null };
 
-    commentMutation.mutate({ diaryId: storyId, data });
+    commentMutation.mutate({ diaryId: props.storyId, data });
     handleResetValue();
     handleResizeHeight();
     props.onReplyReset();

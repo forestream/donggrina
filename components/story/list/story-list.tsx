@@ -11,9 +11,6 @@ interface StoryListProps {
 export default function StoryList(props: StoryListProps) {
   return (
     <ul className={styles.wrapper}>
-<<<<<<< HEAD
-      {props.data.map((page) => page.response.map((story) => <StoryItem key={story.diaryId} {...story} />))}
-=======
       {props.data.map((page) =>
         page.response.map((story, index) => {
           return (
@@ -29,7 +26,6 @@ export default function StoryList(props: StoryListProps) {
           );
         }),
       )}
->>>>>>> 7c494cf1b7948d5de365b5ca20fb4e18cbf5c0cc
     </ul>
   );
 }

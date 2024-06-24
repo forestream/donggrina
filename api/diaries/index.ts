@@ -1,7 +1,6 @@
 import { UpdateCommentData } from '@/types/story/details';
 import { axiosInstance, axiosFileInstance } from '..';
 import { DiaryData } from '@/types/diary/';
-import { UpdateDiaryData } from '@/api/diaries';
 
 interface ImageUpload {
   images: File[];

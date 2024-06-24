@@ -3,8 +3,6 @@ import styles from './pet-radio.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '@/types/calendar';
 import { GrowthDetailsData } from '@/types/growth/details';
-import { DiaryDetail } from '@/types/diary/details';
-import { ChangeEvent } from 'react';
 
 interface PetRadio {
   register:

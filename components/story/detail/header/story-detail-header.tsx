@@ -3,16 +3,16 @@ import CalendarInstance from '@/utils/date/date.utils';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import styles from './story-detail-header.module.scss';
-import { useRouter } from 'next/router';
 import { useDeleteStory } from '@/hooks/queries/story/mutation';
+import { useRouter } from 'next/router';
 
 interface StoryDetailHeaderProps {
   isMyStory: boolean | undefined;
+  storyId: number;
 }
 
 export default function StoryDetailHeader(props: StoryDetailHeaderProps) {
   const router = useRouter();
-  const storyId = +router.query.storyId!;
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
   const today = CalendarInstance.getToday();
 
@@ -20,12 +20,12 @@ export default function StoryDetailHeader(props: StoryDetailHeaderProps) {
 
   const updateFn = () => {
     // 다이어리 수정 페이지로 이동해야함.
-    router.push(`/diaries/${storyId}/edit`);
+    router.push(`/diaries/${props.storyId}/edit`);
     onCloseToggle();
   };
 
   const deleteFn = () => {
-    deleteStoryMutation.mutate(storyId);
+    deleteStoryMutation.mutate(props.storyId);
     router.push(`/story`);
     onCloseToggle();
   };
