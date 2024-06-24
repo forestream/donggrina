@@ -32,7 +32,6 @@ export default function CalendarPage() {
   const monthlyTodosQuery = useMonthlyTodosQuery(yearMonth);
   const dailyTodosQuery = useDailyTodosQuery(yearMonthDate);
 
-  if (!dailyTodosQuery.isFetchedAfterMount) return;
   if (dailyTodosQuery.isPending || monthlyTodosQuery.isPending) return <p>loading</p>;
   if (dailyTodosQuery.isError || monthlyTodosQuery.isError) return <p>Error</p>;
 
@@ -60,7 +59,7 @@ export default function CalendarPage() {
         </div>
         <CalendarMonthly monthlyTodos={monthlyTodosQuery.data} />
         <CalendarTodoDate />
-        <CalendarTodos dailyTodos={dailyTodosQuery.data} />
+        {dailyTodosQuery.isFetchedAfterMount && <CalendarTodos dailyTodos={dailyTodosQuery.data} />}
         <CreateTodoButton />
       </Calendar>
     </main>
