@@ -4,6 +4,7 @@ import Content from '../diary-content/content';
 import Response from '../diary-content/response';
 import Kebab from '../diary-content/kebab';
 import ContentImage from '../diary-content/content-image';
+import DiarySkeleton from '../../skeleton/diary/diary-list/';
 import { useDiaries } from '@/hooks/queries/diary/use-diary-query';
 import { useRouter } from 'next/router';
 
@@ -16,7 +17,7 @@ const DiaryContent: React.FC<DiaryContentProps> = ({ date }) => {
 
   const router = useRouter();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <DiarySkeleton />;
   if (!data || data.length === 0) return <></>;
   if (isError) return <p>error</p>;
 
