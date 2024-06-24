@@ -4,10 +4,10 @@ import { GrowthDetailsContent } from '@/types/growth/details';
 
 interface ContentProps {
   category: string;
-  content: GrowthDetailsContent;
+  content?: GrowthDetailsContent;
 }
 
-export default function Content({ category, content }: ContentProps) {
+export default function Content({ category, content = {} as GrowthDetailsContent }: ContentProps) {
   const getTitleColor = (category: string) => {
     switch (category) {
       case '간식':
@@ -32,13 +32,16 @@ export default function Content({ category, content }: ContentProps) {
         return styles.foodContent;
     }
   };
-  const getTitleAndContent = () => {
+  const getTitleAndContent = (): { title: string; content: React.ReactNode } => {
     switch (category) {
       case '간식':
         return { title: '간식', content: content.snack };
       case '이상 증상':
         return { title: '이상 증상', content: content.abnormalSymptom };
       default:
+        if (!content.food) {
+          throw new Error('content.food 속성이 정의되지 않았습니다.');
+        }
         return { title: '사료', content: content.food };
     }
   };
