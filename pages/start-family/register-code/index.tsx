@@ -17,7 +17,7 @@ export default function RegisterCode() {
     mode: 'onBlur',
   });
   const { handleSubmit, formState } = methods;
-  const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
+  const buttonClassCondition = formState.isValid ? 'primary' : 'disabled';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       await myFamilyApi.myFamilyAddMember(data).then(async () => {

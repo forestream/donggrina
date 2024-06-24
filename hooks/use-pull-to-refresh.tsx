@@ -7,7 +7,7 @@ interface UsePullReloadProps {
 }
 
 export default function usePullReload({ queryClient, containerRef }: UsePullReloadProps) {
-  const [test, setTest] = useState(false);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     let isDragging = false;
     let startY = 0;
@@ -27,7 +27,7 @@ export default function usePullReload({ queryClient, containerRef }: UsePullRelo
         if (distance < 0) distance = 0;
         if (distance > 80) {
           distance = 80;
-          setTest(true);
+          setVisible(true);
         } // 최대 높이를 200px로 제한
         if (containerRef.current) {
           containerRef.current.style.setProperty('padding-top', `${distance}px`);
@@ -43,7 +43,7 @@ export default function usePullReload({ queryClient, containerRef }: UsePullRelo
       distance = 0;
       if (containerRef.current) {
         containerRef.current.style.setProperty('padding-top', `0px`);
-        setTest(false);
+        setVisible(false);
       }
     };
 
@@ -59,5 +59,5 @@ export default function usePullReload({ queryClient, containerRef }: UsePullRelo
       document.removeEventListener('mouseup', handleMouseUp);
     };
   }, [queryClient, containerRef]);
-  return test;
+  return visible;
 }

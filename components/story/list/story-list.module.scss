@@ -1,5 +1,12 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 40px 0;
+  // gap: 40px 0;
+}
+.storyList {
+  padding: 20px 0;
+  border-bottom: 2px solid #eeeeee;
+  &:first-of-type {
+    padding-top: 0;
+  }
 }

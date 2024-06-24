@@ -9,6 +9,7 @@ import usePullReload from '@/hooks/use-pull-to-refresh';
 import Spinner from '@/components/spinner/spinner';
 import Header from '@/components/common/Header';
 import { AnimatePresence } from 'framer-motion';
+import BackGround from '@/components/background/background';
 
 declare global {
   interface Window {
@@ -27,16 +28,18 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <QueryClientProvider client={queryClient}>
         <div id="__wrap">
-          <main id="__container" ref={containerRef}>
-            <Header router={router} />
-            {isDragging && <Spinner />}
-            <AnimatePresence mode="wait">
-              <div key={router.route}>
-                <Component {...pageProps} key={router.route} />
-              </div>
-            </AnimatePresence>
-            {isNav(router) && <Nav />}
-          </main>
+          <BackGround>
+            <main id="__container" ref={containerRef}>
+              <Header router={router} />
+              {isDragging && <Spinner />}
+              <AnimatePresence mode="wait">
+                <div key={router.route}>
+                  <Component {...pageProps} key={router.route} />
+                </div>
+              </AnimatePresence>
+              {isNav(router) && <Nav />}
+            </main>
+          </BackGround>
         </div>
       </QueryClientProvider>
     </>

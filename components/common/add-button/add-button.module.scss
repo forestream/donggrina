@@ -3,10 +3,17 @@
   height: 50px;
   position: fixed;
   background-color: var(--main-color);
-  right: calc(50% - var(--global-width) / 2 + 25px);
+  right: calc(50% - var(--global-width) - 145px);
   bottom: 84px;
   border-radius: 9999px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  @media screen and (max-width: 1257px) {
+    right: calc(50% - var(--global-width) + 235px);
+  }
+  @media screen and (max-width: 430px) {
+    right: 20px;
+  }
 }
