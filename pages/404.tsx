@@ -1,8 +1,8 @@
 import styles from './404.module.scss';
 import Button from '@/components/common/button/button';
-import ErrorSVG from '@/public/images/404/Group 2948.svg';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 export default function Page404() {
   const router = useRouter();
@@ -20,6 +20,9 @@ export default function Page404() {
       },
     },
   };
+  useEffect(() => {
+    if (router.route === '/404') router.replace('/404');
+  }, []);
   return (
     <article className={styles.page404}>
       <section>
