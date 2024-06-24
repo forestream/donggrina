@@ -1,16 +1,17 @@
 import React, { RefObject } from 'react';
 import Button from '@/components/common/button/button';
-import styles from './image-upload-modal.module.scss';
+import CloseSVG from '@/public/images/pets/plus-circle.svg';
 import { useUpdateProfile } from '@/hooks/queries/my/user/mutation';
+import styles from './image-upload-modal.module.scss';
 import { AnimatePresence } from 'framer-motion';
 import { ModalType } from '@/hooks/use-modal';
-import CloseSVG from '@/public/images/pets/plus-circle.svg';
 
 interface ModalImageProps extends ModalType {
   uploadRef: RefObject<HTMLInputElement>;
   onPreview: () => void;
   imageId: number | null;
   nickname: string;
+  onCloseModal: () => void;
 }
 
 export default function ImageUploadModal(props: ModalImageProps) {
@@ -19,8 +20,10 @@ export default function ImageUploadModal(props: ModalImageProps) {
     props.handleModal(false);
   };
   const profileMutation = useUpdateProfile();
-  const handleResetImage = () =>
-    profileMutation.mutate({ imageId: null, nickname: props.nickname }, { onSuccess: () => props.handleModal(false) });
+  const handleResetImage = async () => {
+    await profileMutation.mutateAsync({ imageId: null, nickname: props.nickname });
+    props.onCloseModal();
+  };
 
   return (
     <AnimatePresence>

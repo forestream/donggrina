@@ -14,9 +14,10 @@ import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
 import CompleteModal from '../../../components/growth/complete-modal';
 import Image from 'next/image';
-import MemoItem from '@/components/diaries/jihye/diary-edit-memo';
+
 import ImageSkeleton from '@/components/skeleton/image/';
 import { AnimatePresence } from 'framer-motion';
+import MemoItem from '@/components/diaries/edit/memo';
 
 export default function CreateGrowth() {
   const [Modal, handleModal, isOpen] = useModal();

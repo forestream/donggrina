@@ -1,0 +1,33 @@
+.outer {
+  width: 100%;
+  padding: 0 12px 24px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+.todoIconContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.todoIcon {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background-color: var(--main-color);
+}
+
+.save {
+  margin-top: 20px;
+  background-color: var(--main-color);
+  width: 100%;
+  border-radius: 9999px;
+  padding: 14px;
+}

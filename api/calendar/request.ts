@@ -41,9 +41,8 @@ export async function deleteTodoById(calendarId: string) {
   await axiosInstance.delete(`/calendar/${calendarId}`);
 }
 
-export async function fetchPets(): Promise<Pet[]> {
-  const { data } = await axiosInstance.get(`/my/pets`);
-  return data.data;
+export async function fetchPets() {
+  return (await axiosInstance.get(`/my/pets`)).data.data as Pet[];
 }
 
 export async function putTodoFinished(calendarId: string) {

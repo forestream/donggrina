@@ -6,20 +6,22 @@ import Image from 'next/image';
 import styles from './story-item-header.module.scss';
 
 export default function StoryItemHeader(
-  props: Pick<Story, 'content' | 'author' | 'authorImage' | 'weather' | 'petImages'>,
+  props: Pick<Story, 'content' | 'author' | 'authorImage' | 'weather' | 'petImages' | 'images'>,
 ) {
   const weather = WEATHER_TYPES.find((weather) => weather.label === props.weather);
 
+  const noImageStyle = props.images.length === 0 ? { marginBottom: '24px' } : undefined;
+
   return (
-    <div className={styles['story-header']}>
+    <div className={styles['story-header']} style={noImageStyle}>
       <div className={styles['story-header__info']}>
         <div className={styles['header-info-owner']}>
           <AvatarImage image={props.authorImage} />
           <AvatarName>{props.author}</AvatarName>
         </div>
         <div className={styles['header-info-pets']}>
-          {props.petImages.map((image) => (
-            <AvatarImage image={image} />
+          {props.petImages.map((image, index) => (
+            <AvatarImage image={image} key={image + index} />
           ))}
         </div>
       </div>
