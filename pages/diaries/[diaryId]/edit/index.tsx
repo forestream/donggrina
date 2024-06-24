@@ -7,6 +7,7 @@ import Suspensive from '@/components/suspensive/suspensive';
 import MemoItem from '@/components/diaries/edit/memo';
 import WeatherItem from '@/components/diaries/edit/diary-edit-weather';
 import DiaryEditImage from '@/components/diaries/edit/diary-edit-image/diary-edit-image';
+import DiaryEditHanbin from '@/components/diaries/edit/diary-edit-hanbin';
 
 export default function DiaryEditPage() {
   const diaryId = +useRouterId('diaryId')!;
@@ -36,6 +37,7 @@ export default function DiaryEditPage() {
           <MemoItem />
           <WeatherItem defaultWeather={diaryQuery.data?.weather} />
           <DiaryEditImage />
+          <DiaryEditHanbin />
         </FormProvider>
 
         <button type="submit">check</button>
