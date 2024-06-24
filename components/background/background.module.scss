@@ -1,3 +1,19 @@
+@mixin skeleton-animation {
+  background: linear-gradient(to right, #aaa, #ddd, #aaa);
+  background-size: 200% 100%;
+  animation: skeleton-gradient 1.5s alternate ease infinite;
+}
+
+@keyframes skeleton-gradient {
+  0% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
 .article {
   display: flex;
   justify-content: center;
@@ -6,11 +22,18 @@
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 24px;
+  @media screen and (max-width: 1257px) {
+    padding: 0;
+  }
   .section {
     display: flex;
     flex-direction: column;
     gap: 145px;
-    width: 633px;
+    width: 640px;
+    @media screen and (max-width: 1257px) {
+      display: none;
+    }
     header {
       z-index: 1;
       padding-top: 37px;
@@ -21,6 +44,7 @@
       display: flex;
       flex-direction: column;
       gap: 26px;
+      flex-shrink: 0;
       h2,
       strong {
         font-size: 72px;
@@ -42,14 +66,18 @@
   width: 1000px;
   height: 892px;
   display: block;
-  background: linear-gradient(45deg, #caf0cd, rgba(212, 249, 215, 0));
+  background: linear-gradient(45deg, #caf0cd, rgba(212, 249, 215, 0), #caf0cd);
+  background-size: 200% 100%;
+  animation: skeleton-gradient 3s alternate infinite;
   border-radius: 50%;
 }
 .smallCircle {
   width: 554px;
   height: 554px;
   display: block;
-  background: linear-gradient(45deg, #caf0cd, rgba(212, 249, 215, 0) 70%);
+  background: linear-gradient(45deg, #caf0cd, rgba(212, 249, 215, 0) 70%, #caf0cd);
+  background-size: 200% 100%;
+  animation: skeleton-gradient 3s alternate infinite;
   border-radius: 50%;
 }
 .circleBox1 {

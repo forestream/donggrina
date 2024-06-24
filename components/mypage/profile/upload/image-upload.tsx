@@ -13,7 +13,6 @@ interface UploadProps {
 export default function ImageUpload(props: UploadProps) {
   const [Modal, handleModal, isOpen] = useModal();
   const { imageId, uploadRef, previewUrl, handlePreview } = useUpload({ handleModal, nickname: props.nickname });
-
   return (
     <div className={styles['image-wrapper']}>
       <button onClick={() => handleModal(true)}>

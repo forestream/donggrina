@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import styles from './background.module.scss';
 import LogoSVG from '@/public/images/header/logo.svg';
 import { motion } from 'framer-motion';
-import { horizontalVariants, textVariants } from '../framer';
+import { textVariants } from '../framer';
 
 interface CircleClassType {
   className: 'circle' | 'smallCircle';
@@ -20,7 +20,7 @@ export default function BackGround({ children }: PropsWithChildren) {
         </motion.header>
         <div className={styles.titleBox}>
           <motion.h2 variants={textVariants} initial="hidden" animate="visible" custom={1}>
-            반려동물 <strong>1등</strong>다이어리
+            반려동물 <strong>1등</strong> 다이어리
             <br />
             <strong>동그리나</strong>
           </motion.h2>

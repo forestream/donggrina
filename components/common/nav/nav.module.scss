@@ -19,7 +19,11 @@
     background-color: var(--white);
     box-shadow: 0 -2px 22px 0 rgba(143, 204, 147, 0.15);
     padding: 0 24px 11px;
-    border-right: 1px solid #32a753;
-    border-left: 1px solid #32a753;
+    border-right: 1px solid var(--container-border);
+    border-left: 1px solid var(--container-border);
+    @media screen and (max-width: 430px) {
+      border-left: none;
+      border-right: none;
+    }
   }
 }

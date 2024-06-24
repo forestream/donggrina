@@ -11,4 +11,7 @@
     line-height: 21px;
     color: var(--text-color-gray);
   }
+  &:focus {
+    outline: none;
+  }
 }
