@@ -18,8 +18,8 @@ export default function CreateFamily() {
   const methods = useForm<FieldValues>({
     mode: 'onBlur',
   });
-  const { handleSubmit, formState } = methods;
-  const buttonClassCondition = formState.isSubmitting ? 'disabled' : 'primary';
+  const { handleSubmit, formState, setError } = methods;
+  const buttonClassCondition = formState.isValid ? 'primary' : 'disabled';
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       await myFamilyApi.myFamilyCreate(data).then(async () => {
@@ -30,7 +30,10 @@ export default function CreateFamily() {
       });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log(error.response!.data);
+        setError('name', {
+          type: 'duplication',
+          message: error.response!.data.message,
+        });
       }
     }
   };
