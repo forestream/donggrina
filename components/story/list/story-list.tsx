@@ -15,6 +15,7 @@ export default function StoryList(props: StoryListProps) {
         page.response.map((story, index) => {
           return (
             <motion.li
+              className={styles.storyList}
               key={story.diaryId}
               custom={index}
               variants={horizontalVariants}

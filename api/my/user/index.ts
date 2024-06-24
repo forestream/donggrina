@@ -7,7 +7,7 @@ class MyPageAPI {
   }
 
   async updateProfile(data: { imageId: number | null; nickname: string }) {
-    console.log(data);
+    // console.log(data);
     return await axiosInstance.put('my/profiles', data);
   }
 }

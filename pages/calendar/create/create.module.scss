@@ -20,6 +20,9 @@
     font-family: 'LaundryGothic';
     color: var(--text-color-gray);
   }
+  &:focus {
+    outline: none;
+  }
 }
 
 .memo {
@@ -34,6 +37,10 @@
   &::placeholder {
     font-family: 'LaundryGothic';
     color: var(--text-color-gray);
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 

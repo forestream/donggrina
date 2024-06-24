@@ -6,12 +6,15 @@
   width: 100%;
   height: 54px;
   max-width: var(--global-width);
-  left: 50%;
   top: 0;
-  transform: translateX(-50%);
-  border-bottom: 1px solid var(--main-color);
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  border-bottom: 2px solid #f6f6f6;
+  border-left: 1px solid var(--container-border);
+  border-right: 1px solid var(--container-border);
+  margin-left: -1px;
+  @media screen and (max-width: 430px) {
+    border-left: none;
+    border-right: none;
+  }
   .leftIcon {
     position: absolute;
     margin: auto 0;
