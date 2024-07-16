@@ -1,7 +1,7 @@
 import React from 'react';
 import DiaryEditPetsItem from '@/components/diaries/edit/pets/diary-edit-pets-item';
 import styles from './diary-edit-pet-list.module.scss';
-import { Pet } from '@/api/calendar/request.type';
+import { Pet } from '@/apis/calendar/request.type';
 
 interface DiaryEditPetListProps {
   pets: Pet[];

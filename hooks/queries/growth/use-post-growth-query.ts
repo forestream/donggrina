@@ -1,4 +1,4 @@
-import GrowthAPI from '@/api/growth';
+import GrowthAPI from '@/apis/growth';
 import { GrowthDetailsData } from '@/types/growth/details';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 

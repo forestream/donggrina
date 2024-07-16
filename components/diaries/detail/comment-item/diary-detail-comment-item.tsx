@@ -6,7 +6,7 @@ import styles from './diary-detail-comment-item.module.scss';
 import Kebab from '@/components/kebab';
 
 import useTextarea from '@/hooks/utils/use-textarea';
-import { Comment } from '@/api/diaries';
+import { Comment } from '@/apis/diaries';
 import DiaryDetailReplyUpdateForm from '../reply/diary-detail-reply-update-form';
 import { useDeleteComment } from '@/hooks/queries/diary/mutation';
 

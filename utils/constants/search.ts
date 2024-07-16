@@ -1,4 +1,4 @@
-import { fetchDiariesByQueries, fetchGrowthsByQueries, fetchTodosByQueries } from '@/api/search';
+import { fetchDiariesByQueries, fetchGrowthsByQueries, fetchTodosByQueries } from '@/apis/search';
 
 export const FILTERS = [
   {

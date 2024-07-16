@@ -1,6 +1,6 @@
 import Button from '@/components/common/button/button';
 import styles from './delete-modal.module.scss';
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
 import { AnimatePresence } from 'framer-motion';

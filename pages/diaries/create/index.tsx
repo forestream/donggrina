@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { FormProvider, useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import classNames from 'classnames';
-import { postDiariesImage, postDiaries } from '@/api/diaries/';
+import { postDiariesImage, postDiaries } from '@/apis/diaries';
 import styles from './create.module.scss';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';

@@ -1,4 +1,4 @@
-import { fetchGroup } from '@/api/search';
+import { fetchGroup } from '@/apis/search';
 import { useQuery } from '@tanstack/react-query';
 
 const useMembersQuery = () =>

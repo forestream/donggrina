@@ -1,4 +1,4 @@
-import { DailyTodo } from '@/api/calendar/request.type';
+import { DailyTodo } from '@/apis/calendar/request.type';
 // import { useCalendarContext } from '../calendar-compound/calendar';
 import CalendarTodo from './calendar-todo';
 // import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';

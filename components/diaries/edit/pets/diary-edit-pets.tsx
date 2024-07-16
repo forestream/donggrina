@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import DiaryEditPetList from '@/components/diaries/edit/pets/diary-edit-pet-list';
 import styles from './diary-edit-pets.module.scss';
-import { Pet } from '@/api/calendar/request.type';
+import { Pet } from '@/apis/calendar/request.type';
 
 interface DiaryEditPetsProps {
   pets: Pet[];

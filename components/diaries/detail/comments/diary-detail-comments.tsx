@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './diary-detail-comments.module.scss';
-import { Comment } from '@/api/diaries';
+import { Comment } from '@/apis/diaries';
 import DiaryDetailCommentItem from '../comment-item/diary-detail-comment-item';
 
 interface DiaryDetailCommentsProps {

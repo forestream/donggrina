@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styles from './diary-edit-image.module.scss';
 import { useRef, useState } from 'react';
-import { diaryImageUpload } from '@/api/image-api';
+import { diaryImageUpload } from '@/apis/image-api';
 import { useFormContext } from 'react-hook-form';
 
 interface DiaryEditImageProps {

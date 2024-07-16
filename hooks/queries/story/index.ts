@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import storyApiInstance from '@/api/story';
+import storyApiInstance from '@/apis/story';
 
 interface Story {
   page?: number;

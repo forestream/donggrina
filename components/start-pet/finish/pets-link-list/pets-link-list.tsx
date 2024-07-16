@@ -1,7 +1,7 @@
 import Hyperlink from '@/components/common/button/hyperlink';
 import Button from '@/components/common/button/button';
 import useModal from '@/hooks/use-modal';
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import { useState } from 'react';
 import Share from '@/components/common/share/share';
 

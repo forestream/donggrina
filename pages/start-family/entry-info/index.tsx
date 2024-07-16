@@ -6,8 +6,8 @@ import styles from './index.module.scss';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import MyFamilyApi from '@/api/my/groups';
-import myPageApiInstance from '@/api/my/user';
+import MyFamilyApi from '@/apis/my/groups';
+import myPageApiInstance from '@/apis/my/user';
 import { setCookie } from 'cookies-next';
 import SwitchScreen from '@/components/framer/switch-screen/switch-screen';
 
