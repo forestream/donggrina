@@ -7,7 +7,7 @@ export default function LoginTop() {
       <dt className={styles.imgBox}>
         <Image src="/images/login/logo.png" alt="로고" layout="fill" />
       </dt>
-      <dd className={styles.text}>동그리나와 관련된 소개 문구</dd>
+      <dd className={styles.text}>동그리나</dd>
     </dl>
   );
 }

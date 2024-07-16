@@ -16,6 +16,11 @@ const nextConfig = {
         hostname: 'donggrina.s3.ap-northeast-2.amazonaws.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+      },
     ],
   },
 };

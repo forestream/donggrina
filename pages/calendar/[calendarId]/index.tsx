@@ -8,11 +8,12 @@ import Image from 'next/image';
 import Button from '@/components/common/button/button';
 import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-profile';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
-import useTodoQuery from '@/hooks/queries/calendar/use-todo-query';
+// import useTodoQuery from '@/hooks/queries/calendar/use-todo-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 import { CALENDAR_CATEGORIES } from '@/utils/constants/calendar-constants';
+import { TODO_BY_ID } from '@/lib/mock/mock';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -24,7 +25,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function CalendarById({ calendarId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const queryClient = useQueryClient();
-  const { data: todo, isPending, isError, error } = useTodoQuery(calendarId);
+  // const { data: todo, isPending, isError, error } = useTodoQuery(calendarId);
+  const {
+    data: todo,
+    isPending,
+    isError,
+    error,
+  } = { data: TODO_BY_ID, isPending: false, isError: false, error: { message: '' } };
   const finishedMutation = useTodoFinishedMutation(todo);
   const deleteMutation = useTodoDeleteMutation(todo);
 
