@@ -21,6 +21,22 @@
     top: 54%;
     transform: translateY(-50%);
   }
+  .clicked {
+    animation: 500ms ease-in-out 1 oscillate;
+
+    @keyframes oscillate {
+      0%,
+      40%,
+      80% {
+        transform: translateX(20%) translateY(-50%);
+      }
+      20%,
+      60%,
+      100% {
+        transform: translateX(0%) translateY(-50%);
+      }
+    }
+  }
   .mypageIcon {
     left: 25px;
   }
