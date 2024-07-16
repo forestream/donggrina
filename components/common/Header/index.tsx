@@ -1,24 +1,31 @@
-import Image from 'next/image';
-import styles from './Header.module.scss';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { NextRouter } from 'next/router';
+import React from 'react';
+import BackHeader from './back-header';
+import MainHeader from './main-header';
+import CreateHeader from './create-header';
 
-export function Header() {
-  const router = useRouter();
+interface HeaderProps {
+  router: NextRouter;
+}
+export default function Header({ router }: HeaderProps) {
+  const MainPaths = ['/calendar', '/family', '/diaries', '/growth', '/story'];
 
-  const handleClick = () => {
-    router.back();
-  };
-  return (
-    <header className={styles.header}>
-      <button className={styles.leftArrow} onClick={handleClick}>
-        <Image src="/images/header/arrow-left-black.svg" alt="뒤로 가기" fill />
-      </button>
-      <div className={styles.imageBox}>
-        <Link href="/family">
-          <Image src="/images/header/logo.svg" alt="로고" fill />
-        </Link>
-      </div>
-    </header>
-  );
+  if (router.pathname === '/login' || router.pathname === '/landing' || router.pathname === '/404') {
+    return <BackHeader />;
+  } else if (MainPaths.some((path) => router.pathname === path)) {
+    return <MainHeader />;
+  } else {
+    let headerName = '';
+    if (router.pathname.includes('edit') || router.pathname.includes('create')) {
+      if (router.pathname.includes('/calendar')) {
+        headerName = '일정 등록';
+      } else if (router.pathname.includes('/diaries')) {
+        headerName = '다이어리';
+      } else if (router.pathname.includes('/growth')) {
+        headerName = '성장기록';
+      }
+    }
+
+    return <CreateHeader headerName={headerName} />;
+  }
 }

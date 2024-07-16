@@ -1,0 +1,46 @@
+@import '../../skeleton-animation.module.scss';
+
+.container {
+  width: 312px;
+  height: 72px;
+  border-radius: 10px;
+  border: 1px solid var(--main-color);
+  padding: 16px 13px 14px;
+  display: flex;
+  align-items: center;
+  gap: 87px;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .category {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      @include skeleton-animation;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      .title {
+        width: 104px;
+        height: 18px;
+        border-radius: 10px;
+        @include skeleton-animation;
+      }
+      .profile {
+        width: 124px;
+        height: 20px;
+        border-radius: 10px;
+        @include skeleton-animation;
+      }
+    }
+  }
+  .check {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    border: 2px solid #9e9e9e;
+  }
+}

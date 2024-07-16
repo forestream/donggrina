@@ -1,4 +1,4 @@
-import { fetchPets } from '@/api/calendar/request';
+import { fetchPets } from '@/apis/calendar/request';
 import { useQuery } from '@tanstack/react-query';
 
 const usePetsQuery = () =>

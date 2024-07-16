@@ -5,10 +5,10 @@ import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 import CalendarInstance from '@/utils/date/date.utils';
 import useSelect from '@/hooks/use-select';
 import CalendarTodos from '@/components/calendar-monthly/calendar-todos';
-import Link from 'next/link';
-import useMonthlyTodosQuery from '@/hooks/queries/calendar/use-montly-todos-query';
-import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
+// import useMonthlyTodosQuery from '@/hooks/queries/calendar/use-montly-todos-query';
+// import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 import CalendarMonthly from '@/components/calendar-monthly/calendar-monthly';
+import { DAILY_TODOS, MONTLY_TODOS } from '@/lib/mock/mock';
 
 export default function CalendarPage() {
   const { selectedItem: selectedYear, handleSelectedItem: onSelectedYear } = useSelect<number>(
@@ -27,17 +27,25 @@ export default function CalendarPage() {
     onSelectedDate(CalendarInstance.currentDate);
   };
 
-  const yearMonth = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}`;
-  const yearMonthDate = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
+  // const yearMonth = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}`;
+  // const yearMonthDate = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
 
-  const monthlyTodosQuery = useMonthlyTodosQuery(yearMonth);
-  const dailyTodosQuery = useDailyTodosQuery(yearMonthDate);
+  // const monthlyTodosQuery = useMonthlyTodosQuery(yearMonth);
+  // const dailyTodosQuery = useDailyTodosQuery(yearMonthDate);
+  const monthlyTodosQuery = { data: MONTLY_TODOS, isPending: false, isError: false, error: { message: '' } };
+  const dailyTodosQuery = {
+    data: DAILY_TODOS,
+    isPending: false,
+    isError: false,
+    error: { message: '' },
+    isFetchedAfterMount: true,
+  };
+
+  if (dailyTodosQuery.isPending || monthlyTodosQuery.isPending) return <p>loading</p>;
+  if (dailyTodosQuery.isError || monthlyTodosQuery.isError) return <p>Error</p>;
 
   return (
     <main className={styles.outer}>
-      <Link href="/calendar/search" style={{ position: 'fixed', top: '20px', right: '40%', zIndex: '100' }}>
-        검색
-      </Link>
       <Calendar
         value={{
           year: selectedYear,
@@ -60,7 +68,7 @@ export default function CalendarPage() {
         </div>
         <CalendarMonthly monthlyTodos={monthlyTodosQuery.data} />
         <CalendarTodoDate />
-        <CalendarTodos dailyTodos={dailyTodosQuery.data!} />
+        {dailyTodosQuery.isFetchedAfterMount && <CalendarTodos dailyTodos={dailyTodosQuery.data} />}
         <CreateTodoButton />
       </Calendar>
     </main>

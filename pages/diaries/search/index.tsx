@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './search.module.scss';
 import SearchForm from '@/components/search/search-form';
-import { DiaryByQueries } from '@/api/search/index.type';
+import { DiaryByQueries } from '@/apis/search/index.type';
 import Content from '@/components/diaries/diary-content/content';
 import Response from '@/components/diaries/diary-content/response';
 import Kebab from '@/components/diaries/diary-content/kebab';
@@ -16,6 +16,7 @@ export default function Search() {
   return (
     <main className={styles.outer}>
       <SearchForm service="diary" onSubmit={handleResults} />
+
       {results.map((result) => (
         <div key={result.diaryId} className={styles.diaryContent}>
           <div className={styles.leftContainer}>

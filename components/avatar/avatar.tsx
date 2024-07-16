@@ -2,19 +2,26 @@ import React, { ImgHTMLAttributes, PropsWithChildren } from 'react';
 import Image from 'next/image';
 import styles from './avatar.module.scss';
 
-export default function Avatar(props: PropsWithChildren<AvatarImageProps>) {
-  return (
-    <div className={styles.layout}>
-      <AvatarImage {...props} />
-      <AvatarName>배수지</AvatarName>
-    </div>
-  );
-}
-
 interface AvatarImageProps extends Pick<ImgHTMLAttributes<HTMLImageElement>, 'alt'> {
-  image?: string;
+  image: string;
   size?: 'small';
   border?: 'gray' | 'main';
+}
+
+interface AvatarProps {
+  image: string;
+  size?: 'small';
+  border?: 'gray' | 'main';
+  name: string;
+}
+
+export default function Avatar(props: PropsWithChildren<AvatarProps>) {
+  return (
+    <div className={styles.layout}>
+      <AvatarImage image={props.image} size={props.size} border={props.border} />
+      <AvatarName>{props.name}</AvatarName>
+    </div>
+  );
 }
 
 export function AvatarImage(props: AvatarImageProps) {

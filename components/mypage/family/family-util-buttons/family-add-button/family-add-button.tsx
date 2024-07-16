@@ -1,4 +1,4 @@
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import Button from '@/components/common/button/button';
 import Share from '@/components/common/share/share';
 import useModal from '@/hooks/use-modal';
@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function FamilyAddButton() {
   const myFamilyApi = new MyFamilyApi();
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isOpen] = useModal();
   const [code, setCode] = useState('');
   const handleGetCode = async () => {
     try {
@@ -25,7 +25,7 @@ export default function FamilyAddButton() {
       <Button type="button" className="primary" round onClick={openModal}>
         가족 추가
       </Button>
-      <Share Modal={Modal} handleModal={handleModal} code={code} />
+      <Share Modal={Modal} handleModal={handleModal} code={code} isOpen={isOpen} />
     </>
   );
 }

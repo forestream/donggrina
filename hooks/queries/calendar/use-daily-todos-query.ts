@@ -1,4 +1,4 @@
-import { fetchDailyTodos } from '@/api/calendar/request';
+import { fetchDailyTodos } from '@/apis/calendar/request';
 import { useQuery } from '@tanstack/react-query';
 
 const useDailyTodosQuery = (yearMonthDate: string) =>

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import GrowthAPI from '@/api/growth';
+import GrowthAPI from '@/apis/growth';
 
 const growthAPI = new GrowthAPI();
 
@@ -14,6 +14,30 @@ export const useGetGrowthDetailQuery = (growthId: number) => {
   return useQuery({
     queryKey: ['growth', growthId],
     queryFn: () => growthAPI.getGrowthDetails(growthId),
+    initialData: {
+      data: {
+        id: 0,
+        writerProfileImageUrl: '',
+        petProfileImageUrl: '',
+        category: '',
+        content: {
+          food: '',
+          snack: '',
+          abnormalSymptom: '',
+          hospitalName: '',
+          symptom: '',
+          diagnosis: '',
+          medicationMethod: '',
+          price: 0,
+          memo: '',
+        },
+        dateTime: '',
+        nickname: '',
+        isMine: false,
+        petName: '',
+        date: '',
+      },
+    },
   });
 };
 

@@ -1,4 +1,4 @@
-import { fetchTodosByQueries } from '@/api/calendar/request';
+import { fetchTodosByQueries } from '@/apis/search';
 import { useQuery } from '@tanstack/react-query';
 
 const useSearchTodosQuery = (query: string) =>

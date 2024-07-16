@@ -1,5 +1,5 @@
 .outer {
-  padding: 54px 12px 100px;
+  padding: 54px 24px 100px;
   height: 100vh;
   overflow: scroll;
   scrollbar-width: none;
@@ -8,6 +8,8 @@
 .filters {
   display: flex;
   gap: 6px;
+  width: 100%;
+  margin: 28px 0 12px;
 }
 
 .diaryContent {

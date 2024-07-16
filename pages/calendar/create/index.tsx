@@ -4,7 +4,6 @@ import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
@@ -12,16 +11,20 @@ import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
 import Button from '@/components/common/button/button';
 import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
+import CalendarCategory from '@/components/calendar-monthly/calendar-category';
+import ImageSkeleton from '@/components/skeleton/image/';
 
 export default function Create() {
-  const { data: pets } = usePetsQuery();
+  const { data: pets, isLoading } = usePetsQuery();
   const postMutation = useTodoPostMutation();
 
   const {
+    reset,
     setValue,
     trigger,
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<IFormInput>();
 
@@ -36,6 +39,14 @@ export default function Create() {
 
   const [DateTimeModal, handleDateTimeModal] = useModal();
   const [SuccessModal, handleSuccessModal] = useModal();
+  const handleCloseDateTimeModal = () => {
+    handleDateTimeModal(false);
+  };
+
+  useEffect(() => {
+    if (!watch('dateTime')) return;
+    trigger('dateTime');
+  }, [watch('dateTime')]);
 
   const updateDateTime = (newDateTime: DateTime) => {
     setDateTime((prevDateTime) => ({
@@ -53,7 +64,10 @@ export default function Create() {
     postMutation.mutate(
       { ...data, dateTime: getDateTimeBackend(data.dateTime) },
       {
-        onSuccess: () => handleSuccessModal(true),
+        onSuccess: () => {
+          handleSuccessModal(true);
+          reset();
+        },
       },
     );
   };
@@ -82,27 +96,18 @@ export default function Create() {
         <div className={styles.petSelector}>
           반려동물 선택
           <div className={styles.petLabelContainer}>
-            {pets.map((pet, i) => (
-              <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
-            ))}
+            {isLoading ? (
+              <ImageSkeleton />
+            ) : (
+              pets.map((pet, i) => <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />)
+            )}
           </div>
           {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
         </div>
 
         <div className={styles.categorySelectorOuter}>
           <div className={styles.categorySelectorInner}>
-            {TODO_CATEGORY.map((category) => (
-              <label key={category} className={styles.categoryLabel}>
-                <input
-                  {...register('category', { validate: (selected) => !!selected || '*카테고리를 선택해주세요.' })}
-                  value={category}
-                  className={styles.categoryInput}
-                  type="radio"
-                />
-                <div className={styles.categoryIcon}></div>
-                <p>{category}</p>
-              </label>
-            ))}
+            <CalendarCategory register={register} />
           </div>
           {errors.category && <p className={styles.error}>{errors.category.message}</p>}
         </div>
@@ -133,7 +138,7 @@ export default function Create() {
         </div>
       </form>
       <DateTimeModal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleDateTimeModal.bind(null, false)} />
+        <CalendarModal updateDateTime={updateDateTime} onClose={handleCloseDateTimeModal} />
       </DateTimeModal>
       <SuccessModal>
         <CalendarTodoPostSuccess />

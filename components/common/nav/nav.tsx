@@ -8,7 +8,7 @@ export default function Nav() {
   return (
     <>
       <div className={styles.box}>
-        <ul className={`${styles.nav}`}>
+        <ul className={styles.nav}>
           {NAV_LIST_DATA.map((data: NavListProps, index) => {
             return <NavListItem key={index} {...data} />;
           })}

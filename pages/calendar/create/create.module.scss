@@ -1,5 +1,5 @@
 .outer {
-  padding: 54px 24px 100px;
+  padding: 54px 24px 12px;
   position: relative;
   font-family: 'LaundryGothic';
   color: var(--text-color-gray);
@@ -20,6 +20,9 @@
     font-family: 'LaundryGothic';
     color: var(--text-color-gray);
   }
+  &:focus {
+    outline: none;
+  }
 }
 
 .memo {
@@ -34,6 +37,10 @@
   &::placeholder {
     font-family: 'LaundryGothic';
     color: var(--text-color-gray);
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
@@ -72,29 +79,6 @@
   gap: 16px;
   flex-wrap: wrap;
   position: relative;
-}
-
-.categoryLabel {
-  text-align: center;
-}
-
-.categoryInput {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.categoryInput ~ .categoryIcon {
-  width: 66px;
-  height: 66px;
-  cursor: pointer;
-  background-color: var(--todo-category);
-  border-radius: 10px;
-  margin: 0 0 8px;
-}
-
-.categoryInput:checked ~ .categoryIcon {
-  background-color: var(--main-color);
 }
 
 .todoDate {
@@ -159,4 +143,5 @@
 .submit {
   margin-top: 30px;
   height: 46px;
+  color: var(--button-color);
 }

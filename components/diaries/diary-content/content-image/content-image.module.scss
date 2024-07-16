@@ -1,4 +1,6 @@
-.diarycontentImage {
-  display: flex;
-  align-items: flex-end;
+.diaryImage {
+  width: 79px;
+  height: 79px;
+  border-radius: 5px;
+  object-fit: cover;
 }

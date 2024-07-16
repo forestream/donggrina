@@ -10,13 +10,15 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from '../../create/create.module.scss';
-import CategoryInputs from '../../create/category-inputs';
+import CategoryInputs from '../../../../components/growth/category-inputs';
 import classNames from 'classnames';
-import CompleteModal from '../../create/complete-modal';
+import CompleteModal from '../../../../components/growth/complete-modal';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import Image from 'next/image';
+import { AnimatePresence } from 'framer-motion';
+import MemoItem from '@/components/diaries/edit/memo';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -30,7 +32,7 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
   const router = useRouter();
   const { data: growthList } = useGetGrowthDetailQuery(growthId);
   const { data: pets } = usePetsQuery();
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isOpen] = useModal();
   const modifyMutation = useModifyGrowthMutation(growthId);
 
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -43,7 +45,7 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
   const localDate = convertToLocalDate({ year, month, day: date });
 
   useEffect(() => {
-    if (growthList?.data) {
+    if (growthList) {
       setMemo(growthList.data.content.memo);
       setSelectedCategory(growthList.data.category);
       setContent(growthList.data.content);
@@ -116,15 +118,7 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
-          <div className={styles.division}></div>
-          <textarea
-            {...register('content.memo')}
-            className={styles.memo}
-            id="content.memo"
-            placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
-            defaultValue={memo}
-          />
-          {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
+          <MemoItem register={register} fieldName="content.memo" defaultValue={memo} />
 
           <div className={styles.categorySelectorOuter}>
             <div className={styles.categorySelectorInner}>
@@ -162,9 +156,13 @@ export default function GrowthModify({ growthId }: InferGetServerSidePropsType<t
           </button>
         </form>
       </div>
-      <Modal>
-        <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
-      </Modal>
+      <AnimatePresence>
+        {isOpen && (
+          <Modal>
+            <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
+          </Modal>
+        )}
+      </AnimatePresence>
     </>
   );
 }

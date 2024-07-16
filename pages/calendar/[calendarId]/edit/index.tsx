@@ -4,28 +4,31 @@ import useModal from '@/hooks/use-modal';
 import CalendarModal from '@/components/calendar-monthly/calendar-modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
-import { TODO_CATEGORY } from '@/utils/constants/calendar-constants';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
-import { fetchTodoById } from '@/api/calendar/request';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+// import { fetchTodoById } from '@/api/calendar/request';
+import { /*GetServerSidePropsContext,*/ InferGetServerSidePropsType } from 'next';
+// import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import disintegrateDateTime from '@/utils/disintegrate-date-time';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPutMutation from '@/hooks/queries/calendar/use-todo-put-mutation';
 import { useRouter } from 'next/router';
+import CalendarCategory from '@/components/calendar-monthly/calendar-category';
+import { AnimatePresence } from 'framer-motion';
+import { TODO_BY_ID } from '@/lib/mock/mock';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const {
-    params: { calendarId },
-    req: {
-      cookies: { accessToken },
-    },
-  } = context as Params;
+export async function getServerSideProps(/*context: GetServerSidePropsContext*/) {
+  // const {
+  //   params: { calendarId },
+  //   req: {
+  //     cookies: { accessToken },
+  //   },
+  // } = context as Params;
 
-  const data = await fetchTodoById(calendarId, accessToken);
+  // const data = await fetchTodoById(calendarId, accessToken);
+  const data = TODO_BY_ID;
 
   return { props: { todo: data } };
 }
@@ -71,12 +74,17 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
     putMutation.mutate(
       { data: { ...data, dateTime: getDateTimeBackend(data.dateTime) }, id },
       {
-        onSuccess: () => router.push('/calendar'),
+        onSuccess: () => router.push(`/calendar/${todo.id}`),
       },
     );
   };
 
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isOpen] = useModal();
+
+  const handleCloseModal = () => {
+    handleModal(false);
+    trigger('dateTime');
+  };
 
   return (
     <div className={styles.outer}>
@@ -119,19 +127,7 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
 
         <div className={styles.categorySelectorOuter}>
           <div className={styles.categorySelectorInner}>
-            {TODO_CATEGORY.map((category) => (
-              <label key={category} className={styles.categoryLabel}>
-                <input
-                  {...register('category', { validate: (selected) => !!selected || '*카테고리를 선택해주세요.' })}
-                  value={category}
-                  className={styles.categoryInput}
-                  type="radio"
-                  defaultChecked={category === initCategory}
-                />
-                <div className={styles.categoryIcon}></div>
-                <p>{category}</p>
-              </label>
-            ))}
+            <CalendarCategory register={register} initCategory={initCategory} />
           </div>
           {errors.category && <p className={styles.error}>{errors.category.message}</p>}
         </div>
@@ -163,9 +159,13 @@ export default function Edit({ todo }: InferGetServerSidePropsType<typeof getSer
           수정하기
         </button>
       </form>
-      <Modal>
-        <CalendarModal updateDateTime={updateDateTime} onClose={handleModal.bind(null, false)} />
-      </Modal>
+      <AnimatePresence>
+        {isOpen && (
+          <Modal>
+            <CalendarModal updateDateTime={updateDateTime} onClose={handleCloseModal} />
+          </Modal>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

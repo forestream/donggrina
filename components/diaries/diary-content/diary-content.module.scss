@@ -8,8 +8,9 @@
   margin-bottom: 12px;
   border-radius: 10px;
   border: 1px solid;
-  box-shadow: 2px 4px 5px #dadada;
+  // box-shadow: 2px 4px 5px #dadada;
   border-color: var(--main-color);
+  cursor: pointer;
 
   .leftContainer {
     display: flex;
@@ -18,7 +19,7 @@
 
   .rightContainer {
     display: flex;
-    gap: 10px;
+    gap: 3px;
     flex-direction: column;
     align-items: flex-end;
   }

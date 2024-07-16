@@ -1,4 +1,4 @@
-import { putTodoById } from '@/api/calendar/request';
+import { putTodoById } from '@/apis/calendar/request';
 import { IFormInput } from '@/types/calendar';
 import { useMutation } from '@tanstack/react-query';
 

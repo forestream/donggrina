@@ -1,0 +1,46 @@
+.story-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.story-header__info {
+  display: flex;
+  align-items: center;
+}
+
+.header-info-owner {
+  display: flex;
+  align-items: center;
+  gap: 0 4px;
+}
+
+.header-info-pets {
+  display: flex;
+  padding-left: 8px;
+  position: relative;
+
+  & > div {
+    margin-left: -4px;
+  }
+
+  & > div:first-of-type {
+    margin-left: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 15px;
+    background-color: #d9d9d9;
+  }
+}
+
+.story-header__weather {
+  width: 24px;
+  height: 24px;
+}

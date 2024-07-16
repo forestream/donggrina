@@ -17,12 +17,12 @@
   --red: #d6173a;
   --calendar-red: #e75852;
   --input-error: #e74133;
-  --nav-text-color: #9e9e9e;
   --input-description: #616161;
   --disabled-color: #c8c8c8;
   --clipboard-color: #e9e9eb;
   --hospital-color: #9498ff;
   --abnormalSymptom-color: #f5877e;
   --snack-color: #ffb23f;
-  --skeleton-cololr: #bbbbbb;
+  --skeleton-color: #bbbbbb;
+  --container-border: #a6f4bc;
 }

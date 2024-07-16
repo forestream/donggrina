@@ -1,5 +1,5 @@
-import { putTodoFinished } from '@/api/calendar/request';
-import { DailyTodo, TodoById } from '@/api/calendar/request.type';
+import { putTodoFinished } from '@/apis/calendar/request';
+import { DailyTodo, TodoById } from '@/apis/calendar/request.type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const useTodoFinishedMutation = (todo: DailyTodo | TodoById) => {

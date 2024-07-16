@@ -7,8 +7,9 @@ import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 import { useRouter } from 'next/router';
-import { DailyTodo } from '@/api/calendar/request.type';
-import { TodoByQueries } from '@/api/search/index.type';
+import { DailyTodo } from '@/apis/calendar/request.type';
+import { TodoByQueries } from '@/apis/search/index.type';
+import { CALENDAR_CATEGORIES } from '@/utils/constants/calendar-constants';
 
 interface CalendarTodoProps {
   todo: DailyTodo & TodoByQueries;
@@ -44,7 +45,9 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
 
   return (
     <div onClick={handleClick} className={styles.outer}>
-      <div className={styles.category}>카테고리</div>
+      <div className={styles.category} style={{ backgroundColor: CALENDAR_CATEGORIES[todo.category].backgroundColor }}>
+        <Image src={CALENDAR_CATEGORIES[todo.category].image} alt={todo.category} fill />
+      </div>
 
       <div className={styles.todo}>
         <p className={styles.todoTitle}>

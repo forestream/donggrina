@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './list-header.module.scss';
 import Profile from '../../profile';
-import CategoryIcon from '@/public/images/growth/categroy-icon.svg';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
 import { useDeleteGrowthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import { useRouter } from 'next/router';
-import CompleteModal from '@/pages/growth/create/complete-modal';
+import CompleteModal from '../../complete-modal';
 import useModal from '@/hooks/use-modal';
 import { GROWTH_CATEGORY_IMAGES } from '@/utils/constants/growth';
 import Image from 'next/image';
+import { AnimatePresence } from 'framer-motion';
 
 interface ListHeaderProps {
   category: string;
@@ -19,6 +19,7 @@ interface ListHeaderProps {
   isMine: boolean;
   petName: string;
   id: number;
+  optionRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function ListHeader({
@@ -29,9 +30,10 @@ export default function ListHeader({
   category,
   writerImage,
   petImage,
+  optionRef,
 }: ListHeaderProps) {
   const router = useRouter();
-  const [Modal, handleModal] = useModal();
+  const [Modal, handleModal, isModalOpen] = useModal();
 
   const { isToggle: isOpen, handleCloseToggle: onCloseToggle, handleOpenToggle: onOpenToggle } = useToggle();
   const deleteMutation = useDeleteGrowthMutation();
@@ -77,18 +79,24 @@ export default function ListHeader({
           </div>
         </div>
         {isMine ? (
-          <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
-            <DropdownMenu.Kebab />
-            <DropdownMenu.Content>
-              <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
-              <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu>
+          <div ref={optionRef}>
+            <DropdownMenu value={{ isOpen, onOpenToggle, onCloseToggle }}>
+              <DropdownMenu.Kebab />
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={handleEditClick}>수정</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={handleDeleteClick}>삭제</DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu>
+          </div>
         ) : null}
       </div>
-      <Modal>
-        <CompleteModal closeModal={closeModal} text="성장 기록이 삭제되었습니다." />
-      </Modal>
+      <AnimatePresence>
+        {isModalOpen && (
+          <Modal>
+            <CompleteModal closeModal={closeModal} text="성장 기록이 삭제되었습니다." />
+          </Modal>
+        )}
+      </AnimatePresence>
     </>
   );
 }

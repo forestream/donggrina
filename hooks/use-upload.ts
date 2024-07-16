@@ -1,4 +1,4 @@
-import { imageUpload } from '@/api/image-api';
+import { imageUpload } from '@/apis/image-api';
 import { useRef, useState } from 'react';
 import { useUpdateProfile } from './queries/my/user/mutation';
 
@@ -34,10 +34,13 @@ export default function useUpload({ handleModal, nickname }: UseUpload) {
     handleModal && handleModal(false);
   };
 
+  const resetPrview = () => setPreviewUrl('');
+
   return {
     uploadRef,
     previewUrl,
     handlePreview,
+    resetPrview,
     imageId,
   };
 }

@@ -3,9 +3,13 @@ import styles from './pet-radio.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '@/types/calendar';
 import { GrowthDetailsData } from '@/types/growth/details';
+import { DiaryDetail } from '@/types/diary/details';
 
 interface PetRadio {
-  register: UseFormRegister<IFormInput & FieldValues> | UseFormRegister<GrowthDetailsData & FieldValues>;
+  register:
+    | UseFormRegister<IFormInput & FieldValues>
+    | UseFormRegister<GrowthDetailsData & FieldValues>
+    | UseFormRegister<DiaryDetail & FieldValues>;
   petName: string;
   petImage: string;
   defaultPet?: string;

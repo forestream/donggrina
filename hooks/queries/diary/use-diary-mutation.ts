@@ -1,4 +1,4 @@
-import { deleteDiary } from '@/api/diaries';
+import { deleteDiary } from '@/apis/diaries';
 import { useMutation } from '@tanstack/react-query';
 
 const useDiaryMutation = (diaryId: string) => {

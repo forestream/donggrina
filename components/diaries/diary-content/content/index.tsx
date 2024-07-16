@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import styles from './content.module.scss';
 
 interface ContentProps {
@@ -9,9 +9,9 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = ({ content }) => {
   return (
     <div className={styles.contentContainer}>
-      <Link href="/">
-        <p className={styles.content}>{content}</p>
-      </Link>
+      {/* <Link href="/"> */}
+      <p className={styles.content}>{content}</p>
+      {/* </Link> */}
     </div>
   );
 };

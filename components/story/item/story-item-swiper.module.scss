@@ -1,0 +1,29 @@
+.swiper {
+  margin: 12px 0;
+  margin-bottom: 7px;
+  padding-bottom: 20px;
+
+  :global(.swiper-pagination) {
+    bottom: 0px;
+  }
+
+  :global(.swiper-pagination-bullet) {
+    width: 6px;
+    height: 6px;
+    margin: 0 4px !important;
+    background-color: #d9d9d9 !important;
+    opacity: 1;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background-color: var(--main-color) !important;
+  }
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}

@@ -5,20 +5,24 @@ import PetRadio from '@/components/calendar-monthly/pet-radio';
 import { GROWTH_CATEGORY, GROWTH_CATEGORY_ICON } from '@/utils/constants/growth';
 import { GrowthDetailsData, GrowthDetailsContent } from '@/types/growth/details';
 import classNames from 'classnames';
-import CategoryInputs from './category-inputs';
+import CategoryInputs from '../../../components/growth/category-inputs';
 import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import { useCreateGrotwthMutation } from '@/hooks/queries/growth/use-post-growth-query';
 import useCalenderDateStore from '@/store/calendar.store';
 import { convertToLocalDate } from '@/utils/convert-local-date';
 import { useRouter } from 'next/router';
 import useModal from '@/hooks/use-modal';
-import CompleteModal from './complete-modal';
+import CompleteModal from '../../../components/growth/complete-modal';
 import Image from 'next/image';
 
+import ImageSkeleton from '@/components/skeleton/image/';
+import { AnimatePresence } from 'framer-motion';
+import MemoItem from '@/components/diaries/edit/memo';
+
 export default function CreateGrowth() {
+  const [Modal, handleModal, isOpen] = useModal();
   const router = useRouter();
-  const { data: pets } = usePetsQuery();
-  const [Modal, handleModal] = useModal();
+  const { data: pets, isLoading } = usePetsQuery();
   const createGrowthMutation = useCreateGrotwthMutation();
 
   const year = useCalenderDateStore.use.year().toString();
@@ -75,9 +79,9 @@ export default function CreateGrowth() {
   };
 
   const onSubmit: SubmitHandler<GrowthDetailsData> = (data) => {
+    console.log(data);
     createGrowthMutation.mutate(data, {
-      onSuccess: (response) => {
-        console.log('Success:', response);
+      onSuccess: () => {
         openModal();
       },
       onError: (error) => {
@@ -92,22 +96,17 @@ export default function CreateGrowth() {
           <div className={styles.petSelector}>
             반려동물 선택
             <div className={styles.petLabelContainer}>
-              {!!pets.length &&
+              {isLoading ? (
+                <ImageSkeleton />
+              ) : (
                 pets.map((pet, i) => (
                   <PetRadio key={i} register={register} petName={pet.name} petImage={pet.imageUrl} />
-                ))}
+                ))
+              )}
             </div>
             {errors.petName && <p className={styles.error}>{errors.petName.message}</p>}
           </div>
-          <div className={styles.division}></div>
-          <textarea
-            {...register('content.memo')}
-            className={styles.memo}
-            id="content.memo"
-            placeholder={`메모\n어떤 일정인지 자세하게 기록하실 수 있어요!`}
-          />
-          {errors.content?.memo && <p className={styles.error}>{errors.content.memo.message}</p>}
-
+          <MemoItem register={register} fieldName="content.memo" />
           <div className={styles.categorySelectorOuter}>
             <div className={styles.categorySelectorInner}>
               {GROWTH_CATEGORY.map((category) => (
@@ -121,7 +120,7 @@ export default function CreateGrowth() {
                     onChange={handleCategoryChange}
                   />
                   <div className={`${styles.categoryIcon} ${styles[getCategoryClassName(category)]}`}>
-                    <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={50} height={50} />
+                    <Image src={GROWTH_CATEGORY_ICON[category]} alt="카테고리 아이콘" width={56} height={56} />
                   </div>
                   <p className={styles.categoryName}>{category}</p>
                 </label>
@@ -143,9 +142,13 @@ export default function CreateGrowth() {
           </button>
         </form>
       </div>
-      <Modal>
-        <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
-      </Modal>
+      <AnimatePresence>
+        {isOpen && (
+          <Modal>
+            <CompleteModal closeModal={closeModal} text="성장 기록이 등록되었습니다." />
+          </Modal>
+        )}
+      </AnimatePresence>
     </>
   );
 }

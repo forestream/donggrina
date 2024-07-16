@@ -1,4 +1,4 @@
-import { fetchTodoById } from '@/api/calendar/request';
+import { fetchTodoById } from '@/apis/calendar/request';
 import { useQuery } from '@tanstack/react-query';
 
 const useTodoQuery = (id: string) =>
@@ -10,7 +10,7 @@ const useTodoQuery = (id: string) =>
       id: -1,
       title: '',
       memo: '',
-      category: '',
+      category: '산책',
       dateTime: '',
       writerProfileImageUrl: '',
       writerNickName: '',

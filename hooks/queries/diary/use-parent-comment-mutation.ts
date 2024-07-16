@@ -1,4 +1,4 @@
-import { deleteParentComment } from '@/api/diaries';
+import { deleteParentComment } from '@/apis/diaries';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const useParentCommentMutation = (diaryId: string, commentId: number) => {
