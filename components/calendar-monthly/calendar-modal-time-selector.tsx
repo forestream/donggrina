@@ -54,7 +54,7 @@ export default function CalendarModalTimeSelector({ dateTime, onSelect }: Calend
         <span className={styles.colon}>:</span>
         <span>{minute.toString().padStart(2, '0')}</span>
       </div>
-      <div className={styles.selector}>
+      <div className={styles.selector} onClick={(e) => e.stopPropagation()} onDrag={(e) => e.stopPropagation()}>
         <div ref={observerRootRef} id="observerRoot" className={styles.observerRoot}>
           <TimeScroller className="ampm" refPusher={pushAmpmRef} scrollItems={TIME_SELECTOR.ampm} selectedItem={ampm} />
           <TimeScroller

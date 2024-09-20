@@ -16,6 +16,7 @@ interface CalendarTodoProps {
 }
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
+  console.log(todo);
   const router = useRouter();
   const optionRef = useRef<HTMLDivElement>(null);
 

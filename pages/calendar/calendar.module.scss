@@ -1,5 +1,7 @@
 .outer {
   padding: 19px 24px 100px;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .yearContainer {

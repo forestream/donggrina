@@ -13,6 +13,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';
 import { CALENDAR_CATEGORIES } from '@/utils/constants/calendar-constants';
+import { TODO_BY_ID } from '@/lib/mock/mock';
+import { useState } from 'react';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
@@ -23,9 +25,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function CalendarById({ calendarId }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const queryClient = useQueryClient();
-  const { data: todo, isPending, isError, error } = useTodoQuery(calendarId);
-  const finishedMutation = useTodoFinishedMutation(todo);
+  // const queryClient = useQueryClient();
+  // const { data: todo, isPending, isError, error } = useTodoQuery(calendarId);
+  const {
+    data: todo,
+    isPending,
+    isError,
+    error,
+  } = { data: TODO_BY_ID, isPending: false, isError: false, error: { message: '' } };
+  const [isFinished, setIsFinished] = useState(todo.isFinished);
+  // const finishedMutation = useTodoFinishedMutation(todo);
   const deleteMutation = useTodoDeleteMutation(todo);
 
   const router = useRouter();
@@ -44,9 +53,10 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
   };
 
   const handleClickFinished = () => {
-    finishedMutation.mutate(todo.id.toString(), {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todo', calendarId] }),
-    });
+    // finishedMutation.mutate(todo.id.toString(), {
+    //   onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todo', calendarId] }),
+    // });
+    setIsFinished((prev) => !prev);
   };
 
   if (isPending) return <p>loading</p>;
@@ -100,8 +110,8 @@ export default function CalendarById({ calendarId }: InferGetServerSidePropsType
         </div>
 
         <div className={styles.button}>
-          <Button onClick={handleClickFinished} round className={todo.isFinished ? 'disabled' : 'primary'}>
-            {todo.isFinished ? '완료 해제하기' : '완료로 표시하기'}
+          <Button onClick={handleClickFinished} round className={isFinished ? 'disabled' : 'primary'}>
+            {isFinished ? '완료 해제하기' : '완료로 표시하기'}
           </Button>
         </div>
       </div>

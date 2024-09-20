@@ -5,7 +5,7 @@ import CalendarTodoDate from '@/components/calendar-monthly/calendar-todo-date';
 import CalendarInstance from '@/utils/date/date.utils';
 import useSelect from '@/hooks/use-select';
 import CalendarTodos from '@/components/calendar-monthly/calendar-todos';
-import useMonthlyTodosQuery from '@/hooks/queries/calendar/use-montly-todos-query';
+// import useMonthlyTodosQuery from '@/hooks/queries/calendar/use-montly-todos-query';
 import useDailyTodosQuery from '@/hooks/queries/calendar/use-daily-todos-query';
 import CalendarMonthly from '@/components/calendar-monthly/calendar-monthly';
 
@@ -26,11 +26,21 @@ export default function CalendarPage() {
     onSelectedDate(CalendarInstance.currentDate);
   };
 
-  const yearMonth = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}`;
+  // const yearMonth = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}`;
   const yearMonthDate = `${selectedYear}-${(selectedMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
 
-  const monthlyTodosQuery = useMonthlyTodosQuery(yearMonth);
+  // const monthlyTodosQuery = useMonthlyTodosQuery(yearMonth);
   const dailyTodosQuery = useDailyTodosQuery(yearMonthDate);
+  const monthlyTodosQuery = { data: MONTLY_TODOS, isPending: false, isError: false, error: { message: '' } };
+  // const dailyTodosQuery = {
+  //   data: DAILY_TODOS,
+  //   isPending: false,
+  //   isError: false,
+  //   error: { message: '' },
+  //   isFetchedAfterMount: true,
+  // };
+
+  console.log(dailyTodosQuery.data, ';d');
 
   if (dailyTodosQuery.isPending || monthlyTodosQuery.isPending) return <p>loading</p>;
   if (dailyTodosQuery.isError || monthlyTodosQuery.isError) return <p>Error</p>;

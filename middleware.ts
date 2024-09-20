@@ -7,8 +7,10 @@ const { PROTECTED_PAGES, PUBLIC_PAGES, NON_FAMILY_PAGES, FAMILY_PAGES } = new Mi
 export default function middleware(request: NextRequest) {
   const { cookies, nextUrl } = request;
   const path = nextUrl.pathname;
-  const hasCookie = cookies.has('accessToken');
-  const hasFamily = cookies.get('isFamily')?.value === 'true';
+  // const hasCookie = cookies.has('accessToken');
+  const hasCookie = true;
+  // const hasFamily = cookies.get('isFamily')?.value === 'true';
+  const hasFamily = true;
   const isProtectedPage = PROTECTED_PAGES.some((page) => path.startsWith(page));
   const isPublicPage = PUBLIC_PAGES.includes(path);
   const isNonFamilyPage = NON_FAMILY_PAGES.includes(path);
@@ -36,25 +38,25 @@ export default function middleware(request: NextRequest) {
   // -----------------------------------------------------------------------
 
   // 로그인 상태일 때 접근 불가
-  if (hasCookie && isPublicPage) {
-    const redirectUrl = hasFamily ? '/family' : '/start-family';
-    return NextResponse.redirect(new URL(redirectUrl, request.nextUrl.origin));
-  }
+  // if (hasCookie && isPublicPage) {
+  //   const redirectUrl = hasFamily ? '/family' : '/start-family';
+  //   return NextResponse.redirect(new URL(redirectUrl, request.nextUrl.origin));
+  // }
 
   // 비로그인 상태일 때 접근 불가
-  if (!hasCookie && isProtectedPage) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
-  }
+  // if (!hasCookie && isProtectedPage) {
+  //   return NextResponse.redirect(new URL('/', request.nextUrl));
+  // }
 
   // 가족이 있을 때 접근 불가
-  if (hasCookie && hasFamily && isNonFamilyPage) {
-    return NextResponse.redirect(new URL('/family', request.nextUrl));
-  }
+  // if (hasCookie && hasFamily && isNonFamilyPage) {
+  //   return NextResponse.redirect(new URL('/family', request.nextUrl));
+  // }
 
-  // 가족이 없을 때 접근 불가
-  if (hasCookie && !hasFamily && isFamilyPage) {
-    return NextResponse.redirect(new URL('/start-family', request.nextUrl));
-  }
+  // // 가족이 없을 때 접근 불가
+  // if (hasCookie && !hasFamily && isFamilyPage) {
+  //   return NextResponse.redirect(new URL('/start-family', request.nextUrl));
+  // }
   return NextResponse.next();
 }
 
