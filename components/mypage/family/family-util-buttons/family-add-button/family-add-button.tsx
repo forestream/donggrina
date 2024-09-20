@@ -1,4 +1,4 @@
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import Button from '@/components/common/button/button';
 import Share from '@/components/common/share/share';
 import useModal from '@/hooks/use-modal';

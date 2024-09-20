@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import myPageApiInstance from '../../../../api/my/user';
+import myPageApiInstance from '../../../../apis/my/user';
 
 export function useFetchProfile() {
   return useQuery({

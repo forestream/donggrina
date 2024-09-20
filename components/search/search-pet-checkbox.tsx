@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './search-pet-checkbox.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
-import { Pet } from '@/api/calendar/request.type';
+import { Pet } from '@/apis/calendar/request.type';
 
 interface SearchPetCheckboxProps {
   register: UseFormRegister<FieldValues>;

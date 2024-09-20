@@ -2,12 +2,12 @@ import Title from '@/components/common/title/title';
 import SubTitle from '@/components/common/title/sub-title/sub-title';
 import styles from './index.module.scss';
 import Form from '@/components/common/Form';
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import { useRouter } from 'next/router';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/common/button/button';
 import axios from 'axios';
-import myPageApiInstance from '@/api/my/user';
+import myPageApiInstance from '@/apis/my/user';
 import SwitchScreen from '@/components/framer/switch-screen/switch-screen';
 export default function RegisterCode() {
   const myProfile = myPageApiInstance;

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import EntryForm from '@/components/start-pet/entry-form/entry-form';
 import { usePetsModifyQuery } from '@/hooks/queries/my/pets/usePostPetsQueries';
 import { FieldValues } from 'react-hook-form';
-import { imageUpload } from '@/api/image-api';
+import { imageUpload } from '@/apis/image-api';
 import { useGetPetsDetailsQuery } from '@/hooks/queries/my/pets/useGetPetsQueries';
 import PetFormSkeleton from '@/components/skeleton/mypage/pet/pet-form-skeleton';
 

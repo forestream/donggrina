@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/api';
+import { axiosInstance } from '@/apis';
 
 export interface PetsAddDataType {
   imageId: number;

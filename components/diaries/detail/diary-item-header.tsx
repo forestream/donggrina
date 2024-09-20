@@ -4,7 +4,7 @@ import { AvatarImage, AvatarName } from '@/components/avatar/avatar';
 import { WEATHER_TYPES } from '@/lib/constants/diaries-constants';
 import Image from 'next/image';
 import styles from './diary-item-header.module.scss';
-import { Diary } from '@/api/diaries';
+import { Diary } from '@/apis/diaries';
 
 export default function DiaryItemHeader(
   props: Pick<Diary, 'content' | 'author' | 'authorImage' | 'weather' | 'petImages' | 'contentImages'>,

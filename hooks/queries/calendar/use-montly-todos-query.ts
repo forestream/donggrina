@@ -1,4 +1,4 @@
-import { fetchMonthlyTodos } from '@/api/calendar/request';
+import { fetchMonthlyTodos } from '@/apis/calendar/request';
 import { useQuery } from '@tanstack/react-query';
 
 const useMonthlyTodosQuery = (yearMonth: string) =>

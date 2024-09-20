@@ -1,4 +1,4 @@
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import { useQuery } from '@tanstack/react-query';
 
 const myFamilyApi = new MyFamilyApi();

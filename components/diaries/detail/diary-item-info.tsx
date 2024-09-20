@@ -2,7 +2,7 @@ import React, { MouseEvent } from 'react';
 import Image from 'next/image';
 import styles from './diary-item-info.module.scss';
 import { usePostLike } from '@/hooks/queries/story/mutation';
-import { Diary } from '@/api/diaries';
+import { Diary } from '@/apis/diaries';
 
 interface DiaryItemInfoProps extends Pick<Diary, 'content' | 'favoriteCount' | 'favoriteState' | 'comments'> {
   diaryId: number;

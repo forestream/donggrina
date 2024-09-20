@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from 'react';
 import styles from './kebab.module.scss';
 import DropdownMenu from '@/components/kebab/kebab';
 import useToggle from '@/hooks/use-toggle';
-import { deleteDiary } from '@/api/diaries';
+import { deleteDiary } from '@/apis/diaries';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 

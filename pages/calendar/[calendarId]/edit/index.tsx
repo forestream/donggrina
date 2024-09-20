@@ -6,9 +6,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import PetRadio from '@/components/calendar-monthly/pet-radio';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import classNames from 'classnames';
-import { fetchTodoById } from '@/api/calendar/request';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+// import { fetchTodoById } from '@/api/calendar/request';
+import { /*GetServerSidePropsContext,*/ InferGetServerSidePropsType } from 'next';
+// import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import disintegrateDateTime from '@/utils/disintegrate-date-time';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
@@ -17,16 +17,18 @@ import useTodoPutMutation from '@/hooks/queries/calendar/use-todo-put-mutation';
 import { useRouter } from 'next/router';
 import CalendarCategory from '@/components/calendar-monthly/calendar-category';
 import { AnimatePresence } from 'framer-motion';
+import { TODO_BY_ID } from '@/lib/mock/mock';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const {
-    params: { calendarId },
-    req: {
-      cookies: { accessToken },
-    },
-  } = context as Params;
+export async function getServerSideProps(/*context: GetServerSidePropsContext*/) {
+  // const {
+  //   params: { calendarId },
+  //   req: {
+  //     cookies: { accessToken },
+  //   },
+  // } = context as Params;
 
-  const data = await fetchTodoById(calendarId, accessToken);
+  // const data = await fetchTodoById(calendarId, accessToken);
+  const data = TODO_BY_ID;
 
   return { props: { todo: data } };
 }

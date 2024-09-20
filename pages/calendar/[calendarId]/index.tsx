@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Button from '@/components/common/button/button';
 import CalendarTodoProfile from '@/components/calendar-monthly/calendar-todo-profile';
 import useTodoFinishedMutation from '@/hooks/queries/calendar/use-todo-finished-mutation';
-import useTodoQuery from '@/hooks/queries/calendar/use-todo-query';
+// import useTodoQuery from '@/hooks/queries/calendar/use-todo-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import useTodoDeleteMutation from '@/hooks/queries/calendar/use-todo-delete-mutation';

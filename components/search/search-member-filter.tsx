@@ -1,4 +1,4 @@
-import { Member } from '@/api/search/index.type';
+import { Member } from '@/apis/search/index.type';
 import styles from './search-member-filter.module.scss';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import Image from 'next/image';

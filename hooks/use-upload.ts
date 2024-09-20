@@ -1,4 +1,4 @@
-import { imageUpload } from '@/api/image-api';
+import { imageUpload } from '@/apis/image-api';
 import { useRef, useState } from 'react';
 import { useUpdateProfile } from './queries/my/user/mutation';
 

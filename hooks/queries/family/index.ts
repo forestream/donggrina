@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/api';
+import { axiosInstance } from '@/apis';
 import { DiaryData } from '@/types/diary';
 import { GrowthData } from '@/types/growth';
 import { useQuery } from '@tanstack/react-query';

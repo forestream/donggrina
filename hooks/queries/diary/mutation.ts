@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import storyApiInstance from '@/api/story';
+import storyApiInstance from '@/apis/story';
 import diaryApiInstance, {
   deleteChildComment,
   deleteDiary,
   deleteParentComment,
   putComment,
-} from '../../../api/diaries';
+} from '../../../apis/diaries';
 
 export function usePostLike(status: boolean) {
   const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
 import Title from '@/components/common/title/title';
 import EntryForm from '@/components/start-pet/entry-form/entry-form';
-import { imageUpload } from '@/api/image-api';
+import { imageUpload } from '@/apis/image-api';
 import { FieldValues } from 'react-hook-form';
 import { usePetsAddQuery } from '@/hooks/queries/my/pets/usePostPetsQueries';
 import { useRouter } from 'next/router';

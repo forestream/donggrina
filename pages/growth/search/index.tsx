@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './search.module.scss';
 import SearchForm from '@/components/search/search-form';
-import { GrowthByQueries } from '@/api/search/index.type';
+import { GrowthByQueries } from '@/apis/search/index.type';
 import GrowthList from '@/components/growth/list';
 
 export default function Search() {

@@ -1,4 +1,4 @@
-import { fetchTodosByQueries } from '@/api/search';
+import { fetchTodosByQueries } from '@/apis/search';
 import { useQuery } from '@tanstack/react-query';
 
 const useSearchTodosQuery = (query: string) =>

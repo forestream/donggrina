@@ -2,7 +2,7 @@ import useModal from '@/hooks/use-modal';
 import styles from './add-family.module.scss';
 import Share from '@/components/common/share/share';
 import { useState } from 'react';
-import MyFamilyApi from '@/api/my/groups';
+import MyFamilyApi from '@/apis/my/groups';
 import OpenSVG from '@/public/images/mypage/plus-circle.svg';
 
 export default function AddFamily() {
