@@ -18,8 +18,6 @@ export default function CalendarTodos({ dailyTodos }: CalendarTodosProps) {
   const { error, isError, isLoading } = useDailyTodosQuery(yearMonthDate);
   // const { error, isError, isLoading } = { error: { message: '' }, isError: false, isLoading: false };
 
-  console.log(dailyTodos);
-
   if (isLoading) return <CalendarListSkeleton />;
   if (isError) return <span>Error: {error.message}</span>;
 

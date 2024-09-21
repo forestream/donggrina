@@ -22,7 +22,8 @@ export default function getCalendarArray(year: number, month: number, todoCounts
     .map((_, i) => i + 1);
 
   const editedTodoCounts = todoCounts.map(({ date, count }) => ({
-    date: +date.split('-')[2],
+    // date: +date.split('-')[2],
+    date,
     count,
   }));
   const counts = Array(dateCount).fill(0);

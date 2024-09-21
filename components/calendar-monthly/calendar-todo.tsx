@@ -16,7 +16,6 @@ interface CalendarTodoProps {
 }
 
 export default function CalendarTodo({ todo }: CalendarTodoProps) {
-  console.log(todo);
   const router = useRouter();
   const optionRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +30,7 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
   };
 
   const handleDelete = () => {
-    deleteMutation.mutate(todo.id.toString());
+    deleteMutation.mutate(new Date(todo.dateTime).getDate().toString());
     onCloseToggle();
   };
 
@@ -74,7 +73,7 @@ export default function CalendarTodo({ todo }: CalendarTodoProps) {
         </div>
         <label className={styles.checkContainer}>
           <input
-            id={todo.id.toString()}
+            id={typeof todo.id === 'number' ? todo.id.toString() : todo.id}
             className={styles.checkbox}
             type="checkbox"
             onChange={handleChange}

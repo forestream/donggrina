@@ -7,7 +7,7 @@ import PetRadio from '@/components/calendar-monthly/pet-radio';
 import getDateTimeFrontend from '@/utils/get-date-time-frontend';
 import { DateTime, IFormInput } from '@/types/calendar';
 import getDateTimeBackend from '@/utils/get-date-time-backend';
-import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
+// import usePetsQuery from '@/hooks/queries/calendar/use-pets-query';
 import useTodoPostMutation from '@/hooks/queries/calendar/use-todo-post-mutation';
 import Button from '@/components/common/button/button';
 import CalendarTodoPostSuccess from '@/components/calendar-monthly/calendar-todo-post-success';
@@ -15,7 +15,9 @@ import CalendarCategory from '@/components/calendar-monthly/calendar-category';
 import ImageSkeleton from '@/components/skeleton/image/';
 
 export default function Create() {
-  const { data: pets, isLoading } = usePetsQuery();
+  const pets = [{ name: '아투로', imageUrl: '/images/start-pet/Dog.png' }];
+  const isLoading = false;
+  // const { data: pets, isLoading } = usePetsQuery();
   const postMutation = useTodoPostMutation();
 
   const {
@@ -62,7 +64,7 @@ export default function Create() {
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     postMutation.mutate(
-      { ...data, dateTime: getDateTimeBackend(data.dateTime) },
+      { ...data, dateTime: getDateTimeBackend(data.dateTime) + ':00' },
       {
         onSuccess: () => {
           handleSuccessModal(true);

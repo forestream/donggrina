@@ -10,6 +10,7 @@ export default function WarningModal({ Modal, handleModal, isOpen }: ModalType) 
     handleModal(false);
   };
   const handleDelete = async () => {
+    handleModal(false);
     router.back();
   };
   return (

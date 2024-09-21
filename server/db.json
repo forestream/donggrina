@@ -1,48 +1,7 @@
 {
   "dailyTodos": [
     {
-      "day": 24,
-      "todos": [
-        {
-          "id": 23,
-          "title": "미용 시키기",
-          "category": "미용",
-          "dateTime": "2024-07-30T09:00:00",
-          "memberProfileImageUrl": "https://picsum.photos/id/23/200",
-          "nickname": "산도발",
-          "petProfileImageUrl": "https://picsum.photos/id/37/200",
-          "petName": "바둑이",
-          "isFinished": false,
-          "isMine": true
-        },
-        {
-          "id": 24,
-          "title": "산책 시키기",
-          "category": "산책",
-          "dateTime": "2024-07-03T19:00:00",
-          "memberProfileImageUrl": "https://picsum.photos/id/23/200",
-          "nickname": "산도발",
-          "petProfileImageUrl": "https://picsum.photos/id/37/200",
-          "petName": "바둑이",
-          "isFinished": false,
-          "isMine": true
-        },
-        {
-          "id": 25,
-          "title": "사료 구매하기",
-          "category": "사료 구입",
-          "dateTime": "2024-07-15T09:00:00",
-          "memberProfileImageUrl": "https://picsum.photos/id/23/200",
-          "nickname": "산도발",
-          "petProfileImageUrl": "https://picsum.photos/id/37/200",
-          "petName": "바둑이",
-          "isFinished": false,
-          "isMine": true
-        }
-      ]
-    },
-    {
-      "day": 11,
+      "id": "11",
       "todos": [
         {
           "id": 23,
@@ -59,31 +18,19 @@
       ]
     },
     {
-      "day": 21,
+      "id": "25",
       "todos": [
         {
-          "id": 24,
-          "title": "산책 시키기",
-          "category": "산책",
-          "dateTime": "2024-07-03T19:00:00",
+          "title": "운동",
+          "category": "기타",
+          "dateTime": "2024-09-25T00:00:00",
           "memberProfileImageUrl": "https://picsum.photos/id/23/200",
           "nickname": "산도발",
           "petProfileImageUrl": "https://picsum.photos/id/37/200",
-          "petName": "바둑이",
+          "petName": "아투로",
           "isFinished": false,
-          "isMine": true
-        },
-        {
-          "id": 25,
-          "title": "사료 구매하기",
-          "category": "사료 구입",
-          "dateTime": "2024-07-15T09:00:00",
-          "memberProfileImageUrl": "https://picsum.photos/id/23/200",
-          "nickname": "산도발",
-          "petProfileImageUrl": "https://picsum.photos/id/37/200",
-          "petName": "바둑이",
-          "isFinished": false,
-          "isMine": true
+          "isMine": true,
+          "memo": "공 던지기"
         }
       ]
     }
